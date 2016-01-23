@@ -1,5 +1,5 @@
 {
-  "name": "polylit",
+  "name": "Polylit",
   "version": "1.0.0",
   "description": "A Medium-inspired web app built on Prosemirror.",
   "main": "index.js",
@@ -10,9 +10,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jolim24601/polylit"
+  },
   "keywords": [],
-  "author": "",
+  "author": "John Lim jolim24601@gmail.com",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jolim24601/polylit/issues"
+  },
   "devDependencies": {
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",
