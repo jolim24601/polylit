@@ -2,23 +2,33 @@
 <html>
 <head>
   <title>Polylit</title>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="loadingBar"></div>
+  <div id="container">
+    <header class="metabar">
+      <nav class="metabar-nav group">
+        <h2 class="logo">Polylit</h2>
+        <ul class="metabar-list floatLeft">
+          <li>Staff Picks</li>
+          <li>Top Stories</li>
+          <li>Bookmarks</li>
+        </ul>
 
-  <header class="header">
-    <nav class="header-nav group">
-      <h2 class="header-logo">Polylit</h2>
-      <img src="" />
-      <ul class="header-list group">
+        <ul class="metabar-tools floatRight">
+          <li><input class="metabar-predictiveSearch" type="search" placeholder="Search Polylit"/></li>
+          <li>Write a story</li>
+          <li>Notifications</li>
+          <li>Profile</li>
+        </ul>
+      </nav>
+    </header>
 
-      </ul>
-    </nav>
-  </header>
-
-<%= yield %>
-
+    <%= yield %>
+  </div>
 </body>
 </html>
