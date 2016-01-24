@@ -15,9 +15,9 @@ and React.js. Polylit allows authors to:
 - [ ] Organize stories within Publications
 - [ ] Tag stories with multiple tags and search stories by tag
 - [ ] Follow other authors
-- [ ] Apply a tooltip menu for styling text while editing
-- [ ] Embed content directly into their stories
-- [ ] Make private highlights and stories, and public comments on stories
+- [ ] Write their stories using a sophisticated WYSIWYG rich text editor (Prosemirror)
+- [ ] Embed content directly into their stories (Embedly)
+- [ ] Make highlights, notes, and public responses on stories
 
 ## Design Docs
 * [View Wireframes][view]

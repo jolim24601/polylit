@@ -24,7 +24,7 @@ var App = React.createClass({
 
 var routes = (
   <Route path='/' component={App}>
-    <Route path='/stories/new' component={StoryForm}/>
+    <Route path='new-story' component={StoryForm}/>
   </Route>
 );
 

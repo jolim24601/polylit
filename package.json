@@ -31,6 +31,7 @@
     "webpack": "^1.12.12"
   },
   "dependencies": {
+    "embedly": "^1.0.4",
     "flux": "^2.1.1",
     "history": "^2.0.0-rc2",
     "nprogress": "^0.2.0",
