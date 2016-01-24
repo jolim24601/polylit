@@ -7,8 +7,12 @@ var React = require('react'),
     hashHistory = ReactRouter.hashHistory;
 
 var StoryForm = require('./components/story_form');
+var NProgress = require('nprogress');
 
 var App = React.createClass({
+  componentWillMount: function () {
+    NProgress.start();
+  },
   render: function () {
     return (
       <div className='main'>
@@ -27,4 +31,5 @@ var routes = (
 
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(<Router history={hashHistory}>{routes}</Router>, document.getElementById('content'));
+  NProgress.done();
 });

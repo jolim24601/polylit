@@ -33,6 +33,7 @@
   "dependencies": {
     "flux": "^2.1.1",
     "history": "^2.0.0-rc2",
+    "nprogress": "^0.2.0",
     "prosemirror": "^0.1.1",
     "react": "^0.14.6",
     "react-addons-linked-state-mixin": "^0.14.6",
