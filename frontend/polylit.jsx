@@ -6,13 +6,12 @@ var React = require('react'),
     IndexRoute = ReactRouter.IndexRoute,
     hashHistory = ReactRouter.hashHistory;
 
-var StoryForm = require('./components/Editor');
+var StoryForm = require('./components/story_form');
 
 var App = React.createClass({
   render: function () {
     return (
-      <div>
-        <h1>This is a test.</h1>
+      <div className='main'>
         {this.props.children}
       </div>
     );
@@ -27,5 +26,5 @@ var routes = (
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  ReactDOM.render(<Router history={hashHistory}>{routes}</Router>, document.getElementById('content'))
-})
+  ReactDOM.render(<Router history={hashHistory}>{routes}</Router>, document.getElementById('content'));
+});

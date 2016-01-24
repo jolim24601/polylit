@@ -1,0 +1,14 @@
+{
+  "extends": "eslint-config-airbnb-es5",
+
+  "rules": {
+    "react/prop-types": 0,
+    "react/jsx-quotes": 0,
+    "one-var": 0,
+    "indent": 0,
+    "no-mixed-spaces-and-tabs": 0,
+    "quotes": 0,
+    "space-before-function-paren": 0,
+    "func-names": 0
+  }
+}

@@ -13,3 +13,34 @@
  *= require_tree .
  *= require_self
  */
+
+html, body, section, article,
+h1, h2, p, strong, em, a {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: inherit;
+  font: inherit;
+  text-decoration: inherit;
+  text-align: inherit;
+  color: inherit;
+  background: transparent;
+}
+
+.content, .main {
+  position: relative;
+  height: 800px;
+  width: 900px;
+}
+
+.story-form {
+  width: 500px;
+  height: 500px
+  max-width: 100%;
+}
+
+.ProseMirror-content {
+  height: 500px;
+  width: 500px;
+}
