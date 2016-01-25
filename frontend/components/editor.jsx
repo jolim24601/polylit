@@ -19,6 +19,7 @@ var Editor = React.createClass({
     this._lastValue = this.props.value || (this.props.valueLink || this.props.valueLink.value) || this.props.defaultValue;
     this.pm = new ProseMirror.ProseMirror(Object.assign({doc: this._lastValue}, this.props.options));
   },
+  // places the Prosemirror div, adds a listener to it
   componentDidMount: function () {
     this.refs.pm.appendChild(this.pm.wrapper);
     this.pm.on("change", function () {
@@ -29,6 +30,7 @@ var Editor = React.createClass({
       }
     }.bind(this));
   },
+  // updates options...not available atm.
   componentDidUpdate: function (options) {
     var current = this.props.options;
     var self = this;

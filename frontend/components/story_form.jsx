@@ -15,7 +15,7 @@ var StoryForm = React.createClass({
         autoInput: true,
         docFormat: 'html'
       },
-      output: '<h3>Title</h3><p>Tell a story...</p></div>'
+      output: '<h3>Title</h3><p>Tell a story...</p>'
     });
   },
   render: function () {
@@ -25,18 +25,11 @@ var StoryForm = React.createClass({
       </div>
     );
   },
-  updateOutput: function () {
-    this.setState({
-      output: event.target.value
-    });
+  updateOutput: function (output) {
+    this.setState({ output });
   },
   componentDidMount: function () {
     this.updateOutput(this.refs.pm.getContent());
-  },
-  componeontDidUpdate: function (_, prevState) {
-    if (prevState.options.docFormat !== this.state.options.docFormat) {
-      this.updateOutput(this.refs.pm.getContent());
-    }
   }
 });
 
