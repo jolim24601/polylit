@@ -26,7 +26,7 @@ var App = React.createClass({
 // comments are tbd
 var routes = (
   <Route path='/' component={App}>
-    <IndexRoute path='stories' component={StoriesIndex}/>
+    <IndexRoute component={StoriesIndex}/>
     <Route path='new-story' component={StoryForm}/>
     {/* <Route path='new-publication' component={PublicationForm}/>
     <Route path='authors/:authorId' component={AuthorView}>
