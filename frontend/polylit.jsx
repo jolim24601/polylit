@@ -28,16 +28,16 @@ var routes = (
   <Route path='/' component={App}>
     <IndexRoute component={StoriesIndex}/>
     <Route path='new-story' component={StoryForm}/>
-    {/* <Route path='new-publication' component={PublicationForm}/>
-    <Route path='authors/:authorId' component={AuthorView}>
-      <Route path='/:storyId' component={StoryView}/>
-    </Route>
-    <Route path='publications/:publicationId' component={PublicationView}>
-      <Route path='/:storyId' component={StoryView}/>
-    </Route> */}
   </Route>
 );
 
+// <Route path='new-publication' component={PublicationForm}/>
+// <Route path='authors/:authorId' component={AuthorView}>
+// <Route path='/:storyId' component={StoryView}/>
+// </Route>
+// <Route path='publications/:publicationId' component={PublicationView}>
+// <Route path='/:storyId' component={StoryView}/>
+// </Route>
 
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(
