@@ -1,8 +1,8 @@
 # Polylit
 
-[Heroku link][heroku] **NB:** Link forthcoming
+[Site][site]
 
-[heroku]: http://www.herokuapp.com
+[site]: http://www.polylit.net
 
 ## Minimum Viable Product
 
