@@ -15,7 +15,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: ['react-hot', 'babel'],
+        loader: 'babel',
         query: {
           presets: ['react']
         }
