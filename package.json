@@ -8,7 +8,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "./node_modules/.bin/webpack"
   },
   "repository": {
     "type": "git",
@@ -21,16 +22,16 @@
     "url": "https://github.com/jolim24601/polylit/issues"
   },
   "devDependencies": {
-    "babel-core": "^6.4.5",
     "babel-eslint": "^5.0.0-beta6",
-    "babel-loader": "^6.2.1",
-    "babel-preset-react": "^6.3.13",
     "eslint": "^1.10.3",
     "eslint-config-airbnb-es5": "^1.0.8",
-    "eslint-plugin-react": "^3.15.0",
-    "webpack": "^1.12.12"
+    "eslint-plugin-react": "^3.15.0"
   },
   "dependencies": {
+    "webpack": "^1.12.12",
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-react": "^6.3.13",
     "embedly": "^1.0.4",
     "flux": "^2.1.1",
     "history": "^2.0.0-rc2",
@@ -40,5 +41,9 @@
     "react-addons-linked-state-mixin": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-router": "^2.0.0-rc5"
+  },
+  "engines": {
+    "node": "4.1.1",
+    "npm": "2.1.x"
   }
 }
