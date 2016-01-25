@@ -23,7 +23,7 @@ module.exports = {
       {
         test: /\.node$/,
         loader: "node-loader"
-      },
+      }
     ]
   },
   devtool: 'source-map'

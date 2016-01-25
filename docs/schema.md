@@ -1,32 +1,45 @@
 # Schema Information
 
 ## stories
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-title       | string    | not null
-body        | text      | not null
-author_id   | integer   | not null, foreign key (references users), indexed
-notebook_id | integer   | not null, foreign key (references notebooks), indexed
-archived    | boolean   | not null, default: false
+column name    | data type | details
+------------   |-----------|-----------------------
+id             | integer   | not null, primary key
+title          | string    | not null, indexed
+body           | text      | not null
+subtitle       | string    |
+publication_id | integer   | foreign key (references publications), indexed
+published      | boolean   | default: false
 
 ## publications
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-author_id   | integer   | not null, foreign key (references users), indexed
-title       | string    | not null
+author_id   | integer   | not null, foreign key (references authors), indexed
+title       | string    | not null, indexed, unique
 description | string    |
+slug        | string    |
 
 ## responses
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-user_id     | integer   | not null, foreign key (references users), indexed
-note_id     | string    | not null, foreign key (references notes), indexed
-date        | datetime  | not null
-type        | string    | not null
-prev_id     | integer   | foreign key (references reminders), indexed
+author_id   | integer   | not null, foreign key (references authors), indexed
+story_id    | integer   | not null, foreign key (references stories), indexed
+body        | text      | not null
+
+## bookmarks
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+author_id   | integer   | not null, foreign key (references authors), indexed
+story_id    | integer   | not null, foreign key (references stories), indexed, unique [author_id]
+
+## favorites
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+author_id   | integer   | not null, foreign key (references authors), indexed
+story_id    | integer   | not null, foreign key (references stories), indexed, unique [author_id]
 
 ## tags
 column name | data type | details
@@ -38,9 +51,18 @@ name        | string    | not null
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-name        | string    | not null
+name        | string    | not null, indexed
 story_id    | integer   | not null, foreign key (references stories), indexed, unique [tag_id]
 tag_id      | integer   | not null, foreign key (references tags), indexed
+
+## follows
+column name      | data type | details
+------------     |-----------|-----------------------
+id               | integer   | not null, primary key
+follower_id      | integer   | not null, foreign key (references authors), indexed, unique [followable_id]
+followable_id    | integer   | not null, foreign key (references authors/publications), indexed
+followable_type  | string    | not null
+
 
 ## authors
 column name     | data type | details
@@ -53,3 +75,12 @@ last_name       | string    | not null, indexed
 description     | string    |
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
+
+## highlights (bonus)
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+name        | string    | not null
+story_id    | integer   | not null, foreign key (references stories), indexed
+author_id   | integer   | not null, foreign key (references authors), indexed
+body        | text      | not null

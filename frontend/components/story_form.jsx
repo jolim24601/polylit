@@ -10,7 +10,7 @@ var StoryForm = React.createClass({
   getInitialState: function () {
     return ({
       options: {
-        menuBar: false,
+        menuBar: true,
         tooltipMenu: true,
         autoInput: true,
         docFormat: 'html'
@@ -27,8 +27,7 @@ var StoryForm = React.createClass({
   },
   updateOutput: function () {
     this.setState({
-      output: event.target.value,
-      html: this.refs.pm.getContent('html')
+      output: event.target.value
     });
   },
   componentDidMount: function () {

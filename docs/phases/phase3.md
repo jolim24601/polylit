@@ -1,44 +1,44 @@
-# Phase 3: Notebooks and Tags (2 days)
+# Phase 3: Publications and Tags (2 days)
 
 ## Rails
 ### Models
-* Notebook
+* Publication
 * Tag
 * Tagging
 
 ### Controllers
-* Api::NotebooksController (create, destroy, index, show, update)
+* Api::PublicationsController (create, destroy, index, show, update)
 
 ### Views
-* notebooks/index.json.jbuilder
-* notebooks/show.json.jbuilder
+* publications/index.json.jbuilder
+* publications/show.json.jbuilder
 * tags/show.json.jbuilder
 
 ## Flux
 ### Views (React Components)
-* NotebooksIndex
-  - NotebookIndexItem
-* NotebookForm
+* PublicationsIndex
+  - PublicationIndexItem
+* PublicationForm
 * SearchIndex
 
 ### Stores
-* Notebook
+* Publication
 
 ### Actions
-* ApiActions.receiveAllNotebooks -> triggered by ApiUtil
-* ApiActions.receiveSingleNotebook
-* ApiActions.deleteNotebook
-* NotebookActions.fetchAllNotebooks -> triggers ApiUtil
-* NotebookActions.fetchSingleNotebook
-* NotebookActions.createNotebook
-* NotebookActions.editNotebook
-* NotebookActions.destroyNotebook
+* ApiActions.receiveAllPublications -> triggered by ApiUtil
+* ApiActions.receiveSinglePublication
+* ApiActions.deletePublication
+* PublicationActions.fetchAllPublications -> triggers ApiUtil
+* PublicationActions.fetchSinglePublication
+* PublicationActions.createPublication
+* PublicationActions.editPublication
+* PublicationActions.destroyPublication
 
 ### ApiUtil
-* ApiUtil.fetchAllNotebooks
-* ApiUtil.fetchSingleNotebook
-* ApiUtil.createNotebook
-* ApiUtil.editNotebook
-* ApiUtil.destroyNotebook
+* ApiUtil.fetchAllPublications
+* ApiUtil.fetchSinglePublication
+* ApiUtil.createPublication
+* ApiUtil.editPublication
+* ApiUtil.destroyPublication
 
 ## Gems/Libraries

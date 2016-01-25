@@ -1,6 +1,6 @@
 # Polylit
 
-[Heroku link][heroku] **NB:** This should be a link to your production site
+[Heroku link][heroku] **NB:** Link forthcoming
 
 [heroku]: http://www.herokuapp.com
 
@@ -12,12 +12,13 @@ and React.js. Polylit allows authors to:
 - [ ] Create an account
 - [ ] Log in / Log out
 - [ ] Create, read, edit, and delete stories
+- [ ] Create, read, edit, and delete responses
 - [ ] Organize stories within Publications
 - [ ] Tag stories with multiple tags and search stories by tag
-- [ ] Follow other authors
-- [ ] Write their stories using a sophisticated WYSIWYG rich text editor (Prosemirror)
+- [ ] Bookmark and favorite stories
+- [ ] Follow other authors and publications
+- [ ] Write their stories using a sophisticated WYSIWYG rich text editor (TBD)
 - [ ] Embed content directly into their stories (Embedly)
-- [ ] Make highlights, notes, and public responses on stories
 
 ## Design Docs
 * [View Wireframes][view]
@@ -28,16 +29,16 @@ and React.js. Polylit allows authors to:
 
 ## Implementation Timeline
 
-### Phase 1: User Authentication, Note Model and JSON API (1.5 days)
+### Phase 1: User Authentication, Story Model and JSON API (1 day)
 
 In Phase 1, I will begin by implementing user signup and authentication (using
-BCrypt). There will be a basic landing page after signup that will contain the
+BCrypt). There will be a basic landing page after signup with the
 container for the application's root React component. Before building out the
 front end, I will begin by setting up a full JSON API for Stories.
 
 [Details][phase-one]
 
-### Phase 2: Flux Architecture and Note CRUD (2.5 days)
+### Phase 2: Flux Architecture and Story CRUD (1.5 days)
 
 Phase 2 is focused on setting up Flux, the React Router, and the React view
 structure for the main application. After the basic Flux architecture has been
@@ -46,47 +47,50 @@ the needed CRUD functionality created. Once this is done, I will create React
 views for the Stories `Index`, `IndexItem` and `Form`. At the end of Phase 2,
 Stories can be created, read, edited and destroyed in the browser. Stories should
 save to the database when the form loses focus or is left idle after editing.
-Lastly, while constructing the views I will start applying SASS for
+Lastly, while constructing the views I will start applying CSS/SASS for
 styling.
 
 [Details][phase-two]
 
-### Phase 3: Publication and Tags (2 days)
+### Phase 3: Publications, Tags, Favorites, Bookmarks (2 days)
 
 Phase 3 adds organization to the Stories. Stories belong to a Publication, which has
 its own `Index` view. Create JSON API for Publications. Stories can also now be
-tagged with multiple tags. Authors can bring up stories in a separate `SearchIndex`
-view by searching for their tags.
+tagged with multiple tags, bookmarked, and favorited. Authors can bring up stories
+in a separate `SearchIndex` view by searching for their tags.
 
 [Details][phase-three]
 
-### Phase 4: Allow Complex Styling in Stories (1 day)
+### Phase 4: Polymorphic Follows (1 day)
 
-Using the react-quill library (based on Quill.js), allow for complex styling of
-stories.
+Authors can follow other authors, as well as publications.
 
 [Details][phase-four]
 
-### Phase 5: Reminders and Garbage Collection (1 day)
+### Phase 5: Allow Complex Styling in Stories, embeddable content (1.5 days)
 
-Phase 5 introduces two new features. First, authors can set reminders on stories
-which will at the time they are set for prompt the user to review and edit the
-given note.
+Using the Prosemirror (TBD) library, give users a tooltip menu for styling stories.
+Authors can embed video, articles, tweets, etc. using the Embedly API.
 
 [Details][phase-five]
 
-### Phase 6: Styling Cleanup and Seeding (1 day)
+### Phase 6: Auth styling and Seeding. Single page React authentication. (1 day)
 
+Seed the DB with content and create React routes for single page authentication
+with React. Style authentication flow.
+
+[Details][phase-six]
 
 ### Bonus Features (TBD)
-- [ ] Prettify transitions
-- [ ] Use javascript library for cleaner tag selection
-- [ ] Changelogs for Stories
-- [ ] Pagination / infinite scroll for Stories Index
-- [ ] Multiple sessions
+- [ ] Pagination / infinite scroll
+- [ ] URL slugs using FriendlyId
+- [ ] Keyboard shortcuts for styling stories
+- [ ] Allow highlights, denote top highlighted sections, share highlights on FB/Twitter
+- [ ] Real-time collaborative editing for stories using Prosemirror's collab module
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md
 [phase-three]: ./docs/phases/phase3.md
 [phase-four]: ./docs/phases/phase4.md
 [phase-five]: ./docs/phases/phase5.md
+[phase-six]: ./docs/phases/phase6.md

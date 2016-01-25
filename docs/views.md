@@ -1,21 +1,21 @@
 # View Wireframes
 
-## New User
+## New Author
 ![new-user]
 
 ## New Session
 ![new-session]
 
-## NotesIndex / NoteIndexItem / NoteForm
-![notes]
+## StoriesIndex / StoryIndexItem / StoryForm
+![stories]
 
-## NotebooksIndex / NotebookIndexItem
-![notebooks]
+## PublicationsIndex / PublicationIndexItem
+![publications]
 
-## NoteBookForm
+## PublicationForm
 ![notebook-form]
 
-## Component Heirarchy
+## Component Hierarchy
 ![component-heirarchy]
 
 [new-user]: ./wireframes/new_user.png
