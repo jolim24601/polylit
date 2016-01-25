@@ -9,29 +9,29 @@
 Polylit is a web application inspired by Medium built using Ruby on Rails
 and React.js. Polylit allows authors to:
 
-- [ ] Create an account
-- [ ] Log in / Log out
-- [ ] Create, read, edit, and delete stories
-- [ ] Create, read, edit, and delete responses
-- [ ] Organize stories within Publications
+- [ ] Sign up/Log in by email, twitter, or FB
+- [ ] Create, read, edit, and delete Stories
+- [ ] Write their stories using a sophisticated WYSIWYG rich text editor (TBD)
+- [ ] Create, view, edit, and delete Publications
+- [ ] Organize stories into Publications
+- [ ] Follow other authors and publications
 - [ ] Tag stories with multiple tags and search stories by tag
 - [ ] Bookmark and favorite stories
-- [ ] Follow other authors and publications
-- [ ] Write their stories using a sophisticated WYSIWYG rich text editor (TBD)
+- [ ] Create, read, edit, and delete Responses
 - [ ] Embed content directly into their stories (Embedly)
 
 ## Design Docs
-* [View Wireframes][view]
 * [DB schema][schema]
+* [Views][views]
 
-[view]: ./docs/views.md
+[views]: ./docs/views.md
 [schema]: ./docs/schema.md
 
 ## Implementation Timeline
 
-### Phase 1: User Authentication, Story Model and JSON API (1 day)
+### Phase 1: Author Authentication, Story Model and JSON API (1 day)
 
-In Phase 1, I will begin by implementing user signup and authentication (using
+In Phase 1, I will begin by implementing author signup and authentication (using
 BCrypt). There will be a basic landing page after signup with the
 container for the application's root React component. Before building out the
 front end, I will begin by setting up a full JSON API for Stories.
@@ -44,7 +44,7 @@ Phase 2 is focused on setting up Flux, the React Router, and the React view
 structure for the main application. After the basic Flux architecture has been
 set up, a Story store will be implemented and a set of actions corresponding to
 the needed CRUD functionality created. Once this is done, I will create React
-views for the Stories `Index`, `IndexItem` and `Form`. At the end of Phase 2,
+views for the Stories `Index`, `IndexItem` `Form`, and `View`. At the end of Phase 2,
 Stories can be created, read, edited and destroyed in the browser. Stories should
 save to the database when the form loses focus or is left idle after editing.
 Lastly, while constructing the views I will start applying CSS/SASS for
@@ -85,6 +85,7 @@ with React. Style authentication flow.
 - [ ] Pagination / infinite scroll
 - [ ] URL slugs using FriendlyId
 - [ ] Keyboard shortcuts for styling stories
+- [ ] Import blog posts by url
 - [ ] Allow highlights, denote top highlighted sections, share highlights on FB/Twitter
 - [ ] Real-time collaborative editing for stories using Prosemirror's collab module
 

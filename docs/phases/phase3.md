@@ -1,13 +1,19 @@
-# Phase 3: Publications and Tags (2 days)
+### Phase 3: Publications, Tags, Favorites, Bookmarks (2 days)
 
 ## Rails
 ### Models
 * Publication
 * Tag
 * Tagging
+* Favorite
+* Bookmark
 
 ### Controllers
-* Api::PublicationsController (create, destroy, index, show, update)
+* Api::PublicationsController (create, destroy, edit, show, update)
+* Api::BookmarksController (create, destroy, index)
+* Api::FavoriteController (create, destroy, index)
+* Api::TagsController (create, destroy, index)
+* Api::TaggingsController (create, destroy, index)
 
 ### Views
 * publications/index.json.jbuilder

@@ -1,4 +1,4 @@
-### Phase 5: Allow Complex Styling in Stories, embeddable content (1.5 days)
+### Phase 6: Auth styling and Seeding. Single page React authentication. (1 day)
 
 ## Rails
 ### Models

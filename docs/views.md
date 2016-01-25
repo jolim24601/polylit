@@ -1,26 +1,12 @@
-# View Wireframes
-
-## New Author
-![new-user]
-
-## New Session
-![new-session]
-
-## StoriesIndex / StoryIndexItem / StoryForm
-![stories]
-
-## PublicationsIndex / PublicationIndexItem
-![publications]
-
-## PublicationForm
-![notebook-form]
-
-## Component Hierarchy
-![component-heirarchy]
-
-[new-user]: ./wireframes/new_user.png
-[new-session]: ./wireframes/new_session.png
-[notes]: ./wireframes/root_notes.png
-[notebooks]: ./wireframes/root_notebooks.png
-[notebook-form]: ./wireframes/notebook_form.png
-[component-heirarchy]: ./wireframes/component_heirarchy.png
+![Landing page](./docs/views/landing_page.jpg "Polylit")
+![Sign in page](./docs/views/sign_in.JPG "Sign In/Up")
+![Email sign in](./docs/views/email_signin.JPG "Email")
+![Post sign in form](./docs/views/sign_in2.JPG "Tags to follow")
+![Post sign in part 2](./docs/views/sign_in3.JPG "Authors to follow:")
+![Home](./docs/views/home.JPG "Welcome:")
+![Nav button](./docs/views/closeup_navbutton.JPG "User nav button:")
+![New story](./docs/views/story_form.JPG "New story:")
+![Story view](./docs/views/story_view.JPG "Story:")
+![Author stories](./docs/views/author_story_index.JPG "Your stories:")
+![Publication view](./docs/views/publication.JPG "Publication view:")
+![New publication](./docs/views/publication_form.JPG "New publication:")

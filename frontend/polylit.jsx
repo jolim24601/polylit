@@ -4,13 +4,14 @@ var React = require('react'),
     Router = ReactRouter.Router,
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
-    hashHistory = ReactRouter.hashHistory;
-
-var StoryForm = require('./components/story_form');
-var NProgress = require('nprogress');
+    hashHistory = ReactRouter.hashHistory,
+    StoriesIndex = require('./components/stories_index'),
+    StoryForm = require('./components/story_form'),
+    NProgress = require('nprogress');
 
 var App = React.createClass({
   componentWillMount: function () {
+    // loading bar animation
     NProgress.start();
   },
   render: function () {
@@ -22,14 +23,26 @@ var App = React.createClass({
   }
 });
 
+// comments are tbd
 var routes = (
   <Route path='/' component={App}>
+    <IndexRoute path='stories' component={StoriesIndex}/>
     <Route path='new-story' component={StoryForm}/>
+    // <Route path='new-publication' component={PublicationForm}/>
+    // <Route path='authors/:authorId' component={AuthorView}>
+      // <Route path='/:storyId' component={StoryView}/>
+    // </Route>
+    // <Route path='publications/:publicationId' component={PublicationView}>
+    //   <Route path='/:storyId' component={StoryView}/>
+    // </Route>
   </Route>
 );
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  ReactDOM.render(<Router history={hashHistory}>{routes}</Router>, document.getElementById('content'));
+  ReactDOM.render(
+    <Router history={hashHistory}>{routes}</Router>,
+    document.getElementById('content')
+  );
   NProgress.done();
 });
