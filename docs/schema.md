@@ -14,10 +14,20 @@ published      | boolean   | default: false
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-author_id   | integer   | not null, foreign key (references authors), indexed
 title       | string    | not null, indexed, unique
-description | string    |
+description | text      |
+email       | string    |
+facebook_url| string    |
+twitter_url | string    |
 slug        | string    |
+
+## publishers
+column name      | data type | details
+------------     |-----------|-----------------------
+id               | integer   | not null, primary key
+publication_id   | integer   | not null, foreign key (references publications), indexed
+author_id        | integer   | not null, foreign key (references authors), indexed
+editor           | boolean   | not null, default: false
 
 ## responses
 column name | data type | details
@@ -34,7 +44,7 @@ id          | integer   | not null, primary key
 author_id   | integer   | not null, foreign key (references authors), indexed
 story_id    | integer   | not null, foreign key (references stories), indexed, unique [author_id]
 
-## favorites
+## favorites (aka recommendations)
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
@@ -70,11 +80,11 @@ column name     | data type | details
 id              | integer   | not null, primary key
 username        | string    | not null, indexed, unique
 email           | string    | not null, indexed, unique
-given_name      | string    | not null, indexed
-last_name       | string    | not null, indexed
+pen_name        | string    | not null, indexed
 description     | string    |
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
+
 
 ## highlights (bonus)
 column name | data type | details

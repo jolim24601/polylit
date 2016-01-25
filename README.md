@@ -54,10 +54,10 @@ styling.
 
 ### Phase 3: Publications, Tags, Favorites, Bookmarks (2 days)
 
-Phase 3 adds organization to the Stories. Stories belong to a Publication, which has
-its own `Index` view. Create JSON API for Publications. Stories can also now be
-tagged with multiple tags, bookmarked, and favorited. Authors can bring up stories
-in a separate `SearchIndex` view by searching for their tags.
+Phase 3 adds organization to the Stories. Stories belong to a Publication, which
+is linked to by the story (no index view.) Create JSON API for Publications.
+Stories can also now be tagged with multiple tags, bookmarked, and favorited.
+Authors can bring up stories in a separate `SearchIndex` view by searching for their tags.
 
 [Details][phase-three]
 
