@@ -11,6 +11,7 @@ var Navbar = React.createClass({
           <div className="navbar-logo">
             <h2 className="logo floatLeft"><a href="#">Polylit</a></h2>
           </div>
+
           <ul className="navbar-center group floatLeft">
             <li><a href="#">HOME</a></li>
             <li><a href="#">TOP STORIES</a></li>
@@ -18,11 +19,11 @@ var Navbar = React.createClass({
           </ul>
 
           <ul className="navbar-tools group floatRight">
-            <PredictiveSearch />
-            <li><a href="#/new-story">Write a story</a></li>
-              <Notifications />
-              <ProfileButton />
-              <li>Sign In / Sign Up</li>
+              <li><a href="#/new-story">Write a story</a></li>
+              <li><Notifications /></li>
+              <li><ProfileButton /></li>
+              <li><PredictiveSearch /></li>
+              <li><a href="authors/new">Sign In / Sign Up</a></li>
           </ul>
         </nav>
       </header>

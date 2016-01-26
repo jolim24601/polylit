@@ -1,5 +1,5 @@
 var React = require('react'),
-    Editor = require('../components/editor');
+    Editor = require('../../components/editor');
 
 require('prosemirror/dist/inputrules/autoinput');
 require('prosemirror/dist/menu/menubar');

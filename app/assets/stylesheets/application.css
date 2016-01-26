@@ -17,22 +17,40 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:300,400,700);
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700,700italic);
 
-html, body, section, article,
-h1, h2, p, strong, em, a,
-button, input, select, textarea {
+html, body, header, nav, h1, a,
+ul, li, strong, main, button, i,
+section, img, div, h2, p, form,
+fieldset, label, input, textarea,
+span, article, footer, time, small {
   margin: 0;
   border: 0;
   padding: 0;
   outline: 0;
+  font: inherit;
   box-sizing: inherit;
   text-decoration: inherit;
   text-align: inherit;
+  vertical-align: inherit;
   color: inherit;
   background: transparent;
 }
 
+input[type="password"],
+input[type="email"],
+input[type="text"],
+input[type="submit"],
+textarea,
 button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button,
+input[type="submit"] {
   cursor: pointer;
+}
+
+button {
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 999em;
 }
@@ -56,7 +74,7 @@ ul {
 input {
   outline: 0;
   border-color: rgba(0, 0, 0, 0.14902);
-  border-style: solid;
+  border: 1px solid #D3D3D3;
   border-radius: 4px;
 }
 

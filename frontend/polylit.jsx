@@ -1,13 +1,13 @@
 var React = require('react'),
     ReactDOM = require('react-dom'),
     ReactRouter = require('react-router'),
+    NProgress = require('nprogress'),
     Router = ReactRouter.Router,
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
     hashHistory = ReactRouter.hashHistory,
-    StoriesIndex = require('./components/stories_index'),
-    StoryForm = require('./components/story_form'),
-    NProgress = require('nprogress'),
+    StoriesIndex = require('./components/stories/stories_index'),
+    StoryForm = require('./components/stories/story_form'),
     Navbar = require('./components/navbar/navbar');
 
 var App = React.createClass({
@@ -25,7 +25,6 @@ var App = React.createClass({
   }
 });
 
-// comments are tbd
 var routes = (
   <Route path='/' component={App}>
     <IndexRoute component={StoriesIndex} />
@@ -33,18 +32,11 @@ var routes = (
   </Route>
 );
 
-// <Route path='new-publication' component={PublicationForm}/>
-// <Route path='authors/:authorId' component={AuthorView}>
-// <Route path='/:storyId' component={StoryView}/>
-// </Route>
-// <Route path='publications/:publicationId' component={PublicationView}>
-// <Route path='/:storyId' component={StoryView}/>
-// </Route>
-
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(
     <Router history={hashHistory}>{routes}</Router>,
-    document.getElementById('container')
+    document.getElementById('content')
   );
+  // complete animation
   NProgress.done();
 });

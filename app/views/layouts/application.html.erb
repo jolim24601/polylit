@@ -9,23 +9,12 @@
 <body>
   <%= render "flash/errors" %>
   <%= render "flash/success" %>
-  <%= render "layouts/navbar" %>
   <%= yield %>
 
-  <% unless logged_in? %>
-    <script>
-      console.log("No current user");
-      $(function(){
-        $("body").on("click", ".js-modal-open", function(event){
-          event.preventDefault();
-          $(".modal").addClass("is-open");
-        });
-        $("body").on("click", ".js-modal-close", function(event){
-          event.preventDefault();
-          $(".modal").removeClass("is-open");
-        });
-      });
-    </script>
+  <% if logged_in? %>
+    <p>Welcome, <%= current_author.username %></p>
+  <% else %>
+    <p>Sign in!</p>
   <% end %>
 </body>
 </html>

@@ -12,6 +12,7 @@
 
 .navbar-nav {
   margin: 5px;
+  height: 65px;
 }
 
 .navbar-center {
@@ -24,16 +25,50 @@
 
 .navbar-nav li, h2 {
   display: block;
-  margin-left: 10px;
+  margin: 20px 0 20px 10px;
+}
+
+.navbar-nav a {
+  padding: 10px 0;
 }
 
 .navbar-center > li {
+  cursor: pointer;
   float: left;
   color: rgba(0,0,0,0.5);
 }
 
 .navbar-tools > li {
+  cursor: pointer;
   float: left;
+}
+
+.navbar-profile {
+  position: relative;
+}
+
+.profile-actions {
+  position: absolute;
+  top: 40px;
+  border: 1px solid #D3D3D3;
+  background-color: white;
+  border-radius: 4px;
+  z-index: 900;
+  width: 150px;
+}
+
+.profile-actions > .tooltip {
+  position: absolute;
+  display: none;
+  border-top: 5px solid white;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 0;
+}
+
+.profile-actions a {
+  white-space: nowrap;
+  padding: 10px;
 }
 
 .logo {

@@ -20,7 +20,8 @@
 }
 
 .modal-form {
-  display: inline-block;
+  margin: auto;
+  text-align: center;
   max-width: 620px;
   padding: 100px 80px;
 }
@@ -46,7 +47,7 @@ label[for=form-password] {
   margin-top: 10px;
 }
 
-input {
+.modal-form input {
   width: 255px;
   padding: 0 15px;
   height: 35px;
