@@ -46,14 +46,14 @@ label[for=form-password] {
   margin-top: 10px;
 }
 
-#form-email, #form-password {
+input {
   width: 255px;
   padding: 0 15px;
   height: 35px;
   font-size: 14px;
 }
 
-.modal-form .submit {
+.modal-form .signin-button {
   margin-top: 15px;
 }
 

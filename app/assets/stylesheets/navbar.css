@@ -1,4 +1,4 @@
-.metabar {
+.navbar {
   margin-right: 400px;
   margin-left: 0;
   display: block;
@@ -10,35 +10,32 @@
   letter-spacing: 0;
 }
 
-.metabar-nav {
+.navbar-nav {
   margin: 5px;
 }
 
-.metabar-center {
+.navbar-center {
   margin-left: 400px;
   max-width: 600px;
 }
 
-.metabar-tools {
+.navbar-tools {
 }
 
-.metabar-nav li, h2 {
+.navbar-nav li, h2 {
   display: block;
   margin-left: 10px;
 }
 
-.metabar-center > li {
+.navbar-center > li {
   float: left;
   color: rgba(0,0,0,0.5);
 }
 
-.metabar-tools > li {
+.navbar-tools > li {
   float: left;
 }
 
 .logo {
   font-size: 32px;
-}
-
-.metabar-predictiveSearch {
 }

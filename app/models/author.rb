@@ -1,3 +1,15 @@
+class ActiveRecord::Base
+  def generate_unique_token_for_field(field)
+    token = SecureRandom.base64
+
+    while self.class.exists?(field => token)
+      token = SecureRandom.base64
+    end
+
+    token
+  end
+end
+
 class Author < ActiveRecord::Base
   after_initialize :ensure_session_token
 
@@ -14,19 +26,23 @@ class Author < ActiveRecord::Base
   end
 
   def is_password?(password)
-    BCrypt::Password.new(self.password_digest).is_password?(password)
+    BCrypt::Password.new(password_digest).is_password?(password)
   end
 
   def password=(password)
+    @password = password
     self.password_digest = BCrypt::Password.create(password)
   end
 
   def reset_session_token!
-    self.session_token = SecureRandom.urlsafe_base64(16)
+    self.session_token = generate_unique_token_for_field(:session_token)
     save!
+    session_token
   end
 
-  def ensure_session_token
-    self.session_token ||= SecureRandom.urlsafe_base64(16)
-  end
+  private
+
+    def ensure_session_token
+      self.session_token ||= generate_unique_token_for_field(:session_token)
+    end
 end

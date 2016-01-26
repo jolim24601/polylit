@@ -7,14 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="container">
-    <%= render "layouts/navbar" %>
-    <!-- <%= render "layouts/auth" %> -->
-    <%= yield %>
-  </div>
+  <%= render "flash/errors" %>
+  <%= render "flash/success" %>
+  <%= render "layouts/navbar" %>
+  <%= yield %>
 
   <% unless logged_in? %>
     <script>
+      console.log("No current user");
       $(function(){
         $("body").on("click", ".js-modal-open", function(event){
           event.preventDefault();

@@ -1,14 +1,18 @@
 class Api::AuthorsController < ApplicationController
+  before_action :require_logged_out_author
+
   def create
     @author = Author.new(author_params)
+    @author.username ||= @author.email[/[^@]+/]
 
     if @author.save
       login_author(@author)
       flash[:success] = ["Welcome"]
     else
-      flash.now[:errors] = @author.errors.full_messages
-      redirect_to root_url
+      flash[:errors] = @author.errors.full_messages
     end
+
+    redirect_to root_url
   end
 
   def show

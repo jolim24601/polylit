@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def login_author(author)
-    session[:session_token] = current_author.reset_session_token!
+    session[:session_token] = author.reset_session_token!
   end
 
   def logout_author!

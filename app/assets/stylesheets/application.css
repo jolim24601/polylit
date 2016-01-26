@@ -18,7 +18,8 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700,700italic);
 
 html, body, section, article,
-h1, h2, p, strong, em, a {
+h1, h2, p, strong, em, a,
+button, input, select, textarea {
   margin: 0;
   border: 0;
   padding: 0;
@@ -30,17 +31,10 @@ h1, h2, p, strong, em, a {
   background: transparent;
 }
 
-button, input, select, textarea {
-  color: inherit;
-  font: inherit;
-  margin: 0;
-}
-
 button {
   cursor: pointer;
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 999em;
-  outline: 0;
 }
 
 img {

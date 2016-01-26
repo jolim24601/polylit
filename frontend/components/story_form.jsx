@@ -21,7 +21,8 @@ var StoryForm = React.createClass({
   render: function () {
     return (
       <div className='story-form'>
-        <Editor value={this.state.output} onChange={this.updateOutput} options={this.state.options} ref="pm"/>
+        <Editor value={this.state.output} onChange={this.updateOutput}
+          options={this.state.options} ref="pm" />
       </div>
     );
   },

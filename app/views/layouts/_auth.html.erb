@@ -1,5 +1,6 @@
 <div class="modal is-open">
-  <form class="modal-form">
+  <form class="modal-form" action="<%= action_url %>" method="post">
+    <%= auth_token %>
     <button class="modal-close js-modal-close">&times;</button>
 
     <h1 class="modal-logo">Polylit</h1>
@@ -8,15 +9,22 @@
 
     <div class="input">
       <label for="form-email">Email</label>
-      <input type="text" id="form-email" placeholder="yourname@example.com">
+      <input type="text" name="author[email]"
+        placeholder="yourname@example.com">
+    </div>
+
+    <div class="input">
+      <label for="form-email">Pen name</label>
+      <input type="text" name="author[pen_name]"
+        placeholder="ex: George Eliot, George Orwell">
     </div>
 
     <div class="input">
       <label for="form-password">Password</label>
-      <input type="password" id="form-password" placeholder="Password">
+      <input type="password" name="author[password]" placeholder="Password">
     </div>
 
-    <div class="submit">
+    <div class="signin-button">
       <button class="primary">Sign In</button>
       <span class="button-alternative js-modal-close">Cancel</span>
     </div>

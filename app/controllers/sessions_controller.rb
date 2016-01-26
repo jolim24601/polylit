@@ -19,6 +19,7 @@ class SessionsController < ApplicationController
       flash.now[:errors] = ["Incorrect email/password combination."]
       render :new
     else
+      login_author(author)
       flash[:success] = ["Welcome"]
       redirect_to root_url
     end

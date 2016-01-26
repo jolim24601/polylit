@@ -7,7 +7,8 @@ var React = require('react'),
     hashHistory = ReactRouter.hashHistory,
     StoriesIndex = require('./components/stories_index'),
     StoryForm = require('./components/story_form'),
-    NProgress = require('nprogress');
+    NProgress = require('nprogress'),
+    Navbar = require('./components/navbar/navbar');
 
 var App = React.createClass({
   componentWillMount: function () {
@@ -17,6 +18,7 @@ var App = React.createClass({
   render: function () {
     return (
       <div className='main'>
+        <Navbar />
         {this.props.children}
       </div>
     );
@@ -26,8 +28,8 @@ var App = React.createClass({
 // comments are tbd
 var routes = (
   <Route path='/' component={App}>
-    <IndexRoute component={StoriesIndex}/>
-    <Route path='new-story' component={StoryForm}/>
+    <IndexRoute component={StoriesIndex} />
+    <Route path='new-story' component={StoryForm} />
   </Route>
 );
 
@@ -42,7 +44,7 @@ var routes = (
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(
     <Router history={hashHistory}>{routes}</Router>,
-    document.getElementById('content')
+    document.getElementById('container')
   );
   NProgress.done();
 });
