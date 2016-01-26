@@ -1,18 +1,14 @@
 .metabar li, .logo {
   float: left;
   font-size: 14px;
-  margin: 10px;
 }
 
 .metabar {
+  margin-right: 400px;
+  margin-left: 0;
   display: block;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  height: 65px;
+  text-align: left;
   z-index: 500;
   width: 100%;
   color: rgba(0, 0, 0, 0.3);
@@ -20,21 +16,29 @@
 }
 
 .logo {
-  height: 45px;
-  width: 45px;
+  display: block;
   font-size: 32px;
-  margin-right: 15px;
+  margin-left: 15px;
 }
 
 .metabar-predictiveSearch {
+  margin-left: 10px;
 }
 
 .metabar-list {
-  width: 80%;
+  margin: 0 460px;
   max-width: 600px;
-  /*margin: 0 auto;*/
 }
+
+.metabar-list li {
+  color: rgba(0,0,0,0.5);
+  padding: 23px;
+}
+
 .metabar-tools {
-  position: relative;
-  margin-right: 10px;
+  margin: 10px 10px 10px 0;
+}
+
+.metabar-tools li {
+  padding: 7px;
 }

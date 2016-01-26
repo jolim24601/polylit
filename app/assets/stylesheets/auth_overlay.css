@@ -1,0 +1,79 @@
+.modal {
+  display: none;
+}
+
+.modal.is-open {
+  display: block;
+}
+
+.modal {
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(255,255,255,0.97);
+  z-index: 900;
+}
+
+.modal-form {
+  display: inline-block;
+  max-width: 620px;
+  padding: 100px 80px;
+}
+
+.modal-logo {
+  font-size: 36px;
+}
+
+.modal-content {
+  display: block;
+  font-size: 18px;
+  color: rgba(0,0,0,0.6);
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+label[for=form-email], label[for=form-password] {
+  display: block;
+  margin-bottom: 10px;
+}
+
+label[for=form-password] {
+  margin-top: 10px;
+}
+
+#form-email, #form-password {
+  width: 255px;
+  padding: 0 15px;
+  height: 35px;
+  font-size: 14px;
+}
+
+.modal-form .submit {
+  margin-top: 15px;
+}
+
+.modal-form .primary {
+  margin-bottom: 10px;
+  margin-right: 8px;
+  height: 37px;
+  padding: 0 16px;
+  font-size: 14px;
+  background-color: rgba(255,255,255,0.97);
+}
+
+button.modal-close {
+  border: 0;
+  cursor: pointer;
+  background-color: rgba(255,255,255,0.97);
+  color: rgba(0,0,0,0.3);
+  font-size: 32px;
+  padding: 10px 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
