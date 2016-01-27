@@ -4,12 +4,16 @@ class Api::StoriesController < ApplicationController
     case feed
     when "top" then @stories = Story.top_stories
     when "recommended" then @stories = Story.most_recommended_stories
-      
+    end
   end
 
   def create
-    @story = Story.new(story_params)
-    @story.save
+    @story = current_author.stories.new(story_params)
+    if @story.save
+      render :show
+    else
+      render json: @story.errors.full_messages, status: 422
+    end
   end
 
   def show
@@ -19,6 +23,6 @@ class Api::StoriesController < ApplicationController
   private
 
     def story_params
-      params.require(:story).permit(:title, :subtitle, :body, :published)
+      params.require(:story).permit(:title, :subtitle, :body, :published, :node)
     end
 end

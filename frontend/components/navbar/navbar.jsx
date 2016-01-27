@@ -6,14 +6,16 @@ var Navbar = React.createClass({
       <header className="navbar">
         <nav className="navbar-nav group">
           <div className="navbar-logo">
-            <h2 className="logo floatLeft"><a href="#">Polylit</a></h2>
+            <h2 className="logo floatLeft"><a href="/">Polylit</a></h2>
           </div>
 
           <ul className="navbar-center group floatLeft">
-            <li><a href="#">HOME</a></li>
-            <li><a href="#">TOP STORIES</a></li>
+            <li><a href="/">HOME</a></li>
+            <li><a href="#/stories">TOP STORIES</a></li>
             <li><a href="#">BOOKMARKS</a></li>
           </ul>
+
+          {this.props.children}
         </nav>
       </header>
     );

@@ -7,7 +7,7 @@ var NavTools = React.createClass({
   render: function () {
     return (
       <ul className="navbar-tools group floatRight">
-          <li><a href="#/new-story">Write a story</a></li>
+          <li><a href="#/stories/new-story">Write a story</a></li>
           <li><Notifications /></li>
           <li><ProfileButton /></li>
           <li><PredictiveSearch /></li>

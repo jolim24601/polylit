@@ -17,9 +17,10 @@ module.exports = {
       url: "stories"
     });
   },
-  publishStory: function (data) {
+  publishStory: function (data, callback) {
     $.post("api/stories", { story: data }, function(story) {
       ApiActions.receiveSingleStory(story);
+      callback && callback();
     });
   }
 };

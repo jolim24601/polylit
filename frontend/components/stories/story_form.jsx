@@ -1,6 +1,8 @@
 var React = require('react'),
-    Editor = require('../../components/editor'),
-    ApiUtil = require('../../util/api_util');
+    Editor = require('../editor'),
+    ApiUtil = require('../../util/api_util'),
+    PublishButton = require('../navbar/publish_button'),
+    History = ReactRouter = require('react-router').hashHistory;
 
 require('prosemirror/dist/inputrules/autoinput');
 require('prosemirror/dist/menu/menubar');
@@ -16,17 +18,28 @@ var StoryForm = React.createClass({
         autoInput: true,
         docFormat: 'html'
       },
-      output: '<h3 pm-offset=1 pm-leaf=17>Title</h3><p>Tell a story...</p>'
+      output: '<h3>Title</h3><p>Tell a story...</p>'
     });
   },
-  publishStory: function () {
-    ApiUtil.publishStory(this.state.output);
+  publishStory: function (e) {
+    e.preventDefault();
+    var pmNode = this.refs.pm.pm.getContent();
+    var story = {};
+    story.published = true;
+    story.body = this.state.output;
+    story.title = pmNode.firstChild.textContent;
+    story.subtitle = pmNode.iter(1, 2).next().textContent;
+    story.node = JSON.stringify(pmNode.toJSON());
+    ApiUtil.publishStory(story, function () {
+      History.push('/stories');
+    });
   },
   render: function () {
     return (
       <div className='story-form'>
         <Editor value={this.state.output} onChange={this.updateOutput}
           options={this.state.options} ref="pm" />
+        <PublishButton publishStory={this.publishStory} />
       </div>
     );
   },

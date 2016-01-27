@@ -1,6 +1,6 @@
 var React = require('react');
 
-var Publish = React.createClass({
+var PublishButton = React.createClass({
   render: function () {
     return (
       <button className="primary" onClick={this.props.publishStory}>
@@ -10,4 +10,4 @@ var Publish = React.createClass({
   }
 });
 
-module.exports = Publish;
+module.exports = PublishButton;
