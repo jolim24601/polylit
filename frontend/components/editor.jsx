@@ -1,5 +1,6 @@
 var React = require('react');
 var ProseMirror = require('prosemirror/dist/edit');
+var objectAssign = require('object-assign');
 
 var Editor = React.createClass({
   render: function () {
@@ -17,7 +18,7 @@ var Editor = React.createClass({
   },
   componentWillMount: function () {
     this._lastValue = this.props.value || (this.props.valueLink || this.props.valueLink.value) || this.props.defaultValue;
-    this.pm = new ProseMirror.ProseMirror(Object.assign({doc: this._lastValue}, this.props.options));
+    this.pm = new ProseMirror.ProseMirror(objectAssign({doc: this._lastValue}, this.props.options));
   },
   // places the Prosemirror div, adds a listener to it
   componentDidMount: function () {

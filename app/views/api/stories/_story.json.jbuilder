@@ -1,7 +1,7 @@
-json.story do
-  json.title      story.title
-  json.subtitle   story.subtitle
-  json.created_at story.created_at
+json.extract! story, :id, :title, :subtitle
+json.author do
+  json.name story.author.pen_name
+  json.url  url_for(json.author)
 end
-
-json.body story.body if show_full
+json.body               story.body if show_full
+json.time_ago_in_words  time_ago_in_words(story.created_at)

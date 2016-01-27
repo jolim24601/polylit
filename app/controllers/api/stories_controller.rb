@@ -1,10 +1,6 @@
 class Api::StoriesController < ApplicationController
   def index
-    @stories = Story.all
-    case feed
-    when "top" then @stories = Story.top_stories
-    when "recommended" then @stories = Story.most_recommended_stories
-    end
+    @stories = Story.all.order(created_at: :desc)
   end
 
   def create

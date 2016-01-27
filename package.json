@@ -37,6 +37,7 @@
     "history": "^2.0.0-rc2",
     "keymirror": "^0.1.1",
     "nprogress": "^0.2.0",
+    "object-assign": "^4.0.1",
     "prosemirror": "^0.1.1",
     "react": "^0.14.6",
     "react-addons-linked-state-mixin": "^0.14.6",

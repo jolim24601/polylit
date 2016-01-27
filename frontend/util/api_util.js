@@ -1,20 +1,13 @@
 var ApiActions = require('../actions/api_actions');
 
 module.exports = {
-  destroySession: function () {
-    $.ajax({
-      type: "DELETE",
-      url: "session",
-      success: function () {
-      },
-      error: function () {
-      }
-    });
-  },
   fetchTopStories: function () {
-    $.ajax({
+    $.get({
       type: "GET",
-      url: "stories"
+      url: "api/stories",
+      success: function (stories) {
+        ApiActions.receiveTopStories(stories);
+      }
     });
   },
   publishStory: function (data, callback) {
@@ -22,5 +15,34 @@ module.exports = {
       ApiActions.receiveSingleStory(story);
       callback && callback();
     });
+  },
+  fetchStory: function (id, callback) {
+    $.ajax({
+      type: "GET",
+      url: "api/stories/" + id,
+      success: function (story) {
+        ApiActions.receiveSingleStory(story);
+        callback && callback();
+      }
+    });
+  },
+  fetchAuthor: function (id, callback) {
+    $.ajax({
+      type: "GET",
+      url: "api/authors/" + id,
+      success: function (author) {
+        ApiActions.receiveAuthor(author);
+        callback && callback();
+      }
+    });
   }
 };
+
+// ### Actions
+// * ApiActions.deleteStory
+// * StoryActions.editStory
+// * StoryActions.destroyStory
+//
+// ### ApiUtil
+// * ApiUtil.editStory
+// * ApiUtil.destroyStory

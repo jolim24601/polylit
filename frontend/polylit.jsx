@@ -10,7 +10,8 @@ var React = require('react'),
     StoryForm = require('./components/stories/story_form'),
     Navbar = require('./components/navbar/navbar'),
     NavTools = require('./components/navbar/nav_tools'),
-    WriteTools = require('./components/navbar/write_tools');
+    WriteTools = require('./components/navbar/write_tools'),
+    AuthorProfile = require('./components/authors/author_profile');
 
 var App = React.createClass({
   componentWillMount: function () {
@@ -19,13 +20,13 @@ var App = React.createClass({
   },
 
   render: function () {
-    var navbar = (<Navbar><NavTools /></Navbar>);
+    var tools = <NavTools />;
     if (this.props.children && this.props.children.type.displayName === 'StoryForm') {
-      navbar = (<Navbar><WriteTools /></Navbar>);
+      tools = <WriteTools />;
     }
     return (
       <div className='main'>
-        {navbar}
+        <Navbar>{tools}</Navbar>
         {this.props.children}
       </div>
     );
@@ -35,8 +36,8 @@ var App = React.createClass({
 var routes = (
   <Route path='/' component={App}>
     <Route path='new-story' component={StoryForm} />
-    <Route path='stories' component={StoriesIndex}>
-    </Route>
+    <Route path='stories' component={StoriesIndex} />
+    <Route path='api/authors/:id' component={AuthorProfile} />
   </Route>
 );
 

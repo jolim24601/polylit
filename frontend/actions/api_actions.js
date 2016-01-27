@@ -7,5 +7,11 @@ module.exports = {
       actionType: StoryConstants.STORY_RECEIVED,
       story: story
     });
+  },
+  receiveTopStories: function (stories) {
+    AppDispatcher.dispatch({
+      actionType: StoryConstants.STORIES_RECEIVED,
+      stories: stories
+    });
   }
 };

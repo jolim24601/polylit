@@ -1,20 +1,24 @@
 var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher'),
-    StoryConstants = require('../constants/story_constants');
+    StoryConstants = require('../constants/story_constants'),
+    objectAssign = require('object-assign');
 
 var StoryStore = new Store(AppDispatcher);
-var _stories = [];
+var _stories = {};
 
 function resetStories(stories) {
-  _stories = stories;
+  _stories = {};
+  stories.forEach(function (story) {
+    _stories[story.id] = story;
+  });
 }
 
-function addStory(story) {
-  _stories.shift(story);
+function resetStory(story) {
+  _stories[story.id] = story;
 }
 
 StoryStore.all = function () {
-  return _stories.slice();
+  return objectAssign({}, _stories);
 };
 
 StoryStore.__onDispatch = function (payload) {
@@ -24,7 +28,7 @@ StoryStore.__onDispatch = function (payload) {
     StoryStore.__emitChange();
     break;
   case StoryConstants.STORY_RECEIVED:
-    addStory(payload.story);
+    resetStory(payload.story);
     StoryStore.__emitChange();
     break;
   default:
