@@ -1,4 +1,4 @@
-### Phase 6: Auth styling and Seeding. Single page React authentication. (1 day)
+### Phase 7: Polymorphic Follows (1 day)
 
 ## Rails
 ### Models
@@ -14,6 +14,5 @@
 
 ### Actions
 
-### ApiUtil
-
 ## Gems/Libraries
+* prosemirror (npm)

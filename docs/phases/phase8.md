@@ -1,4 +1,4 @@
-### Phase 5: Allow Complex Styling in Stories, embeddable content (1.5 days)
+### Phase 8: Allow Complex Styling in Stories, embeddable content (1.5 days)
 
 ## Rails
 ### Models
