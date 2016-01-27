@@ -1,5 +1,6 @@
 var React = require('react'),
-    Editor = require('../../components/editor');
+    Editor = require('../../components/editor'),
+    ApiUtil = require('../../util/api_util');
 
 require('prosemirror/dist/inputrules/autoinput');
 require('prosemirror/dist/menu/menubar');
@@ -15,8 +16,11 @@ var StoryForm = React.createClass({
         autoInput: true,
         docFormat: 'html'
       },
-      output: '<h3>Title</h3><p>Tell a story...</p>'
+      output: '<h3 pm-offset=1 pm-leaf=17>Title</h3><p>Tell a story...</p>'
     });
+  },
+  publishStory: function () {
+    ApiUtil.publishStory(this.state.output);
   },
   render: function () {
     return (

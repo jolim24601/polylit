@@ -6,7 +6,8 @@ var React = require('react'),
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
     hashHistory = ReactRouter.hashHistory,
-    StoriesIndex = require('./components/stories/stories_index'),
+    WriteTools = require('./write_tools'),
+    NavTools = require('./nav_tools'),
     StoryForm = require('./components/stories/story_form'),
     Navbar = require('./components/navbar/navbar');
 
@@ -18,7 +19,6 @@ var App = React.createClass({
   render: function () {
     return (
       <div className='main'>
-        <Navbar />
         {this.props.children}
       </div>
     );
@@ -27,8 +27,11 @@ var App = React.createClass({
 
 var routes = (
   <Route path='/' component={App}>
-    <IndexRoute component={StoriesIndex} />
+    <IndexRoute component={Navbar} />
+    <IndexRoute component={NavTools} />
     <Route path='new-story' component={StoryForm} />
+      <IndexRoute component={Navbar} />
+      <IndexRoute component={WriteTools} />
   </Route>
 );
 

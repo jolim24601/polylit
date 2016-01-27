@@ -58,15 +58,6 @@ label[for=form-password] {
   margin-top: 15px;
 }
 
-.modal-form .primary {
-  margin-bottom: 10px;
-  margin-right: 8px;
-  height: 37px;
-  padding: 0 16px;
-  font-size: 14px;
-  background-color: rgba(255,255,255,0.97);
-}
-
 button.modal-close {
   border: 0;
   cursor: pointer;

@@ -1,7 +1,4 @@
-var React = require('react'),
-    ProfileButton = require('./profile_button'),
-    PredictiveSearch = require('../predictive_search'),
-    Notifications = require('./notifications');
+var React = require('react');
 
 var Navbar = React.createClass({
   render: function () {
@@ -16,14 +13,6 @@ var Navbar = React.createClass({
             <li><a href="#">HOME</a></li>
             <li><a href="#">TOP STORIES</a></li>
             <li><a href="#">BOOKMARKS</a></li>
-          </ul>
-
-          <ul className="navbar-tools group floatRight">
-              <li><a href="#/new-story">Write a story</a></li>
-              <li><Notifications /></li>
-              <li><ProfileButton /></li>
-              <li><PredictiveSearch /></li>
-              <li><a href="authors/new">Sign In / Sign Up</a></li>
           </ul>
         </nav>
       </header>
