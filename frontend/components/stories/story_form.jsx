@@ -26,7 +26,6 @@ var StoryForm = React.createClass({
     var pmNode = this.refs.pm.pm.getContent();
     var story = {};
     story.published = true;
-    story.body = this.state.output;
     story.title = pmNode.firstChild.textContent;
     story.subtitle = pmNode.iter(1, 2).next().textContent;
     story.node = JSON.stringify(pmNode.toJSON());

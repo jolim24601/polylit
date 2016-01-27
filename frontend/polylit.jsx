@@ -8,6 +8,7 @@ var React = require('react'),
     hashHistory = ReactRouter.hashHistory,
     StoriesIndex = require('./components/stories/stories_index'),
     StoryForm = require('./components/stories/story_form'),
+    StoryView = require('./components/stories/story_view'),
     Navbar = require('./components/navbar/navbar'),
     NavTools = require('./components/navbar/nav_tools'),
     WriteTools = require('./components/navbar/write_tools'),
@@ -37,7 +38,8 @@ var routes = (
   <Route path='/' component={App}>
     <Route path='new-story' component={StoryForm} />
     <Route path='stories' component={StoriesIndex} />
-    <Route path='api/authors/:id' component={AuthorProfile} />
+    <Route path='stories/:id' component={StoryView} />
+    <Route path='authors/:id' component={AuthorProfile} />
   </Route>
 );
 

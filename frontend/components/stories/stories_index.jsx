@@ -8,18 +8,17 @@ var StoriesIndex = React.createClass({
     return ({ stories: StoryStore.all() });
   },
   componentDidMount: function () {
-    StoryStore.addListener(this._onChange);
+    this.storyStoreListener = StoryStore.addListener(this._onChange);
     ApiUtil.fetchTopStories();
   },
   componentWillUnmount: function () {
-    StoryStore.removeListener(this._onChange);
+    this.storyStoreListener.remove();
   },
   render: function () {
     var stories = this.state.stories;
-    var storyList = Object.keys(stories).forEach(function (key) {
+    var storyList = Object.keys(stories).map(function (key) {
       return <StoryIndexItem key={key} story={stories[key]} />;
     });
-
     return (
       <ul className="story-feed">
         {storyList}

@@ -3,7 +3,7 @@ var React = require('react');
 var StoryIndexItem = React.createClass({
   render: function () {
     var story = this.props.story;
-    var link = "stories/" + story.id;
+    var link = "#/stories/" + story.id;
     return (
       <li className="story-feed-item">
         <a href={story.author.url}>{story.author.name}</a>

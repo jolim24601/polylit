@@ -21,6 +21,10 @@ StoryStore.all = function () {
   return objectAssign({}, _stories);
 };
 
+StoryStore.find = function (id) {
+  return objectAssign({}, _stories[id]);
+};
+
 StoryStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
   case StoryConstants.STORIES_RECEIVED:
