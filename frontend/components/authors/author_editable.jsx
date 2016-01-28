@@ -55,8 +55,8 @@ var AuthorEditable = React.createClass({
         <small>{author.following} Following</small>
         <small>{author.followers} Followers</small>
         &middot;
-        <a href="https://twitter.com/">Twitter</a>
-        <a href="https://facebook.com/">FB</a>
+        <a href={author.twitter}>Twitter</a>
+        <a href={author.facebook}>FB</a>
         <img src={this.state.avatarUrl} alt={this.state.penName} />
         <AvatarEditable handleUpload={this.handleUpload} />
 
