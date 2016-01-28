@@ -2,11 +2,11 @@
   width: 600px;
   margin: 50px 150px;
 }
-
+]
 .story-feed > li {
   display: block;
   border-bottom: 1px solid rgba(0,0,0,0.05);
-  margin: 20px 0;
+  margin: 25px 0;
 }
 
 .heading-title {
