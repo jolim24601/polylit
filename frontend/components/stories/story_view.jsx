@@ -1,5 +1,8 @@
 var React = require('react'),
-    ProseMirror = require('prosemirror/dist/edit'),
+    pmFormat = require('prosemirror/dist/format'),
+    pmModel = require('prosemirror/dist/model/'),
+    Schema = require('prosemirror/dist/model/schema'),
+    DefaultSchema = require('prosemirror/dist/model/defaultschema'),
     ApiUtil = require('../../util/api_util'),
     StoryStore = require('../../stores/story_store');
 
@@ -18,10 +21,18 @@ var StoryView = React.createClass({
     this.storyStoreListener.remove();
   },
   render: function () {
-    var story = this.state.story;
+    var story = this.state.story.node;
+    var pmNode, pmDOMFragment, pmHTML;
+    pmFormat, pmModel, Schema, DefaultSchema;
+    if (typeof story !== 'undefined') {
+      pmNode = DefaultSchema.defaultSchema.nodeFromJSON(story);
+      pmDOMFragment = pmFormat.toDOM(pmNode);
+      pmHTML = pmFormat.toHTML(pmNode);
+    }
     debugger
     return (
       <article className="story-view">
+        {pmHTML}
       </article>
     );
   },

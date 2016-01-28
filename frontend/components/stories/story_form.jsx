@@ -8,6 +8,7 @@ require('prosemirror/dist/inputrules/autoinput');
 require('prosemirror/dist/menu/menubar');
 require('prosemirror/dist/menu/tooltipmenu');
 require('prosemirror/dist/menu/menu');
+var pmFormat = require('prosemirror/dist/format');
 
 var StoryForm = React.createClass({
   getInitialState: function () {

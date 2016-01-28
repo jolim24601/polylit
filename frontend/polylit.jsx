@@ -19,7 +19,9 @@ var App = React.createClass({
     // loading bar animation
     NProgress.start();
   },
-
+  componentDidMount: function () {
+    NProgress.done();
+  },
   render: function () {
     var tools = <NavTools />;
     if (this.props.children && this.props.children.type.displayName === 'StoryForm') {
@@ -48,6 +50,4 @@ document.addEventListener('DOMContentLoaded', function () {
     <Router history={hashHistory}>{routes}</Router>,
     document.getElementById('content')
   );
-  // complete animation
-  NProgress.done();
 });
