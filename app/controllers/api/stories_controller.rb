@@ -19,6 +19,7 @@ class Api::StoriesController < ApplicationController
   private
 
     def story_params
-      params.require(:story).permit(:title, :subtitle, :published, :node)
+      params.require(:story)
+        .permit(:title, :subtitle, :published, :node, :wordcount)
     end
 end

@@ -1,5 +1,5 @@
 class Story < ActiveRecord::Base
-  validates :author_id, :node, presence: true
+  validates :author_id, :node, :wordcount, presence: true
   validates :title, :subtitle, length: { maximum: 100,
     too_long: "%{count} characters is the maximum allowed" }
   belongs_to :author, inverse_of: :stories

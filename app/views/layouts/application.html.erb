@@ -10,11 +10,5 @@
   <%= render "flash/errors" %>
   <%= render "flash/success" %>
   <%= yield %>
-
-  <% if logged_in? %>
-    <p>Welcome, <%= current_author.username %></p>
-  <% else %>
-    <p>Sign in!</p>
-  <% end %>
 </body>
 </html>

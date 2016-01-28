@@ -30,6 +30,7 @@ var StoryForm = React.createClass({
     story.title = pmNode.firstChild.textContent;
     story.subtitle = pmNode.iter(1, 2).next().textContent;
     story.node = JSON.stringify(pmNode.toJSON());
+    story.wordcount = pmFormat.toText(pmNode).length;
     ApiUtil.publishStory(story, function () {
       History.push('/stories');
     });
