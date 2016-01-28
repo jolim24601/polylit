@@ -31,3 +31,19 @@ me = Author.create(
   description: "I code and I write.",
   password: "jupiter3"
 )
+
+bradbury = Author.create(
+  username: "ray",
+  email: "ray@example.com",
+  pen_name: "Ray Bradbury",
+  description: "I burn books.",
+  password: "fahrenheit451"
+)
+
+lydia = Author.create(
+  username: "lydia",
+  email: "lydia@example.com",
+  pen_name: "Lydia Davis",
+  description: "Flash fiction writer, recently translated Marcel Proust's Swann's Way.",
+  password: "lydiadavis"
+)
