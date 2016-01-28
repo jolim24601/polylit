@@ -20,8 +20,8 @@ var AuthorCard = React.createClass({
       this.state.active ? "profile-card" : "profile-card hide";
     return (
       <div
-        onMouseOver={this.setTimer}
-        onMouseOut={this.clearTimer}
+        onMouseEnter={this.setTimer}
+        onMouseLeave={this.clearTimer}
         className="author-card-entry"
       >
         <a href={author.url}>{author.name}</a>
