@@ -8,6 +8,18 @@ var ProfileButton = React.createClass({
   toggleView: function () {
     this.setState({ active: !this.state.active });
   },
+  clickHandler: function (e) {
+    if ($(e.target).parents('.profile-actions').length === 0) {
+      this.toggleView();
+    }
+  },
+  componentDidUpdate: function () {
+    if (this.state.active) {
+      $('body').on('click', this.clickHandler);
+    } else {
+      $('body').off('click', this.clickHandler);
+    }
+  },
   destroySession: function () {
     ApiUtil.destroySession();
   },

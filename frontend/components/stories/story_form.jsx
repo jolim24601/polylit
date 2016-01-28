@@ -47,11 +47,11 @@ var StoryForm = React.createClass({
   },
   componentDidMount: function () {
     this.updateOutput(this.refs.pm.getContent());
-    this.publishButton = document.getElementById("publish-button");
-    this.publishListener = this.publishButton.addEventListener("click", this.publishStory);
+    this.publishButton = document.getElementById('publish-button');
+    this.publishListener = this.publishButton.addEventListener('click', this.publishStory);
   },
   componentWillUnmount: function () {
-    this.publishButton.removeEventListener("click", this.publishListener, false);
+    this.publishButton.removeEventListener('click', this.publishListener, false);
   }
 });
 
