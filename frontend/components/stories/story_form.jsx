@@ -43,7 +43,7 @@ var StoryForm = React.createClass({
     );
   },
   updateOutput: function (output) {
-    this.setState({ output });
+    this.setState({ output: output });
   },
   componentDidMount: function () {
     this.updateOutput(this.refs.pm.getContent());

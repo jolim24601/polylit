@@ -5,9 +5,8 @@ column name    | data type | details
 ------------   |-----------|-----------------------
 id             | integer   | not null, primary key
 title          | string    | not null, indexed
-body           | text      | not null
+node           | json      | not null
 subtitle       | string    |
-publication_id | integer   | foreign key (references publications), indexed
 published      | boolean   | default: false
 
 ## publications

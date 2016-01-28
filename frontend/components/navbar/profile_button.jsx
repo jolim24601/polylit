@@ -11,6 +11,8 @@ var ProfileButton = React.createClass({
   clickHandler: function (e) {
     if ($(e.target).parents('.profile-actions').length === 0) {
       this.toggleView();
+    } else if ($(e.target).is('.profile-actions')) {
+      this.toggleView();
     }
   },
   componentDidUpdate: function () {
@@ -31,7 +33,7 @@ var ProfileButton = React.createClass({
       <div onClick={this.toggleView} className="navbar-profile">
         Profile
         <ul className={ profileClass }>
-         <li className="tooltip"></li>
+         <div className="tooltip"></div>
          <li key={"prof-new-story"}><a href="#">New Story</a></li>
          <li key={"prof-drafts"}><a href="#">Drafts and stories</a></li>
          <li key={"prof-publications"}><a href="#">Publications</a></li>
