@@ -3,7 +3,7 @@ var React = require('react');
 var PublishButton = React.createClass({
   render: function () {
     return (
-      <button className="primary" onClick={this.props.publishStory}>
+      <button id="publish-button" className="primary">
         Publish &or;
       </button>
     );

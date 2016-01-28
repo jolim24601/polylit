@@ -28,11 +28,11 @@ var StoryView = React.createClass({
       pmNode = DefaultSchema.defaultSchema.nodeFromJSON(story);
       pmDOMFragment = pmFormat.toDOM(pmNode);
       pmHTML = pmFormat.toHTML(pmNode);
+      $(".story-view").append(pmDOMFragment);
     }
-    debugger
+
     return (
       <article className="story-view">
-        {pmHTML}
       </article>
     );
   },

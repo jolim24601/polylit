@@ -6,11 +6,15 @@ var StoryIndexItem = React.createClass({
     var link = "#/stories/" + story.id;
     return (
       <li className="story-feed-item">
-        <a href={story.author.url}>{story.author.name}</a>
-        <h3><a href={link}>{story.title}</a></h3>
-        <small>{story.time_ago_in_words} ago</small>&middot;<small>{story.readTime} minute read</small>
-        <p>{story.subtitle}</p>
-        <a href={link}>Read more...</a>
+        <div className="mini-profile">
+          <a href={story.author.url}>{story.author.name}</a>
+        </div>
+        <small>{story.timeAgo} ago </small>
+        &middot;
+        <small> {story.readTime}</small>
+        <h3 className="feed-title"><a href={link}>{story.title}</a></h3>
+        <p className="feed-subtitle">{story.subtitle}</p>
+        <small><a href={link}>Read more...</a></small>
       </li>
     );
   }

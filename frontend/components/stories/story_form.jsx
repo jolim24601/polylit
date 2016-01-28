@@ -1,8 +1,7 @@
 var React = require('react'),
     Editor = require('../editor'),
     ApiUtil = require('../../util/api_util'),
-    PublishButton = require('../navbar/publish_button'),
-    History = ReactRouter = require('react-router').hashHistory;
+    History = require('react-router').hashHistory;
 
 require('prosemirror/dist/inputrules/autoinput');
 require('prosemirror/dist/menu/menubar');
@@ -30,7 +29,7 @@ var StoryForm = React.createClass({
     story.title = pmNode.firstChild.textContent;
     story.subtitle = pmNode.iter(1, 2).next().textContent;
     story.node = JSON.stringify(pmNode.toJSON());
-    story.wordcount = pmFormat.toText(pmNode).length;
+    story.wordcount = pmFormat.toText(pmNode).split(/\s+/).length;
     ApiUtil.publishStory(story, function () {
       History.push('/stories');
     });
@@ -40,7 +39,6 @@ var StoryForm = React.createClass({
       <div className='story-form'>
         <Editor value={this.state.output} onChange={this.updateOutput}
           options={this.state.options} ref="pm" />
-        <PublishButton publishStory={this.publishStory} />
       </div>
     );
   },
@@ -49,6 +47,11 @@ var StoryForm = React.createClass({
   },
   componentDidMount: function () {
     this.updateOutput(this.refs.pm.getContent());
+    this.publishButton = document.getElementById("publish-button");
+    this.publishListener = this.publishButton.addEventListener("click", this.publishStory);
+  },
+  componentWillUnmount: function () {
+    this.publishButton.removeEventListener("click", this.publishListener, false);
   }
 });
 

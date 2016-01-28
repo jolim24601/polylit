@@ -5,6 +5,7 @@ var React = require('react'),
     Router = ReactRouter.Router,
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
+    DefaultRoute = ReactRouter.DefaultRoute,
     hashHistory = ReactRouter.hashHistory,
     StoriesIndex = require('./components/stories/stories_index'),
     StoryForm = require('./components/stories/story_form'),
@@ -38,6 +39,7 @@ var App = React.createClass({
 
 var routes = (
   <Route path='/' component={App}>
+    <IndexRoute component={StoriesIndex} />
     <Route path='new-story' component={StoryForm} />
     <Route path='stories' component={StoriesIndex} />
     <Route path='stories/:id' component={StoryView} />

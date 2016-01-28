@@ -21,6 +21,7 @@ var StoriesIndex = React.createClass({
     });
     return (
       <ul className="story-feed">
+        <li className="heading-title">Latest stories</li>
         {storyList}
       </ul>
     );
