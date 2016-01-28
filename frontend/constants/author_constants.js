@@ -1,6 +1,6 @@
-var keyMirror = require('keyMirror');
+var keymirror = require('keymirror');
 
-module.exports = keyMirror({
+module.exports = keymirror({
   AUTHOR_RECEIVED: null,
   AUTHORS_RECEIVED: null
 });
