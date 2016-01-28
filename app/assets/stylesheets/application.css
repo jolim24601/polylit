@@ -13,6 +13,7 @@
  *= require 'main'
  *= require 'nprogress'
  *= require 'navbar'
+ *= require 'auth_overlay'
  *= require 'story_feed'
  *= require 'story_form'
  *= require_self
