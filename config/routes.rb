@@ -6,6 +6,6 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :stories, only: [:create, :index, :show]
-    resources :authors, only: [:show, :create]
+    resources :authors, only: [:show, :create, :update]
   end
 end

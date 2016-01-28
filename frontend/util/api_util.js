@@ -1,4 +1,5 @@
-var ApiActions = require('../actions/api_actions');
+var ApiActions = require('../actions/api_actions'),
+    AuthorActions = require('../actions/author_actions');
 
 module.exports = {
   fetchTopStories: function () {
@@ -31,7 +32,20 @@ module.exports = {
       type: "GET",
       url: "api/authors/" + id,
       success: function (author) {
-        ApiActions.receiveAuthor(author);
+        AuthorActions.receiveAuthor(author);
+        callback && callback();
+      }
+    });
+  },
+  editAuthor: function (formData, callback) {
+    $.ajax({
+      type: "PATCH",
+      url: "api/authors/" + formData.id,
+      dataType: "json",
+      processData: false,
+      data: formData,
+      success: function (author) {
+        AuthorActions.receiveAuthor(author);
         callback && callback();
       }
     });

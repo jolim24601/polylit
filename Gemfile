@@ -12,6 +12,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 gem 'rails_12factor', group: :production
 
+gem 'paperclip'
+gem 'aws-sdk', '~> 1.6'
+
 group :development, :test do
   gem 'byebug'
 end
