@@ -9,10 +9,8 @@ var ProfileButton = React.createClass({
     this.setState({ active: !this.state.active });
   },
   clickHandler: function (e) {
-    if ($(e.target).parents('.profile-actions').length === 0) {
-      this.toggleView();
     // get this to work when pressing the parent element.
-    } else if ($(e.target).is('.profile-actions')) {
+    if ($(e.target).parents('.profile-actions').length === 0) {
       this.toggleView();
     }
   },
