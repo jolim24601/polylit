@@ -10,7 +10,7 @@ var Follow = React.createClass({
   },
   render: function () {
     return (
-      <button className="author-follow">{this.state.follow}</button>
+      <button className="follow primary">{this.state.follow}</button>
     );
   }
 });

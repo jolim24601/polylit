@@ -7,7 +7,9 @@ json.followers    0
 
 # eventually call associations here
 if show_full
-  json.stories    author.stories
+  json.stories do
+    json.partial! 'api/stories/story', collection: author.stories, show_full: false, as: :story
+  end
   json.favorites  0
   json.twitter    'https://twitter.com/'
   json.facebook   'https://facebook.com/'

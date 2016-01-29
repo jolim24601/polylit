@@ -6,6 +6,9 @@ var StoryIndexItem = React.createClass({
   render: function () {
     var story = this.props.story;
     var link = "#/stories/" + story.id;
+
+    // story feed || author profile
+    story.author = story.author || this.props.author;
     return (
       <li className="story-feed-item">
         <AuthorCard author={story.author} />

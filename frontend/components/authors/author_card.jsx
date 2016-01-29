@@ -7,6 +7,9 @@ var AuthorCard = React.createClass({
   showCard: function () {
     this.setState({ active: true });
   },
+  componentWillUnmount: function () {
+    window.clearTimeout(this.timeoutId);
+  },
   clearTimer: function () {
     window.clearTimeout(this.timeoutId);
     this.setState({ active: false });

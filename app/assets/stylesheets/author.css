@@ -1,0 +1,76 @@
+/*<div className="profile-banner">
+  <div className="inner-profile group">
+    <h3 contentEditable={this.state.editable}>{this.state.name}</h3>
+    <p contentEditable={this.state.editable}>{this.state.description}</p>
+
+    <div className="social-button-set">
+      <small>{author.following} Following</small>
+      <small>{author.followers} Followers</small>
+      <small>&middot;</small>
+      <small><a href={author.twitter}>Twitter</a></small>
+      <small><a href={author.facebook}>FB</a></small>
+    </div>
+    {buttons}
+
+    <AvatarEditable handleUpload={this.handleUpload} />
+  </div>
+</div>*/
+
+.profile-banner {
+  position: relative;
+  height: 240px;
+  padding: 50px;
+  background-color: #fafafa;
+}
+
+.inner-profile h3 {
+  margin-bottom: 10px;
+}
+
+.inner-profile p {
+  margin-bottom: 10px;
+  display: block;
+  color: rgba(0,0,0,0.44);
+}
+
+.inner-profile {
+  margin: 0 auto;
+  width: 600px;
+  height: 240px;
+}
+
+.social-button-set > small {
+  float: left;
+  color: rgba(0,0,0,0.44);
+  margin-right: 6px;
+  margin-bottom: 15px;
+}
+
+.avatar-large {
+  position: absolute;
+  border-radius: 100%;
+  background: #f0f0f0;
+  width: 100px;
+  height: 100px;
+  top: 25%;
+  right: 35%;
+}
+
+.avatar-small {
+
+}
+
+.profile-banner button {
+  display: block;
+  float: left;
+}
+
+#file-input {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+
+.rec-stories {
+
+}

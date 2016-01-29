@@ -7,10 +7,10 @@ var AuthorEditable = React.createClass({
   getInitialState: function () {
     return ({
       id: this.props.author.id,
-      penName: this.props.author.name,
+      name: this.props.author.name,
       description: this.props.author.description,
+      imageURL: '',
       imageFile: null,
-      imageUrl: this.props.author.avatarUrl,
       editable: false
     });
   },
@@ -23,11 +23,11 @@ var AuthorEditable = React.createClass({
   resetEdit: function () {
     this.setState(this.getInitialState());
   },
-  handleSubmit: function (e) {
+  handleClick: function (e) {
     e.preventDefault();
     var formData = new FormData();
     formData.append('author[avatar]', this.state.imageFile);
-    formData.append('author[pen_name]', this.state.penName);
+    formData.append('author[pen_name]', this.state.name);
 
     ApiUtil.editAuthor(formData, this.closeEdit);
   },
@@ -36,47 +36,56 @@ var AuthorEditable = React.createClass({
     var file = e.currentTarget.files[0];
 
     reader.onloadend = function () {
-      this.setState({ imageFile: file, imageUrl: reader.result });
+      this.setState({ imageFile: file, imageURL: reader.result });
     }.bind(this);
 
     if (file) {
-      reader.readAsDataUrl(file);
+      reader.readAsDataURL(file);
     } else {
-      this.setState({ imageFile: null, imageUrl: '' });
+      this.setState({ imageFile: null, imageURL: '' });
     }
   },
   render: function () {
     var author = this.props.author;
-    var buttons = this.getButtons();
+    var buttons = this._getButtons();
     return (
-      <div contentEditable={this.state.editable} className="author-profile">
-        <h3>{this.state.penName}</h3>
-        <p>{this.state.description}</p>
-        <small>{author.following} Following</small>
-        <small>{author.followers} Followers</small>
-        &middot;
-        <a href={author.twitter}>Twitter</a>
-        <a href={author.facebook}>FB</a>
-        <img src={this.state.avatarUrl} alt={this.state.penName} />
-        <AvatarEditable handleUpload={this.handleUpload} />
+      <div className="profile-banner">
+        <div className="inner-profile group">
+          <h3 contentEditable={this.state.editable}>{this.state.name}</h3>
+          <p contentEditable={this.state.editable}>{this.state.description}</p>
 
-        {buttons}
+          <div className="social-button-set group">
+            <small>{author.following} Following</small>
+            <small>{author.followers} Followers</small>
+            <small>&middot;</small>
+            <small><a href={author.twitter}>Twitter</a></small>
+            <small><a href={author.facebook}>FB</a></small>
+          </div>
+          {buttons}
+
+          <AvatarEditable imageURL={this.state.imageURL} handleUpload={this.handleUpload} />
+        </div>
       </div>
     );
   },
-  getButtons: function () {
+  _getButtons: function () {
     if (this.state.editable && this.props.owner) {
       return (
-        <div className="edit-mode-buttons">
+        <div className="author-edit button">
           <button
-            className="primary"
-            onClick={this.handleSubmit}>Save
+            className="submit-button primary"
+            onClick={this.handleClick}>Save
           </button>
           <button onClick={this.resetEdit}>Cancel</button>
         </div>
       );
     } else if (this.props.owner) {
-      return <button onClick={this.openEdit}>Edit</button>;
+      return (
+        <button
+          className="author-edit button"
+          onClick={this.openEdit}>Edit
+        </button>
+        );
     }
 
     return <Follow />;

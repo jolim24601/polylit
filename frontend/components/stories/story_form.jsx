@@ -32,7 +32,7 @@ var StoryForm = React.createClass({
     var words = pmFormat.toText(pmNode).split(/\s+/);
     story.wordcount = words.length;
     story.subtitle = words.split(/\s+/)
-      .slice(story.title.length, story.title.length + 60);
+      .slice(story.title.length, story.title.length + 60).join(' ');
     ApiUtil.publishStory(story, function () {
       History.push('/stories');
     });

@@ -1,21 +1,23 @@
 var React = require('react');
 
 var AvatarEditable = React.createClass({
-  getInitialState: function () {
-    return { imageFile: null, imageUrl: '' };
-  },
   getFile: function () {
     document.getElementById('file-input').click();
   },
   render: function () {
     return (
-      <button onClick={this.getFile} className="image-embed">
-        Image
-        <input
-          type="file" id="file-input"
-          onChange={this.props.handleUpload}
+      <div className="avatar floatRight">
+        <img
+          className="avatar-large"
+          src={this.props.imageURL}
+          onClick={this.getFile}
+          alt="author avatar">
+      </img>
+      <input
+        type="file" id="file-input"
+        onChange={this.props.handleUpload}
         />
-      </button>
+    </div>
     );
   }
 });
