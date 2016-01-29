@@ -22,7 +22,8 @@ var AuthorProfile = React.createClass({
     var author = this.state.author;
     var authorProfileBanner, authorStoriesIndex;
     if (typeof this.state.author.id !== 'undefined') {
-      authorProfileBanner = <AuthorEditable author={author} />;
+      // check if currentUser is the same as author, return true for testing.
+      authorProfileBanner = <AuthorEditable owner={'true'} author={author} />;
       authorStoriesIndex = author.stories.map(function (story) {
         return <StoryIndexItem key={story.id} story={story} author={author} />;
       });

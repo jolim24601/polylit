@@ -6,9 +6,8 @@ var React = require('react'),
 var AuthorEditable = React.createClass({
   getInitialState: function () {
     return ({
-      id: this.props.author.id,
-      name: this.props.author.name,
-      description: this.props.author.description,
+      name: '',
+      description: '',
       imageURL: '',
       imageFile: null,
       editable: false
@@ -21,15 +20,22 @@ var AuthorEditable = React.createClass({
     this.setState({ editable: false });
   },
   resetEdit: function () {
-    this.setState(this.getInitialState());
+    var author = this.props.author;
+    this.setState({
+      name: author.name,
+      description: author.description,
+      imageURL: author.avatarLarge
+    });
+    this.closeEdit();
   },
   handleClick: function (e) {
     e.preventDefault();
     var formData = new FormData();
     formData.append('author[avatar]', this.state.imageFile);
     formData.append('author[pen_name]', this.state.name);
+    formData.append('author[description]', this.state.description);
 
-    ApiUtil.editAuthor(formData, this.closeEdit);
+    ApiUtil.editAuthor(this.props.author.id, formData, this.closeEdit);
   },
   handleUpload: function (e) {
     var reader = new FileReader();
@@ -45,14 +51,23 @@ var AuthorEditable = React.createClass({
       this.setState({ imageFile: null, imageURL: '' });
     }
   },
+  handleChange: function (name, e) {
+    var change = {};
+    change[name] = e.target.value;
+    this.setState(change);
+  },
   render: function () {
     var author = this.props.author;
     var buttons = this._getButtons();
     return (
       <div className="profile-banner">
         <div className="inner-profile group">
-          <h3 contentEditable={this.state.editable}>{this.state.name}</h3>
-          <p contentEditable={this.state.editable}>{this.state.description}</p>
+          <h3 onChange={this.handleChange.bind(this, 'name')}
+            contentEditable={this.state.editable}>{this.state.name}
+          </h3>
+          <p onChange={this.handleChange.bind(this, 'description')}
+            contentEditable={this.state.editable}>{this.state.description}
+          </p>
 
           <div className="social-button-set group">
             <small>{author.following} Following</small>
@@ -63,7 +78,9 @@ var AuthorEditable = React.createClass({
           </div>
           {buttons}
 
-          <AvatarEditable imageURL={this.state.imageURL} handleUpload={this.handleUpload} />
+          <AvatarEditable editable={this.state.editable}
+            defaultURL={author.avatarLarge}
+            imageURL={this.state.imageURL} handleUpload={this.handleUpload} />
         </div>
       </div>
     );

@@ -37,12 +37,13 @@ module.exports = {
       }
     });
   },
-  editAuthor: function (formData, callback) {
+  editAuthor: function (id, formData, callback) {
     $.ajax({
       type: "PATCH",
-      url: "api/authors/" + formData.id,
+      url: "api/authors/" + id,
       dataType: "json",
       processData: false,
+      contentType: false,
       data: formData,
       success: function (author) {
         AuthorActions.receiveAuthor(author);
