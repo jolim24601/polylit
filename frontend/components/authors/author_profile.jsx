@@ -20,17 +20,17 @@ var AuthorProfile = React.createClass({
   },
   render: function () {
     var author = this.state.author;
-    var authorProfileBanner, authorStoriesIndex;
+    var authorEditable, authorStoriesIndex;
     if (typeof this.state.author.id !== 'undefined') {
       // check if currentUser is the same as author, return true for testing.
-      authorProfileBanner = <AuthorEditable owner={'true'} author={author} />;
+      authorEditable = <AuthorEditable authorId={author.id} owner={'true'} />;
       authorStoriesIndex = author.stories.map(function (story) {
         return <StoryIndexItem key={story.id} story={story} author={author} />;
       });
     }
     return (
       <div className="author-profile">
-        {authorProfileBanner}
+        {authorEditable}
         <ul className="author story-feed">
           <li className="heading-title">Latest</li>
           {authorStoriesIndex}

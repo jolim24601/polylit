@@ -29,6 +29,7 @@ var AuthorCard = React.createClass({
       >
         <a href={author.url}>{author.name}</a>
         <div className={cardClass}>
+          <img className="avatar-small floatLeft" src={author.avatar} alt={author.name} />
           <a className="card-title" href={author.url}>{author.name}</a>
           <p>{author.description}</p>
           <footer className="follow-footer">

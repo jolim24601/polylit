@@ -39,6 +39,20 @@
   height: 240px;
 }
 
+.author-info input:first-child {
+  border: 0;
+  font-size: xx-large;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.author-info input:last-child {
+  display: block;
+  color: rgba(0,0,0,0.44);
+  border: 0;
+  margin-bottom: 10px;
+}
+
 .social-button-set > small {
   float: left;
   color: rgba(0,0,0,0.44);
@@ -56,13 +70,62 @@
   right: 35%;
 }
 
-.avatar-small {
+.avatar-large[editable="true"] {
 
+}
+
+
+.avatar-small {
+  border-radius: 100%;
+  width: 36px;
+  height: 36px;
+  margin: 3px 25px 0px 12px;
+  float: right;
+}
+
+.author-edit-button button {
+  padding: 8px 22px;
+  font-size: 14px;
+}
+
+.author-card-entry {
+  position: relative;
+  display: block;
+  width: 100px;
+}
+
+.author-card-entry > a {
+  color: #00ab6b;
+}
+
+.profile-card {
+  position: absolute;
+  border: 1px solid #D3D3D3;
+  background-color: white;
+  border-radius: 5%;
+  z-index: 900;
+  width: 250px;
+  padding: 10px;
+}
+
+.profile-card p {
+  font-size: 12px;
+  margin: 5px 0;
+}
+
+.card-title {
+  font-size: 18px;
 }
 
 .profile-banner button {
   display: block;
   float: left;
+  background-color: #fafafa;
+}
+
+button:disabled {
+  border-color: gray;
+  color: gray;
 }
 
 #file-input {

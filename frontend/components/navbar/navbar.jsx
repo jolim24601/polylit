@@ -5,8 +5,8 @@ var Navbar = React.createClass({
     return (
       <header className="navbar">
         <nav className="navbar-nav group">
-          <div className="navbar-logo">
-            <h2 className="logo floatLeft"><a href="/">Polylit</a></h2>
+          <div className="navbar-logo floatLeft">
+            <img src="https://s3-us-west-2.amazonaws.com/jolim24601/polylit-prod/logo.png" className="logo" alt="site-logo" />
           </div>
 
           <ul className="navbar-center group floatLeft">

@@ -15,7 +15,7 @@
  *= require 'navbar'
  *= require 'auth_overlay'
  *= require 'story_feed'
- *= require 'story_form'
+ *= require 'story'
  *= require_self
  *= require_tree
  */

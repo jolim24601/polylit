@@ -20,7 +20,7 @@ class Api::AuthorsController < ApplicationController
   def update
     @author = Author.find(params[:id])
     if @author.update(author_params)
-      render json: :show
+      render :show
     else
       render json: @author.errors.full_messages, status: 422
     end

@@ -9,7 +9,7 @@ class Author < ActiveRecord::Base
   attr_reader :password
 
   has_many :stories, inverse_of: :author
-  has_attached_file :avatar, default_url: 'assets/avatar.png', styles: {
+  has_attached_file :avatar, default_url: 'avatar.png', styles: {
     small: '36x36>',
     large: '100x100>'
   }

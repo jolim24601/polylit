@@ -28,11 +28,12 @@ var StoryView = React.createClass({
       pmNode = DefaultSchema.defaultSchema.nodeFromJSON(story);
       pmDOMFragment = pmFormat.toDOM(pmNode);
       pmHTML = pmFormat.toHTML(pmNode);
-      $(".story-view").append(pmDOMFragment);
+      $(".ProseMirror-content").append(pmDOMFragment);
     }
 
     return (
-      <article className="story-view">
+      <article className="story">
+        <div className="ProseMirror-content"></div>
       </article>
     );
   },

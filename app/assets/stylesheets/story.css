@@ -1,8 +1,8 @@
-.story-form {
+.story {
   position: absolute;
   left: 100px;
   top: 80px;
-  width: 80%;
+  width: 100%;
   max-width: 100%;
 }
 
@@ -11,8 +11,8 @@
 }
 
 .ProseMirror-content {
-  height: 600px;
-  width: 100%;
+  height: auto;
+  width: 80%;
   min-height: 200px;
   font-size: 21px;
 }

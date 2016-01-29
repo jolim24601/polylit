@@ -71,7 +71,10 @@
 }
 
 .logo {
-  font-size: 32px;
+  height: 45px;
+  width: auto;
+  margin-top: 10px;
+  margin-left: 15px;
 }
 
 button.primary {

@@ -1,41 +1,43 @@
 var React = require('react'),
     AvatarEditable = require('./avatar_editable'),
     ApiUtil = require('../../util/api_util'),
-    Follow = require('../buttons/follow');
+    Follow = require('../buttons/follow'),
+    AuthorStore = require('../../stores/author_store'),
+    BioEditable = require('./bio_editable');
 
 var AuthorEditable = React.createClass({
-  getInitialState: function () {
-    return ({
-      name: '',
-      description: '',
-      imageURL: '',
+  getStateFromStore: function () {
+    var author = AuthorStore.find(this.props.authorId);
+    return {
+      name: author.name,
+      description: author.description,
+      imageURL: author.avatarLarge,
       imageFile: null,
       editable: false
-    });
+    };
+  },
+  getInitialState: function () {
+    return this.getStateFromStore();
   },
   openEdit: function () {
     this.setState({ editable: true });
   },
-  closeEdit: function () {
-    this.setState({ editable: false });
+  refresh: function () {
+    this.setState(this.getStateFromStore());
   },
-  resetEdit: function () {
-    var author = this.props.author;
-    this.setState({
-      name: author.name,
-      description: author.description,
-      imageURL: author.avatarLarge
-    });
-    this.closeEdit();
+  componentDidMount: function () {
+    this.authorListener = AuthorStore.addListener(this.refresh);
+  },
+  componentWillUnmount: function () {
+    this.authorListener.remove();
   },
   handleClick: function (e) {
     e.preventDefault();
     var formData = new FormData();
-    formData.append('author[avatar]', this.state.imageFile);
-    formData.append('author[pen_name]', this.state.name);
-    formData.append('author[description]', this.state.description);
-
-    ApiUtil.editAuthor(this.props.author.id, formData, this.closeEdit);
+    if (this.state.imageFile) { formData.append('author[avatar]', this.state.imageFile); }
+    if (this.state.name) { formData.append('author[pen_name]', this.state.name); }
+    if (this.state.description) { formData.append('author[description]', this.state.description); }
+    ApiUtil.editAuthor(this.props.authorId, formData, this.refresh);
   },
   handleUpload: function (e) {
     var reader = new FileReader();
@@ -51,23 +53,23 @@ var AuthorEditable = React.createClass({
       this.setState({ imageFile: null, imageURL: '' });
     }
   },
-  handleChange: function (name, e) {
-    var change = {};
-    change[name] = e.target.value;
-    this.setState(change);
+  changeName: function (e) {
+    this.setState({ name: e.target.value });
+  },
+  changeDescription: function (e) {
+    this.setState({ description: e.target.value });
   },
   render: function () {
-    var author = this.props.author;
+    var field = this.state;
+    var author = AuthorStore.find(this.props.authorId);
     var buttons = this._getButtons();
     return (
       <div className="profile-banner">
         <div className="inner-profile group">
-          <h3 onChange={this.handleChange.bind(this, 'name')}
-            contentEditable={this.state.editable}>{this.state.name}
-          </h3>
-          <p onChange={this.handleChange.bind(this, 'description')}
-            contentEditable={this.state.editable}>{this.state.description}
-          </p>
+          <BioEditable
+            changeName={this.changeName}
+            changeDescription={this.changeDescription}
+            field={field} />
 
           <div className="social-button-set group">
             <small>{author.following} Following</small>
@@ -88,21 +90,24 @@ var AuthorEditable = React.createClass({
   _getButtons: function () {
     if (this.state.editable && this.props.owner) {
       return (
-        <div className="author-edit button">
+        <div className="author-edit-button">
           <button
+            disabled={!this.state.editable}
             className="submit-button primary"
             onClick={this.handleClick}>Save
           </button>
-          <button onClick={this.resetEdit}>Cancel</button>
+          <button onClick={this.refresh}>Cancel</button>
         </div>
       );
     } else if (this.props.owner) {
       return (
-        <button
-          className="author-edit button"
-          onClick={this.openEdit}>Edit
-        </button>
-        );
+        <div className="author-edit-button">
+          <button
+            className="edit-button"
+            onClick={this.openEdit}>Edit
+          </button>
+        </div>
+      );
     }
 
     return <Follow />;
