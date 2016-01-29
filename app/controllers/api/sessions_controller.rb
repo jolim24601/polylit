@@ -1,6 +1,4 @@
 class Api::SessionsController < ApplicationController
-  before_action :require_logged_out_author, only: [:create, :new]
-
   def new
   end
 

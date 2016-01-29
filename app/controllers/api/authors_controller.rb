@@ -5,12 +5,10 @@ class Api::AuthorsController < ApplicationController
 
     if @author.save
       login_author(@author)
-      flash[:success] = ["Welcome"]
+      render :show
     else
-      flash[:errors] = @author.errors.full_messages
+      render json: @author.errors.full_messages, status: 422
     end
-
-    redirect_to root_url
   end
 
   def show
@@ -29,7 +27,8 @@ class Api::AuthorsController < ApplicationController
   private
 
   def author_params
-    params.require(:author)
-      .permit(:email, :password, :username, :pen_name, :description, :avatar)
+    params.require(:author).permit(
+      :email, :password, :username, :pen_name, :name, :description, :avatar
+    )
   end
 end

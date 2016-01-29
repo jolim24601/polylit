@@ -3,6 +3,10 @@ var React = require('react'),
     StoryIndexItem = require('./story_index_item'),
     ApiUtil = require('../../util/api_util');
 
+var Navbar = require('./navbar/navbar'),
+    HomeTools = require('./home_tools'),
+    NavTools = require('./nav_tools');
+
 var StoriesIndex = React.createClass({
   getInitialState: function () {
     return ({ stories: StoryStore.all() });
@@ -20,10 +24,13 @@ var StoriesIndex = React.createClass({
       return <StoryIndexItem key={key} story={stories[key]} />;
     });
     return (
-      <ul className="story-feed">
-        <li className="heading-title">Latest stories</li>
-        {storyList}
-      </ul>
+      <div className="main-content">
+        <Navbar><HomeTools /><NavTools /></Navbar>
+        <ul className="story-feed">
+          <li className="heading-title">Latest stories</li>
+          {storyList}
+        </ul>
+      </div>
     );
   },
   _onChange: function () {

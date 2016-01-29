@@ -1,7 +1,6 @@
 var React = require('react'),
     ReactDOM = require('react-dom'),
     ReactRouter = require('react-router'),
-    NProgress = require('nprogress'),
     Router = ReactRouter.Router,
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
@@ -10,42 +9,31 @@ var React = require('react'),
     StoriesIndex = require('./components/stories/stories_index'),
     StoryForm = require('./components/stories/story_form'),
     StoryView = require('./components/stories/story_view'),
-    Navbar = require('./components/navbar/navbar'),
-    NavTools = require('./components/navbar/nav_tools'),
-    WriteTools = require('./components/navbar/write_tools'),
-    AuthorProfile = require('./components/authors/author_profile');
+    AuthorProfile = require('./components/authors/author_profile'),
+    newSession = require('./components/sessions/new'),
+    newAuthor = require('./components/authors/new');
 
-var App = React.createClass({
-  componentWillMount: function () {
-    // loading bar animation
-    NProgress.start();
-  },
-  componentDidMount: function () {
-    NProgress.done();
-  },
-  render: function () {
-    var tools = <NavTools />;
-    if (this.props.children && this.props.children.type.displayName === 'StoryForm') {
-      tools = <WriteTools />;
-    }
-    return (
-      <div className='main'>
-        <Navbar>{tools}</Navbar>
-        {this.props.children}
-      </div>
-    );
-  }
-});
+var App = require('./components/app');
 
 var routes = (
   <Route path='/' component={App}>
     <IndexRoute component={StoriesIndex} />
+    <Route path='login' component={newSession} />
+    <Route path='signup' component={newAuthor} />
     <Route path='new-story' component={StoryForm} />
     <Route path='stories' component={StoriesIndex} />
     <Route path='stories/:id' component={StoryView} />
     <Route path='authors/:id' component={AuthorProfile} />
   </Route>
 );
+
+Navbar = require('./navbar/navbar'),
+HomeTools = require('./home_tools'),
+WriteTools = require('./write_tools'),
+NavTools = require('./nav_tools'); // profile
+<Navbar><HomeTools /><NavTools /></Navbar>
+<Navbar><WriteTools /></Navbar>
+<Navbar><NavTools /></Navbar>
 
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(

@@ -27,10 +27,6 @@
   margin: 20px 0 20px 10px;
 }
 
-.navbar-nav a {
-  padding: 10px 0;
-}
-
 .navbar-center > li {
   cursor: pointer;
   float: left;
@@ -56,6 +52,11 @@
   width: 150px;
 }
 
+.divider {
+  border-right: 1px solid rgba(0, 0, 0, 0, .15);
+  margin: 18px 12px 0 6px;
+}
+
 .profile-actions > .tooltip {
   position: absolute;
   display: none;
@@ -77,11 +78,20 @@
   margin-left: 15px;
 }
 
-button.primary {
-  margin-bottom: 10px;
-  margin-right: 8px;
-  height: 37px;
-  padding: 0 16px;
+.modal-logo {
+  margin: 0 auto;
+  height: 60px;
+}
+
+.button {
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 999em;
+}
+
+.primary {
+  color: #00ab6b;
+  border-color: #02b875;
+  padding: 8px 16px;
   font-size: 14px;
   background-color: rgba(255,255,255,0.97);
 }

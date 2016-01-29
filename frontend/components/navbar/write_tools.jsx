@@ -1,15 +1,14 @@
 var React = require('react'),
-    Notifications = require('./notifications'),
-    ProfileButton = require('./profile_button'),
-    PublishButton = require('./publish_button');
+    PublishButton = require('../buttons/publish_button');
 
 var WriteTools = React.createClass({
   render: function () {
     return (
-      <ul className = "navbar-tools group floatRight">Share
+      <ul className = "navbar-tools group floatRight">
+        <li><button>Share</button></li>
         <li><PublishButton publishStory={this.props.publishStory} /></li>
-        <li><Notifications /></li>
-        <li><ProfileButton /></li>
+        <li><button>...</button></li>
+        <li className="divider"></li>
       </ul>
     );
   }

@@ -5,15 +5,10 @@ var Navbar = React.createClass({
     return (
       <header className="navbar">
         <nav className="navbar-nav group">
-          <div className="navbar-logo floatLeft">
-            <img src="https://s3-us-west-2.amazonaws.com/jolim24601/polylit-prod/logo.png" className="logo" alt="site-logo" />
-          </div>
-
-          <ul className="navbar-center group floatLeft">
-            <li><a href="/">HOME</a></li>
-            <li><a href="#/stories">TOP STORIES</a></li>
-            <li><a href="#">BOOKMARKS</a></li>
-          </ul>
+          <a href="#" className="navbar-logo floatLeft">
+            <img className="logo" alt="site-logo" onClick={this.redirect}
+              src="https://s3-us-west-2.amazonaws.com/jolim24601/polylit-prod/logo.png" />
+          </a>
 
           {this.props.children}
         </nav>

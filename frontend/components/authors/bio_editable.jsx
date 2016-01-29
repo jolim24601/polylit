@@ -1,9 +1,6 @@
 var React = require('react');
 
 var BioEditable = React.createClass({
-  getInitialState: function () {
-    return { name: '', description: '' };
-  },
   render: function () {
     var field = this.props.field;
     var textFields;
@@ -13,9 +10,10 @@ var BioEditable = React.createClass({
           <input type="text" value={field.name}
             onChange={this.props.changeName}>
           </input>
-          <input type="text" value={field.description}
+          <textarea type="text" value={field.description}
+            placeholder="Enter a short bio"
             onChange={this.props.changeDescription}>
-          </input>
+          </textarea>
         </div>
       );
     } else {

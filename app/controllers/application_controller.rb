@@ -1,21 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_author, :logged_in?
+  helper_method :current_author
 
   def current_author
     @current_author ||= Author.find_by_session_token(session[:session_token])
   end
 
-  def logged_in?
-    !!current_author
-  end
-
   def require_logged_in_author
-    redirect_to root_url unless logged_in?
-  end
-
-  def require_logged_out_author
-    redirect_to root_url if logged_in?
+    # redirect_to root_url unless logged_in?
+    render json: ["Forbidden"] unless current_author
   end
 
   def login_author(author)
@@ -23,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logout_author!
-    current_author.reset_session_token!
+    current_author.try(:reset_session_token!)
     session[:sesion_token] = nil
   end
 end

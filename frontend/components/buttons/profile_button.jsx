@@ -1,5 +1,5 @@
 var React = require('react'),
-    ApiUtil = require('../../util/api_util');
+    SessionApiUtil = require('../../util/session_api_util');
 
 var ProfileButton = React.createClass({
   getInitialState: function () {
@@ -21,22 +21,25 @@ var ProfileButton = React.createClass({
       $('body').off('click', this.clickHandler);
     }
   },
-  destroySession: function () {
-    ApiUtil.destroySession();
+  logoutAuthor: function () {
+    SessionApiUtil.logoutAuthor();
   },
   render: function () {
+    var author = this.props.author;
+    var authorLink = "#/authors/" + author.id;
     var profileClass =
       this.state.active ? "profile-actions" : "profile-actions hide";
 
     return (
       <div onClick={this.toggleView} className="navbar-profile">
-        Profile
+        <img className="avatar-small" src={author.avatar} alt={author.name} />
         <ul className={ profileClass }>
          <div className="tooltip"></div>
-         <li key={"prof-new-story"}><a href="#">New Story</a></li>
+         <li key={"prof-new-story"}><a href="#/new-story">New Story</a></li>
          <li key={"prof-drafts"}><a href="#">Drafts and stories</a></li>
          <li key={"prof-publications"}><a href="#">Publications</a></li>
-         <li onClick={this.destroySession} key={"prof-signout"}><a href="#">Sign Out</a></li>
+         <li key={"prof-link"}><a href={authorLink}>Profile</a></li>
+         <li onClick={this.logoutAuthor} key={"prof-signout"}><a href="#">Sign Out</a></li>
         </ul>
       </div>
     );

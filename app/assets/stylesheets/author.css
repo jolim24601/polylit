@@ -17,9 +17,6 @@
 </div>*/
 
 .profile-banner {
-  position: relative;
-  height: 240px;
-  padding: 50px;
   background-color: #fafafa;
 }
 
@@ -28,25 +25,30 @@
 }
 
 .inner-profile p {
+  width: 65%;
   margin-bottom: 10px;
   display: block;
   color: rgba(0,0,0,0.44);
 }
 
 .inner-profile {
-  margin: 0 auto;
   width: 600px;
   height: 240px;
+  margin: 0 auto;
+  padding: 2% 0;
 }
 
 .author-info input:first-child {
+  width: 100%;
   border: 0;
   font-size: xx-large;
   font-weight: 700;
   margin-bottom: 10px;
 }
 
-.author-info input:last-child {
+.author-info textarea:last-child {
+  resize: none;
+  width: 65%;
   display: block;
   color: rgba(0,0,0,0.44);
   border: 0;
@@ -126,6 +128,7 @@
 button:disabled {
   border-color: gray;
   color: gray;
+  cursor-pointer: none;
 }
 
 #file-input {

@@ -5,7 +5,8 @@ class Author < ActiveRecord::Base
   validates :username, :password_digest, :pen_name, presence: true
   validates :email, :session_token, uniqueness: true, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
-
+  validates :description, length: { maximum: 140, allow_nil: true }
+  alias_attribute :name, :pen_name
   attr_reader :password
 
   has_many :stories, inverse_of: :author

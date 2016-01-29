@@ -13,7 +13,8 @@ var AuthorEditable = React.createClass({
       description: author.description,
       imageURL: author.avatarLarge,
       imageFile: null,
-      editable: false
+      editable: false,
+      disabled: false
     };
   },
   getInitialState: function () {
@@ -33,6 +34,7 @@ var AuthorEditable = React.createClass({
   },
   handleClick: function (e) {
     e.preventDefault();
+    this.setState({ disabled: true });
     var formData = new FormData();
     if (this.state.imageFile) { formData.append('author[avatar]', this.state.imageFile); }
     if (this.state.name) { formData.append('author[pen_name]', this.state.name); }
@@ -92,7 +94,7 @@ var AuthorEditable = React.createClass({
       return (
         <div className="author-edit-button">
           <button
-            disabled={!this.state.editable}
+            disabled={this.state.disabled}
             className="submit-button primary"
             onClick={this.handleClick}>Save
           </button>

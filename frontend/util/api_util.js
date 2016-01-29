@@ -1,5 +1,6 @@
 var ApiActions = require('../actions/api_actions'),
-    AuthorActions = require('../actions/author_actions');
+    AuthorActions = require('../actions/author_actions'),
+    CurrentAuthorActions = require('../actions/current_author_actions');
 
 module.exports = {
   fetchTopStories: function () {
@@ -47,6 +48,19 @@ module.exports = {
       data: formData,
       success: function (author) {
         AuthorActions.receiveAuthor(author);
+        callback && callback();
+      }
+    });
+  },
+  createAuthor: function (data, callback) {
+    $.ajax({
+      type: "POST",
+      url: "api/authors",
+      dataType: "json",
+      data: { author: data },
+      success: function (author) {
+        AuthorActions.receiveAuthor(author);
+        CurrentAuthorActions.receiveCurrentAuthor(author);
         callback && callback();
       }
     });
