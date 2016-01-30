@@ -1,5 +1,10 @@
 class Story < ActiveRecord::Base
   include Taggable
+  include PgSearch
+  pg_search_scope :search_stories, against: [
+    [:title, 'A'],
+    [:subtitle, 'B']
+  ], using: { tsearch: { prefix: true } }
 
   validates :author_id, :node, :wordcount, presence: true
   validates :title, :subtitle, length: {
