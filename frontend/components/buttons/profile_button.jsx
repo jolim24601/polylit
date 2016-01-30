@@ -26,6 +26,7 @@ var ProfileButton = React.createClass({
   },
   render: function () {
     var author = this.props.author;
+    debugger
     var authorLink = "#/authors/" + author.id;
     var profileClass =
       this.state.active ? "profile-actions" : "profile-actions hide";

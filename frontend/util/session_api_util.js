@@ -17,7 +17,7 @@ module.exports = {
       type: "POST",
       url: "api/session",
       dataType: "json",
-      data: credentials,
+      data: { author: credentials },
       success: function (author) {
         CurrentAuthorActions.receiveCurrentAuthor(author);
         callback && callback();
