@@ -1,6 +1,7 @@
 class Author < ActiveRecord::Base
   include Authentication
   include PgSearch
+  multisearchable against: [:name, :username]
   after_initialize :ensure_session_token
 
   validates :username, :password_digest, :pen_name, presence: true

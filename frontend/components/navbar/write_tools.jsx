@@ -7,6 +7,7 @@ var WriteTools = React.createClass({
       <ul className = "navbar-tools group floatLeft">
         <li><button className="share-button">Share</button></li>
         <li><PublishButton publishStory={this.props.publishStory} /></li>
+        <li className="tag-menu"></li>
         <li className="divider"></li>
       </ul>
     );
