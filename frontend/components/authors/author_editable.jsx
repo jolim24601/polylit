@@ -68,10 +68,13 @@ var AuthorEditable = React.createClass({
     return (
       <div className="profile-banner">
         <div className="inner-profile group">
+          <div className="author-bio floatLeft">
+          </div>
           <BioEditable
             changeName={this.changeName}
             changeDescription={this.changeDescription}
-            field={field} />
+            field={field}
+            />
 
           <div className="social-button-set group">
             <small>{author.following} Following</small>
@@ -82,9 +85,11 @@ var AuthorEditable = React.createClass({
           </div>
           {buttons}
 
-          <AvatarEditable editable={this.state.editable}
+          <AvatarEditable
+            editable={this.state.editable}
             defaultURL={author.avatarLarge}
-            imageURL={this.state.imageURL} handleUpload={this.handleUpload} />
+            imageURL={this.state.imageURL} handleUpload={this.handleUpload}
+            />
         </div>
       </div>
     );

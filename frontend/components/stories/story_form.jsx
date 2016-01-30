@@ -17,7 +17,7 @@ var StoryForm = React.createClass({
   getInitialState: function () {
     return ({
       options: {
-        menuBar: true,
+        menuBar: false,
         tooltipMenu: true,
         autoInput: true,
         docFormat: 'html'

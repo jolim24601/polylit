@@ -1,10 +1,7 @@
 var React = require('react'),
     ProfileTools = require('./profile_tools'),
     PredictiveSearch = require('./predictive_search'),
-    CurrentAuthorStore = require('../../stores/current_author_store'),
-    SessionApiUtil = require('../../util/session_api_util');
-
-var History = require('react-router');
+    CurrentAuthorStore = require('../../stores/current_author_store');
 
 var NavTools = React.createClass({
   getStateFromStore: function () {
@@ -44,20 +41,7 @@ var NavTools = React.createClass({
   },
   _onChange: function () {
     this.setState(this.getStateFromStore());
-  },
-  _ensureSignIn: function () {
-      if (CurrentAuthorStore.currentAuthorFetched()) {
-        _redirectIfNotLoggedIn();
-      } else {
-        SessionApiUtil.fetchCurrentAuthor(_redirectIfNotLoggedIn);
-      }
-      function _redirectIfNotLoggedIn() {
-        debugger
-        if (!CurrentAuthorStore.isLoggedIn()) {
-          History.push({}, '/');
-        }
-      }
-    }
+  }
 });
 
 module.exports = NavTools;

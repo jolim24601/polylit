@@ -1,5 +1,14 @@
 .profile-banner {
   background-color: #fafafa;
+  margin-top: 65px;
+}
+
+.inner-profile {
+  width: 600px;
+  height: 240px;
+  margin: 0 auto;
+  padding: 2% 0;
+  position: relative;
 }
 
 .inner-profile h3 {
@@ -11,14 +20,6 @@
   margin-bottom: 10px;
   display: block;
   color: rgba(0,0,0,0.44);
-}
-
-.inner-profile {
-  position: relative;
-  width: 600px;
-  height: 240px;
-  margin: 0 auto;
-  padding: 2% 0;
 }
 
 .author-info input:first-child {
@@ -47,13 +48,12 @@
 
 .avatar-large {
   position: absolute;
+  bottom: 40%; right: 2%;
   vertical-align: middle;
   border-radius: 100%;
   background: #f0f0f0;
   width: 100px;
   height: 100px;
-  top: 15%;
-  right: 10%;
 }
 
 .avatar-small {
@@ -67,6 +67,10 @@
 .author-edit-button button {
   padding: 8px 22px;
   font-size: 14px;
+}
+
+.author-profile .predictiveSearch {
+  bottom: 15px;
 }
 
 .author-card-entry {

@@ -11,6 +11,8 @@ var React = require('react'),
     AuthorProfile = require('./components/authors/author_profile'),
     newSession = require('./components/sessions/new'),
     newAuthor = require('./components/authors/new'),
+    SessionApiUtil = require('./util/session_api_util'),
+    CurrentAuthorStore = require('./stores/current_author_store'),
     Search = require('./components/search/search');
 
 var App = require('./components/app');
@@ -20,13 +22,27 @@ var routes = (
     <IndexRoute component={StoriesIndex} />
     <Route path='login' component={newSession} />
     <Route path='signup' component={newAuthor} />
-    <Route path='new-story' component={StoryForm} />
+    <Route path='new-story' onEnter={_ensureSignIn} component={StoryForm} />
     <Route path='stories' component={StoriesIndex} />
     <Route path='stories/:id' component={StoryView} />
     <Route path='authors/:id' component={AuthorProfile} />
     <Route path='search' component={Search} />
   </Route>
 );
+
+function _ensureSignIn(nextState, replace) {
+  if (CurrentAuthorStore.currentAuthorFetched()) {
+    _redirectIfNotLoggedIn();
+  } else {
+    SessionApiUtil.fetchCurrentAuthor(_redirectIfNotLoggedIn);
+  }
+
+  function _redirectIfNotLoggedIn() {
+    if (!CurrentAuthorStore.isLoggedIn()) {
+      replace('/login');
+    }
+  }
+}
 
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(

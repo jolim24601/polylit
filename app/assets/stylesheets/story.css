@@ -1,17 +1,17 @@
 .story {
-  position: absolute;
-  left: 100px;
-  top: 80px;
   width: 100%;
   max-width: 100%;
+  margin-top: 100px;
 }
 
 .ProseMirror {
   border-style: none;
+  width: 900px;
 }
 
 .ProseMirror-content {
   height: auto;
+  margin: auto;
   width: 80%;
   min-height: 200px;
   font-size: 21px;

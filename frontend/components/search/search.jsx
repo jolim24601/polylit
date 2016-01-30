@@ -47,14 +47,14 @@ var Search = React.createClass({
           placeholder="Search Polylit"
           valueLink={this.linkstate('query') }
           onKeyUp={this.search}
-        />
+          />
 
         <ul className="story-feed">
           <Infinite
             containerHeight={250}
             elementHeight={elementHeight}
             onInfiniteLoad={this.nextPage}
-          >
+            >
             {results}
           </Infinite>
         </ul>

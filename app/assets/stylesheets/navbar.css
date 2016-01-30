@@ -18,6 +18,20 @@
   max-width: 600px;
 }
 
+.predictiveSearch {
+  text-align: right;
+  padding-right: 70px;
+  color: rgba(0,0,0,0.8);
+  border-radius: 999em;
+  font-size: 14px;
+  height: 38px;
+  margin-top: -10px;
+}
+
+.share-button, .notifications-button {
+  padding: 7px;
+}
+
 .navbar-profile {
   position: relative;
 }
@@ -31,37 +45,6 @@
   border-radius: 4px;
   z-index: 900;
   width: 150px;
-}
-
-.profile-actions li {
-  margin: 10px;
-}
-
-.predictiveSearch {
-  padding-left: 36px;
-  color: rgba(0,0,0,0.8);
-  border-radius: 999em;
-  font-size: 14px;
-  height: 38px;
-  position: absolute;
-  right: 255px; bottom: 23px;
-}
-
-.write-link {
-  border: 1px solid rgba(0,0,0,0.15);
-  border-radius: 999em;
-  padding: 10px 10px 9px 10px;
-  font-size: 14px;
-}
-
-.divider {
-  border-right: 1px solid rgba(0, 0, 0, 0.15);
-  height: 28px;
-  margin-top: 25px !important;
-}
-
-.share-button, .notifications-button {
-  padding: 7px;
 }
 
 .profile-actions:before {
@@ -93,12 +76,17 @@
   border-style: solid;
 }
 
+.profile-actions li {
+  margin: 10px;
+}
+
 .profile-actions a {
   white-space: nowrap;
   padding: 10px;
 }
 
 .profile-tools > li {
+  list-style: none;
   float: left;
   margin: 17px 5px;
 }
@@ -117,11 +105,35 @@
 .navbar-tools > li {
   cursor: pointer;
   float: left;
-  margin: 25px 5px;
+  margin: 23px 5px;
+}
+
+.write-tools > li {
+  float: left;
+  margin: 17px 5px;
+}
+
+.write-link {
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 999em;
+  padding: 10px 10px 12px 10px;
+  font-size: 14px;
+}
+
+.divider {
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+  height: 28px;
+  float: left;
+  margin: 21px 10px;
 }
 
 #nav-login {
-  margin: 18px 8px;
+  margin: 17px 8px;
+}
+
+#nav-login a {
+  margin-top: 16px;
+  padding: 10px 13px;
 }
 
 .navbar-tools a[data-current="true"] {
