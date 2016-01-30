@@ -1,5 +1,4 @@
 var React = require('react'),
-    Notifications = require('../buttons/notifications'),
     ProfileTools = require('./profile_tools'),
     PredictiveSearch = require('./predictive_search'),
     CurrentAuthorStore = require('../../stores/current_author_store');
@@ -18,13 +17,13 @@ var NavTools = React.createClass({
     this.authorListener.remove();
   },
   render: function () {
-    var buttons = this.props.tools;
-    if (!buttons && this.state.authenticated) {
-      buttons = <ProfileTools author={this.state} />;
+    var buttons;
+    if (this.state.authenticated) {
+      buttons = <ProfileTools />;
     } else {
       buttons = (
         <li className="button primary">
-          <a href="#/signup">Sign In / Sign Up</a>
+          <a href="#/login">Sign In / Sign Up</a>
         </li>
       );
     }

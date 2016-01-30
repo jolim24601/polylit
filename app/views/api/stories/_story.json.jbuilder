@@ -1,4 +1,4 @@
-json.extract! story, :id, :title, :subtitle
+json.extract!   story, :id, :title, :subtitle
 json.node       story.node if show_full
 json.timeAgo    time_ago_in_words(story.created_at)
 json.readTime   (story.wordcount / 200).to_s + ' min read'

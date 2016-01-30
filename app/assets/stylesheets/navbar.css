@@ -44,7 +44,8 @@
 
 .profile-actions {
   position: absolute;
-  top: 40px;
+  top: 50px;
+  right: 15px;
   border: 1px solid #D3D3D3;
   background-color: white;
   border-radius: 4px;
@@ -52,23 +53,56 @@
   width: 150px;
 }
 
+.profile-actions li {
+  margin: 10px;
+
+}
+
 .divider {
   border-right: 1px solid rgba(0, 0, 0, 0, .15);
   margin: 18px 12px 0 6px;
 }
 
-.profile-actions > .tooltip {
+.share-button, .notifications-button {
+  padding: 7px;
+}
+
+.profile-actions:before {
+  content: "";
+  width: 0; height: 0;
+  background: transparent;
+  border-top: none;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 14px solid white;
+  top: -13px;
+  right: 0;
   position: absolute;
-  display: none;
-  border-top: 5px solid white;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 0;
+  border-color: #D3D3D3 transparent;
+}
+
+.profile-actions:after {
+  content: "";
+  width: 0; height: 0;
+  background: transparent;
+  border-top: none;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 12px solid white;
+  top: -14px;
+  right: 0;
+  position: absolute;
+  border-color: #fff transparent;
+  border-style: solid;
 }
 
 .profile-actions a {
   white-space: nowrap;
   padding: 10px;
+}
+
+.profile-tools li {
+  float: left;
 }
 
 .logo {

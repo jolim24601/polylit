@@ -1,5 +1,6 @@
 var React = require('react'),
-    SessionApiUtil = require('../../util/session_api_util');
+    SessionApiUtil = require('../../util/session_api_util'),
+    CurrentAuthorStore = require('../../stores/current_author_store');
 
 var ProfileButton = React.createClass({
   getInitialState: function () {
@@ -25,8 +26,7 @@ var ProfileButton = React.createClass({
     SessionApiUtil.logoutAuthor();
   },
   render: function () {
-    var author = this.props.author;
-    debugger
+    var author = CurrentAuthorStore.currentAuthor();
     var authorLink = "#/authors/" + author.id;
     var profileClass =
       this.state.active ? "profile-actions" : "profile-actions hide";
@@ -35,7 +35,6 @@ var ProfileButton = React.createClass({
       <div onClick={this.toggleView} className="navbar-profile">
         <img className="avatar-small" src={author.avatar} alt={author.name} />
         <ul className={ profileClass }>
-         <div className="tooltip"></div>
          <li key={"prof-new-story"}><a href="#/new-story">New Story</a></li>
          <li key={"prof-drafts"}><a href="#">Drafts and stories</a></li>
          <li key={"prof-publications"}><a href="#">Publications</a></li>

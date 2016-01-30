@@ -1,21 +1,3 @@
-/*<div className="profile-banner">
-  <div className="inner-profile group">
-    <h3 contentEditable={this.state.editable}>{this.state.name}</h3>
-    <p contentEditable={this.state.editable}>{this.state.description}</p>
-
-    <div className="social-button-set">
-      <small>{author.following} Following</small>
-      <small>{author.followers} Followers</small>
-      <small>&middot;</small>
-      <small><a href={author.twitter}>Twitter</a></small>
-      <small><a href={author.facebook}>FB</a></small>
-    </div>
-    {buttons}
-
-    <AvatarEditable handleUpload={this.handleUpload} />
-  </div>
-</div>*/
-
 .profile-banner {
   background-color: #fafafa;
 }
@@ -32,6 +14,7 @@
 }
 
 .inner-profile {
+  position: relative;
   width: 600px;
   height: 240px;
   margin: 0 auto;
@@ -68,8 +51,8 @@
   background: #f0f0f0;
   width: 100px;
   height: 100px;
-  top: 25%;
-  right: 35%;
+  top: 15%;
+  right: 10%;
 }
 
 .avatar-large[editable="true"] {
@@ -81,8 +64,7 @@
   border-radius: 100%;
   width: 36px;
   height: 36px;
-  margin: 3px 25px 0px 12px;
-  float: right;
+  margin: 0px 15px 0px 5px;
 }
 
 .author-edit-button button {

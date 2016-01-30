@@ -29,7 +29,7 @@ me = Author.create(
   email: "jolim24601@gmail.com",
   pen_name: "JH LIM",
   description: "I code and I write.",
-  password: "jupiter3"
+  password: "jupiter"
 )
 
 bradbury = Author.create(

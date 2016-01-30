@@ -15,7 +15,7 @@ CurrentAuthorStore.isLoggedIn = function () {
   return !!_currentAuthor.id;
 };
 
-CurrentAuthorStore.currentUserFetched = function () {
+CurrentAuthorStore.currentAuthorFetched = function () {
   return _currentAuthorFetched;
 };
 

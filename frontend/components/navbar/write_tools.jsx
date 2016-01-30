@@ -4,10 +4,9 @@ var React = require('react'),
 var WriteTools = React.createClass({
   render: function () {
     return (
-      <ul className = "navbar-tools group floatRight">
-        <li><button>Share</button></li>
+      <ul className = "navbar-tools group floatLeft">
+        <li><button className="share-button">Share</button></li>
         <li><PublishButton publishStory={this.props.publishStory} /></li>
-        <li><button>...</button></li>
         <li className="divider"></li>
       </ul>
     );

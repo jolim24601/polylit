@@ -1,1 +1,1 @@
-json.partial! 'author', author: @author, show_full: true
+json.partial! 'api/authors/author', author: @author, show_full: true

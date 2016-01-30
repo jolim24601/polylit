@@ -43,10 +43,14 @@ var StoryForm = React.createClass({
   },
   render: function () {
     return (
-      <div className='story'>
-        <Navbar><WriteTools /><ProfileTools /></Navbar>
-        <Editor value={this.state.output} onChange={this.updateOutput}
-          options={this.state.options} ref="pm" />
+      <div className="main-content">
+        <Navbar>
+          <div className="floatRight"><WriteTools /><ProfileTools /></div>
+        </Navbar>
+        <div className="story">
+          <Editor value={this.state.output} onChange={this.updateOutput}
+            options={this.state.options} ref="pm" />
+        </div>
       </div>
     );
   },

@@ -3,7 +3,7 @@ var React = require('react');
 var Notifications = React.createClass({
   render: function () {
     return (
-      <button>...</button>
+      <button className="notifications-button">...</button>
     );
   }
 });
