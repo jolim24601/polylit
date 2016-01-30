@@ -30,7 +30,7 @@ var NavTools = React.createClass({
     return (
       <ul className="navbar-tools group floatRight">
         <li><PredictiveSearch /></li>
-        <li><a href="#/new-story">Write a story</a></li>
+        <li><a className="write-link" href="#/new-story">Write a story</a></li>
 
         {buttons}
       </ul>

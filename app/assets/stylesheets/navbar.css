@@ -55,12 +55,18 @@
 
 .profile-actions li {
   margin: 10px;
+}
 
+.write-link {
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 999em;
+  padding: 10px;
 }
 
 .divider {
-  border-right: 1px solid rgba(0, 0, 0, 0, .15);
-  margin: 18px 12px 0 6px;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+  height: 28px;
+  margin-top: 25px !important;
 }
 
 .share-button, .notifications-button {
