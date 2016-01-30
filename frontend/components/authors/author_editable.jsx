@@ -90,7 +90,7 @@ var AuthorEditable = React.createClass({
     );
   },
   _getButtons: function () {
-    if (this.state.editable && this.props.owner) {
+    if (this.state.editable && this.props.isOwner) {
       return (
         <div className="author-edit-button">
           <button
@@ -101,7 +101,7 @@ var AuthorEditable = React.createClass({
           <button onClick={this.refresh}>Cancel</button>
         </div>
       );
-    } else if (this.props.owner) {
+    } else if (this.props.isOwner) {
       return (
         <div className="author-edit-button">
           <button

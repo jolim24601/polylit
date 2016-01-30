@@ -47,6 +47,7 @@
 
 .avatar-large {
   position: absolute;
+  vertical-align: middle;
   border-radius: 100%;
   background: #f0f0f0;
   width: 100px;
@@ -55,12 +56,8 @@
   right: 10%;
 }
 
-.avatar-large[editable="true"] {
-
-}
-
-
 .avatar-small {
+  vertical-align: middle;
   border-radius: 100%;
   width: 36px;
   height: 36px;

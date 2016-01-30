@@ -1,41 +1,21 @@
 .navbar {
-  margin-right: 400px;
-  margin-left: 0;
-  display: block;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
-  text-align: left;
-  z-index: 500;
+  position: fixed;
+  top: 0; left: 0;
   width: 100%;
   color: rgba(0, 0, 0, 0.3);
   letter-spacing: 0;
 }
 
 .navbar-nav {
+  background: white;
   height: 65px;
 }
 
 .navbar-center {
-  margin-left: 400px;
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 50px;
   max-width: 600px;
-}
-
-.navbar-tools {
-}
-
-.navbar-nav li, h2 {
-  display: block;
-  margin: 20px 0 20px 10px;
-}
-
-.navbar-center > li {
-  cursor: pointer;
-  float: left;
-  color: rgba(0,0,0,0.5);
-}
-
-.navbar-tools > li {
-  cursor: pointer;
-  float: left;
 }
 
 .navbar-profile {
@@ -57,10 +37,21 @@
   margin: 10px;
 }
 
+.predictiveSearch {
+  padding-left: 36px;
+  color: rgba(0,0,0,0.8);
+  border-radius: 999em;
+  font-size: 14px;
+  height: 38px;
+  position: absolute;
+  right: 255px; bottom: 23px;
+}
+
 .write-link {
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 999em;
-  padding: 10px;
+  padding: 10px 10px 9px 10px;
+  font-size: 14px;
 }
 
 .divider {
@@ -107,15 +98,41 @@
   padding: 10px;
 }
 
-.profile-tools li {
+.profile-tools > li {
   float: left;
+  margin: 17px 5px;
+}
+
+.navbar-center > li {
+  cursor: pointer;
+  float: left;
+  color: rgba(0,0,0,0.5);
+  margin: 30px 10px;
+}
+
+.navber-center a:hover {
+  color: rgba(0,0,0,0.9);
+}
+
+.navbar-tools > li {
+  cursor: pointer;
+  float: left;
+  margin: 25px 5px;
+}
+
+#nav-login {
+  margin: 18px 8px;
+}
+
+.navbar-tools a[data-current="true"] {
+  border-bottom: 1px solid black;
 }
 
 .logo {
-  height: 45px;
+  height: 42px;
   width: auto;
-  margin-top: 10px;
-  margin-left: 15px;
+  margin-top: 8px;
+  margin-left: 30px;
 }
 
 .modal-logo {
@@ -126,6 +143,12 @@
 .button {
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 999em;
+}
+
+
+.navbar-nav a:hover {
+  color: rgba(0,0,0,0.6);
+  border-color: rgba(0,0,0,0.3);
 }
 
 .primary {

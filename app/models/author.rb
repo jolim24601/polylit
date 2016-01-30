@@ -1,5 +1,6 @@
 class Author < ActiveRecord::Base
   include Authentication
+  include PgSearch
   after_initialize :ensure_session_token
 
   validates :username, :password_digest, :pen_name, presence: true
@@ -11,8 +12,8 @@ class Author < ActiveRecord::Base
 
   has_many :stories, inverse_of: :author
   has_attached_file :avatar, default_url: 'avatar.png', styles: {
-    small: '36x36>',
-    large: '100x100>'
+    small: '37x37#',
+    large: '100x100#'
   }
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/

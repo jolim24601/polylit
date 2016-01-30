@@ -49,7 +49,8 @@ var newSession = React.createClass({
             </span>
           </div>
 
-          <button onClick={this.demoSignIn}>Sign in as Demo user</button>
+          <button className="demo-login"
+            onClick={this.demoSignIn}>Sign in as Demo user</button>
       </form>
     );
   }

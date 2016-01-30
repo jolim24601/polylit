@@ -4,6 +4,7 @@ class Api::SessionsController < ApplicationController
 
   def destroy
     logout_author!
+    redirect_to root_url
   end
 
   def show

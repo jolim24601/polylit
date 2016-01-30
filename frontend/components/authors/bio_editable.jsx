@@ -7,7 +7,7 @@ var BioEditable = React.createClass({
     if (field.editable) {
       textFields = (
         <div className="author-info">
-          <input type="text" value={field.name}
+          <input type="text" value={field.name} autoFocus
             onChange={this.props.changeName}>
           </input>
           <textarea type="text" value={field.description}

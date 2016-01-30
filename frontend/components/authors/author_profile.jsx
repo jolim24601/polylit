@@ -2,7 +2,8 @@ var React = require('react'),
     AuthorStore = require('../../stores/author_store'),
     ApiUtil = require('../../util/api_util'),
     AuthorEditable = require('./author_editable'),
-    StoryIndexItem = require('../stories/story_index_item');
+    StoryIndexItem = require('../stories/story_index_item'),
+    CurrentAuthorStore = require('../../stores/current_author_store');
 
 var Navbar = require('../navbar/navbar'),
     NavTools = require('../navbar/nav_tools');
@@ -23,10 +24,11 @@ var AuthorProfile = React.createClass({
   },
   render: function () {
     var author = this.state.author;
+    var isOwner = author.id === CurrentAuthorStore.currentAuthor().id;
     var authorEditable, authorStoriesIndex;
     if (typeof this.state.author.id !== 'undefined') {
       // check if currentUser is the same as author, return true for testing.
-      authorEditable = <AuthorEditable authorId={author.id} owner={'true'} />;
+      authorEditable = <AuthorEditable authorId={author.id} isOwner={isOwner} />;
       authorStoriesIndex = author.stories.map(function (story) {
         return <StoryIndexItem key={story.id} story={story} author={author} />;
       });

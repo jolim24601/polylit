@@ -1,7 +1,10 @@
 var React = require('react'),
     ProfileTools = require('./profile_tools'),
     PredictiveSearch = require('./predictive_search'),
-    CurrentAuthorStore = require('../../stores/current_author_store');
+    CurrentAuthorStore = require('../../stores/current_author_store'),
+    SessionApiUtil = require('../../util/session_api_util');
+
+var History = require('react-router');
 
 var NavTools = React.createClass({
   getStateFromStore: function () {
@@ -22,7 +25,7 @@ var NavTools = React.createClass({
       buttons = <ProfileTools />;
     } else {
       buttons = (
-        <li className="button primary">
+        <li id="nav-login" className="button primary">
           <a href="#/login">Sign In / Sign Up</a>
         </li>
       );
@@ -30,7 +33,10 @@ var NavTools = React.createClass({
     return (
       <ul className="navbar-tools group floatRight">
         <li><PredictiveSearch /></li>
-        <li><a className="write-link" href="#/new-story">Write a story</a></li>
+        <li>
+          <a onClick={this._ensureSignIn}
+            className="write-link" href="#/new-story">Write a story</a>
+        </li>
 
         {buttons}
       </ul>
@@ -38,7 +44,20 @@ var NavTools = React.createClass({
   },
   _onChange: function () {
     this.setState(this.getStateFromStore());
-  }
+  },
+  _ensureSignIn: function () {
+      if (CurrentAuthorStore.currentAuthorFetched()) {
+        _redirectIfNotLoggedIn();
+      } else {
+        SessionApiUtil.fetchCurrentAuthor(_redirectIfNotLoggedIn);
+      }
+      function _redirectIfNotLoggedIn() {
+        debugger
+        if (!CurrentAuthorStore.isLoggedIn()) {
+          History.push({}, '/');
+        }
+      }
+    }
 });
 
 module.exports = NavTools;

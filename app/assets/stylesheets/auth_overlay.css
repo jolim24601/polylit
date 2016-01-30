@@ -9,10 +9,7 @@
 .modal {
   position: fixed;
   overflow: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  top: 0; left: 0; bottom: 0; right: 0;
   width: 100%;
   text-align: center;
   background-color: rgba(255,255,255,0.97);
@@ -26,8 +23,8 @@
   padding: 100px 80px;
 }
 
-.modal-logo {
-  font-size: 36px;
+.modal-form button {
+  margin-right: 5px;
 }
 
 .modal-content {
@@ -56,6 +53,13 @@ label[for=form-password] {
 
 .modal-form .signin-button {
   margin-top: 15px;
+  margin-right: 10px;
+}
+
+.demo-login {
+  padding: 5px;
+  margin: 5px;
+  border: 0;
 }
 
 button.modal-close {

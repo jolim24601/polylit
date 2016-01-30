@@ -14,6 +14,7 @@
  *= require 'nprogress'
  *= require 'navbar'
  *= require 'auth_overlay'
+ *= require 'landing'
  *= require 'story_feed'
  *= require 'story'
  *= require_self

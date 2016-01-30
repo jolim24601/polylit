@@ -14,6 +14,8 @@ gem 'rails_12factor', group: :production
 
 gem 'paperclip'
 gem 'aws-sdk', '~> 1.6'
+gem 'pg_search'
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug'
