@@ -3,9 +3,9 @@ var React = require('react'),
     StoryIndexItem = require('./story_index_item'),
     ApiUtil = require('../../util/api_util');
 
-var Navbar = require('./navbar/navbar'),
-    HomeTools = require('./home_tools'),
-    NavTools = require('./nav_tools');
+var Navbar = require('../navbar/navbar'),
+    HomeTools = require('../navbar/home_tools'),
+    NavTools = require('../navbar/nav_tools');
 
 var StoriesIndex = React.createClass({
   getInitialState: function () {

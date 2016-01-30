@@ -6,6 +6,10 @@ var React = require('react'),
     ApiUtil = require('../../util/api_util'),
     StoryStore = require('../../stores/story_store');
 
+var Navbar = require('../navbar/navbar'),
+    NavTools = require('../navbar/nav_tools'),
+    ProfileTools = require('../navbar/profile_tools');
+
 var StoryView = React.createClass({
   getStateFromStore: function () {
     return { story: StoryStore.find(this.props.params.id) };
@@ -33,6 +37,7 @@ var StoryView = React.createClass({
 
     return (
       <article className="story">
+        <Navbar><NavTools /><ProfileTools /></Navbar>
         <div className="ProseMirror-content"></div>
       </article>
     );

@@ -27,14 +27,6 @@ var routes = (
   </Route>
 );
 
-Navbar = require('./navbar/navbar'),
-HomeTools = require('./home_tools'),
-WriteTools = require('./write_tools'),
-NavTools = require('./nav_tools'); // profile
-<Navbar><HomeTools /><NavTools /></Navbar>
-<Navbar><WriteTools /></Navbar>
-<Navbar><NavTools /></Navbar>
-
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(
     <Router history={hashHistory}>{routes}</Router>,

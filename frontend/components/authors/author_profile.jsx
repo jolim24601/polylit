@@ -4,6 +4,9 @@ var React = require('react'),
     AuthorEditable = require('./author_editable'),
     StoryIndexItem = require('../stories/story_index_item');
 
+var Navbar = require('../navbar/navbar'),
+    NavTools = require('../navbar/nav_tools');
+
 var AuthorProfile = React.createClass({
   getStateFromStore: function () {
     return { author: AuthorStore.find(this.props.params.id) };
@@ -30,6 +33,7 @@ var AuthorProfile = React.createClass({
     }
     return (
       <div className="author-profile">
+        <Navbar><NavTools /></Navbar>
         {authorEditable}
         <ul className="author story-feed">
           <li className="heading-title">Latest</li>

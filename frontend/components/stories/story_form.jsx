@@ -9,6 +9,10 @@ require('prosemirror/dist/menu/tooltipmenu');
 require('prosemirror/dist/menu/menu');
 var pmFormat = require('prosemirror/dist/format');
 
+var Navbar = require('../navbar/navbar'),
+    WriteTools = require('../navbar/write_tools'),
+    ProfileTools = require('../navbar/profile_tools');
+
 var StoryForm = React.createClass({
   getInitialState: function () {
     return ({
@@ -40,6 +44,7 @@ var StoryForm = React.createClass({
   render: function () {
     return (
       <div className='story'>
+        <Navbar><WriteTools /><ProfileTools /></Navbar>
         <Editor value={this.state.output} onChange={this.updateOutput}
           options={this.state.options} ref="pm" />
       </div>
