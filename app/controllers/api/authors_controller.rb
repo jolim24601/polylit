@@ -13,6 +13,7 @@ class Api::AuthorsController < ApplicationController
 
   def show
     @author = Author.find(params[:id])
+    @show_full = true
   end
 
   def update

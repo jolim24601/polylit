@@ -4,15 +4,10 @@ var Store = require('flux/utils').Store,
     objectAssign = require('object-assign');
 
 var SearchResultsStore = new Store(AppDispatcher),
-    _searchResults = { "Story": [], "Tag": [], "Author": [] },
-    _meta = {};
+    _searchResults = { "Story": [], "Tag": [], "Author": [] };
 
 SearchResultsStore.all = function () {
   return objectAssign({}, _searchResults);
-};
-
-SearchResultsStore.meta = function () {
-  return objectAssign({}, _meta);
 };
 
 SearchResultsStore.stories = function () {
@@ -28,7 +23,8 @@ SearchResultsStore.authors = function () {
 };
 
 function resetSearchResults(results) {
-  _searchResults = { "Story": [], "Tag": [], "Author": [] };
+  // Have a catch-all for unexpected results
+  _searchResults = { "Story": [], "Tag": [], "Author": [], "MISC": [] };
   results.forEach(function (result) {
     _searchResults[result._type].push(result);
   });
@@ -38,7 +34,6 @@ SearchResultsStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
   case SearchConstants.RECEIVE_SEARCH_RESULTS:
     resetSearchResults(payload.results);
-    _meta = payload.meta;
     SearchResultsStore.__emitChange();
     break;
   default:

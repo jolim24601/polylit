@@ -1,7 +1,6 @@
 var React = require('react'),
     SearchResultsStore = require('../../stores/search_results_store'),
     SearchApiUtil = require('../../util/search_api_util'),
-    LinkedStateMixin = require('react-addons-linked-state-mixin'),
     StoryIndexItem = require('../stories/story_index_item'),
     InfiniteScroll = require('react-infinite-scroll')(React);
 
@@ -9,8 +8,6 @@ var Navbar = require('../navbar/navbar'),
     NavTools = require('../navbar/nav_tools');
 
 var Search = React.createClass({
-  mixins: [LinkedStateMixin],
-
   getInitialState: function () {
     return { query: '', page: 1, type: "Story" };
   },
@@ -20,12 +17,17 @@ var Search = React.createClass({
   componentWillUnmount: function () {
     this.listener.remove();
   },
-  search: function () {
-    SearchApiUtil.search(this.state.query, this.state.page, this.state.type);
+  componentWillReceiveProps: function (newProps) {
+    var newQuery = newProps.location.state.query;
+    this.setState({ query: newQuery });
+    this.search(newQuery, this.state.type);
+  },
+  search: function (newQuery, newType) {
+    SearchApiUtil.search(newQuery, newType, this.state.page);
   },
   nextPage: function () {
     var nextPage = this.state.page + 1;
-    SearchApiUtil.search(this.state.query, nextPage);
+    SearchApiUtil.search(this.state.query, this.state.type, nextPage);
     this.setState({ page: nextPage });
   },
   render: function () {
@@ -41,11 +43,11 @@ var Search = React.createClass({
           <li><a>People</a></li>
         </ul>
         <input
-          type="search"
+          type="text"
           className="search-banner"
           placeholder="Search Polylit"
-          valueLink={this.linkState('query') }
-          onKeyUp={this.search}
+          value={this.state.query}
+          onChange={this.handleChange}
           autoFocus
           />
 
@@ -76,10 +78,15 @@ var Search = React.createClass({
       });
     }
   },
+  handleChange: function (e) {
+    var newQuery = e.target.value;
+    this.search(newQuery, this.state.type);
+    this.setState({ query: newQuery });
+  },
   changeType: function (e) {
-    var type = e.target.innerText === "People" ? "Author" : "Story";
-    this.setState({ type: type });
-    SearchApiUtil.search(this.state.query, this.state.page, type);
+    var newType = e.target.innerText === "People" ? "Author" : "Story";
+    this.search(this.state.query, newType);
+    this.setState({ type: newType });
   },
   _onChange: function () {
     this.forceUpdate();

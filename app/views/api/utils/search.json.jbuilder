@@ -1,5 +1,3 @@
-json.totalCount @search_results.total_count
-
 json.results do
   json.array! @search_results do |result|
     if result.class == Story
@@ -10,6 +8,6 @@ json.results do
       json.partial! "api/tags/tag", tag: result
     end
 
-    json._type result.class.to_s
+    json._type result.class.to_s || "MISC"
   end
 end

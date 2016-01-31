@@ -5,8 +5,7 @@ module.exports = {
   receiveResults: function(data) {
     AppDispatcher.dispatch({
       actionType: SearchConstants.RECEIVE_SEARCH_RESULTS,
-      results: data.results,
-      _meta: { totalCount: data.totalCount }
+      results: data.results
     });
   }
 };

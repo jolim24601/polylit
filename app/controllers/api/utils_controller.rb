@@ -5,6 +5,7 @@ class Api::UtilsController < ApplicationController
       @search_results = PgSearch.multisearch(params[:query])
                                 .includes(:searchable)
                                 .page(params[:page])
+                                .map(&:searchable)
     when "Story"
       @search_results = Story.search(params[:query]).page(params[:page])
     when "Tag"

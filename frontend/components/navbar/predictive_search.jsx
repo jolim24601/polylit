@@ -2,6 +2,8 @@ var React = require('react'),
     SearchResultsStore = require('../../stores/search_results_store'),
     SearchApiUtil = require('../../util/search_api_util');
 
+var hashHistory = require('react-router').hashHistory;
+
 var PredictiveSearch = React.createClass({
   getInitialState: function () {
     return { query: '' };
@@ -14,16 +16,14 @@ var PredictiveSearch = React.createClass({
   },
   search: function (e) {
     if (e.keyCode === 13) {
-      debugger
-      window.location.hash.replace('search');
-      // {
-      //   pathname: 'search',
-      //   query: this.state,
-      //   state: null
-      // });
+      hashHistory.push({
+        pathname: 'search',
+        query: {},
+        state: this.state
+      });
     } else {
       this.setState({ query: e.target.value });
-      SearchApiUtil.search(e.target.value, 1, "Predictive");
+      SearchApiUtil.search(e.target.value, "Predictive", 1);
     }
   },
   render: function () {

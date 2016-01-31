@@ -2,6 +2,8 @@ var React = require('react'),
     SessionApiUtil = require('../../util/session_api_util'),
     CurrentAuthorStore = require('../../stores/current_author_store');
 
+var hashHistory = require('react-router').hashHistory;
+
 var ProfileButton = React.createClass({
   getInitialState: function () {
     return { active: false };
@@ -23,7 +25,9 @@ var ProfileButton = React.createClass({
     }
   },
   logoutAuthor: function () {
-    SessionApiUtil.logoutAuthor();
+    SessionApiUtil.logoutAuthor(function () {
+      hashHistory.push('/');
+    });
   },
   render: function () {
     var author = CurrentAuthorStore.currentAuthor();
