@@ -10,7 +10,7 @@ class Api::SessionsController < ApplicationController
   def show
     if current_author
       @author = current_author
-      @show_full = false
+      @show_full = true
       render "api/authors/show"
     else
       render json: {}

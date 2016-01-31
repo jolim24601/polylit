@@ -1,6 +1,7 @@
 var React = require('react'),
     ApiUtil = require('../../util/api_util'),
-    History = require('react-router').hashHistory,
+    SessionApiUtil = require('../../util/session_api_util'),
+    hashHistory = require('react-router').hashHistory,
     LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var newAuthor = React.createClass({
@@ -13,7 +14,15 @@ var newAuthor = React.createClass({
     e.preventDefault();
 
     ApiUtil.createAuthor(this.state, function () {
-      History.goBack();
+      hashHistory.goBack();
+    });
+  },
+  demoSignIn: function (e) {
+    e.preventDefault();
+    var demoCredentials = { email: 'jolim24601@gmail.com', password: 'jupiter' };
+
+    SessionApiUtil.loginAuthor(demoCredentials, function () {
+      hashHistory.goBack();
     });
   },
   render: function () {
@@ -50,6 +59,9 @@ var newAuthor = React.createClass({
           </div>
 
           <a href="#/login">I already have an account.</a>
+
+          <button className="demo-login"
+            onClick={this.demoSignIn}>Sign in as Demo user</button>
       </form>
     );
   }
