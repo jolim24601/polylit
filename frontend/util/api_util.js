@@ -13,9 +13,18 @@ module.exports = {
     });
   },
   publishStory: function (data, callback) {
-    $.post("api/stories", { story: data }, function(story) {
-      ApiActions.receiveSingleStory(story);
-      callback && callback();
+    $.ajax({
+      type: "POST",
+      url: "api/stories",
+      dataType: "json",
+      data: { story: data },
+      success: function (story) {
+        ApiActions.receiveSingleStory(story);
+        callback && callback();
+      },
+      error: function (message) {
+        console.log(message);
+      }
     });
   },
   fetchStory: function (id, callback) {

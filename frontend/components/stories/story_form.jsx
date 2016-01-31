@@ -1,7 +1,7 @@
 var React = require('react'),
     Editor = require('../editor'),
     ApiUtil = require('../../util/api_util'),
-    History = require('react-router').hashHistory;
+    hashHistory = require('react-router').hashHistory;
 
 require('prosemirror/dist/inputrules/autoinput');
 require('prosemirror/dist/menu/menubar');
@@ -35,9 +35,13 @@ var StoryForm = React.createClass({
 
     var words = pmFormat.toText(pmNode).split(/\s+/);
     story.wordcount = words.length;
-    story.subtitle = words.slice(story.title.length - 1, story.title.length + 60).join(' ');
+    story.subtitle = words
+      .slice(story.title.split(/\s+/).length, story.title.length + 60)
+      .join(' ');
+
+    if (words.length >= 60) { story.subtitle += '...'; }
     ApiUtil.publishStory(story, function () {
-      History.push('/stories');
+      hashHistory.push('/stories');
     });
   },
   render: function () {
