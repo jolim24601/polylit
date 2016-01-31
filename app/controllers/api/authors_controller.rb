@@ -7,7 +7,7 @@ class Api::AuthorsController < ApplicationController
       login_author(@author)
       render :show
     else
-      render json: @author.errors.full_messages, status: 422
+      render json: { errors: @author.errors.full_messages }, status: 422
     end
   end
 
@@ -21,7 +21,7 @@ class Api::AuthorsController < ApplicationController
     if @author.update(author_params)
       render :show
     else
-      render json: @author.errors.full_messages, status: 422
+      render json: { errors: @author.errors.full_messages }, status: 422
     end
   end
 
