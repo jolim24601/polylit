@@ -1,6 +1,7 @@
 var React = require('react'),
     Editor = require('../editor'),
     ApiUtil = require('../../util/api_util'),
+    TagApiUtil = require('../../util/tag_api_util'),
     hashHistory = require('react-router').hashHistory;
 
 require('prosemirror/dist/inputrules/autoinput');
@@ -16,6 +17,7 @@ var Navbar = require('../navbar/navbar'),
 var StoryForm = React.createClass({
   getInitialState: function () {
     return ({
+      story: {},
       options: {
         menuBar: false,
         tooltipMenu: true,
@@ -25,11 +27,12 @@ var StoryForm = React.createClass({
       output: '<h3>Title</h3><p>Tell a story...</p>'
     });
   },
-  publishStory: function (e) {
-    e.preventDefault();
+  saveStory: function (e) {
+    if (e) { e.preventDefault(); }
     var pmNode = this.refs.pm.pm.getContent();
-    var story = {};
-    story.published = true;
+    var story = this.state.story;
+    
+    story.published = false;
     story.title = pmNode.firstChild.textContent;
     story.node = JSON.stringify(pmNode.toJSON());
 
@@ -41,15 +44,27 @@ var StoryForm = React.createClass({
       .join(' ');
     if (words.length >= 60) { story.subtitle += '...'; }
 
-    ApiUtil.publishStory(story, function () {
+    ApiUtil.saveStory(story, function () {
       hashHistory.push('/stories');
     });
   },
+  startDraftInterval: function () {
+    this.intervalId = setInterval(function () {
+      this.saveStory();
+    }, 15000);
+  },
   render: function () {
+    var draftState;
+    if this.
+
     return (
       <div className="main-content">
         <Navbar>
-          <div className="floatRight"><WriteTools /><ProfileTools /></div>
+          <div className="floatRight">
+            <span className="draft-message">{draftState}</span>
+            <WriteTools saveStory={this.saveStory} />
+            <ProfileTools />
+          </div>
         </Navbar>
         <div className="story">
           <Editor value={this.state.output} onChange={this.updateOutput}
@@ -63,11 +78,10 @@ var StoryForm = React.createClass({
   },
   componentDidMount: function () {
     this.updateOutput(this.refs.pm.getContent());
-    this.publishButton = document.getElementById('publish-button');
-    this.publishListener = this.publishButton.addEventListener('click', this.publishStory);
+    this.startDraftInterval();
   },
   componentWillUnmount: function () {
-    this.publishButton.removeEventListener('click', this.publishListener, false);
+    clearInterval(this.intervalId);
   }
 });
 

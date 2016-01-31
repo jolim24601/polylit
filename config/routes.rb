@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     resources :authors, only: [:show, :create, :update]
     resource :session, only: [:show, :create, :destroy]
 
-    resources :tags, only: [:index, :create]
-    resources :taggings, only: [:show, :create, :destroy]
+    resources :tags, only: [:index, :create, :show]
+    resources :taggings, only: [:create]
 
     get 'search', to: 'utils#search'
   end

@@ -2,6 +2,7 @@ class Api::AuthorsController < ApplicationController
   def create
     @author = Author.new(author_params)
     @author.username ||= @author.email[/[^@]+/]
+    @show_full = true
 
     if @author.save
       login_author(@author)
@@ -18,6 +19,7 @@ class Api::AuthorsController < ApplicationController
 
   def update
     @author = Author.find(params[:id])
+    @show_full = true
     if @author.update(author_params)
       render :show
     else

@@ -14,7 +14,7 @@ var newAuthor = React.createClass({
     e.preventDefault();
 
     ApiUtil.createAuthor(this.state, function () {
-      hashHistory.goBack();
+      hashHistory.push('/');
     });
   },
   demoSignIn: function (e) {
@@ -22,7 +22,7 @@ var newAuthor = React.createClass({
     var demoCredentials = { email: 'jolim24601@gmail.com', password: 'jupiter' };
 
     SessionApiUtil.loginAuthor(demoCredentials, function () {
-      hashHistory.goBack();
+      hashHistory.push('/');
     });
   },
   render: function () {

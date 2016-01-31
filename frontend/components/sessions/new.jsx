@@ -14,13 +14,13 @@ var newSession = React.createClass({
     var demoCredentials = { email: 'jolim24601@gmail.com', password: 'jupiter' };
 
     SessionApiUtil.loginAuthor(demoCredentials, function () {
-      hashHistory.goBack();
+      hashHistory.push('/');
     });
   },
   handleSubmit: function (e) {
     e.preventDefault();
     SessionApiUtil.loginAuthor(this.state, function () {
-      hashHistory.goBack();
+      hashHistory.push('/');
     });
   },
   render: function () {

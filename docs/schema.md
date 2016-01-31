@@ -57,11 +57,12 @@ id          | integer   | not null, primary key
 name        | string    | not null
 
 ## taggings
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-story_id    | integer   | not null, foreign key (references stories), indexed, unique [tag_id]
-tag_id      | integer   | not null, foreign key (references tags), indexed
+column name   | data type | details
+------------  |-----------|-----------------------
+id            | integer   | not null, primary key
+tag_id        | integer   | not null, foreign key (references tags), indexed
+taggable_id   | integer   | not null, foreign key (references stories/publications), indexed, unique [tag_id]
+taggable_type | integer   | not null, foreign key
 
 ## follows
 column name      | data type | details

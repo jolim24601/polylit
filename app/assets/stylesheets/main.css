@@ -70,6 +70,10 @@ input {
   display: none;
 }
 
+.is-active {
+  display: block;
+}
+
 .group:after {
   display: block;
   content: "";
@@ -82,4 +86,17 @@ input {
 
 .floatLeft {
   float: left;
+}
+
+.errorBar {
+  background: #cc5454;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  margin: 0 auto;
+  padding: 12px 25px;
+  font-size: 14px;
+  border-radius: 0 0 4px 4px;
+  text-align: center;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.25), 0 0 1px rgba(0,0,0,0.35);
 }

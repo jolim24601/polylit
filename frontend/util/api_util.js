@@ -12,7 +12,7 @@ module.exports = {
       }
     });
   },
-  publishStory: function (data, callback) {
+  saveStory: function (data, callback) {
     $.ajax({
       type: "POST",
       url: "api/stories",
@@ -74,12 +74,3 @@ module.exports = {
     });
   }
 };
-
-// ### Actions
-// * ApiActions.deleteStory
-// * StoryActions.editStory
-// * StoryActions.destroyStory
-//
-// ### ApiUtil
-// * ApiUtil.editStory
-// * ApiUtil.destroyStory

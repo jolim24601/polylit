@@ -47,3 +47,33 @@ lydia = Author.create(
   description: "Flash fiction writer, recently translated Marcel Proust's Swann's Way.",
   password: "lydiadavis"
 )
+
+Tag.destroy_all
+
+love = Tag.create(name: "Love")
+sex = Tag.create(name: "Sex")
+money = Tag.create(name: "Money")
+music = Tag.create(name: "Music")
+selfhelp = Tag.create(name: "Self-help")
+christianity = Tag.create(name: "Christianity")
+zen = Tag.create(name: "Zen")
+wellbeing = Tag.create(name: "Wellbeing")
+art = Tag.create(name: "Art")
+family = Tag.create(name: "Family")
+winter = Tag.create(name: "Winter")
+gameofthrones = Tag.create(name: "Game of Thrones")
+film = Tag.create(name: "Film")
+newyork = Tag.create(name: "New York")
+soccer = Tag.create(name: "Soccer")
+food = Tag.create(name: "Food")
+friends = Tag.create(name: "Friendship")
+code = Tag.create(name: "Code")
+prog = Tag.create(name: "Programming")
+frenchlit = Tag.create(name: "French Literature")
+russlit = Tag.create(name: "Russian Literature")
+americana = Tag.create(name: "Americana")
+politics = Tag.create(name: "Politics")
+history = Tag.create(name: "History")
+lives = Tag.create(name: "Black Lives Matter")
+guns = Tag.create(name: "Guns")
+isis = Tag.create(name: "ISIS")
