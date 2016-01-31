@@ -35,11 +35,12 @@ var StoryForm = React.createClass({
 
     var words = pmFormat.toText(pmNode).split(/\s+/);
     story.wordcount = words.length;
+    var titleLength = story.title.split(/\s+/);
     story.subtitle = words
-      .slice(story.title.split(/\s+/).length, story.title.length + 60)
+      .slice(titleLength, titleLength + 60)
       .join(' ');
-
     if (words.length >= 60) { story.subtitle += '...'; }
+
     ApiUtil.publishStory(story, function () {
       hashHistory.push('/stories');
     });
