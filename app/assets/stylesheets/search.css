@@ -1,0 +1,48 @@
+.search-banner {
+  position: relative;
+  left: 50px;
+  border: 0;
+  font-size: 50px;
+}
+
+.search-type {
+  position: relative;
+  top: 200px;
+  left: 60px;
+}
+
+.search-type li {
+  cursor: pointer;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.search-type a {
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-right: 150px;
+  padding-top: 15px;
+}
+
+.darken-border a {
+  border-top: 2px rgba(0,0,0,0.8) solid;
+}
+
+.search-feed {
+  border-top: 1px solid rgba(0,0,0,0.05);
+  width: 800px;
+  margin: 26px 290px;
+}
+
+.search-header {
+  color: rgba(0,0,0,0.8);
+  font-size: 16px;
+  letter-spacing: .1em;
+  margin-bottom: 15px;
+}
+
+.author-search-card {
+  width: 100%;
+  padding: 20px 0;
+  height: 100px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}

@@ -27,6 +27,7 @@ var NavTools = React.createClass({
         </li>
       );
     }
+
     return (
       <ul className="navbar-tools group floatRight">
         <li><PredictiveSearch /></li>

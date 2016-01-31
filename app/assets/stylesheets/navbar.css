@@ -1,5 +1,6 @@
 .navbar {
   position: fixed;
+  z-index: 1000;
   top: 0; left: 0;
   width: 100%;
   color: rgba(0, 0, 0, 0.3);
@@ -12,10 +13,16 @@
 }
 
 .navbar-center {
+  margin-left: 50px;
   font-weight: 400;
   font-size: 14px;
-  margin-left: 50px;
   max-width: 600px;
+  letter-spacing: 1.5px;
+}
+
+.is-active a {
+  border-bottom: 2px rgba(0,0,0,0.8) solid;
+  color: rgba(0,0,0,0.8);
 }
 
 .predictiveSearch {
@@ -45,35 +52,6 @@
   border-radius: 4px;
   z-index: 900;
   width: 150px;
-}
-
-.profile-actions:before {
-  content: "";
-  width: 0; height: 0;
-  background: transparent;
-  border-top: none;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-bottom: 14px solid white;
-  top: -13px;
-  right: 0;
-  position: absolute;
-  border-color: #D3D3D3 transparent;
-}
-
-.profile-actions:after {
-  content: "";
-  width: 0; height: 0;
-  background: transparent;
-  border-top: none;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-bottom: 12px solid white;
-  top: -14px;
-  right: 0;
-  position: absolute;
-  border-color: #fff transparent;
-  border-style: solid;
 }
 
 .profile-actions li {

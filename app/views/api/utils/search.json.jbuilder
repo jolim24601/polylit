@@ -2,14 +2,12 @@ json.totalCount @search_results.total_count
 
 json.results do
   json.array! @search_results do |result|
-    case search_result.class
-    when "Story"
+    if result.class == Story
       json.partial! "api/stories/story", story: result, show_full: false
-    when "Author"
+    elsif result.class == Author
       json.partial! "api/authors/author", author: result, show_full: false
-    when "Tag"
+    elsif result.class == Tag
       json.partial! "api/tags/tag", tag: result
-    when "Publication"
     end
 
     json._type result.class.to_s

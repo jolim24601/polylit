@@ -1,7 +1,11 @@
 class Author < ActiveRecord::Base
   include Authentication
   include PgSearch
-  multisearchable against: [:name, :username]
+  multisearchable against: :name
+  PgSearch.multisearch_options = { using: { tsearch: { prefix: true } } }
+  pg_search_scope :search, against: [:pen_name, :username],
+    using: { tsearch: { prefix: true } }
+
   after_initialize :ensure_session_token
 
   validates :username, :password_digest, :pen_name, presence: true

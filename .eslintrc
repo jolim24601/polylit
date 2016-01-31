@@ -10,7 +10,8 @@
     "quotes": 0,
     "space-before-function-paren": 0,
     "func-names": 0,
-    "no-unused-vars": 0
+    "no-unused-vars": 0,
+    "space-infix-ops": 0
   },
 
   "globals": {

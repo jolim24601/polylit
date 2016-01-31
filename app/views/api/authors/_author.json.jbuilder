@@ -8,8 +8,8 @@ json.avatar       asset_url(author.avatar.url(:small))
 
 # eventually call associations here
 if show_full
-  json.favorites        0
   json.avatarLarge      asset_url(author.avatar.url(:large))
+  json.favorites        0
   json.twitter          'https://twitter.com/'
   json.facebook         'https://facebook.com/'
 

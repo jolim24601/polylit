@@ -1,7 +1,7 @@
 class Story < ActiveRecord::Base
   include Taggable
   include PgSearch
-  pg_search_scope :search_stories, against: [
+  pg_search_scope :search, against: [
     [:title, 'A'],
     [:subtitle, 'B']
   ], using: { tsearch: { prefix: true } }

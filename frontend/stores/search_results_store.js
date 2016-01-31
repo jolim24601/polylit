@@ -4,7 +4,7 @@ var Store = require('flux/utils').Store,
     objectAssign = require('object-assign');
 
 var SearchResultsStore = new Store(AppDispatcher),
-    _searchResults = {},
+    _searchResults = { "Story": [], "Tag": [], "Author": [] },
     _meta = {};
 
 SearchResultsStore.all = function () {
@@ -16,20 +16,21 @@ SearchResultsStore.meta = function () {
 };
 
 SearchResultsStore.stories = function () {
-  return _searchResults.stories.slice();
+  return _searchResults.Story.slice();
 };
 
 SearchResultsStore.tags = function () {
-  return _searchResults.tags.slice();
+  return _searchResults.Tag.slice();
 };
 
 SearchResultsStore.authors = function () {
-  return _searchResults.authors.slice();
+  return _searchResults.Author.slice();
 };
 
 function resetSearchResults(results) {
-  Object.keys(results).forEach(function (k) {
-    _searchResults[k] = results[k];
+  _searchResults = { "Story": [], "Tag": [], "Author": [] };
+  results.forEach(function (result) {
+    _searchResults[result._type].push(result);
   });
 }
 

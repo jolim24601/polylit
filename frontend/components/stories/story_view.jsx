@@ -37,7 +37,7 @@ var StoryView = React.createClass({
 
     return (
       <article className="story">
-        <Navbar><NavTools /><ProfileTools /></Navbar>
+        <Navbar><NavTools /></Navbar>
         <div className="ProseMirror-content"></div>
       </article>
     );

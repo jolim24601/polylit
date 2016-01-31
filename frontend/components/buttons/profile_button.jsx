@@ -29,7 +29,7 @@ var ProfileButton = React.createClass({
     var author = CurrentAuthorStore.currentAuthor();
     var authorLink = "#/authors/" + author.id;
     var profileClass =
-      this.state.active ? "profile-actions" : "profile-actions hide";
+      this.state.active ? "profile-actions tooltip" : "profile-actions tooltip hide";
 
     return (
       <div onClick={this.toggleView} className="navbar-profile">

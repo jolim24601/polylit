@@ -76,7 +76,7 @@
 .author-card-entry {
   position: relative;
   display: block;
-  width: 100px;
+  width: 240px;
 }
 
 .author-card-entry > a {
@@ -91,6 +91,10 @@
   z-index: 900;
   width: 250px;
   padding: 10px;
+}
+
+.profile-card.tooltip {
+  background: yellow;
 }
 
 .profile-card p {
@@ -118,6 +122,35 @@ button:disabled {
   position: absolute;
   left: -9999px;
   top: -9999px;
+}
+
+.tooltip:before {
+  content: "";
+  width: 0; height: 0;
+  background: transparent;
+  border-top: none;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 14px solid white;
+  top: -13px;
+  right: 0;
+  position: absolute;
+  border-color: #D3D3D3 transparent;
+}
+
+.tooltip:after {
+  content: "";
+  width: 0; height: 0;
+  background: transparent;
+  border-top: none;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 12px solid white;
+  top: -14px;
+  right: 0;
+  position: absolute;
+  border-color: #fff transparent;
+  border-style: solid;
 }
 
 .rec-stories {

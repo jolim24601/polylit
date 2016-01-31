@@ -20,9 +20,11 @@ var StoriesIndex = React.createClass({
   },
   render: function () {
     var stories = this.state.stories;
-    var storyList = Object.keys(stories).map(function (key) {
-      return <StoryIndexItem key={key} story={stories[key]} />;
+
+    var storyList = Object.keys(stories).map(function (k) {
+      return <StoryIndexItem key={stories[k].id} story={stories[k]} />;
     });
+
     return (
       <div className="main-content">
         <Navbar><HomeTools /><NavTools /></Navbar>
