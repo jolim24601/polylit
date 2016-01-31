@@ -1,5 +1,6 @@
 var React = require('react'),
     SessionApiUtil = require('../../util/session_api_util'),
+    CurrentAuthorActions = require('../../actions/current_author_actions'),
     CurrentAuthorStore = require('../../stores/current_author_store');
 
 var hashHistory = require('react-router').hashHistory;
@@ -26,6 +27,7 @@ var ProfileButton = React.createClass({
   },
   logoutAuthor: function () {
     SessionApiUtil.logoutAuthor(function () {
+      CurrentAuthorActions.destroyCurrentAuthor();
       hashHistory.push('/');
     });
   },

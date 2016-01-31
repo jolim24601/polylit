@@ -7,5 +7,10 @@ module.exports = {
       actionType: CurrentAuthorConstants.RECEIVE_CURRENT_AUTHOR,
       currentAuthor: author
     });
+  },
+  destroyCurrentAuthor: function (author) {
+    AppDispatcher.dispatch({
+      actionType: CurrentAuthorConstants.DESTROY_CURRENT_AUTHOR
+    });
   }
 };

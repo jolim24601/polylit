@@ -23,7 +23,6 @@ module.exports = {
         callback && callback();
       },
       error: function (message) {
-        console.log(message);
       }
     });
   },

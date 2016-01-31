@@ -26,6 +26,10 @@ CurrentAuthorStore.__onDispatch = function (payload) {
     _currentAuthor = payload.currentAuthor;
     CurrentAuthorStore.__emitChange();
     break;
+  case CurrentAuthorConstants.DESTROY_CURRENT_AUTHOR:
+    _currentAuthor = {};
+    CurrentAuthorStore.__emitChange();
+    break;
   default:
   // do nothing
   }

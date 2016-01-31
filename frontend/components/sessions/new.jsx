@@ -12,8 +12,9 @@ var newSession = React.createClass({
   demoSignIn: function (e) {
     e.preventDefault();
     var demoCredentials = { email: 'jolim24601@gmail.com', password: 'jupiter' };
+
     SessionApiUtil.loginAuthor(demoCredentials, function () {
-      hashHistory.push('/');
+      hashHistory.goBack();
     });
   },
   handleSubmit: function (e) {
