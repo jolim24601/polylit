@@ -35,7 +35,7 @@ var StoryForm = React.createClass({
 
     var words = pmFormat.toText(pmNode).split(/\s+/);
     story.wordcount = words.length;
-    var titleLength = story.title.split(/\s+/);
+    var titleLength = story.title.split(/\s+/).length;
     story.subtitle = words
       .slice(titleLength, titleLength + 60)
       .join(' ');
