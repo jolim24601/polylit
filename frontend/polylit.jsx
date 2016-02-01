@@ -13,6 +13,7 @@ var React = require('react'),
     newAuthor = require('./components/authors/new'),
     SessionApiUtil = require('./util/session_api_util'),
     CurrentAuthorStore = require('./stores/current_author_store'),
+    AuthorStories = require('./components/authors/stories'),
     Search = require('./components/search/search');
 
 var App = require('./components/app');
@@ -26,6 +27,7 @@ var routes = (
     <Route path='stories' component={StoriesIndex} />
     <Route path='stories/:id' component={StoryView} />
     <Route path='authors/:id' component={AuthorProfile} />
+    <Route path='me' component={AuthorStories} />
     <Route path='search' component={Search} />
   </Route>
 );

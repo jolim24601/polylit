@@ -11,5 +11,6 @@ Rails.application.routes.draw do
 
     delete 'taggings', to: 'taggings#destroy'
     get 'search', to: 'utils#search'
+    get 'me', to: 'authors#show'
   end
 end

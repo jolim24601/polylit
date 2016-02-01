@@ -5,7 +5,8 @@ var React = require('react'),
 
 var Navbar = require('../navbar/navbar'),
     HomeTools = require('../navbar/home_tools'),
-    NavTools = require('../navbar/nav_tools');
+    NavTools = require('../navbar/nav_tools'),
+    Sidebar = require('../sidebar/sidebar');
 
 var infiniteScroller = require('../../util/helpers').infiniteScroller;
 
@@ -24,13 +25,6 @@ var StoriesIndex = React.createClass({
     ApiUtil.fetchLatestStories({ page: nextPage });
     this.setState({ page: nextPage });
   },
-  addInfiniteScroller: function () {
-    $(window).scroll(function() {
-      if ($(window).scrollTop() + $(window).height() === $(document).height()) {
-        this.nextPage();
-      }
-    }.bind(this));
-  },
   componentWillUnmount: function () {
     this.storyStoreListener.remove();
   },
@@ -48,6 +42,7 @@ var StoriesIndex = React.createClass({
           <li className="heading-title">Latest stories</li>
           {storyList}
         </ul>
+        <Sidebar />
       </div>
     );
   },

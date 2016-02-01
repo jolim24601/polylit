@@ -42,8 +42,7 @@ var ProfileButton = React.createClass({
         <img className="avatar-small" src={author.avatar} alt={author.name} />
         <ul className={ profileClass }>
          <li key={"prof-new-story"}><a href="#/new-story">New Story</a></li>
-         <li key={"prof-drafts"}><a href="#">Drafts and stories</a></li>
-         <li key={"prof-publications"}><a href="#">Publications</a></li>
+         <li key={"prof-drafts"}><a href="#/me/stories">Drafts and stories</a></li>
          <li key={"prof-link"}><a href={authorLink}>Profile</a></li>
          <li onClick={this.logoutAuthor} key={"prof-signout"}><a href="#">Sign Out</a></li>
         </ul>
