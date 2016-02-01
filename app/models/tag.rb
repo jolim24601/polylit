@@ -5,7 +5,7 @@ class Tag < ActiveRecord::Base
   pg_search_scope :search, against: :name, using: { tsearch: { prefix: true } }
 
   validates :name, presence: true
-  validates :name, uniqueness: { case_sensitive: false }
+  validates :name, uniqueness: true
   validates :name, length: {
     maximum: 25,
     too_long: "%{count} characters is the maximum allowed"

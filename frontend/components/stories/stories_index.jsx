@@ -7,13 +7,29 @@ var Navbar = require('../navbar/navbar'),
     HomeTools = require('../navbar/home_tools'),
     NavTools = require('../navbar/nav_tools');
 
+var infiniteScroller = require('../../util/helpers').infiniteScroller;
+
 var StoriesIndex = React.createClass({
   getInitialState: function () {
-    return ({ stories: StoryStore.all() });
+    return ({ stories: StoryStore.all(), page: 1 });
   },
   componentDidMount: function () {
     this.storyStoreListener = StoryStore.addListener(this._onChange);
-    ApiUtil.fetchTopStories();
+
+    ApiUtil.fetchLatestStories({ page: this.state.page },
+      infiniteScroller(this.nextPage));
+  },
+  nextPage: function () {
+    var nextPage = this.state.page + 1;
+    ApiUtil.fetchLatestStories({ page: nextPage });
+    this.setState({ page: nextPage });
+  },
+  addInfiniteScroller: function () {
+    $(window).scroll(function() {
+      if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+        this.nextPage();
+      }
+    }.bind(this));
   },
   componentWillUnmount: function () {
     this.storyStoreListener.remove();
@@ -21,8 +37,8 @@ var StoriesIndex = React.createClass({
   render: function () {
     var stories = this.state.stories;
 
-    var storyList = Object.keys(stories).map(function (k) {
-      return <StoryIndexItem key={stories[k].id} story={stories[k]} />;
+    var storyList = stories.map(function (story) {
+      return <StoryIndexItem key={story.id} story={story} />;
     });
 
     return (

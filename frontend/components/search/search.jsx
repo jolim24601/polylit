@@ -7,6 +7,8 @@ var React = require('react'),
 var Navbar = require('../navbar/navbar'),
     NavTools = require('../navbar/nav_tools');
 
+var infiniteScroller = require('../../util/helpers').infiniteScroller;
+
 var Search = React.createClass({
   getInitialState: function () {
     return { query: '', page: 1, type: "Story" };
@@ -23,7 +25,8 @@ var Search = React.createClass({
     this.search(newQuery, this.state.type);
   },
   search: function (newQuery, newType) {
-    SearchApiUtil.search(newQuery, newType, this.state.page);
+    SearchApiUtil.search(newQuery, newType, this.state.page,
+      infiniteScroller(this.nextPage));
   },
   nextPage: function () {
     var nextPage = this.state.page + 1;

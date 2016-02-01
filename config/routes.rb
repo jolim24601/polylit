@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:index, :create, :show]
     resources :taggings, only: [:create]
 
+    delete 'taggings', to: 'taggings#destroy'
     get 'search', to: 'utils#search'
   end
 end

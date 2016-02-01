@@ -31,17 +31,26 @@ var PublishButton = React.createClass({
     }
   },
   handleSubmit: function (e) {
-    if (e.key === "Enter" && this.state.value) {
-      var newTags;
-      newTags = this.state.story.tags.concat(this.state.value);
-      this.setState({ value: '' });
+    this.setState({ value: e.target.value });
 
-      TagApiUtil.createTaggings({
-        tags: _filterTags(newTags),
+    if (e.key === "Enter") {
+      TagApiUtil.createTagging({
+        tag: e.target.value,
         taggable_id: this.state.story.id,
         taggable_type: "Story"
       }, ApiActions.receiveSingleStory);
+
+      this.setState({ value: '' });
     }
+  },
+  deleteTag: function (e) {
+    TagApiUtil.destroyTagging({
+      tag: e.target.previousSibling.innerText,
+      taggable_id: this.state.story.id,
+      taggable_type: "Story"
+    }, ApiActions.receiveSingleStory);
+
+    this.forceUpdate();
   },
   handleChange: function (e) {
     if (this.state.story.tags.length < 3) {
@@ -55,8 +64,8 @@ var PublishButton = React.createClass({
   },
   render: function () {
     var tags = this.state.story.tags.map(function (tag) {
-      return <Tag cancelTag={this.cancelTag} key={tag.id} tag={tag} />;
-    });
+      return <Tag deleteTag={this.deleteTag} key={tag.id} tag={tag} />;
+    }, this);
 
     return (
       <div onClick={this.toggleView} className="prepublish primary button">
@@ -85,23 +94,9 @@ var PublishButton = React.createClass({
       </div>
     );
   },
-  cancelTag: function (e) {
-    return 1;
-    // cancel tag
-  },
   _onChange: function () {
     this.setState({ story: this.getStoryFromStore() });
   }
 });
-
-function _filterTags(tags) {
-  return tags.map(function (tag) {
-    if (tag instanceof Object) {
-      return tag.name;
-    } else if (tag !== '') {
-      return tag;
-    }
-  });
-}
 
 module.exports = PublishButton;

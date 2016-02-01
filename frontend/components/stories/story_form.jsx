@@ -50,7 +50,7 @@ var StoryForm = React.createClass({
     var pmNode = this.refs.pm.pm.getContent();
     var story = objectAssign({}, this.state.story);
 
-    if (e) {
+    if (e && e.target.id === 'full-publish') {
       e.preventDefault();
       story.published = true;
       this.setState({ published: true });
@@ -81,7 +81,9 @@ var StoryForm = React.createClass({
         clearInterval(form.intervalId);
         form.intervalId = null;
 
-        if (e) { hashHistory.push('#/stories/' + saved.id); }
+        if (e && e.target.id === 'full-publish') {
+          // hashHistory.push('#/stories/' + saved.id);
+        }
       }, 1000);
     });
   },
@@ -117,7 +119,7 @@ var StoryForm = React.createClass({
       this.intervalId = setTimeout(function () {
         form.setState({ draftState: 'Saving...' });
         form.saveStory();
-      }, 5000);
+      }, 1000);
     }
   },
   updateOutput: function (value) {

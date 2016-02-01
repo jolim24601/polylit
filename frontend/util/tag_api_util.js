@@ -13,7 +13,18 @@ module.exports = {
       }
     });
   },
-  createTaggings: function (data, callback) {
+  destroyTagging: function (data, callback) {
+    $.ajax({
+      type: "DELETE",
+      url: "api/taggings",
+      data: data,
+      dataType: "json",
+      success: function (taggable) {
+        callback && callback(taggable);
+      }
+    });
+  },
+  createTagging: function (data, callback) {
     $.ajax({
       type: "POST",
       url: "api/taggings",

@@ -1,6 +1,9 @@
 var React = require('react');
 
 var Tag = React.createClass({
+  blankoutTag: function () {
+
+  },
   render: function () {
     var tag = this.props.tag;
     var tagToken;
@@ -8,13 +11,14 @@ var Tag = React.createClass({
       tagToken = <li className="tag-list-item" onClick={this.props.addTag}>{tag.name}</li>;
     } else if (this.props.addFollow) {
       tagToken = <button onClick={this.props.addFollow} className="tag-token">{tag.name}</button>;
-    } else if (this.props.cancelTag) {
+    } else if (this.props.deleteTag) {
       tagToken = (  <div className="tag-token">
                       <button className="tagging">{tag.name}</button>
-                      <span onClick={this.props.cancelTag}>&times;</span>
+                      <span onClick={this.props.deleteTag}>&times;</span>
                     </div>
                   );
     } else {
+
       tagToken = <a href={tag.link} className="tag-token">{tag.name}</a>;
     }
 

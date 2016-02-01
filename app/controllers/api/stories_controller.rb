@@ -1,6 +1,8 @@
 class Api::StoriesController < ApplicationController
   def index
-    @stories = Story.all.order(created_at: :desc)
+    @stories = Story.page(1)
+      .per(Story.default_per_page * params[:page].to_i)
+      .order(created_at: :desc)
   end
 
   def create
