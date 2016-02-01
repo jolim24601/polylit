@@ -3,12 +3,9 @@ var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     ApiUtil = require('../../util/api_util'),
     TagApiUtil = require('../../util/tag_api_util'),
+    hashHistory = require('react-router').hashHistory,
     objectAssign = require('object-assign');
 
-require('prosemirror/dist/inputrules/autoinput');
-require('prosemirror/dist/menu/menubar');
-require('prosemirror/dist/menu/tooltipmenu');
-require('prosemirror/dist/menu/menu');
 var pmFormat = require('prosemirror/dist/format');
 var ProseMirror = require('prosemirror/dist/edit');
 
@@ -25,9 +22,9 @@ var blankAttrs = ({
                       published: false
                     },
                     storyId: '',
-                    draftState: 'Draft',
+                    draftState: '',
                     verb: 'POST',
-                    value: '<h3>Title</h3>'
+                    value: '<h3></h3>'
                 });
 
 var StoryForm = React.createClass({
@@ -69,7 +66,8 @@ var StoryForm = React.createClass({
       .join(' ');
     if (words.length >= 60) { story.subtitle += '...'; }
 
-    story.node = JSON.stringify(pmNode.toJSON());
+
+    story.node = JSON.stringify(this.refs.pm.pm.getContent('json'));
     var params = objectAssign({}, {
       story: story,
       verb: this.state.verb,
@@ -82,15 +80,10 @@ var StoryForm = React.createClass({
         form.setState({ storyId: saved.id, verb: 'PATCH', draftState: 'Saved.' });
         clearInterval(form.intervalId);
         form.intervalId = null;
+
+        if (e) { hashHistory.push('#/stories/' + saved.id); }
       }, 1000);
     });
-  },
-  startDraftInterval: function () {
-    var form = this;
-    this.intervalId = setInterval(function () {
-      form.setState({ draftState: 'Saving...' });
-      form.saveStory();
-    }, 5000);
   },
   showHelper: function () {
     // Author can save after writing
@@ -119,12 +112,17 @@ var StoryForm = React.createClass({
     );
   },
   handleDraft: function () {
-    if (!this.intervalId && this.state.value) {
-      this.startDraftInterval();
+    var form = this;
+    if (!this.intervalId && this.refs.pm.pm.getContent('text')) {
+      this.intervalId = setTimeout(function () {
+        form.setState({ draftState: 'Saving...' });
+        form.saveStory();
+      }, 5000);
     }
   },
   updateOutput: function (value) {
-    this.setState({ draftState: 'Draft', value: value },
+    var draftState = this.intervalId ? this.state.draftState : 'Draft';
+    this.setState({ draftState: draftState, value: value },
       this.handleDraft);
   },
   componentDidMount: function () {

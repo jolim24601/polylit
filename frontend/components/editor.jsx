@@ -2,6 +2,11 @@ var React = require('react');
 var ProseMirror = require('prosemirror/dist/edit');
 var objectAssign = require('object-assign');
 
+require('prosemirror/dist/inputrules/autoinput');
+require('prosemirror/dist/menu/menubar');
+require('prosemirror/dist/menu/tooltipmenu');
+require('prosemirror/dist/menu/menu');
+
 var options = {
                 menuBar: false,
                 tooltipMenu: true,

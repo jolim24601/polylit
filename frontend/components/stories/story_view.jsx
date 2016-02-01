@@ -20,26 +20,23 @@ var StoryView = React.createClass({
   },
   componentDidMount: function () {
     this.storyStoreListener = StoryStore.addListener(this._onChange);
-    ApiUtil.fetchStory(this.props.params.id);
+    ApiUtil.fetchStory(this.props.params.id, function (story) {
+      var pm = new ProseMirror.ProseMirror({ doc: story.node, docFormat: 'json', tooltipMenu: true });
+      pm.wrapper.firstChild.contentEditable = false;
+      this.refs.pm.appendChild(pm.wrapper);
+    }.bind(this));
+  },
+  componentWillMount: function () {
   },
   componentWillUnmount: function () {
     this.storyStoreListener.remove();
   },
   render: function () {
-    var story = this.state.story.node;
-    var pmNode, pmDOMFragment, pmHTML;
-    pmFormat, pmModel, Schema, DefaultSchema, ProseMirror;
-    if (typeof story !== 'undefined') {
-      pmNode = DefaultSchema.defaultSchema.nodeFromJSON(story);
-      pmDOMFragment = pmFormat.toDOM(pmNode);
-      pmHTML = pmFormat.toHTML(pmNode);
-      $(".ProseMirror-content").append(pmDOMFragment);
-    }
-
+    // pmFormat, pmModel, Schema, DefaultSchema, ProseMirror;
     return (
       <article className="story">
         <Navbar><NavTools /></Navbar>
-        <div className="ProseMirror-content"></div>
+        <div ref="pm"></div>
       </article>
     );
   },

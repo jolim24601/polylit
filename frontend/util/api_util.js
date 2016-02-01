@@ -39,7 +39,7 @@ module.exports = {
       url: "api/stories/" + id,
       success: function (story) {
         ApiActions.receiveSingleStory(story);
-        callback && callback();
+        callback && callback(story);
       }
     });
   },

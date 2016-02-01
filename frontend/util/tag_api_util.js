@@ -19,8 +19,8 @@ module.exports = {
       url: "api/taggings",
       data: data,
       dataType: "json",
-      success: function (tagging) {
-        callback && callback();
+      success: function (taggable) {
+        callback && callback(taggable);
       }
     });
   }

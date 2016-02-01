@@ -10,8 +10,8 @@ module Taggable
 
   def tag(name)
     name.strip!
-    tag = Tag.find_or_create_by_name(name)
-    taggings.find_or_create_by_tag_id(tag.id)
+    tag = Tag.find_or_create_by(name: name)
+    taggings.find_or_create_by(tag_id: tag.id)
   end
 
   def tag_names

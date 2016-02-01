@@ -9,6 +9,7 @@
   line-height: 22px;
   border-radius: 3px;
   cursor: pointer;
+  float: left;
 }
 
 .tag-token:hover {
@@ -43,13 +44,11 @@
 
 .tag-menu input {
   border: 0;
-  min-width: 220px;
+  float: left;
   padding: 14px 0 0;
   margin-bottom: 15px;
-  position: relative;
-  bottom: 45px;
-  min-height: 144px;
 }
+
 
 #full-publish {
   display: block;

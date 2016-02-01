@@ -3,6 +3,9 @@ class Api::TagsController < ApplicationController
     @tags = Tag.search(params[:name])
   end
 
+  def show
+  end
+
   def create
     @tag = Tag.save(name: params[:name])
     render "api/tags/show"
