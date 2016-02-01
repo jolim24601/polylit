@@ -25,9 +25,11 @@ var routes = (
     <Route path='signup' component={newAuthor} />
     <Route path='new-story' onEnter={_ensureSignIn} component={StoryForm} />
     <Route path='stories' component={StoriesIndex} />
-    <Route path='stories/:id' component={StoryView} />
+    <Route path='stories/:id' component={StoryView}>
+      <Route path='edit' component={StoryView} />
+    </Route>
     <Route path='authors/:id' component={AuthorProfile} />
-    <Route path='me' component={AuthorStories} />
+    <Route path='me/stories' component={AuthorStories} />
     <Route path='search' component={Search} />
   </Route>
 );

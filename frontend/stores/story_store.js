@@ -11,7 +11,11 @@ function resetStories(stories) {
 
 function resetStory(story) {
   var oldStory = StoryStore.find(story.id);
-  oldStory = story;
+  if (oldStory) {
+    oldStory = story;
+  } else {
+    _stories.push(story);
+  }
 }
 
 StoryStore.all = function () {

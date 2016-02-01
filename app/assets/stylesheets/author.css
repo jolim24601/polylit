@@ -153,6 +153,83 @@ button:disabled {
   border-style: solid;
 }
 
-.rec-stories {
+.draft-list-header {
+  position: relative;
+  top: 90px;
+  left: 150px;
+  width: 900px;
 
+}
+
+.draft-list-header h1 {
+  font-size: 44px;
+  margin-bottom: 30px;
+}
+
+.navtabs {
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.navtabs > li {
+  float: left;
+  cursor: pointer;
+  padding: 15px 10px 20px 0;
+  margin-right: 15px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: rgba(0,0,0,0.5);
+}
+
+.draft-feed {
+
+}
+
+.draft-feed h3 {
+  font-size: 24px;
+  padding-bottom: 5px;
+}
+
+.draft-feed-item {
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  width: 900px;
+  margin-bottom: 10px;
+}
+
+.draft-feed-item small {
+  color: rgba(0,0,0,0.44);
+}
+
+.draft-content {
+  padding: 15px 0;
+}
+
+.draft-content span {
+  padding: 0 2px;
+  color: rgba(0,0,0,0.5);
+}
+
+.edit-option {
+  cursor: pointer;
+  position: relative;
+}
+
+.edit-actions {
+  position: absolute;
+  border: 1px solid #D3D3D3;
+  background-color: white;
+  border-radius: 5%;
+  z-index: 900;
+  right: -40px;
+  top: 30px;
+}
+
+.edit-actions li {
+  padding: 8px 26px;
+}
+
+.tab-active {
+  font-weight: 700;
+  color: black !important;
 }

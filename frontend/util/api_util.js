@@ -35,6 +35,12 @@ module.exports = {
       }
     });
   },
+  destroyStory: function (data) {
+    $.ajax({
+      type: "DELETE",
+      url: "api/stories/" + data.id
+    });
+  },
   fetchStory: function (id, callback) {
     $.ajax({
       type: "GET",
@@ -51,7 +57,7 @@ module.exports = {
       url: "api/authors/" + id,
       success: function (author) {
         AuthorActions.receiveAuthor(author);
-        callback && callback();
+        callback && callback(author);
       }
     });
   },
