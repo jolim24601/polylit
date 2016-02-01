@@ -5,9 +5,12 @@ class Api::TaggingsController < ApplicationController
     @taggable = type.find(params[:taggable].id)
     @taggable.taggings.map(&:destroy)
     tags.each do |tag|
-      .taggings.create(tag_id: tag.id)
+      @taggable.taggings.create(tag_id: tag.id)
     end
 
-    render "api/stories/show" @story
+    if type == Story
+      @story = @taggable
+      render "api/stories/show"
+    end
   end
 end

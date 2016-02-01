@@ -16,6 +16,13 @@ class Api::StoriesController < ApplicationController
     @story = Story.find(params[:id])
   end
 
+  def update
+    @story = Story.find(params[:id])
+    @story.update(story_params)
+
+    render :show
+  end
+
   private
 
     def story_params

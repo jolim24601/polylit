@@ -6,8 +6,7 @@ var WriteTools = React.createClass({
     return (
       <ul className = "write-tools group floatLeft">
         <li><button className="share-button">Share</button></li>
-        <li><PublishButton saveStory={this.props.saveStory} /></li>
-        <li className="tag-menu"></li>
+        <li>{this.props.children}</li>
         <span className="divider"></span>
       </ul>
     );

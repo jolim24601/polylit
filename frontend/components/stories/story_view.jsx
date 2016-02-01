@@ -1,4 +1,5 @@
 var React = require('react'),
+    ProseMirror = require('prosemirror/dist/edit'),
     pmFormat = require('prosemirror/dist/format'),
     pmModel = require('prosemirror/dist/model/'),
     Schema = require('prosemirror/dist/model/schema'),
@@ -27,7 +28,7 @@ var StoryView = React.createClass({
   render: function () {
     var story = this.state.story.node;
     var pmNode, pmDOMFragment, pmHTML;
-    pmFormat, pmModel, Schema, DefaultSchema;
+    pmFormat, pmModel, Schema, DefaultSchema, ProseMirror;
     if (typeof story !== 'undefined') {
       pmNode = DefaultSchema.defaultSchema.nodeFromJSON(story);
       pmDOMFragment = pmFormat.toDOM(pmNode);

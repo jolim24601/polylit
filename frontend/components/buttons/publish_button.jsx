@@ -6,7 +6,7 @@ var React = require('react'),
 
 var PublishButton = React.createClass({
   getStoryFromStore: function () {
-    return StoryStore.find(this.props.params.id);
+    return StoryStore.find(this.props.storyId);
   },
   componentDidMount: function () {
     this.listener = StoryStore.addListener(this._onChange);
@@ -22,17 +22,17 @@ var PublishButton = React.createClass({
       menuActive: "tag-menu hide"
     });
   },
-  toggleMenu: function () {
+  toggleView: function (e) {
     if (this.state.menuActive === "tag-menu hide") {
       this.setState({ menuActive: "tag-menu" });
-    } else {
-      this.setState({ menuActive: "tag-menu-hide" });
+    } else if ($(e.target).parents('.prepublish').length === 0) {
+      this.setState({ menuActive: "tag-menu hide" });
     }
   },
   handleChange: function (e) {
     if (this.state.story.tags.length < 3) {
       this.setState({ value: e.target.value });
-
+      debugger
       if (e.keyCode === 13) {
         var newTags = this.state.story.tags.concat(e.target.value);
         this.setState({ value: '', tags: newTags });
@@ -46,26 +46,35 @@ var PublishButton = React.createClass({
       this.setState({ helperActive: "tag-helper is-active" });
       setTimeout(function () {
         this.setState({ helperActive: "tag-helper hide" });
-      }, 3000);
+      }.bind(this), 3000);
     }
   },
   render: function () {
     var tags = this.state.story.tags.map(function (tag) {
       return <Tag tag={tag} />;
     });
-
     return (
-      <button onClick={this.toggleMenu} className="prepublish primary">
+      <div onClick={this.toggleView} className="prepublish primary button">
         Publish &or;
         <div className={this.state.menuActive}>
           <h3>Ready to publish?</h3>
           <p>Add or change tags (up to 3):</p>
           <div className="tag-box">{tags}</div>
-          <input type="text" onChange={this.handleChange} value={this.state.value} />
+          <input
+            type="text"
+            onChange={this.handleChange}
+            placeholder="Add a tag..."
+            value={this.state.value} />
           <div className={this.state.helperActive}>You can only add up to 3 tags</div>
-          <button onClick={this.props.saveStory} className="publish primary">Publish</button>
+
+          <button
+            id="full-publish"
+            onClick={this.props.saveStory}
+            className="publish primary"
+            >
+          Publish</button>
         </div>
-      </button>
+      </div>
     );
   },
   _onChange: function () {

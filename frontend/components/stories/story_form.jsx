@@ -1,40 +1,65 @@
 var React = require('react'),
     Editor = require('../editor'),
+    StoryStore = require('../../stores/story_store'),
     ApiUtil = require('../../util/api_util'),
     TagApiUtil = require('../../util/tag_api_util'),
-    hashHistory = require('react-router').hashHistory;
+    objectAssign = require('object-assign');
 
 require('prosemirror/dist/inputrules/autoinput');
 require('prosemirror/dist/menu/menubar');
 require('prosemirror/dist/menu/tooltipmenu');
 require('prosemirror/dist/menu/menu');
 var pmFormat = require('prosemirror/dist/format');
+var ProseMirror = require('prosemirror/dist/edit');
 
 var Navbar = require('../navbar/navbar'),
     WriteTools = require('../navbar/write_tools'),
+    PublishButton = require('../buttons/publish_button'),
     ProfileTools = require('../navbar/profile_tools');
 
+var blankAttrs = ({
+                    story: {
+                      title: '',
+                      subtitle: '',
+                      wordcount: 0,
+                      published: false
+                    },
+                    storyId: '',
+                    draftState: 'Draft',
+                    verb: 'POST',
+                    value: '<h3>Title</h3>'
+                });
+
 var StoryForm = React.createClass({
-  getInitialState: function () {
-    return ({
-      story: {},
-      options: {
-        menuBar: false,
-        tooltipMenu: true,
-        autoInput: true,
-        docFormat: 'html'
+  getStateFromStore: function () {
+    var story = StoryStore.find(this.props.params.id);
+    return objectAssign(blankAttrs, {
+      story: {
+        title: story.title,
+        subtitle: story.subtitle,
+        wordcount: story.wordcount,
+        published: story.published
       },
-      output: '<h3>Title</h3><p>Tell a story...</p>'
+      storyId: story.id,
+      verb: 'PATCH',
+      value: story.node
     });
   },
+  getInitialState: function () {
+    if (this.props.params.id) { return this.getStateFromStore(); }
+    return blankAttrs;
+  },
   saveStory: function (e) {
-    if (e) { e.preventDefault(); }
     var pmNode = this.refs.pm.pm.getContent();
-    var story = this.state.story;
-    
-    story.published = false;
+    var story = objectAssign({}, this.state.story);
+
+    if (e) {
+      e.preventDefault();
+      story.published = true;
+      this.setState({ published: true });
+    }
+
     story.title = pmNode.firstChild.textContent;
-    story.node = JSON.stringify(pmNode.toJSON());
 
     var words = pmFormat.toText(pmNode).split(/\s+/);
     story.wordcount = words.length;
@@ -44,41 +69,67 @@ var StoryForm = React.createClass({
       .join(' ');
     if (words.length >= 60) { story.subtitle += '...'; }
 
-    ApiUtil.saveStory(story, function () {
-      hashHistory.push('/stories');
+    story.node = JSON.stringify(pmNode.toJSON());
+    var params = objectAssign({}, {
+      story: story,
+      verb: this.state.verb,
+      storyId: this.state.storyId
+    });
+
+    var form = this;
+    ApiUtil.saveStory(params, function (saved) {
+      setTimeout(function () {
+        form.setState({ storyId: saved.id, verb: 'PATCH', draftState: 'Saved.' });
+        clearInterval(form.intervalId);
+        form.intervalId = null;
+      }, 1000);
     });
   },
   startDraftInterval: function () {
+    var form = this;
     this.intervalId = setInterval(function () {
-      this.saveStory();
-    }, 15000);
+      form.setState({ draftState: 'Saving...' });
+      form.saveStory();
+    }, 5000);
+  },
+  showHelper: function () {
+    // Author can save after writing
   },
   render: function () {
-    var draftState;
-    if this.
+    var publishButton;
+    if (this.state.storyId) {
+      publishButton = <PublishButton storyId={this.state.storyId} saveStory={this.saveStory} />;
+    } else {
+      publishButton = <button onClick={this.showHelper} className="dummy-button primary">Publish &or;</button>;
+    }
 
     return (
       <div className="main-content">
         <Navbar>
+          <span className="draft-message floatLeft">{this.state.draftState}</span>
           <div className="floatRight">
-            <span className="draft-message">{draftState}</span>
-            <WriteTools saveStory={this.saveStory} />
+            <WriteTools>{publishButton}</WriteTools>
             <ProfileTools />
           </div>
         </Navbar>
         <div className="story">
-          <Editor value={this.state.output} onChange={this.updateOutput}
-            options={this.state.options} ref="pm" />
+          <Editor value={this.state.value} onChange={this.updateOutput} ref="pm" />
         </div>
       </div>
     );
   },
-  updateOutput: function (output) {
-    this.setState({ output: output });
+  handleDraft: function () {
+    if (!this.intervalId && this.state.value) {
+      this.startDraftInterval();
+    }
+  },
+  updateOutput: function (value) {
+    this.setState({ draftState: 'Draft', value: value },
+      this.handleDraft);
   },
   componentDidMount: function () {
     this.updateOutput(this.refs.pm.getContent());
-    this.startDraftInterval();
+    document.querySelector('.ProseMirror-content').focus();
   },
   componentWillUnmount: function () {
     clearInterval(this.intervalId);

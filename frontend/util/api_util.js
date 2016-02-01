@@ -13,14 +13,21 @@ module.exports = {
     });
   },
   saveStory: function (data, callback) {
+    var url;
+    if (data.storyId) {
+      url = "api/stories/" + String(data.storyId);
+    } else {
+      url = "api/stories";
+    }
+
     $.ajax({
-      type: "POST",
-      url: "api/stories",
+      type: data.verb,
+      url: url,
       dataType: "json",
-      data: { story: data },
+      data: { story: data.story },
       success: function (story) {
         ApiActions.receiveSingleStory(story);
-        callback && callback();
+        callback && callback(story);
       },
       error: function (message) {
       }

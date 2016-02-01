@@ -17,6 +17,7 @@
  *= require 'landing'
  *= require 'story_feed'
  *= require 'story'
+ *= require 'publish'
  *= require_self
  *= require_tree
  */

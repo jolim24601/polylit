@@ -2,6 +2,13 @@ var React = require('react');
 var ProseMirror = require('prosemirror/dist/edit');
 var objectAssign = require('object-assign');
 
+var options = {
+                menuBar: false,
+                tooltipMenu: true,
+                autoInput: true,
+                docFormat: 'html'
+              };
+
 var Editor = React.createClass({
   render: function () {
     return (
@@ -9,40 +16,29 @@ var Editor = React.createClass({
     );
   },
   componentWillUpdate: function (props) {
-    if (props.value || props.valueLink) {
-      var value = props.value || (props.valueLink || props.valueLink.value) || '';
+    if (props.value) {
+      var value = props.value || '';
       if (value !== this._lastValue) {
-        this.pm.setContent(value, props.options.docFormat);
+        this.pm.setContent(value, options.docFormat);
       }
     }
   },
   componentWillMount: function () {
-    this._lastValue = this.props.value || (this.props.valueLink || this.props.valueLink.value) || this.props.defaultValue;
-    this.pm = new ProseMirror.ProseMirror(objectAssign({doc: this._lastValue}, this.props.options));
+    this._lastValue = this.props.value;
+    this.pm = new ProseMirror.ProseMirror(objectAssign({doc: this._lastValue}, options));
   },
-  // places the Prosemirror div, adds a listener to it
   componentDidMount: function () {
     this.refs.pm.appendChild(this.pm.wrapper);
     this.pm.on("change", function () {
-      var callback = this.props.onChange || this.props.valueLink && this.props.valueLink.requestChange;
+      var callback = this.props.onChange;
       if (callback) {
-        this._lastValue = this.pm.getContent(this.props.options.docFormat);
+        this._lastValue = this.pm.getContent(options.docFormat);
         callback(this._lastValue);
       }
     }.bind(this));
   },
-  // updates options...not available atm.
-  componentDidUpdate: function (options) {
-    var current = this.props.options;
-    var self = this;
-    Object.keys(current).forEach(function (k) {
-      if (current[k] !== options[k]) {
-        self.pm.setOption(k, current[k]);
-      }
-    });
-  },
   getContent: function () {
-    return this.pm.getContent(this.props.options.docFormat);
+    return this.pm.getContent(options.docFormat);
   }
 });
 
