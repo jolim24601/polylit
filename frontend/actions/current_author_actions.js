@@ -12,5 +12,11 @@ module.exports = {
     AppDispatcher.dispatch({
       actionType: CurrentAuthorConstants.DESTROY_CURRENT_AUTHOR
     });
+  },
+  loseStory: function (story) {
+    AppDispatcher.dispatch({
+      actionType: CurrentAuthorConstants.LOSE_STORY,
+      story: story
+    });
   }
 };

@@ -19,7 +19,7 @@ var Tag = React.createClass({
                   );
     } else {
 
-      tagToken = <a href={tag.link} className="tag-token">{tag.name}</a>;
+      tagToken = <a href={tag.url} className="tag-token">{tag.name}</a>;
     }
 
     return tagToken;

@@ -3,6 +3,7 @@ json.timeAgo        time_ago_in_words(story.created_at)
 json.published      story.published
 json.favorites      0
 json.responses      0
+json.url            api_story_url(story)
 
 read_time = (story.wordcount / 200).to_s + ' min read'
 if story.published

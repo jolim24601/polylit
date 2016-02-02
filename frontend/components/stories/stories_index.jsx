@@ -27,6 +27,7 @@ var StoriesIndex = React.createClass({
   },
   componentWillUnmount: function () {
     this.storyStoreListener.remove();
+    $(window).off('scroll', this.scrollerId);
   },
   render: function () {
     var stories = this.state.stories;

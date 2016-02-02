@@ -2,12 +2,13 @@ var React = require('react'),
     CurrentAuthorStore = require('../../stores/current_author_store'),
     CurrentAuthorActions = require('../../actions/current_author_actions'),
     Navbar = require('../navbar/navbar'),
+    EditMenu = require('./edit_menu'),
     ApiUtil = require('../../util/api_util'),
     NavTools = require('../navbar/nav_tools');
 
 var AuthorStories = React.createClass({
   getInitialState: function () {
-    return { published: false, active: false, draftActive: "tab-active", pubActive: "" };
+    return { published: false, draftActive: "tab-active", pubActive: "" };
   },
   componentDidMount: function () {
     this.listener = CurrentAuthorStore.addListener(this._onChange);
@@ -19,9 +20,6 @@ var AuthorStories = React.createClass({
   componentWillUnmount: function () {
     this.listener.remove();
   },
-  toggleEditMenu: function () {
-    this.setState({ active: !this.state.active });
-  },
   handleClick: function (e) {
     if (e.target.innerHTML === "Drafts") {
       this.setState({ published: false, draftActive: "tab-active", pubActive: "" });
@@ -31,15 +29,10 @@ var AuthorStories = React.createClass({
   },
   render: function () {
     var author = CurrentAuthorStore.currentAuthor();
-    var editActions;
-    if (this.state.active) {
-      editActions = "edit-actions";
-    } else {
-      editActions = "edit-actions hide";
-    }
 
     if (author.stories) {
       var storyItems = author.stories.map(function (story) {
+        var uniqueKey = new Date().getUTCMilliseconds();
         if (this.state.published === story.published) {
           return (
             <li className="draft-feed-item" key={story.id}>
@@ -49,13 +42,7 @@ var AuthorStories = React.createClass({
                 &middot;
                 <small> {story.readTime}</small>
                 &middot;
-                <span onClick={this.toggleEditMenu} className="edit-option">
-                  &or;
-                  <ul className={editActions}>
-                    <li><a href="">Edit</a></li>
-                    <li><a href="">Delete</a></li>
-                  </ul>
-                </span>
+                <EditMenu story={story} key={uniqueKey} />
               </div>
             </li>
           );

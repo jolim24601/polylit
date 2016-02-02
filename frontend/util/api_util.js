@@ -35,10 +35,13 @@ module.exports = {
       }
     });
   },
-  destroyStory: function (data) {
+  destroyStory: function (data, callback) {
     $.ajax({
       type: "DELETE",
-      url: "api/stories/" + data.id
+      url: "api/stories/" + data.id,
+      success: function (story) {
+        callback && callback(story);
+      }
     });
   },
   fetchStory: function (id, callback) {

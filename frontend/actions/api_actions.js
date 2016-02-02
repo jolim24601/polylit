@@ -13,5 +13,11 @@ module.exports = {
       actionType: StoryConstants.STORIES_RECEIVED,
       stories: stories
     });
+  },
+  destroyStory: function (story) {
+    AppDispatcher.dispatch({
+      actionType: StoryConstants.STORY_DESTROYED,
+      story: story
+    });
   }
 };

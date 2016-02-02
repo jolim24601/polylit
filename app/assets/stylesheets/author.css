@@ -229,6 +229,10 @@ button:disabled {
   padding: 8px 26px;
 }
 
+.edit-actions button {
+  border: 0;
+}
+
 .tab-active {
   font-weight: 700;
   color: black !important;

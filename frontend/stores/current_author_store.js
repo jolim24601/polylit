@@ -19,6 +19,16 @@ CurrentAuthorStore.currentAuthorFetched = function () {
   return _currentAuthorFetched;
 };
 
+function destroyStory(story) {
+  var stories = _currentAuthor.stories;
+  for (var i=0; i < stories.length; i++) {
+    if (stories[i].id === story.id) {
+      stories.splice(i, 1);
+      break;
+    }
+  }
+}
+
 CurrentAuthorStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
   case CurrentAuthorConstants.RECEIVE_CURRENT_AUTHOR:
@@ -28,6 +38,10 @@ CurrentAuthorStore.__onDispatch = function (payload) {
     break;
   case CurrentAuthorConstants.DESTROY_CURRENT_AUTHOR:
     _currentAuthor = {};
+    CurrentAuthorStore.__emitChange();
+    break;
+  case CurrentAuthorConstants.LOSE_STORY:
+    destroyStory(payload.story);
     CurrentAuthorStore.__emitChange();
     break;
   default:
