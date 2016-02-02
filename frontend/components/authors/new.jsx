@@ -1,11 +1,11 @@
 var React = require('react'),
     ApiUtil = require('../../util/api_util'),
     SessionApiUtil = require('../../util/session_api_util'),
-    hashHistory = require('react-router').hashHistory,
+    History = require('react-router').History,
     LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var newAuthor = React.createClass({
-  mixins: [LinkedStateMixin],
+  mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
     return ({ email: '', name: '', password: '' });
@@ -14,7 +14,7 @@ var newAuthor = React.createClass({
     e.preventDefault();
 
     ApiUtil.createAuthor(this.state, function () {
-      hashHistory.push('/');
+      this.history.pushState(null, '/', {});
     });
   },
   demoSignIn: function (e) {
@@ -22,8 +22,8 @@ var newAuthor = React.createClass({
     var demoCredentials = { email: 'jolim24601@gmail.com', password: 'jupiter' };
 
     SessionApiUtil.loginAuthor(demoCredentials, function () {
-      hashHistory.push('/');
-    });
+      this.history.pushState(null, '/', {});
+    }.bind(this));
   },
   render: function () {
     return (
@@ -58,7 +58,7 @@ var newAuthor = React.createClass({
             </span>
           </div>
 
-          <a href="#/login">I already have an account.</a>
+          <a href="login">I already have an account.</a>
 
           <button className="demo-login"
             onClick={this.demoSignIn}>Sign in as Demo user</button>

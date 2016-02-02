@@ -3,9 +3,11 @@ var React = require('react'),
     CurrentAuthorActions = require('../../actions/current_author_actions'),
     CurrentAuthorStore = require('../../stores/current_author_store');
 
-var hashHistory = require('react-router').hashHistory;
+var History = require('react-router').History;
 
 var ProfileButton = React.createClass({
+  mixins: [History],
+
   getInitialState: function () {
     return { active: false };
   },
@@ -28,7 +30,7 @@ var ProfileButton = React.createClass({
   logoutAuthor: function () {
     SessionApiUtil.logoutAuthor(function () {
       CurrentAuthorActions.destroyCurrentAuthor();
-      hashHistory.push('/');
+      this.history.pushState(null, '/', {});
     });
   },
   render: function () {
@@ -44,7 +46,7 @@ var ProfileButton = React.createClass({
          <li key={"prof-new-story"}><a href="#/new-story">New Story</a></li>
          <li key={"prof-drafts"}><a href="#/me/stories">Drafts and stories</a></li>
          <li key={"prof-link"}><a href={authorLink}>Profile</a></li>
-         <li onClick={this.logoutAuthor} key={"prof-signout"}><a href="#">Sign Out</a></li>
+         <li onClick={this.logoutAuthor} key={"prof-signout"}><a>Sign Out</a></li>
         </ul>
       </div>
     );

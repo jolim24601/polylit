@@ -21,12 +21,12 @@ var EditMenu = React.createClass({
     } else {
       editActions = "edit-actions hide";
     }
-
+    var editLink = "#/stories/" + this.props.story.id + "/edit";
     return (
       <span onClick={this.toggleView} className="edit-option">
         &or;
         <ul onMouseLeave={this.toggleView} className={editActions}>
-          <li><a href={this.props.story.url}>Edit</a></li>
+          <li><a href={editLink}>Edit</a></li>
           <li><button onClick={this.destroyStory}>Delete</button></li>
         </ul>
       </span>

@@ -12,7 +12,8 @@ function resetStories(stories) {
 function resetStory(story) {
   var oldStory = StoryStore.find(story.id);
   if (oldStory) {
-    oldStory = story;
+    var idx = _stories.indexOf(oldStory);
+    _stories[idx] = story;
   } else {
     _stories.push(story);
   }

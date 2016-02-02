@@ -3,7 +3,7 @@ var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     ApiUtil = require('../../util/api_util'),
     TagApiUtil = require('../../util/tag_api_util'),
-    hashHistory = require('react-router').hashHistory,
+    History = require('react-router').History,
     objectAssign = require('object-assign');
 
 var pmFormat = require('prosemirror/dist/format');
@@ -28,6 +28,8 @@ var blankAttrs = ({
                 });
 
 var StoryForm = React.createClass({
+  mixins: [History],
+
   getStateFromStore: function () {
     var story = StoryStore.find(this.props.params.id);
     return objectAssign(blankAttrs, {
@@ -82,7 +84,7 @@ var StoryForm = React.createClass({
         form.intervalId = null;
 
         if (e && e.target.id === 'full-publish') {
-          // hashHistory.push('#/stories/' + saved.id);
+          form.history.pushState(null, '/stories/' + saved.id, {});
         }
       }, 1000);
     });

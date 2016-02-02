@@ -1,10 +1,10 @@
 var React = require('react'),
-    hashHistory = require('react-router').hashHistory,
+    History = require('react-router').History,
     SessionApiUtil = require('../../util/session_api_util'),
     LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var newSession = React.createClass({
-  mixins: [LinkedStateMixin],
+  mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
     return { email: '', password: '' };
@@ -14,13 +14,13 @@ var newSession = React.createClass({
     var demoCredentials = { email: 'jolim24601@gmail.com', password: 'jupiter' };
 
     SessionApiUtil.loginAuthor(demoCredentials, function () {
-      hashHistory.push('/');
+      this.history.pushState(null, '/', {});
     });
   },
   handleSubmit: function (e) {
     e.preventDefault();
     SessionApiUtil.loginAuthor(this.state, function () {
-      hashHistory.push('/');
+      this.history.pushState(null, '/', {});
     });
   },
   render: function () {

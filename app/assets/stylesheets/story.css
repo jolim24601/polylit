@@ -6,13 +6,12 @@
 
 .ProseMirror {
   border-style: none;
-  width: 900px;
 }
 
 .ProseMirror-content {
   height: auto;
   margin: auto;
-  width: 80%;
+  width: 900px;
   min-height: 200px;
   font-size: 21px;
 }

@@ -4,7 +4,7 @@ var React = require('react'),
     Router = ReactRouter.Router,
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
-    hashHistory = ReactRouter.hashHistory,
+    History = ReactRouter.History,
     StoriesIndex = require('./components/stories/stories_index'),
     StoryForm = require('./components/stories/story_form'),
     StoryView = require('./components/stories/story_view'),
@@ -50,7 +50,7 @@ function _ensureSignIn(nextState, replace) {
 
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(
-    <Router history={hashHistory}>{routes}</Router>,
+    <Router>{routes}</Router>,
     document.getElementById('content')
   );
 });

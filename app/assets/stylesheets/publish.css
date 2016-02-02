@@ -29,8 +29,9 @@
 }
 
 .tag-menu {
+  cursor: default;
   position: absolute;
-  z-index: 900;
+  z-index: 900 !important;
   height: 284px;
   min-width: 284px;
   max-width: 300px;
@@ -55,6 +56,7 @@
   float: left;
   padding: 14px 0 0;
   margin-bottom: 15px;
+  margin-left: 10px;
 }
 
 .tag-helper {
@@ -69,12 +71,11 @@
 
 #full-publish {
   display: block;
-  margin-top: 70px;
 }
 
 .tag-box {
   position: relative;
-
+  height: 150px;
 }
 
 .draft-message {

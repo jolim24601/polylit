@@ -18,10 +18,11 @@ json.author do
   json.partial! 'api/authors/author', author: story.author, show_full: false
 end
 
+json.tags do
+  json.partial! 'api/tags/tag', collection: story.tags, as: :tag
+end
+
 if show_full
-  json.tags do
-    json.partial! 'api/tags/tag', collection: story.tags, as: :tag
-  end
 
   json.node       story.node
 end

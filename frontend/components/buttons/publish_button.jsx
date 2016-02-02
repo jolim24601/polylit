@@ -20,14 +20,14 @@ var PublishButton = React.createClass({
       story: this.getStoryFromStore(),
       value: '',
       helperActive: "hide",
-      menuActive: "tag-menu hide"
+      menuActive: false
     });
   },
   toggleView: function (e) {
-    if (this.state.menuActive === "tag-menu hide") {
-      this.setState({ menuActive: "tag-menu" });
+    if (!this.state.menuActive) {
+      this.setState({ menuActive: true });
     } else if ($(e.target).parents('.prepublish').length === 0) {
-      this.setState({ menuActive: "tag-menu hide" });
+      this.setState({ menuActive: false });
     }
   },
   handleSubmit: function (e) {
@@ -66,11 +66,11 @@ var PublishButton = React.createClass({
     var tags = this.state.story.tags.map(function (tag) {
       return <Tag deleteTag={this.deleteTag} key={tag.id} tag={tag} />;
     }, this);
-
-    return (
-      <div onClick={this.toggleView} className="prepublish primary button">
-        Publish &or;
-        <div className={this.state.menuActive}>
+    
+    var tagMenu;
+    if (this.state.menuActive) {
+      tagMenu = (
+        <div className="tag-menu">
           <h3>Ready to publish?</h3>
           <p>Add or change tags (up to 3):</p>
           <form className="tag-box group">
@@ -89,8 +89,15 @@ var PublishButton = React.createClass({
             onClick={this.props.saveStory}
             className="primary"
             >
-          Publish</button>
+            Publish</button>
         </div>
+      );
+    }
+
+    return (
+      <div onClick={this.toggleView} className="prepublish primary button">
+        <span>Publish &or;</span>
+        {tagMenu}
       </div>
     );
   },
