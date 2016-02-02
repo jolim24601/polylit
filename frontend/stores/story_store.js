@@ -25,7 +25,9 @@ StoryStore.all = function () {
 
 StoryStore.find = function (id) {
   for (var i=0; i < _stories.length; i++) {
-    if (_stories[i].id === id) { return _stories[i]; }
+    if (_stories[i].id === parseInt(id, 10)) {
+      return _stories[i];
+    }
   }
 };
 

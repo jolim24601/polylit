@@ -26,11 +26,10 @@ var routes = (
     <Route path='signup' component={newAuthor} />
     <Route path='new-story' onEnter={_ensureSignIn} component={StoryForm} />
     <Route path='top-stories' component={StoriesIndex} />
-    <Route path='stories/:id' component={StoryView}>
-      <Route path='edit' component={StoryView} />
-    </Route>
+    <Route path='stories/:id' component={StoryView} />
+    <Route path='stories/:id/edit' onEnter={_ensureSignIn} component={StoryForm} />
     <Route path='authors/:id' component={AuthorProfile} />
-    <Route path='me/stories' component={AuthorStories} />
+    <Route path='me/stories' onEnter={_ensureSignIn} component={AuthorStories} />
     <Route path='search' component={Search} />
   </Route>
 );
@@ -44,7 +43,7 @@ function _ensureSignIn(nextState, replace) {
 
   function _redirectIfNotLoggedIn() {
     if (!CurrentAuthorStore.isLoggedIn()) {
-      replace('/login');
+      replace(null, '/login', {});
     }
   }
 }

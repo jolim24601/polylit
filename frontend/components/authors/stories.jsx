@@ -12,9 +12,15 @@ var AuthorStories = React.createClass({
   },
   componentDidMount: function () {
     this.listener = CurrentAuthorStore.addListener(this._onChange);
-    var author = CurrentAuthorStore.currentAuthor();
-    // update store with author's stories
-    ApiUtil.fetchAuthor(author.id,
+
+    if (CurrentAuthorStore.currentAuthor().id) { this.fetchStories(); }
+  },
+  componentWillReceiveProps: function () {
+    console.log("PROPS");
+    this.fetchStories();
+  },
+  fetchStories: function () {
+    ApiUtil.fetchAuthor(CurrentAuthorStore.currentAuthor().id,
       CurrentAuthorActions.receiveCurrentAuthor);
   },
   componentWillUnmount: function () {

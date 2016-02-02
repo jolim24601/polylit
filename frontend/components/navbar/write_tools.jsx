@@ -1,5 +1,4 @@
-var React = require('react'),
-    PublishButton = require('../buttons/publish_button');
+var React = require('react');
 
 var WriteTools = React.createClass({
   render: function () {

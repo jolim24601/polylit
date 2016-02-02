@@ -12,7 +12,9 @@ var ProseMirror = require('prosemirror/dist/edit');
 var Navbar = require('../navbar/navbar'),
     WriteTools = require('../navbar/write_tools'),
     PublishButton = require('../buttons/publish_button'),
+    ProseMirror = require('prosemirror/dist/edit'),
     ProfileTools = require('../navbar/profile_tools');
+
 
 var blankAttrs = ({
                     story: {
@@ -30,22 +32,28 @@ var blankAttrs = ({
 var StoryForm = React.createClass({
   mixins: [History],
 
-  getStateFromStore: function () {
-    var story = StoryStore.find(this.props.params.id);
-    return objectAssign(blankAttrs, {
-      story: {
-        title: story.title,
-        subtitle: story.subtitle,
-        wordcount: story.wordcount,
-        published: story.published
-      },
-      storyId: story.id,
-      verb: 'PATCH',
-      value: story.node
-    });
+  fetchStory: function () {
+    ApiUtil.fetchStory(this.props.params.id, function (story) {
+      // wrap json in PM object so we can serialize it into HTML
+      var pm = new ProseMirror.ProseMirror({ doc: story.node, docFormat: 'json' });
+
+      var newState = objectAssign(blankAttrs, {
+        story: {
+          title: story.title,
+          subtitle: story.subtitle,
+          wordcount: story.wordcount,
+          published: story.published
+        },
+        storyId: story.id,
+        verb: 'PATCH',
+        value: pm.getContent('html')
+      });
+
+      this.setState(newState);
+
+    }.bind(this));
   },
   getInitialState: function () {
-    if (this.props.params.id) { return this.getStateFromStore(); }
     return blankAttrs;
   },
   saveStory: function (e) {
@@ -130,7 +138,11 @@ var StoryForm = React.createClass({
       this.handleDraft);
   },
   componentDidMount: function () {
-    this.updateOutput(this.refs.pm.getContent());
+    if (this.props.params.id) {
+      return this.fetchStory();
+    }
+
+    // this.updateOutput(this.refs.pm.getContent());
     document.querySelector('.ProseMirror-content').focus();
   },
   componentWillUnmount: function () {
