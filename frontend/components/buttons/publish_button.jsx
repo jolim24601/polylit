@@ -86,7 +86,7 @@ var PublishButton = React.createClass({
 
           <button
             id="full-publish"
-            onClick={this.props.saveStory}
+            onClick={this.props.publishStory}
             className="primary"
             >
             Publish</button>

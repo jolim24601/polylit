@@ -23,7 +23,6 @@ var newAuthor = React.createClass({
 
 
     SessionApiUtil.loginAuthor(demoCredentials, function () {
-
       this.history.pushState(null, '/', {});
     }.bind(this));
   },

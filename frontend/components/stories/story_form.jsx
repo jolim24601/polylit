@@ -15,7 +15,6 @@ var Navbar = require('../navbar/navbar'),
     ProseMirror = require('prosemirror/dist/edit'),
     ProfileTools = require('../navbar/profile_tools');
 
-
 var blankAttrs = ({
                     story: {
                       title: '',
@@ -56,15 +55,9 @@ var StoryForm = React.createClass({
   getInitialState: function () {
     return blankAttrs;
   },
-  saveStory: function (e) {
+  createParams: function () {
     var pmNode = this.refs.pm.pm.getContent();
     var story = objectAssign({}, this.state.story);
-
-    if (e && e.target.id === 'full-publish') {
-      e.preventDefault();
-      story.published = true;
-      this.setState({ published: true });
-    }
 
     story.title = pmNode.firstChild.textContent;
 
@@ -76,7 +69,6 @@ var StoryForm = React.createClass({
       .join(' ');
     if (words.length >= 60) { story.subtitle += '...'; }
 
-
     story.node = JSON.stringify(this.refs.pm.pm.getContent('json'));
     var params = objectAssign({}, {
       story: story,
@@ -84,18 +76,31 @@ var StoryForm = React.createClass({
       storyId: this.state.storyId
     });
 
-    var form = this;
-    ApiUtil.saveStory(params, function (saved) {
-      setTimeout(function () {
-        form.setState({ storyId: saved.id, verb: 'PATCH', draftState: 'Saved.' });
-        clearInterval(form.intervalId);
-        form.intervalId = null;
+    return params;
+  },
+  saveStory: function (cb) {
+    var params = this.createParams();
 
-        if (e && e.target.id === 'full-publish') {
-          form.history.pushState(null, '/stories/' + saved.id, {});
-        }
-      }, 1000);
-    });
+    ApiUtil.saveStory(params, function (saved) {
+      this.setState({ storyId: saved.id, verb: 'PATCH', draftState: 'Saved.' });
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+      cb && cb();
+    }.bind(this));
+  },
+  publishStory: function (e) {
+    e.preventDefault();
+    clearInterval(this.intervalId);
+    this.intervalId = null;
+
+    var story = objectAssign({}, this.state.story);
+    story.published = true;
+
+    this.setState({ story: story }, function () {
+      this.saveStory(
+        this.history.pushState.bind(null, '/stories/' + this.state.story.id, {})
+      );
+    }.bind(this));
   },
   showHelper: function () {
     // Author can save after writing
@@ -103,7 +108,7 @@ var StoryForm = React.createClass({
   render: function () {
     var publishButton;
     if (this.state.storyId) {
-      publishButton = <PublishButton storyId={this.state.storyId} saveStory={this.saveStory} />;
+      publishButton = <PublishButton storyId={this.state.storyId} publishStory={this.publishStory} />;
     } else {
       publishButton = <button onClick={this.showHelper} className="dummy-button primary">Publish &or;</button>;
     }
@@ -129,7 +134,7 @@ var StoryForm = React.createClass({
       this.intervalId = setTimeout(function () {
         form.setState({ draftState: 'Saving...' });
         form.saveStory();
-      }, 1000);
+      }, 5000); // shortened for testing
     }
   },
   updateOutput: function (value) {
@@ -142,7 +147,7 @@ var StoryForm = React.createClass({
       return this.fetchStory();
     }
 
-    // this.updateOutput(this.refs.pm.getContent());
+    this.updateOutput(this.refs.pm.getContent());
     document.querySelector('.ProseMirror-content').focus();
   },
   componentWillUnmount: function () {

@@ -2,6 +2,11 @@ var React = require('react');
 var ProseMirror = require('prosemirror/dist/edit');
 var objectAssign = require('object-assign');
 
+var pmFormat = require('prosemirror/dist/format'),
+    pmModel = require('prosemirror/dist/model/'),
+    Schema = require('prosemirror/dist/model/schema'),
+    DefaultSchema = require('prosemirror/dist/model/defaultschema');
+    
 require('prosemirror/dist/inputrules/autoinput');
 require('prosemirror/dist/menu/menubar');
 require('prosemirror/dist/menu/tooltipmenu');

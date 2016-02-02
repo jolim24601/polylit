@@ -1,9 +1,5 @@
 var React = require('react'),
     ProseMirror = require('prosemirror/dist/edit'),
-    pmFormat = require('prosemirror/dist/format'),
-    pmModel = require('prosemirror/dist/model/'),
-    Schema = require('prosemirror/dist/model/schema'),
-    DefaultSchema = require('prosemirror/dist/model/defaultschema'),
     ApiUtil = require('../../util/api_util'),
     StoryStore = require('../../stores/story_store'),
     CurrentAuthorStore = require('../../stores/current_author_store');
@@ -33,8 +29,6 @@ var StoryView = React.createClass({
     this.storyStoreListener.remove();
   },
   render: function () {
-    // pmFormat, pmModel, Schema, DefaultSchema, ProseMirror;
-
     var editLink, editButton;
     if (CurrentAuthorStore.currentAuthor() && this.state.story &&
         CurrentAuthorStore.currentAuthor().id === this.state.story.author.id) {
