@@ -6,9 +6,6 @@ json.following    0
 json.followers    0
 json.avatar       asset_url(author.avatar.url(:small))
 
-json.tags do
-  json.partial! 'api/tags/tag', collection: Tag.page(1).per(15), as: :tag
-end
 
 # eventually call associations here
 if show_full
@@ -20,5 +17,9 @@ if show_full
   json.stories do
     json.partial! 'api/stories/story',
       collection: author.stories.order(created_at: :desc), show_full: false, as: :story
+  end
+
+  json.tags do
+    json.partial! 'api/tags/tag', collection: Tag.page(1).per(15), as: :tag
   end
 end

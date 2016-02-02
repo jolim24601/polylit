@@ -1,7 +1,6 @@
 var React = require('react'),
     NProgress = require('nprogress');
 
-
 var App = React.createClass({
   componentWillMount: function () {
     // loading bar animation

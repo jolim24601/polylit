@@ -13,6 +13,14 @@ var TaggedStoriesIndex = React.createClass({
   getInitialState: function () {
     return { page: 1 };
   },
+  componentWillReceiveProps: function (newProps) {
+    this.setState({ page: 1 },
+      ApiUtil.fetchStoriesByTag({
+        page: 1,
+        tag: newProps.params.name
+      })
+    );
+  },
   nextPage: function () {
     var nextPage = this.state.page + 1;
     ApiUtil.fetchStoriesByTag({
@@ -28,7 +36,7 @@ var TaggedStoriesIndex = React.createClass({
       page: 1,
       tag: this.props.params.name
     });
-    
+
     infiniteScroller(this.nextPage);
   },
   componentWillUnmount: function () {
@@ -43,12 +51,12 @@ var TaggedStoriesIndex = React.createClass({
     return (
       <div className="main-content">
         <Navbar><NavTools /></Navbar>
-        <div className="heading">
-          <span>TAGGED IN</span>
-          <h3>{this.props.params.name}</h3>
-        </div>
         <Sidebar />
-        <ul className="story-feed">
+        <ul className="tagged story-feed">
+          <li>
+            <span>TAGGED IN</span>
+            <h3>{this.props.params.name}</h3>
+          </li>
           {storiesList}
         </ul>
       </div>

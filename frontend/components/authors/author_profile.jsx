@@ -15,6 +15,9 @@ var AuthorProfile = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
+  componentWillReceiveProps: function (newProps) {
+    ApiUtil.fetchAuthor(newProps.params.id);
+  },
   componentDidMount: function () {
     this.authorStoreListener = AuthorStore.addListener(this._onChange);
     ApiUtil.fetchAuthor(this.props.params.id);

@@ -8,7 +8,7 @@ module.exports = {
       dataType: "json",
       success: function (author) {
         CurrentAuthorActions.receiveCurrentAuthor(author);
-        callback && callback();
+        if (typeof callback === "function") { callback(); }
       }
     });
   },

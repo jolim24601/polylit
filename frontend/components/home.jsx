@@ -28,7 +28,7 @@ var Home = React.createClass({
       );
     }
 
-    var promo;
+    var promo, sidebar;
     if (!CurrentAuthorStore.isLoggedIn()
       && this.isFirstRender && this.props.location.pathname === "/") {
       promo = (
@@ -45,12 +45,15 @@ var Home = React.createClass({
           </div>
         </div>
       );
+    } else {
+      sidebar = <Sidebar />;
     }
+
     return (
       <div>
         {promo}
         <StoriesIndex location={{pathname: '/'}} />
-        <Sidebar />
+        {sidebar}
       </div>
     );
   }

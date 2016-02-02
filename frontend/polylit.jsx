@@ -21,7 +21,7 @@ var App = require('./components/app');
 var Home = require('./components/home');
 
 var routes = (
-  <Route path='/' component={App}>
+  <Route onEnter={SessionApiUtil.fetchCurrentAuthor} path='/' component={App}>
     <IndexRoute component={Home} />
     <Route path='login' component={newSession} />
     <Route path='signup' component={newAuthor} />
@@ -35,7 +35,6 @@ var routes = (
     <Route path='tag/:name' component={TaggedStoriesIndex} />
   </Route>
 );
-
 
 function _ensureSignIn(nextState, replace, callback) {
   if (CurrentAuthorStore.currentAuthorFetched()) {

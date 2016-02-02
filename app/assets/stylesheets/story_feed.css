@@ -16,10 +16,6 @@
   color: rgba(0,0,0,0.9);
 }
 
-.story-feed-item {
-
-}
-
 .story-feed-item small {
   font-size: 12px;
   color: rgba(0,0,0,0.44);
@@ -51,4 +47,19 @@ button.mini {
   font-size: 12px;
   padding: 0px 12px;
   width: 60px;
+}
+
+.tagged li:first-child {
+  border-bottom: 1px rgba(0,0,0,0.15) solid;
+}
+
+.tagged li:first-child span {
+  color: rgba(0,0,0,0.35);
+  font-size: 14px;
+  letter-spacing: .5px;
+}
+
+.tagged li:first-child h3 {
+  font-weight: 400;
+  margin-bottom: 30px;
 }

@@ -1,4 +1,5 @@
 var ApiActions = require('../actions/api_actions'),
+    TagActions = require('../actions/tag_actions'),
     AuthorActions = require('../actions/author_actions'),
     CurrentAuthorActions = require('../actions/current_author_actions');
 
@@ -30,6 +31,7 @@ module.exports = {
       url: "api/stories/tag/" + data.tag,
       data: data,
       success: function (stories) {
+        console.log(stories);
         ApiActions.receiveStoriesByTag(stories);
         callback && callback(stories);
       }

@@ -1,5 +1,6 @@
 class Api::TagsController < ApplicationController
   def top_tags
+    # currently counts published stories and drafts
     @tags = Tag.select("tags.*, count(taggings.tag_id) as tag_count")
                .joins(:taggings)
                .group("tags.id")

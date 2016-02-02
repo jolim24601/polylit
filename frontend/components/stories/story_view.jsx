@@ -15,13 +15,22 @@ var StoryView = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
-  componentDidMount: function () {
-    this.storyStoreListener = StoryStore.addListener(this._onChange);
-    ApiUtil.fetchStory(this.props.params.id, function (story) {
+  fetchStory: function (id) {
+    ApiUtil.fetchStory(id, function (story) {
       var pm = new ProseMirror.ProseMirror({ doc: story.node, docFormat: 'json' });
       pm.wrapper.firstChild.contentEditable = false;
       this.refs.pm.appendChild(pm.wrapper);
     }.bind(this));
+  },
+  componentWillReceiveProps: function (newProps) {
+    // jules read this!!!
+    // unfortunately not the React way, this is a workaround.
+    this.refs.pm.removeChild(this.refs.pm.firstChild);
+    this.fetchStory(newProps.params.id);
+  },
+  componentDidMount: function () {
+    this.storyStoreListener = StoryStore.addListener(this._onChange);
+    this.fetchStory(this.props.params.id);
   },
   componentWillMount: function () {
   },
