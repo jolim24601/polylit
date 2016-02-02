@@ -49,7 +49,7 @@ var Home = React.createClass({
     return (
       <div>
         {promo}
-        <StoriesIndex tab="HOME"/>
+        <StoriesIndex location={{pathname: '/'}} />
         <Sidebar />
       </div>
     );

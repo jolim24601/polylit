@@ -8,9 +8,21 @@ class Api::StoriesController < ApplicationController
 
   def top_stories
     @stories = Story.page(1)
+                    .per(5)
                     .where(published: true)
                     .order(created_at: :desc)
-                    .limit(5)
+
+    render :index
+  end
+
+  def by_tag
+    tag = Tag.find_by(name: params[:name])
+    @stories = tag.stories
+                  .page(1)
+                  .per(Story.default_per_page * params[:page].to_i)
+                  .where(published: true)
+                  .order(created_at: :desc)
+
     render :index
   end
 

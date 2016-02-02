@@ -21,7 +21,7 @@ var Search = React.createClass({
     $(window).off('scroll', this.scrollerId);
   },
   componentWillReceiveProps: function (newProps) {
-    var newQuery = newProps.location.state.query;
+    var newQuery = newProps.location.query.query;
     this.setState({ query: newQuery });
     this.search(newQuery, this.state.type);
   },

@@ -6,6 +6,7 @@ var Tag = React.createClass({
   },
   render: function () {
     var tag = this.props.tag;
+
     var tagToken;
     if (this.props.addTag) {
       tagToken = <li className="tag-list-item" onClick={this.props.addTag}>{tag.name}</li>;

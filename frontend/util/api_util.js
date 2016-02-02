@@ -24,6 +24,17 @@ module.exports = {
       }
     });
   },
+  fetchStoriesByTag: function (data, callback) {
+    $.ajax({
+      type: "GET",
+      url: "api/stories/tag/" + data.tag,
+      data: data,
+      success: function (stories) {
+        ApiActions.receiveStoriesByTag(stories);
+        callback && callback(stories);
+      }
+    });
+  },
   saveStory: function (data, callback) {
     var url;
     if (data.storyId) {

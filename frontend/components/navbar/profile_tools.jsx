@@ -6,7 +6,6 @@ var ProfileTools = React.createClass({
   render: function () {
     return (
       <div className="profile-tools group floatLeft">
-        <li><Notifications /></li>
         <li><ProfileButton /></li>
       </div>
     );

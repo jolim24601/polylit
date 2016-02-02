@@ -18,7 +18,7 @@ var PredictiveSearch = React.createClass({
   },
   search: function (e) {
     if (e.keyCode === 13) {
-      this.history.pushState(this.state, 'search', {});
+      this.history.pushState(null, 'search', this.state);
     } else {
       this.setState({ query: e.target.value });
       SearchApiUtil.search(e.target.value, "Predictive", 1);

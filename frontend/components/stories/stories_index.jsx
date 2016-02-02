@@ -19,16 +19,12 @@ var StoriesIndex = React.createClass({
 
     // Feed options and have the controller make queries,
     // eventually pass the API request in as a prop
-    if (this.props.tab === "HOME") {
-      ApiUtil.fetchStories({ page: this.state.page, by: "LATEST" },
-        infiniteScroller(this.nextPage));
-    } else if (this.props.tab === "TOP") {
-
-    }
+    ApiUtil.fetchStories({ page: this.state.page},
+    infiniteScroller(this.nextPage));
   },
   nextPage: function () {
     var nextPage = this.state.page + 1;
-    ApiUtil.fetchStories({ page: nextPage, by: "LATEST" });
+    ApiUtil.fetchStories({ page: nextPage });
     this.setState({ page: nextPage });
   },
   componentWillUnmount: function () {
@@ -42,11 +38,13 @@ var StoriesIndex = React.createClass({
       return <StoryIndexItem key={story.id} story={story} />;
     });
 
+    var heading = this.props.location === '/' ? "Latest Stories" : "Top Stories";
+
     return (
       <div className="main-content">
-        <Navbar><HomeTools /><NavTools /></Navbar>
+        <Navbar><HomeTools location={this.props.location} /><NavTools /></Navbar>
         <ul className="story-feed">
-          <li className="heading-title">Latest stories</li>
+          <li className="heading-title">{heading}</li>
           {storyList}
         </ul>
       </div>

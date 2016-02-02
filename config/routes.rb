@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       end
     end
 
+    get 'stories/tag/:name', to: 'stories#by_tag'
+
     resources :authors, only: [:show, :create, :update]
     resource :session, only: [:show, :create, :destroy]
 
@@ -18,8 +20,8 @@ Rails.application.routes.draw do
     end
 
     resources :taggings, only: [:create]
-
     delete 'taggings', to: 'taggings#destroy'
+
     get 'search', to: 'utils#search'
     get 'me', to: 'authors#show'
   end

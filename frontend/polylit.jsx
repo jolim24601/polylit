@@ -6,6 +6,7 @@ var React = require('react'),
     IndexRoute = ReactRouter.IndexRoute,
     History = ReactRouter.History,
     StoriesIndex = require('./components/stories/stories_index'),
+    TaggedStoriesIndex = require('./components/stories/tagged_stories'),
     StoryForm = require('./components/stories/story_form'),
     StoryView = require('./components/stories/story_view'),
     AuthorProfile = require('./components/authors/author_profile'),
@@ -31,8 +32,10 @@ var routes = (
     <Route path='authors/:id' component={AuthorProfile} />
     <Route path='me/stories' onEnter={_ensureSignIn} component={AuthorStories} />
     <Route path='search' component={Search} />
+    <Route path='tag/:name' component={TaggedStoriesIndex} />
   </Route>
 );
+
 
 function _ensureSignIn(nextState, replace, callback) {
   if (CurrentAuthorStore.currentAuthorFetched()) {
