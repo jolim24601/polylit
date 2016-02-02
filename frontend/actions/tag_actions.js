@@ -7,5 +7,11 @@ module.exports = {
       actionType: TagConstants.TAGS_RECEIVED,
       tags: tags
     });
+  },
+  receiveTopTags: function (tags) {
+    AppDispatcher.dispatch({
+      actionType: TagConstants.TOP_TAGS_RECEIVED,
+      tags: tags
+    });
   }
 };

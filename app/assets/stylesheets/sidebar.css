@@ -1,0 +1,23 @@
+.home-sidebar {
+  width: 400px;
+  padding: 0 30px 60px;
+  background-color: #fafafa;
+  position: fixed;
+  display: block;
+  top: 75px; right: 0; bottom: 0;
+  height: 100%;
+}
+
+.sidebar-header {
+  font-size: 14px;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.sidebox {
+  min-height: 200px;
+}
+
+.home-sidebar ul {
+  border-top:
+}

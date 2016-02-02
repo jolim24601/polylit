@@ -3,13 +3,23 @@ var ApiActions = require('../actions/api_actions'),
     CurrentAuthorActions = require('../actions/current_author_actions');
 
 module.exports = {
+  fetchTopStories: function (callback) {
+    $.get({
+      type: "GET",
+      url: "api/stories/top-stories",
+      success: function (stories) {
+        ApiActions.receiveTopStories(stories);
+        callback && callback();
+      }
+    });
+  },
   fetchStories: function (data, callback) {
     $.get({
       type: "GET",
       url: "api/stories",
       data: data,
       success: function (stories) {
-        ApiActions.receiveTopStories(stories);
+        ApiActions.receiveLatestStories(stories);
         callback && callback();
       }
     });

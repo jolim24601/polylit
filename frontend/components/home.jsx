@@ -21,7 +21,11 @@ var Home = React.createClass({
   },
   render: function () {
     if (!CurrentAuthorStore.currentAuthorFetched()) {
-      return <div className="spinner">Loading...</div>;
+      return (
+        <div className="spinner">
+          <small className="loading">Loading...</small>
+        </div>
+      );
     }
 
     var promo;
@@ -46,6 +50,7 @@ var Home = React.createClass({
       <div>
         {promo}
         <StoriesIndex tab="HOME"/>
+        <Sidebar />
       </div>
     );
   }

@@ -10,6 +10,12 @@ module.exports = {
   },
   receiveTopStories: function (stories) {
     AppDispatcher.dispatch({
+      actionType: StoryConstants.TOP_STORIES_RECEIVED,
+      stories: stories
+    });
+  },
+  receiveLatestStories: function (stories) {
+    AppDispatcher.dispatch({
       actionType: StoryConstants.STORIES_RECEIVED,
       stories: stories
     });

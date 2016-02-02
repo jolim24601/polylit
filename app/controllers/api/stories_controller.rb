@@ -1,15 +1,19 @@
 class Api::StoriesController < ApplicationController
   def index
     @stories = Story.page(1)
-      .per(Story.default_per_page * params[:page].to_i)
-      .where(published: true)
-      .order(created_at: :desc)
+                    .per(Story.default_per_page * params[:page].to_i)
+                    .where(published: true)
+                    .order(created_at: :desc)
   end
 
   def top_stories
-    # by favorites
+    @stories = Story.page(1)
+                    .where(published: true)
+                    .order(created_at: :desc)
+                    .limit(5)
+    render :index
   end
-  
+
   def create
     @story = current_author.stories.new(story_params)
 

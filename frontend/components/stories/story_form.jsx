@@ -80,6 +80,8 @@ var StoryForm = React.createClass({
   },
   saveStory: function (cb) {
     var params = this.createParams();
+    clearInterval(this.intervalId);
+    this.intervalId = null;
 
     ApiUtil.saveStory(params, function (saved) {
       this.setState({ storyId: saved.id, verb: 'PATCH', draftState: 'Saved.' });
@@ -131,7 +133,7 @@ var StoryForm = React.createClass({
     // this.timer
     if (!this.intervalId && this.refs.pm.pm.getContent('text')) {
       form.setState({ draftState: 'Saving...' });
-      setTimeout(function () {
+      this.intervalId = setInterval(function () {
         form.saveStory();
       }, 5000); // shortened for testing
     }
@@ -148,9 +150,6 @@ var StoryForm = React.createClass({
 
     this.updateOutput(this.refs.pm.getContent());
     document.querySelector('.ProseMirror-content').focus();
-  },
-  componentWillUnmount: function () {
-    clearInterval(this.intervalId);
   }
 });
 

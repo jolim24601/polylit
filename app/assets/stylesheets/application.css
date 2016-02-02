@@ -15,7 +15,9 @@
  *= require 'navbar'
  *= require 'auth_overlay'
  *= require 'landing'
+ *= require 'sidebar'
  *= require 'story_feed'
+ *= require 'search'
  *= require 'story'
  *= require 'publish'
  *= require_self

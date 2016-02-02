@@ -35,7 +35,15 @@ module.exports = {
       }
     });
   },
-  fetchTopTags: function () {
-
+  fetchTopTags: function (callback) {
+    $.ajax({
+      type: "GET",
+      url: "api/tags/top-tags",
+      dataType: "json",
+      success: function (tags) {
+        TagActions.receiveTopTags(tags);
+        callback && callback();
+      }
+    });
   }
 };
