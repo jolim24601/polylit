@@ -15,10 +15,6 @@ var AuthorStories = React.createClass({
 
     if (CurrentAuthorStore.currentAuthor().id) { this.fetchStories(); }
   },
-  componentWillReceiveProps: function () {
-    console.log("PROPS");
-    this.fetchStories();
-  },
   fetchStories: function () {
     ApiUtil.fetchAuthor(CurrentAuthorStore.currentAuthor().id,
       CurrentAuthorActions.receiveCurrentAuthor);
@@ -60,7 +56,6 @@ var AuthorStories = React.createClass({
     return (
       <main>
         <Navbar><NavTools /></Navbar>
-
         <div className="draft-list-header">
           <h1>Your stories</h1>
           <ul className="navtabs group">

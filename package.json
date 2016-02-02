@@ -44,6 +44,7 @@
     "react-infinite": "^0.8.0",
     "react-infinite-scroll": "^0.1.5",
     "react-router": "1.0.2",
+    "history": "1.13.x",
     "underscore": "^1.8.3",
     "webpack": "^1.12.12"
   },
