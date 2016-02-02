@@ -3,7 +3,7 @@ var ApiActions = require('../actions/api_actions'),
     CurrentAuthorActions = require('../actions/current_author_actions');
 
 module.exports = {
-  fetchLatestStories: function (data, callback) {
+  fetchStories: function (data, callback) {
     $.get({
       type: "GET",
       url: "api/stories",

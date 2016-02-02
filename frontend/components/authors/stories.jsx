@@ -33,11 +33,12 @@ var AuthorStories = React.createClass({
     if (author.stories) {
       var storyItems = author.stories.map(function (story) {
         var uniqueKey = new Date().getUTCMilliseconds();
+        var storyLink = "#/stories/" + story.id;
         if (this.state.published === story.published) {
           return (
             <li className="draft-feed-item" key={story.id}>
               <div className="draft-content">
-                <h3>{story.title}</h3>
+                <h3><a href={storyLink}>{story.title}</a></h3>
                 <small>{story.draftedAgo} </small>
                 &middot;
                 <small> {story.readTime}</small>

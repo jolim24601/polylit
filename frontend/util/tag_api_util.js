@@ -34,5 +34,8 @@ module.exports = {
         callback && callback(taggable);
       }
     });
+  },
+  fetchTopTags: function () {
+
   }
 };

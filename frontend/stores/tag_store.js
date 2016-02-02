@@ -5,6 +5,10 @@ var Store = require('flux/utils').Store,
 var TagStore = new Store(AppDispatcher),
     _tags = [];
 
+TagStore.all = function () {
+  return _tags.slice();
+};
+
 TagStore.__onDispatch = function (payload) {
   if (payload.actionType ===  TagConstants.TAGS_RECEIVED) {
     _tags = payload.tags;

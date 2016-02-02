@@ -66,14 +66,14 @@ var PublishButton = React.createClass({
     var tags = this.state.story.tags.map(function (tag) {
       return <Tag deleteTag={this.deleteTag} key={tag.id} tag={tag} />;
     }, this);
-    
+
     var tagMenu;
     if (this.state.menuActive) {
       tagMenu = (
         <div className="tag-menu">
           <h3>Ready to publish?</h3>
           <p>Add or change tags (up to 3):</p>
-          <form className="tag-box group">
+          <div className="tag-box group">
             {tags}
             <input
               type="text"
@@ -82,7 +82,7 @@ var PublishButton = React.createClass({
               placeholder="Add a tag..."
               value={this.state.value} />
             <div className={this.state.helperActive}>You can only add up to 3 tags</div>
-          </form>
+          </div>
 
           <button
             id="full-publish"

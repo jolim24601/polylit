@@ -57,6 +57,7 @@
 }
 
 .avatar-small {
+  cursor: pointer;
   vertical-align: middle;
   border-radius: 100%;
   width: 36px;

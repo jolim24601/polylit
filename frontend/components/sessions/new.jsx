@@ -15,13 +15,13 @@ var newSession = React.createClass({
 
     SessionApiUtil.loginAuthor(demoCredentials, function () {
       this.history.pushState(null, '/', {});
-    });
+    }.bind(this));
   },
   handleSubmit: function (e) {
     e.preventDefault();
     SessionApiUtil.loginAuthor(this.state, function () {
       this.history.pushState(null, '/', {});
-    });
+    }.bind(this));
   },
   render: function () {
     return (
@@ -29,7 +29,7 @@ var newSession = React.createClass({
         <img className="modal-logo logo"
           src="https://s3-us-west-2.amazonaws.com/jolim24601/polylit-prod/logo.png" alt="site logo"/>
 
-        <p className="modal-content">Create an account</p>
+        <p className="modal-content">Sign In</p>
 
           <div className="input">
             <label htmlFor="form-email">Email</label>

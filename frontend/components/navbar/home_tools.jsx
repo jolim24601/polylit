@@ -8,7 +8,7 @@ var HomeTools = React.createClass({
     return (
       <ul className="navbar-center group floatLeft">
         <li className={this.state.tabActive1}><a href="#">HOME</a></li>
-        <li className={this.state.tabActive2}><a href="#/stories">TOP STORIES</a></li>
+        <li className={this.state.tabActive2}><a href="#/top-stories">TOP STORIES</a></li>
         <li className={this.state.tabActive3}><a href="#">BOOKMARKS</a></li>
       </ul>
     );

@@ -19,3 +19,7 @@
 .ProseMirror-content:focus {
   outline: 0;
 }
+
+strong {
+  font-weight: 700;
+}

@@ -17,14 +17,15 @@ var React = require('react'),
     Search = require('./components/search/search');
 
 var App = require('./components/app');
+var Home = require('./components/home');
 
 var routes = (
   <Route path='/' component={App}>
-    <IndexRoute component={StoriesIndex} />
+    <IndexRoute component={Home} />
     <Route path='login' component={newSession} />
     <Route path='signup' component={newAuthor} />
     <Route path='new-story' onEnter={_ensureSignIn} component={StoryForm} />
-    <Route path='stories' component={StoriesIndex} />
+    <Route path='top-stories' component={StoriesIndex} />
     <Route path='stories/:id' component={StoryView}>
       <Route path='edit' component={StoryView} />
     </Route>

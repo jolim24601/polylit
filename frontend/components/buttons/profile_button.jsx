@@ -31,7 +31,7 @@ var ProfileButton = React.createClass({
     SessionApiUtil.logoutAuthor(function () {
       CurrentAuthorActions.destroyCurrentAuthor();
       this.history.pushState(null, '/', {});
-    });
+    }.bind(this));
   },
   render: function () {
     var author = CurrentAuthorStore.currentAuthor();

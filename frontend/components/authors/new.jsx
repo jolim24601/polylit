@@ -15,13 +15,15 @@ var newAuthor = React.createClass({
 
     ApiUtil.createAuthor(this.state, function () {
       this.history.pushState(null, '/', {});
-    });
+    }.bind(this));
   },
   demoSignIn: function (e) {
     e.preventDefault();
     var demoCredentials = { email: 'jolim24601@gmail.com', password: 'jupiter' };
 
+
     SessionApiUtil.loginAuthor(demoCredentials, function () {
+
       this.history.pushState(null, '/', {});
     }.bind(this));
   },
@@ -58,7 +60,7 @@ var newAuthor = React.createClass({
             </span>
           </div>
 
-          <a href="login">I already have an account.</a>
+          <a href="#/login">I already have an account.</a>
 
           <button className="demo-login"
             onClick={this.demoSignIn}>Sign in as Demo user</button>

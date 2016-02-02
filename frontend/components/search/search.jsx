@@ -37,14 +37,21 @@ var Search = React.createClass({
   render: function () {
     // add cases for tags, authors search
     var results = this.findByType();
-    var pluralType = this.state.type === "Story" ? "Stories" : "People";
+    var pluralType, storyActive, peopleActive;
+    if (this.state.type === "Story") {
+      pluralType = "Stories";
+      storyActive = "darken-border";
+    } else {
+      pluralType = "People";
+      peopleActive = "darken-border";
+    }
 
     return (
       <div className="main-content">
         <Navbar><NavTools /></Navbar>
         <ul onClick={this.changeType} className="search-type">
-          <li className="darken-border"><a >Stories</a></li>
-          <li><a>People</a></li>
+          <li className={storyActive}><a >Stories</a></li>
+          <li className={peopleActive}><a>People</a></li>
         </ul>
         <input
           type="text"

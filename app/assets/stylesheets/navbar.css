@@ -59,6 +59,7 @@
 }
 
 .profile-actions a {
+  cursor: pointer;
   white-space: nowrap;
   padding: 10px;
 }

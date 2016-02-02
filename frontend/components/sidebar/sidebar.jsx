@@ -3,13 +3,12 @@ var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     CurrentAuthorStore = require('../../stores/current_author_store');
 
-
 var Sidebar = React.createClass({
   render: function () {
-    var topStories = this.props.stories;
-    var topTags = this.props.tags;
+    var topStories = StoryStore.all();
+    var topTags = TagStore.all();
     var followedTags = CurrentAuthorStore.currentAuthor().tags;
-    
+
     return (
       <aside className="home-sidebar">
         <ul className="top-tags">

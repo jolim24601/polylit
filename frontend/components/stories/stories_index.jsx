@@ -5,8 +5,7 @@ var React = require('react'),
 
 var Navbar = require('../navbar/navbar'),
     HomeTools = require('../navbar/home_tools'),
-    NavTools = require('../navbar/nav_tools'),
-    Sidebar = require('../sidebar/sidebar');
+    NavTools = require('../navbar/nav_tools');
 
 var infiniteScroller = require('../../util/helpers').infiniteScroller;
 
@@ -17,12 +16,19 @@ var StoriesIndex = React.createClass({
   componentDidMount: function () {
     this.storyStoreListener = StoryStore.addListener(this._onChange);
 
-    ApiUtil.fetchLatestStories({ page: this.state.page },
-      infiniteScroller(this.nextPage));
+
+    // Feed options and have the controller make queries,
+    // eventually pass the API request in as a prop
+    if (this.props.tab === "HOME") {
+      ApiUtil.fetchStories({ page: this.state.page, by: "LATEST" },
+        infiniteScroller(this.nextPage));
+    } else if (this.props.tab === "TOP") {
+
+    }
   },
   nextPage: function () {
     var nextPage = this.state.page + 1;
-    ApiUtil.fetchLatestStories({ page: nextPage });
+    ApiUtil.fetchStories({ page: nextPage, by: "LATEST" });
     this.setState({ page: nextPage });
   },
   componentWillUnmount: function () {
@@ -43,7 +49,6 @@ var StoriesIndex = React.createClass({
           <li className="heading-title">Latest stories</li>
           {storyList}
         </ul>
-        <Sidebar />
       </div>
     );
   },
