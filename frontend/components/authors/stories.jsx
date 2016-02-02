@@ -11,6 +11,8 @@ var AuthorStories = React.createClass({
     return { published: false, draftActive: "tab-active", pubActive: "" };
   },
   componentDidMount: function () {
+
+    // not fetching on page refresh!
     this.listener = CurrentAuthorStore.addListener(this._onChange);
 
     if (CurrentAuthorStore.currentAuthor().id) { this.fetchStories(); }

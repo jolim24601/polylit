@@ -14,6 +14,7 @@ if show_full
   json.facebook         'https://facebook.com/'
 
   json.stories do
-    json.partial! 'api/stories/story', collection: author.stories, show_full: false, as: :story
+    json.partial! 'api/stories/story',
+      collection: author.stories.order(created_at: :desc), show_full: false, as: :story
   end
 end
