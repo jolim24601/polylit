@@ -34,7 +34,7 @@ var routes = (
   </Route>
 );
 
-function _ensureSignIn(nextState, replace) {
+function _ensureSignIn(nextState, replace, callback) {
   if (CurrentAuthorStore.currentAuthorFetched()) {
     _redirectIfNotLoggedIn();
   } else {
@@ -45,6 +45,7 @@ function _ensureSignIn(nextState, replace) {
     if (!CurrentAuthorStore.isLoggedIn()) {
       replace(null, '/login', {});
     }
+    callback();
   }
 }
 

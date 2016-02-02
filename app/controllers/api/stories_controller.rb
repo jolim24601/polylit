@@ -6,6 +6,10 @@ class Api::StoriesController < ApplicationController
       .order(created_at: :desc)
   end
 
+  def top_stories
+    # by favorites
+  end
+  
   def create
     @story = current_author.stories.new(story_params)
 
