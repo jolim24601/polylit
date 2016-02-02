@@ -5,7 +5,7 @@ json.description  author.description
 json.following    0
 json.followers    0
 json.avatar       asset_url(author.avatar.url(:small))
-json.tags         Tag.all.limit(12)
+json.tags         Tag.all.limit(15)
 
 # eventually call associations here
 if show_full

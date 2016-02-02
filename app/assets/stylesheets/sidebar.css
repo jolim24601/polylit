@@ -5,19 +5,67 @@
   position: fixed;
   display: block;
   top: 75px; right: 0; bottom: 0;
-  height: 100%;
+  height: auto;
+  overflow-y: scroll;
 }
 
 .sidebar-header {
-  font-size: 14px;
-  margin-left: 10px;
+  letter-spacing: .9px;
+  color: rgba(0,0,0,0.8);
+  font-weight: 400;
+  font-size: 12px;
+  margin-left: 5px;
+  margin-top: 11px;
+  margin-bottom: 15px;
   display: inline-block;
 }
 
 .sidebox {
-  min-height: 200px;
+  margin: auto;
+  width: 300px;
+  border-top: 1px rgba(0,0,0,0.15) solid;
+  margin-top: 18px;
+  margin-bottom: 40px;
 }
 
-.home-sidebar ul {
-  border-top:
+.more-top-stories {
+  font-size: 10px;
+  float: right;
+  padding: 13px;
+}
+
+.sidebox .tag-token {
+  padding: 7px 13px;
+  margin: 4px;
+  letter-spacing: .75px;
+}
+
+.top-five {
+  margin-top: 0;
+  padding-left: 15px;
+}
+
+.top-five li {
+  list-style: none;
+  border-bottom: 1px rgba(0,0,0,0.15) solid;
+  padding: 18px 0;
+}
+
+.top-five li:last-child {
+  border-bottom: 0;
+  padding-bottom: 50px;
+}
+
+.top-five a:first-child {
+  font-size: 18px;
+}
+
+.sidebar-author {
+  color: rgba(0,0,0,0.6);
+  font-size: 13px;
+  display: block;
+}
+
+.sidebar-author:hover {
+  color: #00ab6b;
 }

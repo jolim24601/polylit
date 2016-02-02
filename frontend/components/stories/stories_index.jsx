@@ -1,6 +1,7 @@
 var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     StoryIndexItem = require('./story_index_item'),
+    Sidebar = require('../sidebar/sidebar'),
     ApiUtil = require('../../util/api_util');
 
 var Navbar = require('../navbar/navbar'),
@@ -15,7 +16,6 @@ var StoriesIndex = React.createClass({
   },
   componentDidMount: function () {
     this.storyStoreListener = StoryStore.addListener(this._onChange);
-
 
     // Feed options and have the controller make queries,
     // eventually pass the API request in as a prop

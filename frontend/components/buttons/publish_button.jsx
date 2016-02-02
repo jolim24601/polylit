@@ -63,11 +63,11 @@ var PublishButton = React.createClass({
     }
   },
   render: function () {
-
+    if (this.state.story && this.state.story.tags) {
       var tags = this.state.story.tags.map(function (tag) {
         return <Tag deleteTag={this.deleteTag} key={tag.id} tag={tag} />;
       }, this);
-
+    }
 
     var tagMenu;
     if (this.state.menuActive) {

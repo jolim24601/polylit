@@ -4,7 +4,7 @@ class Api::TagsController < ApplicationController
                .joins(:taggings)
                .group("tags.id")
                .order("tag_count DESC")
-               .limit(12)
+               .limit(15)
 
     render :index
   end

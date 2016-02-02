@@ -25,7 +25,7 @@ var Sidebar = React.createClass({
     this.setState({ topTags: TagStore.topTags() });
   },
   handleStories: function () {
-    this.setState({ stories: StoryStore.topStories() });
+    this.setState({ topStories: StoryStore.topStories() });
   },
   createTags: function (tags) {
     return tags.map(function (tag) {
@@ -33,8 +33,9 @@ var Sidebar = React.createClass({
     });
   },
   render: function () {
+    var topStories, topTags, followedTags;
     if (this.state.topTags && this.state.topStories) {
-      var topStories = this.state.topStories.map(function (story) {
+      topStories = this.state.topStories.map(function (story) {
         var truncatedTitle = story.title.slice(0, 25);
         if (story.title.length > 25) { truncatedTitle += "..."; }
         var storyLink = "#/stories/" + story.id;
@@ -43,30 +44,32 @@ var Sidebar = React.createClass({
         return (
           <li key={story.id}>
             <a href={storyLink}>{truncatedTitle}</a>
-            <a href={authorLink}>{story.author.name}</a>
+            <a className="sidebar-author" href={authorLink}>{story.author.name}</a>
           </li>
         );
       });
-      var topTags = this.createTags(this.state.topTags);
-      var followedTags = this.createTags(CurrentAuthorStore.currentAuthor().tags);
+
+      topTags = this.createTags(this.state.topTags);
+      followedTags = this.createTags(CurrentAuthorStore.currentAuthor().tags);
     }
-    console.log(topStories);
+
     return (
       <aside className="home-sidebar">
-        <div className="sidebox">
+        <div className="sidebox group">
           <h3 className="sidebar-header">FEATURED TAGS</h3>
           <ul className="top-tags">
             {topTags}
           </ul>
         </div>
-        <div className="sidebox">
+        <div className="sidebox group">
           <h3 className="sidebar-header">TAGS YOU FOLLOW</h3>
           <ul className="followed-tags">
             {followedTags}
           </ul>
         </div>
-        <div className="sidebox">
-          <h3 className="sidebar-header">TOP STORIES ON MEDIUM</h3><a>SEE MORE</a>
+        <div className="sidebox group">
+          <h3 className="sidebar-header">TOP STORIES ON MEDIUM</h3>
+          <a className="more-top-stories" href="#/top-stories">SEE MORE</a>
           <ol className="top-five">
             {topStories}
           </ol>
