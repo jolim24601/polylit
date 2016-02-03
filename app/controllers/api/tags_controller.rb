@@ -10,9 +10,6 @@ class Api::TagsController < ApplicationController
     render :index
   end
 
-  def index
-  end
-
   def show
   end
 

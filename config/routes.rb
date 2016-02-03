@@ -13,11 +13,13 @@ Rails.application.routes.draw do
     resources :authors, only: [:show, :create, :update]
     resource :session, only: [:show, :create, :destroy]
 
-    resources :tags, only: [:index, :create, :show] do
+    resources :tags, only: [:create, :show] do
       collection do
         get 'top-tags'
       end
     end
+
+    resources :follows, only: [:create, :show, :index]
 
     resources :taggings, only: [:create]
     delete 'taggings', to: 'taggings#destroy'

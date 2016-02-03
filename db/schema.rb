@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202235530) do
+ActiveRecord::Schema.define(version: 20160203001850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,14 +55,18 @@ ActiveRecord::Schema.define(version: 20160202235530) do
   add_index "pg_search_documents", ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
 
   create_table "stories", force: :cascade do |t|
-    t.integer  "author_id",                  null: false
+    t.integer  "author_id",                           null: false
     t.string   "title"
     t.string   "subtitle"
-    t.boolean  "published",  default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.json     "node",                       null: false
-    t.integer  "wordcount",                  null: false
+    t.boolean  "published",           default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.json     "node",                                null: false
+    t.integer  "wordcount",                           null: false
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.datetime "banner_updated_at"
   end
 
   add_index "stories", ["author_id"], name: "index_stories_on_author_id", using: :btree
