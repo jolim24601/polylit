@@ -3,6 +3,7 @@ json.timeAgo        time_ago_in_words(story.created_at)
 json.published      story.published
 json.favorites      0
 json.responses      0
+json.banner         asset_url(story.banner.url)
 
 read_time = (story.wordcount / 200).to_s + ' min read'
 if story.published
@@ -21,6 +22,6 @@ if show_full
   json.tags do
     json.partial! 'api/tags/tag', collection: story.tags, as: :tag
   end
-  
+
   json.node       story.node
 end

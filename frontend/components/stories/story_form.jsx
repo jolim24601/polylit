@@ -96,6 +96,9 @@ var StoryForm = React.createClass({
     var story = objectAssign({}, this.state.story);
     story.published = true;
 
+    story.banner = document
+      .querySelector('.ProseMirror-content').querySelector('img').src;
+
     this.setState({ story: story }, function () {
       this.saveStory(
         this.history.pushState.bind(null, '/stories/' + this.state.story.id, {})

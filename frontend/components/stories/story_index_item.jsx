@@ -6,7 +6,11 @@ var StoryIndexItem = React.createClass({
   render: function () {
     var story = this.props.story;
     var link = "#/stories/" + story.id;
+    var bannerImage;
 
+    if (story.banner) {
+      bannerImage = <img className="banner-index" src={story.banner} />;
+    }
     // story feed || author profile
     story.author = story.author || this.props.author;
     return (
@@ -15,6 +19,7 @@ var StoryIndexItem = React.createClass({
         <small>{story.timeAgo} ago </small>
         &middot;
         <small> {story.readTime}</small>
+        {bannerImage}
         <h3 className="feed-title"><a href={link}>{story.title}</a></h3>
         <p className="feed-subtitle">{story.subtitle}</p>
         <small><a href={link}>Read more...</a></small>
