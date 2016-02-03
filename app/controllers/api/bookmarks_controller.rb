@@ -1,4 +1,8 @@
 class Api::BookmarksController < ApplicationController
+  def index
+    current_author.bookmarks.includes(:stories)
+  end
+
   def create
     bookmark = Bookmark.create(bookmark_params)
 

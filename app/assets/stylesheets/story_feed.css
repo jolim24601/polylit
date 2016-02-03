@@ -28,8 +28,8 @@
 }
 
 .story-preview-footer {
-  position: relative;
-  bottom: -45px;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 
 .fav-count {

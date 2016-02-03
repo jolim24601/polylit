@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
     resources :favorites, only: [:show, :create]
     delete 'favorites', to: 'favorites#destroy'
-    resources :bookmarks, only: [:create, :show]
+    resources :bookmarks, only: [:index, :create, :show]
     delete 'bookmarks', to: 'bookmarks#destroy'
 
     resources :follows, only: [:create, :show, :index]
