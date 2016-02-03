@@ -11,6 +11,6 @@ class Tag < ActiveRecord::Base
     too_long: "%{count} characters is the maximum allowed"
   }
 
-  has_many :taggings
+  has_many :taggings, dependent: :destroy
   has_many :stories, through: :taggings, source: :taggable, source_type: Story
 end

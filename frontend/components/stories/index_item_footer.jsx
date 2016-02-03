@@ -1,4 +1,6 @@
-var React = require('react');
+var React = require('react'),
+    Bookmark = require('../buttons/bookmark'),
+    Favorite = require('../buttons/favorite');
 
 // appears in two formats: in the story feed with
 // author card up top, and in the story view with
@@ -12,9 +14,9 @@ var Footer = React.createClass({
     return (
       <footer className="story-preview-footer group">
         <small>
-          <Bookmark />
+          <Bookmark storyId={story.id} />
           <div className="fav-count">{story.favorites}</div>
-          <Favorite />
+          <Favorite storyId={story.id} />
 
         </small>
       </footer>

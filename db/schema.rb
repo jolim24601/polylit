@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203145802) do
+ActiveRecord::Schema.define(version: 20160203202531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,24 @@ ActiveRecord::Schema.define(version: 20160203145802) do
   add_index "authors", ["session_token"], name: "index_authors_on_session_token", unique: true, using: :btree
   add_index "authors", ["uid"], name: "index_authors_on_uid", using: :btree
   add_index "authors", ["username"], name: "index_authors_on_username", unique: true, using: :btree
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.integer "story_id",  null: false
+  end
+
+  add_index "bookmarks", ["author_id", "story_id"], name: "index_bookmarks_on_author_id_and_story_id", using: :btree
+  add_index "bookmarks", ["author_id"], name: "index_bookmarks_on_author_id", using: :btree
+  add_index "bookmarks", ["story_id"], name: "index_bookmarks_on_story_id", using: :btree
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.integer "story_id",  null: false
+  end
+
+  add_index "favorites", ["author_id"], name: "index_favorites_on_author_id", using: :btree
+  add_index "favorites", ["story_id", "author_id"], name: "index_favorites_on_story_id_and_author_id", using: :btree
+  add_index "favorites", ["story_id"], name: "index_favorites_on_story_id", using: :btree
 
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id",     null: false
@@ -96,5 +114,9 @@ ActiveRecord::Schema.define(version: 20160203145802) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
 
+  add_foreign_key "bookmarks", "authors"
+  add_foreign_key "bookmarks", "stories"
+  add_foreign_key "favorites", "authors"
+  add_foreign_key "favorites", "stories"
   add_foreign_key "follows", "authors", column: "follower_id"
 end

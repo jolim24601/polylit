@@ -41,7 +41,7 @@ var TaggedStoriesIndex = React.createClass({
   },
   componentWillUnmount: function () {
     this.listener.remove();
-    $(window).off('scroll', this.scrollerId);
+    $(window).off('scroll', infiniteScroller);
   },
   render: function () {
     var storiesList = StoryStore.all().map(function (story) {

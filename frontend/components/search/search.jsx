@@ -18,7 +18,7 @@ var Search = React.createClass({
   },
   componentWillUnmount: function () {
     this.listener.remove();
-    $(window).off('scroll', this.scrollerId);
+    $(window).off('scroll', infiniteScroller);
   },
   componentWillReceiveProps: function (newProps) {
     var newQuery = newProps.location.query.query;

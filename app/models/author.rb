@@ -21,5 +21,8 @@ class Author < ActiveRecord::Base
     large: '100x100#'
   }
 
+  has_many :favorites, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 end

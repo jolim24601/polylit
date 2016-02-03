@@ -76,6 +76,30 @@ module.exports = {
       }
     });
   },
+  toggleFavorite: function (data, callback) {
+    $.ajax({
+      type: data.type,
+      url: "api/favorites",
+      data: data,
+      dataType: "json",
+      success: function (story) {
+        ApiActions.receiveSingleStory(story);
+        callback && callback(story);
+      }
+    });
+  },
+  toggleBookmark: function (data, callback) {
+    $.ajax({
+      type: data.type,
+      url: "api/bookmarks",
+      data: data,
+      dataType: "json",
+      success: function (story) {
+        ApiActions.receiveSingleStory(story);
+        callback && callback(story);
+      }
+    });
+  },
   fetchAuthor: function (id, callback) {
     $.ajax({
       type: "GET",

@@ -11,11 +11,11 @@ var Navbar = React.createClass({
      });
   },
   componentDidMount: function () {
-    $(window).scroll(function(event) {
+    this.scrollerId = $(window).scroll(function(event) {
       this.setState({ didScroll: true });
     }.bind(this));
 
-    this.intervalid = setInterval(function() {
+    this.intervalId = setInterval(function() {
       if (this.state.didScroll) {
         this.hasScrolled();
         this.setState({ didScroll: false });
@@ -23,7 +23,9 @@ var Navbar = React.createClass({
     }.bind(this), 250);
   },
   componentWillUnmount: function () {
+    $(window).off('scroll', this.scrollerId);
     clearInterval(this.intervalId);
+    this.intervalId = null;
   },
   hasScrolled: function () {
     var st = $(document).scrollTop();

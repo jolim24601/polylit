@@ -1,19 +1,52 @@
 var React = require('react');
 var FontAwesome = require('react-fontawesome');
 
-var Bookmark = React.createClass({
-  bookmarkStory: function () {
+var ApiUtil = require('../../util/api_util'),
+    StoryStore = require('../../stores/story_store'),
+    CurrentAuthorStore = require('../../stores/current_author_store');
 
+var Bookmark = React.createClass({
+  getStateFromStore: function () {
+    var bookmarks = StoryStore.find(this.props.storyId).bookmarks;
+    if (bookmarks.indexOf(CurrentAuthorStore.currentAuthor().id) !== -1) {
+      return { bookmarked: true};
+    }
+    return { bookmarked: false };
+  },
+  getInitialState: function () {
+    return this.getStateFromStore();
+  },
+  componentDidMount: function () {
+    this.listener = StoryStore.addListener(this._onChange);
+  },
+  componentWillUnmount: function () {
+    this.listener.remove();
+  },
+  bookmarkStory: function () {
+    var type = this.state.bookmarked ? "DELETE" : "POST";
+
+    ApiUtil.toggleBookmark({
+      bookmark: {
+        story_id: this.props.storyId,
+        author_id: CurrentAuthorStore.currentAuthor().id,
+        type: type
+      }
+    });
   },
   render: function () {
+    var name = this.state.bookmarked ? "fa fa-bookmark" : "fa fa-bookmark-o";
+
     return (
       <FontAwesome
         onClick={this.bookmarkStory}
-        name="fa fa-bookmark-o"
+        name={name}
         className="bookmark-button floatRight"
         />
 
     );
+  },
+  _onChange: function () {
+    this.setState(this.getStateFromStore());
   }
 });
 

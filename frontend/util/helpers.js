@@ -8,6 +8,6 @@ module.exports = {
         }
       }, 1500);
 
-    this.scrollerId = $(window).scroll(throttled);
+    $(window).scroll(throttled);
   }
 };

@@ -29,7 +29,7 @@ var StoriesIndex = React.createClass({
   },
   componentWillUnmount: function () {
     this.storyStoreListener.remove();
-    $(window).off('scroll', this.scrollerId);
+    $(window).off('scroll', infiniteScroller);
   },
   render: function () {
     var stories = this.state.stories;
@@ -38,7 +38,7 @@ var StoriesIndex = React.createClass({
       return <StoryIndexItem key={story.id} story={story} />;
     });
 
-    var heading = this.props.location === '/' ? "Latest Stories" : "Top Stories";
+    var heading = this.props.location.pathname === '/' ? "Latest Stories" : "Top Stories";
 
     return (
       <div className="main-content">

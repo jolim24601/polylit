@@ -5,14 +5,13 @@ json.description  author.description
 json.following    0
 json.followers    0
 json.avatar       asset_url(author.avatar.url(:small))
+json.favorites        author.favorites
+json.bookmarks        author.bookmarks
 
 
 # eventually call associations here
 if show_full
   json.avatarLarge      asset_url(author.avatar.url(:large))
-  json.favorites        0
-  json.twitter          'https://twitter.com/'
-  json.facebook         'https://facebook.com/'
 
   json.stories do
     json.partial! 'api/stories/story',
