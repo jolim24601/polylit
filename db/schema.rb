@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203001850) do
+ActiveRecord::Schema.define(version: 20160203145802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,11 +29,16 @@ ActiveRecord::Schema.define(version: 20160203001850) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "authors", ["email"], name: "index_authors_on_email", unique: true, using: :btree
   add_index "authors", ["pen_name"], name: "index_authors_on_pen_name", using: :btree
+  add_index "authors", ["provider", "uid"], name: "index_authors_on_provider_and_uid", unique: true, using: :btree
+  add_index "authors", ["provider"], name: "index_authors_on_provider", using: :btree
   add_index "authors", ["session_token"], name: "index_authors_on_session_token", unique: true, using: :btree
+  add_index "authors", ["uid"], name: "index_authors_on_uid", using: :btree
   add_index "authors", ["username"], name: "index_authors_on_username", unique: true, using: :btree
 
   create_table "follows", force: :cascade do |t|

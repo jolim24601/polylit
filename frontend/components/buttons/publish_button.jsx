@@ -14,6 +14,7 @@ var PublishButton = React.createClass({
   },
   componentWillUnmount: function () {
     this.listener.remove();
+    $(document).off('click', this.toggleView);
   },
   getInitialState: function () {
     return ({
@@ -23,12 +24,8 @@ var PublishButton = React.createClass({
       menuActive: false
     });
   },
-  toggleView: function (e) {
-    if (!this.state.menuActive) {
-      this.setState({ menuActive: true });
-    } else if ($(e.target).parents('.prepublish').length === 0) {
-      this.setState({ menuActive: false });
-    }
+  toggleView: function () {
+    this.setState({ menuActive: !this.state.menuActive });
   },
   handleSubmit: function (e) {
     this.setState({ value: e.target.value });
@@ -56,9 +53,9 @@ var PublishButton = React.createClass({
     if (this.state.story.tags.length < 3) {
       this.setState({ value: e.target.value });
     } else {
-      this.setState({ helperActive: "tag-helper is-active" });
+      this.setState({ helperActive: "helper is-active" });
       setTimeout(function () {
-        this.setState({ helperActive: "tag-helper hide" });
+        this.setState({ helperActive: "helper hide" });
       }.bind(this), 3000);
     }
   },
@@ -98,7 +95,7 @@ var PublishButton = React.createClass({
 
     return (
       <div onClick={this.toggleView} className="prepublish primary button">
-        <span>Publish &or;</span>
+        <span onClick={this.toggleView} id="pub-parent">Publish &or;</span>
         {tagMenu}
       </div>
     );

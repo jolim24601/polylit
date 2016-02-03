@@ -1,6 +1,45 @@
 var React = require('react');
 
+var navbarHeight = $('header').outerHeight();
+var delta = 5;
+
 var Navbar = React.createClass({
+  getInitialState: function () {
+    return ({
+      didScroll: false,
+      lastScrollTop: 0
+     });
+  },
+  componentDidMount: function () {
+    $(window).scroll(function(event) {
+      this.setState({ didScroll: true });
+    }.bind(this));
+
+    this.intervalid = setInterval(function() {
+      if (this.state.didScroll) {
+        this.hasScrolled();
+        this.setState({ didScroll: false });
+      }
+    }.bind(this), 250);
+  },
+  componentWillUnmount: function () {
+    clearInterval(this.intervalId);
+  },
+  hasScrolled: function () {
+    var st = $(document).scrollTop();
+    // Make sure they scroll more than delta
+    if (Math.abs(this.state.lastScrollTop - st) <= delta) { return; }
+
+    if (st > this.state.lastScrollTop && st > navbarHeight) {
+      $('.navbar').addClass('nav-up');
+      $('.sidebar').addClass('side-up');
+    } else if (st + $(window).height() < $(document).height()) {
+      $('.navbar').removeClass('nav-up');
+      $('.sidebar').removeClass('side-up');
+    }
+
+    this.setState({ lastScrollTop: st });
+  },
   render: function () {
     return (
       <header className="navbar">

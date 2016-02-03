@@ -5,6 +5,15 @@
   width: 100%;
   color: rgba(0, 0, 0, 0.3);
   letter-spacing: 0;
+  transition: top 0.2s ease-in-out;
+}
+
+.nav-up {
+  top: -65px !important;
+}
+
+.side-up {
+  top: 0 !important;
 }
 
 .navbar-nav {

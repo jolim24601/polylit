@@ -59,7 +59,7 @@
   margin-left: 10px;
 }
 
-.tag-helper {
+.helper {
   position: absolute;
   border: 1px solid #D3D3D3;
   background-color: white;
@@ -82,4 +82,9 @@
   color: rgba(0,0,0,0.44);
   font-size: 20px;
   margin: 25px;
+}
+
+.dummy-button {
+  color: grey;
+  border-color: grey;
 }

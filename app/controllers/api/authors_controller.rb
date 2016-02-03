@@ -1,7 +1,12 @@
 class Api::AuthorsController < ApplicationController
   def create
     @author = Author.new(author_params)
-    @author.username ||= @author.email[/[^@]+/]
+    debugger
+    if author_params[:provider] && author_params[:uid]
+    else
+      @author.username ||= @author.email[/[^@]+/]
+    end
+
     @show_full = true
 
     if @author.save
@@ -31,7 +36,15 @@ class Api::AuthorsController < ApplicationController
 
   def author_params
     params.require(:author).permit(
-      :email, :password, :username, :pen_name, :name, :description, :avatar
+      :email,
+      :password,
+      :username,
+      :pen_name,
+      :name,
+      :description,
+      :avatar,
+      :provider,
+      :uid
     )
   end
 end

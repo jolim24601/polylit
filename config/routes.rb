@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :authors, only: [:show, :create, :update]
     resource :session, only: [:show, :create, :destroy]
 
+    get '/auth/:provider/callback', to: 'sessions#create'
+
     resources :tags, only: [:create, :show] do
       collection do
         get 'top-tags'

@@ -5,6 +5,7 @@ var React = require('react'),
     TagApiUtil = require('../../util/tag_api_util'),
     History = require('react-router').History,
     CurrentAuthorStore = require('../../stores/current_author_store'),
+    AuthorCard = require('../authors/author_card'),
     objectAssign = require('object-assign');
 
 var pmFormat = require('prosemirror/dist/format');
@@ -12,6 +13,7 @@ var ProseMirror = require('prosemirror/dist/edit');
 
 var Navbar = require('../navbar/navbar'),
     WriteTools = require('../navbar/write_tools'),
+    ShortcutHelper = require('./shortcuts'),
     PublishButton = require('../buttons/publish_button'),
     ProseMirror = require('prosemirror/dist/edit'),
     ProfileTools = require('../navbar/profile_tools');
@@ -109,15 +111,16 @@ var StoryForm = React.createClass({
       );
     }.bind(this));
   },
-  showHelper: function () {
-    // Author can save after writing
-  },
   render: function () {
     var publishButton;
     if (this.state.storyId) {
       publishButton = <PublishButton storyId={this.state.storyId} publishStory={this.publishStory} />;
     } else {
-      publishButton = <button onClick={this.showHelper} className="dummy-button primary">Publish &or;</button>;
+      publishButton = (
+        <div>
+          <button className="dummy-button primary">Publish &or;</button>
+        </div>
+      );
     }
 
     return (
@@ -130,17 +133,22 @@ var StoryForm = React.createClass({
           </div>
         </Navbar>
         <div className="story">
+          <div className="story-author-header group">
+            <AuthorCard author={CurrentAuthorStore.currentAuthor()} />
+          </div>
           <Editor value={this.state.value} onChange={this.updateOutput} ref="pm" />
         </div>
+
+        <ShortcutHelper />
       </div>
     );
   },
   handleDraft: function () {
     var form = this;
-    // this.timer
+
     if (!this.intervalId && this.refs.pm.pm.getContent('text')) {
-      form.setState({ draftState: 'Saving...' });
-      this.intervalId = setInterval(function () {
+      setTimeout(form.setState({ draftState: 'Saving...' }), 8000);
+      form.intervalId = setInterval(function () {
         form.saveStory();
       }, 5000); // shortened for testing
     }

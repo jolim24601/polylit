@@ -1,10 +1,10 @@
 var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     StoryIndexItem = require('./story_index_item'),
-    Sidebar = require('../sidebar/sidebar'),
     ApiUtil = require('../../util/api_util');
 
 var Navbar = require('../navbar/navbar'),
+    Sidebar = require('../sidebar/sidebar'),
     HomeTools = require('../navbar/home_tools'),
     NavTools = require('../navbar/nav_tools');
 
@@ -43,6 +43,7 @@ var StoriesIndex = React.createClass({
     return (
       <div className="main-content">
         <Navbar><HomeTools location={this.props.location} /><NavTools /></Navbar>
+        <Sidebar />
         <ul className="story-feed">
           <li className="heading-title">{heading}</li>
           {storyList}

@@ -3,6 +3,8 @@ class Api::TagsController < ApplicationController
     # currently counts published stories and drafts
     @tags = Tag.select("tags.*, count(taggings.tag_id) as tag_count")
                .joins(:taggings)
+               .joins(:stories)
+               .where("stories.published = true")
                .group("tags.id")
                .order("tag_count DESC")
                .limit(15)

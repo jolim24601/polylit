@@ -1,33 +1,22 @@
 var React = require('react'),
     CurrentAuthorStore = require('../stores/current_author_store'),
-    SessionApiUtil = require('../util/session_api_util');
-
-var StoriesIndex = require('./stories/stories_index'),
+    StoriesIndex = require('./stories/stories_index'),
     Sidebar = require('./sidebar/sidebar');
 
 var Home = React.createClass({
-  componentDidMount: function () {
-    this.listener = CurrentAuthorStore.addListener(this.forceUpdate.bind(this));
-    SessionApiUtil.fetchCurrentAuthor();
-  },
+  // componentDidMount: function () {
+  //   this.listener = CurrentAuthorStore.addListener(this.forceUpdate.bind(this));
+  // },
   componentWillMount: function () {
     this.isFirstRender = true;
   },
-  componentWillUnmount: function () {
-    this.listener.remove();
-  },
+  // componentWillUnmount: function () {
+  //   this.listener.remove();
+  // },
   componentDidUpdate: function () {
     this.isFirstRender = false;
   },
   render: function () {
-    if (!CurrentAuthorStore.currentAuthorFetched()) {
-      return (
-        <div className="spinner">
-          <small className="loading">Loading...</small>
-        </div>
-      );
-    }
-
     var promo, sidebar;
     if (!CurrentAuthorStore.isLoggedIn()
       && this.isFirstRender && this.props.location.pathname === "/") {
@@ -49,11 +38,12 @@ var Home = React.createClass({
       sidebar = <Sidebar />;
     }
 
+
     return (
-      <div>
+      <div id="page-wrap">
         {promo}
-        <StoriesIndex location={{pathname: '/'}} />
         {sidebar}
+        <StoriesIndex location={{pathname: '/'}} />
       </div>
     );
   }
