@@ -28,7 +28,6 @@ class Api::StoriesController < ApplicationController
 
   def create
     @story = current_author.stories.new(story_params)
-
     if @story.save
       render :show
     else
