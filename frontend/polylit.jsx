@@ -12,6 +12,7 @@ var React = require('react'),
     AuthorProfile = require('./components/authors/author_profile'),
     newSession = require('./components/sessions/new'),
     newAuthor = require('./components/authors/new'),
+    oauth = require('./components/sessions/oauth'),
     SessionApiUtil = require('./util/session_api_util'),
     CurrentAuthorStore = require('./stores/current_author_store'),
     AuthorStories = require('./components/authors/stories'),
@@ -25,6 +26,7 @@ var routes = (
     <IndexRoute component={Home} />
     <Route path='login' component={newSession} />
     <Route path='signup' component={newAuthor} />
+    <Route path='auth' component={oauth} />
     <Route path='new-story' onEnter={_ensureSignIn} component={StoryForm} />
     <Route path='top-stories' component={StoriesIndex} />
     <Route path='stories/:id' component={StoryView} />
@@ -45,7 +47,7 @@ function _ensureSignIn(nextState, replace, callback) {
 
   function _redirectIfNotLoggedIn() {
     if (!CurrentAuthorStore.isLoggedIn()) {
-      replace(null, '/login', {});
+      replace(null, '/oauth', {});
     }
     callback();
   }

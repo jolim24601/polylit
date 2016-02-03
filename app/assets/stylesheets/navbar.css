@@ -12,10 +12,6 @@
   top: -65px !important;
 }
 
-.side-up {
-  top: 0 !important;
-}
-
 .navbar-nav {
   background: white;
   height: 65px;
@@ -42,6 +38,11 @@
   font-size: 14px;
   height: 38px;
   margin-top: -10px;
+}
+
+.search-icon {
+  margin-right: -25px;
+  position: relative;
 }
 
 .share-button, .notifications-button {

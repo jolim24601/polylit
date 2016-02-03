@@ -19,7 +19,7 @@ var newAuthor = React.createClass({
   },
   demoSignIn: function (e) {
     e.preventDefault();
-    var demoCredentials = { email: 'jolim24601@gmail.com', password: 'jupiter' };
+    var demoCredentials = { email: 'leo@example.com', password: 'annakarenina123' };
 
 
     SessionApiUtil.loginAuthor(demoCredentials, function () {
@@ -60,9 +60,6 @@ var newAuthor = React.createClass({
           </div>
 
           <a href="#/login">I already have an account.</a>
-
-          <button className="demo-login"
-            onClick={this.demoSignIn}>Sign in as Demo user</button>
       </form>
     );
   }

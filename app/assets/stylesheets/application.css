@@ -20,6 +20,7 @@
  *= require 'search'
  *= require 'story'
  *= require 'publish'
+ *= require font-awesome
  *= require_self
  *= require_tree
  */

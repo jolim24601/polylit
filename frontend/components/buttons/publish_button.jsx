@@ -24,7 +24,10 @@ var PublishButton = React.createClass({
       menuActive: false
     });
   },
-  toggleView: function () {
+  toggleView: function (e) {
+    if (document.getElementById('pub-parent').contains(e.target)) {
+      return;
+    }
     this.setState({ menuActive: !this.state.menuActive });
   },
   handleSubmit: function (e) {
@@ -95,8 +98,9 @@ var PublishButton = React.createClass({
 
     return (
       <div onClick={this.toggleView} className="prepublish primary button">
-        <span onClick={this.toggleView} id="pub-parent">Publish &or;</span>
-        {tagMenu}
+        <span id="pub-parent">Publish &or;
+          {tagMenu}
+        </span>
       </div>
     );
   },

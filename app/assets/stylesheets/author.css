@@ -90,7 +90,7 @@
   background-color: white;
   border-radius: 3%;
   z-index: 900;
-  max-width: 300px;
+  min-width: 250px;
   min-height: 150px;
   padding: 10px;
 }

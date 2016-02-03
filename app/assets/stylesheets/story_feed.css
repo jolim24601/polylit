@@ -11,7 +11,8 @@
 }
 
 .banner-index {
-  width: auto;
+  height: auto;
+  width: 100%;
   margin: 20px auto;
 }
 
@@ -26,10 +27,33 @@
   color: rgba(0,0,0,0.44);
 }
 
+.story-preview-footer {
+  position: relative;
+  bottom: -45px;
+}
+
+.fav-count {
+  font-size: 18px;
+  display: inline;
+  line-height: 5px;
+}
+
 .story-preview-footer button {
   display: block;
   border: 0;
   margin-right: 10px;
+}
+
+.story-preview-footer span {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.favorite-button {
+  color: #00ab6b;
+}
+
+.story-preview-footer span:hover {
 }
 
 .feed-subtitle {

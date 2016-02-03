@@ -147,7 +147,7 @@ var StoryForm = React.createClass({
     var form = this;
 
     if (!this.intervalId && this.refs.pm.pm.getContent('text')) {
-      setTimeout(form.setState({ draftState: 'Saving...' }), 8000);
+      form.setState({ draftState: 'Saving...' });
       form.intervalId = setInterval(function () {
         form.saveStory();
       }, 5000); // shortened for testing
@@ -166,10 +166,15 @@ var StoryForm = React.createClass({
     this.updateOutput(this.refs.pm.getContent());
     document.querySelector('.ProseMirror-content').focus();
   },
+  componentWillUnmount: function () {
+    clearInterval(this.intervalId);
+    this.intervalId = null;
+  },
   _isAuthorOwner: function (authorId) {
-    if (authorId !== CurrentAuthorStore.currentAuthor().id) {
-      return false;
+    if (authorId === CurrentAuthorStore.currentAuthor().id) {
+      return true;
     }
+    return false;
   },
   _redirect: function () {
     this.history.push('/');

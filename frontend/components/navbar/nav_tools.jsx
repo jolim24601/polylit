@@ -23,7 +23,7 @@ var NavTools = React.createClass({
     } else {
       buttons = (
         <li id="nav-login" className="button primary">
-          <a href="#/signup">Sign In / Sign Up</a>
+          <a href="#/auth">Sign In / Sign Up</a>
         </li>
       );
     }

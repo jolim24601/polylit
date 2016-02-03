@@ -42,14 +42,29 @@
 }
 
 .top-five {
+  list-style-type: none;
+  margin-left: 0;
+  padding-right: 0;
   margin-top: 0;
   padding-left: 15px;
 }
 
 .top-five li {
-  list-style: none;
+  counter-increment: step-counter;
   border-bottom: 1px rgba(0,0,0,0.15) solid;
   padding: 18px 0;
+}
+
+.top-five li:before {
+  content: counter(step-counter);
+  background-color: #fff;
+  color: black;
+  font-size: 15px;
+  padding: 8px 15px;
+  border-radius: 100%;
+  margin-left: -46px;
+  margin-right: 8px;
+  border-color: solid .1em rgba(0,0,0,0.05);
 }
 
 .top-five li:last-child {
@@ -69,4 +84,12 @@
 
 .sidebar-author:hover {
   color: #00ab6b;
+}
+
+.side-up {
+  top: 0;
+}
+
+.side-down {
+  top: 639px;
 }

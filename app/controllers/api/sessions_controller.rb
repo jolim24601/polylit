@@ -18,8 +18,6 @@ class Api::SessionsController < ApplicationController
   end
 
   def create
-    debugger
-    
     @author = Author.find_by_credentials(
       params[:author][:email],
       params[:author][:password]

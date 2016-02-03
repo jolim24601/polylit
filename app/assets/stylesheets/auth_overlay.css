@@ -56,12 +56,6 @@ label[for=form-password] {
   margin-right: 10px;
 }
 
-.demo-login {
-  padding: 5px;
-  margin: 5px;
-  border: 0;
-}
-
 button.modal-close {
   border: 0;
   cursor: pointer;
@@ -72,4 +66,65 @@ button.modal-close {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.oauth-login {
+  display: block;
+  text-align: left;
+  width: 210px;
+  margin: 0 auto 10px;
+  color: white;
+  border-radius: 40px;
+  padding: 10px 0;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: .3px;
+  line-height: 22px;
+}
+
+.fa-twitter, .fa-facebook-official, .fa-user {
+  padding-left: 21px;
+  padding-right: 10px;
+}
+
+.oauth-login a {
+  padding: 10px 2px;
+}
+
+.twitter-login {
+  background-color: #55acee;
+}
+.twitter-login:hover {
+  background-color: #006daa;
+}
+
+.fb-login {
+  background-color: #3b5998;
+}
+.fb-login:hover {
+  background-color: #1d315b;
+}
+
+.demo-login {
+  cursor: pointer;
+  background-color: rgb(176, 45, 41);
+}
+
+.demo-login:hover {
+  background-color: rgb(122, 23, 6);
+}
+
+.auth-alts a {
+  font-size: 12px;
+  border: 0;
+  color: #00ab6b;
+  margin-top: 5px;
+  margin-bottom: 0;
+  padding: 0;
+  display: block;
+}
+
+.auth-alts a:hover {
+  text-decoration: underline;
 }

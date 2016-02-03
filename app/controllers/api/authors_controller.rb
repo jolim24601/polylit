@@ -1,12 +1,7 @@
 class Api::AuthorsController < ApplicationController
   def create
     @author = Author.new(author_params)
-    debugger
-    if author_params[:provider] && author_params[:uid]
-    else
-      @author.username ||= @author.email[/[^@]+/]
-    end
-
+    @author.username ||= @author.email[/[^@]+/]
     @show_full = true
 
     if @author.save

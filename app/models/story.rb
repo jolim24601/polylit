@@ -15,7 +15,9 @@ class Story < ActiveRecord::Base
     tokenizer: ->(str) { str.scan(/\w+/) }
 
   belongs_to :author, inverse_of: :stories
-
+  has_many :favorites, dependent: :destroy
+  has_many :bookmarks, depenent: :destroy
+  
   has_attached_file :banner, default_url: ""
   validates_attachment_content_type :banner, content_type: /\Aimage\/.*\Z/
 

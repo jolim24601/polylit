@@ -6,6 +6,8 @@ var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     CurrentAuthorStore = require('../../stores/current_author_store');
 
+var FontAwesome = require('react-fontawesome');
+
 var Sidebar = React.createClass({
   getInitialState: function () {
     return { topTags: [], topStories: [] };
@@ -73,6 +75,7 @@ var Sidebar = React.createClass({
         <div className="sidebox group">
           <h3 className="sidebar-header">TOP STORIES ON MEDIUM</h3>
           <a className="more-top-stories" href="#/top-stories">SEE MORE</a>
+
           <ol className="top-five">
             {topStories}
           </ol>

@@ -34,15 +34,11 @@ var Home = React.createClass({
           </div>
         </div>
       );
-    } else {
-      sidebar = <Sidebar />;
     }
-
 
     return (
       <div id="page-wrap">
         {promo}
-        {sidebar}
         <StoriesIndex location={{pathname: '/'}} />
       </div>
     );

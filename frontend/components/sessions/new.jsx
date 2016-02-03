@@ -11,7 +11,7 @@ var newSession = React.createClass({
   },
   demoSignIn: function (e) {
     e.preventDefault();
-    var demoCredentials = { email: 'jolim24601@gmail.com', password: 'jupiter' };
+    var demoCredentials = { email: 'leo@example.com', password: 'annakarenina123' };
 
     SessionApiUtil.loginAuthor(demoCredentials, function () {
       this.history.pushState(null, '/', {});
@@ -49,9 +49,6 @@ var newSession = React.createClass({
               <a href="#">Cancel</a>
             </span>
           </div>
-
-          <button className="demo-login"
-            onClick={this.demoSignIn}>Sign in as Demo user</button>
       </form>
     );
   }

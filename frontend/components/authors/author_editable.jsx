@@ -79,9 +79,6 @@ var AuthorEditable = React.createClass({
           <div className="social-button-set group">
             <small>{author.following} Following</small>
             <small>{author.followers} Followers</small>
-            <small>&middot;</small>
-            <small><a href={author.twitter}>Twitter</a></small>
-            <small><a href={author.facebook}>FB</a></small>
           </div>
           {buttons}
 

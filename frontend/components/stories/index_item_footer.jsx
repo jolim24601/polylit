@@ -12,15 +12,10 @@ var Footer = React.createClass({
     return (
       <footer className="story-preview-footer group">
         <small>
-          <button className="favorite-button floatLeft">
-            Hearts {story.favorites}
-          </button>
-          <button className="bookmark-button floatRight">
-            Boomark
-          </button>
-          <button className="response-button floatRight">
-            Responses {story.responses}
-          </button>
+          <Bookmark />
+          <div className="fav-count">{story.favorites}</div>
+          <Favorite />
+
         </small>
       </footer>
     );

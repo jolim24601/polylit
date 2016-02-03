@@ -15,7 +15,7 @@ class Author < ActiveRecord::Base
   alias_attribute :name, :pen_name
   attr_reader :password
 
-  has_many :stories, inverse_of: :author
+  has_many :stories, inverse_of: :author, dependent: :destroy
   has_attached_file :avatar, default_url: 'avatar.png', styles: {
     small: '37x37#',
     large: '100x100#'
