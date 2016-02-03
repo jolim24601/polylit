@@ -31,7 +31,6 @@ module.exports = {
       url: "api/stories/tag/" + data.tag,
       data: data,
       success: function (stories) {
-        console.log(stories);
         ApiActions.receiveStoriesByTag(stories);
         callback && callback(stories);
       }
