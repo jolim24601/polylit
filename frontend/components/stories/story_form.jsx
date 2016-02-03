@@ -4,6 +4,7 @@ var React = require('react'),
     ApiUtil = require('../../util/api_util'),
     TagApiUtil = require('../../util/tag_api_util'),
     History = require('react-router').History,
+    CurrentAuthorStore = require('../../stores/current_author_store'),
     objectAssign = require('object-assign');
 
 var pmFormat = require('prosemirror/dist/format');
@@ -23,6 +24,7 @@ var blankAttrs = ({
                       published: false
                     },
                     storyId: '',
+                    authorId: '',
                     draftState: '',
                     verb: 'POST',
                     value: '<h3></h3>'
@@ -33,6 +35,7 @@ var StoryForm = React.createClass({
 
   fetchStory: function () {
     ApiUtil.fetchStory(this.props.params.id, function (story) {
+      if (!this._isAuthorOwner(story.author.id)) { this._redirect(); return; }
       // wrap json in PM object so we can serialize it into HTML
       var pm = new ProseMirror.ProseMirror({ doc: story.node, docFormat: 'json' });
 
@@ -44,6 +47,7 @@ var StoryForm = React.createClass({
           published: story.published
         },
         storyId: story.id,
+        authorId: story.author.id,
         verb: 'PATCH',
         value: pm.getContent('html')
       });
@@ -153,6 +157,14 @@ var StoryForm = React.createClass({
 
     this.updateOutput(this.refs.pm.getContent());
     document.querySelector('.ProseMirror-content').focus();
+  },
+  _isAuthorOwner: function (authorId) {
+    if (authorId !== CurrentAuthorStore.currentAuthor().id) {
+      return false;
+    }
+  },
+  _redirect: function () {
+    this.history.push('/');
   }
 });
 

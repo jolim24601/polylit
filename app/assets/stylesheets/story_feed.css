@@ -36,17 +36,6 @@
   font-style: italic;
 }
 
-.follow-footer {
-  border-top: 1px solid rgba(0,0,0,0.05);
-  padding-top: 10px;
-  margin-left: 10px;
-  margin-bottom: -5px;
-}
-
-.follow-footer small {
-  margin-right: 5px;
-}
-
 button.mini {
   margin-left: 10px;
   font-size: 12px;

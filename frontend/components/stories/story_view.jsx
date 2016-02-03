@@ -2,6 +2,7 @@ var React = require('react'),
     ProseMirror = require('prosemirror/dist/edit'),
     ApiUtil = require('../../util/api_util'),
     StoryStore = require('../../stores/story_store'),
+    AuthorCard = require('../authors/author_card'),
     CurrentAuthorStore = require('../../stores/current_author_store');
 
 var Navbar = require('../navbar/navbar'),
@@ -32,17 +33,21 @@ var StoryView = React.createClass({
     this.storyStoreListener = StoryStore.addListener(this._onChange);
     this.fetchStory(this.props.params.id);
   },
-  componentWillMount: function () {
-  },
   componentWillUnmount: function () {
     this.storyStoreListener.remove();
   },
   render: function () {
-    var editLink, editButton;
+    var authorCard, editLink, editButton;
     if (CurrentAuthorStore.currentAuthor() && this.state.story &&
         CurrentAuthorStore.currentAuthor().id === this.state.story.author.id) {
       editLink = "#/stories/" + this.state.story.id + "/edit";
       editButton = <a className="story-edit button" href={editLink}>Edit</a>;
+
+      authorCard = (
+        <div className="story-author-header group">
+          <AuthorCard author={this.state.story.author} />
+        </div>
+      );
     }
 
     return (
@@ -51,6 +56,7 @@ var StoryView = React.createClass({
           {editButton}
           <NavTools />
         </Navbar>
+        {authorCard}
         <div ref="pm"></div>
       </article>
     );

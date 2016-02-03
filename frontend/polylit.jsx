@@ -51,6 +51,7 @@ function _ensureSignIn(nextState, replace, callback) {
   }
 }
 
+
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(
     <Router>{routes}</Router>,

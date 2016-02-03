@@ -19,7 +19,7 @@ var StoryIndexItem = React.createClass({
         <small>{story.timeAgo} ago </small>
         &middot;
         <small> {story.readTime}</small>
-        {bannerImage}
+        <a className="banner-link" href={link}>{bannerImage}</a>
         <h3 className="feed-title"><a href={link}>{story.title}</a></h3>
         <p className="feed-subtitle">{story.subtitle}</p>
         <small><a href={link}>Read more...</a></small>

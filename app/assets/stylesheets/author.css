@@ -77,7 +77,7 @@
 .author-card-entry {
   position: relative;
   display: block;
-  width: 240px;
+  width: auto;
 }
 
 .author-card-entry > a {
@@ -88,9 +88,10 @@
   position: absolute;
   border: 1px solid #D3D3D3;
   background-color: white;
-  border-radius: 5%;
+  border-radius: 3%;
   z-index: 900;
-  width: 250px;
+  max-width: 300px;
+  min-height: 150px;
   padding: 10px;
 }
 
@@ -105,6 +106,17 @@
 
 .card-title {
   font-size: 18px;
+}
+
+.follow-footer {
+  position: absolute;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  padding-top: 10px;
+  bottom: 20px;
+}
+
+.follow-footer small {
+  margin-right: 5px;
 }
 
 .profile-banner button {

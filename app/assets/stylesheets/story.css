@@ -30,3 +30,12 @@ strong {
   right: 460px;
   top: 18px;
 }
+
+.story-author-header {
+  width: 875px;
+  margin: 10px auto;
+}
+
+.banner-link {
+  background-size: cover;
+}
