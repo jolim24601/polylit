@@ -5,8 +5,8 @@ json.description  author.description
 json.following    0
 json.followers    0
 json.avatar       asset_url(author.avatar.url(:small))
-json.favorites        author.favorites
-json.bookmarks        author.bookmarks
+json.favorites    author.favorites
+json.bookmarks    author.bookmarks
 
 
 # eventually call associations here

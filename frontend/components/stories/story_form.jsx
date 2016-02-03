@@ -102,8 +102,9 @@ var StoryForm = React.createClass({
     var story = objectAssign({}, this.state.story);
     story.published = true;
 
-    story.banner = document
-      .querySelector('.ProseMirror-content').querySelector('img').src;
+    var image = document.querySelector('.ProseMirror-content')
+                        .querySelector('img');
+    if (image) { story.banner = image.src; }
 
     this.setState({ story: story }, function () {
       this.saveStory(
@@ -150,7 +151,7 @@ var StoryForm = React.createClass({
       form.setState({ draftState: 'Saving...' });
       form.intervalId = setInterval(function () {
         form.saveStory();
-      }, 5000); // shortened for testing
+      }, 2500); // shortened for testing
     }
   },
   updateOutput: function (value) {

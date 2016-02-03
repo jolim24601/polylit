@@ -8,7 +8,10 @@ var ApiUtil = require('../../util/api_util'),
 var Bookmark = React.createClass({
   getStateFromStore: function () {
     var bookmarks = StoryStore.find(this.props.storyId).bookmarks;
-    if (bookmarks.indexOf(CurrentAuthorStore.currentAuthor().id) !== -1) {
+    var authorIds = bookmarks.map(function (bk) {
+      return bk.author_id;
+    });
+    if (authorIds.indexOf(CurrentAuthorStore.currentAuthor().id) !== -1) {
       return { bookmarked: true};
     }
     return { bookmarked: false };
@@ -28,21 +31,22 @@ var Bookmark = React.createClass({
     ApiUtil.toggleBookmark({
       bookmark: {
         story_id: this.props.storyId,
-        author_id: CurrentAuthorStore.currentAuthor().id,
-        type: type
-      }
+        author_id: CurrentAuthorStore.currentAuthor().id
+      },
+      type: type
     });
   },
   render: function () {
     var name = this.state.bookmarked ? "fa fa-bookmark" : "fa fa-bookmark-o";
 
     return (
-      <FontAwesome
-        onClick={this.bookmarkStory}
-        name={name}
-        className="bookmark-button floatRight"
-        />
-
+      <small>
+        <FontAwesome
+          onClick={this.bookmarkStory}
+          name={name}
+          className="bookmark-button floatRight"
+          />
+      </small>
     );
   },
   _onChange: function () {

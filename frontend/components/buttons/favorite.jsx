@@ -7,8 +7,11 @@ var ApiUtil = require('../../util/api_util'),
 
 var Favorite = React.createClass({
   getStateFromStore: function () {
-    var favorites = StoryStore.find(this.props.storyId).bookmarks;
-    if (favorites.indexOf(CurrentAuthorStore.currentAuthor().id) !== -1) {
+    var favorites = StoryStore.find(this.props.storyId).favorites;
+    var authorIds = favorites.map(function (fav) {
+      return fav.author_id;
+    });
+    if (authorIds.indexOf(CurrentAuthorStore.currentAuthor().id) !== -1) {
       return { favorited: true};
     }
     return { favorited: false };
@@ -29,18 +32,21 @@ var Favorite = React.createClass({
       favorite: {
         story_id: this.props.storyId,
         author_id: CurrentAuthorStore.currentAuthor().id
-      }
+      },
+      type: type
     });
   },
   render: function () {
     var name = this.state.favorited? "fa fa-heart" : "fa fa-heart-o";
-    
+
     return (
-      <FontAwesome
-        onClick={this.favoriteStory}
-        className="favorite-button floatLeft"
-        name={name}
-        />
+      <small>
+        <FontAwesome
+          onClick={this.favoriteStory}
+          className="favorite-button floatLeft"
+          name={name}
+          />
+      </small>
     );
   },
   _onChange: function () {

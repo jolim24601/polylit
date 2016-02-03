@@ -58,8 +58,6 @@ var newAuthor = React.createClass({
               <a href="#">Cancel</a>
             </span>
           </div>
-
-          <a href="#/login">I already have an account.</a>
       </form>
     );
   }

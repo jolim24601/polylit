@@ -11,6 +11,7 @@ var StoryIndexItem = React.createClass({
     if (story.banner) {
       bannerImage = <img className="banner-index" src={story.banner} />;
     }
+
     // story feed || author profile
     story.author = story.author || this.props.author;
     return (

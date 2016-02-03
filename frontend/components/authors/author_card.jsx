@@ -21,6 +21,7 @@ var AuthorCard = React.createClass({
     var author = this.props.author;
     var cardClass =
       this.state.active ? "profile-card" : "profile-card hide";
+
     return (
       <div
         onMouseEnter={this.setTimer}

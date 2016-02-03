@@ -19,6 +19,11 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :favorites, only: [:show, :create]
+    delete 'favorites', to: 'favorites#destroy'
+    resources :bookmarks, only: [:create, :show]
+    delete 'bookmarks', to: 'bookmarks#destroy'
+
     resources :follows, only: [:create, :show, :index]
 
     resources :taggings, only: [:create]

@@ -11,14 +11,12 @@ var React = require('react'),
 var Footer = React.createClass({
   render: function () {
     var story = this.props.story;
+
     return (
       <footer className="story-preview-footer group">
-        <small>
-          <Bookmark storyId={story.id} />
-          <div className="fav-count">{story.favorites}</div>
-          <Favorite storyId={story.id} />
-
-        </small>
+        <Bookmark storyId={story.id} />
+        <div className="fav-count">{story.favorites.length}</div>
+        <Favorite storyId={story.id} />
       </footer>
     );
   }

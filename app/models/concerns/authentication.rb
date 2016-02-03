@@ -49,7 +49,6 @@ module Authentication
       end
 
       author.email ||= 'blank'
-
       author.pen_name = auth_hash['info']['name']
       author.description = auth_hash['info']['description']
       author.avatar = auth_hash['info']['image']
