@@ -37,17 +37,11 @@ var StoryView = React.createClass({
     this.storyStoreListener.remove();
   },
   render: function () {
-    var authorCard, editLink, editButton;
+    var editLink, editButton;
     if (CurrentAuthorStore.currentAuthor() && this.state.story &&
         CurrentAuthorStore.currentAuthor().id === this.state.story.author.id) {
       editLink = "#/stories/" + this.state.story.id + "/edit";
       editButton = <a className="story-edit button" href={editLink}>Edit</a>;
-
-      authorCard = (
-        <div className="story-author-header group">
-          <AuthorCard author={this.state.story.author} />
-        </div>
-      );
     }
 
     return (
@@ -56,7 +50,11 @@ var StoryView = React.createClass({
           {editButton}
           <NavTools />
         </Navbar>
-        {authorCard}
+
+        <div className="story-author-header group">
+          <AuthorCard author={this.state.story.author} />
+        </div>
+
         <div ref="pm"></div>
       </article>
     );

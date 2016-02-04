@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204022453) do
+ActiveRecord::Schema.define(version: 20160204160918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20160204022453) do
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "author_id",  null: false
     t.integer  "story_id",   null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "bookmarks", ["author_id", "story_id"], name: "index_bookmarks_on_author_id_and_story_id", using: :btree
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 20160204022453) do
   create_table "favorites", force: :cascade do |t|
     t.integer  "author_id",  null: false
     t.integer  "story_id",   null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "favorites", ["author_id"], name: "index_favorites_on_author_id", using: :btree
@@ -64,9 +64,11 @@ ActiveRecord::Schema.define(version: 20160204022453) do
   add_index "favorites", ["story_id"], name: "index_favorites_on_story_id", using: :btree
 
   create_table "follows", force: :cascade do |t|
-    t.integer "follower_id",     null: false
-    t.integer "followable_id"
-    t.string  "followable_type"
+    t.integer  "follower_id",     null: false
+    t.integer  "followable_id",   null: false
+    t.string   "followable_type", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "follows", ["followable_type", "followable_id"], name: "index_follows_on_followable_type_and_followable_id", using: :btree
@@ -101,8 +103,8 @@ ActiveRecord::Schema.define(version: 20160204022453) do
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id",        null: false
-    t.integer  "taggable_id"
-    t.string   "taggable_type"
+    t.integer  "taggable_id",   null: false
+    t.string   "taggable_type", null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
