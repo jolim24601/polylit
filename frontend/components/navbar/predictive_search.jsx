@@ -18,7 +18,7 @@ var PredictiveSearch = React.createClass({
     this.listener.remove();
   },
   search: function (e) {
-    if (e.keyCode === 13 || e) {
+    if (e.keyCode === 13) {
       this.history.pushState(null, 'search', this.state);
     } else {
       this.setState({ query: e.target.value });

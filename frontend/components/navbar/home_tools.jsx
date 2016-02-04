@@ -9,6 +9,7 @@ var HomeTools = React.createClass({
   },
   componentWillReceiveProps: function (newProps) {
     var path = newProps.location.pathname;
+
     var newState;
     if (path === '/top-stories') {
       newState = objectAssign({}, blankState, { tabActive2: "is-active" });
@@ -29,7 +30,7 @@ var HomeTools = React.createClass({
           <a href="#/top-stories">TOP STORIES</a>
         </li>
         <li className={this.state.tabActive3}>
-          <a href="#">BOOKMARKS</a>
+          <a href="#/me/bookmarks">BOOKMARKS</a>
         </li>
       </ul>
     );

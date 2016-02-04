@@ -17,7 +17,8 @@ var Home = React.createClass({
     this.isFirstRender = false;
   },
   render: function () {
-    var promo, sidebar;
+    var promo;
+    var sidebar = <div className="dummy-sidebar"></div>;
     if (!CurrentAuthorStore.isLoggedIn()
       && this.isFirstRender && this.props.location.pathname === "/") {
       promo = (
@@ -34,12 +35,14 @@ var Home = React.createClass({
           </div>
         </div>
       );
+    } else {
+      sidebar = <Sidebar />;
     }
 
     return (
       <div id="page-wrap">
         {promo}
-        <StoriesIndex location={'/'} />
+        <StoriesIndex location={this.props.location}>{sidebar}</StoriesIndex>
       </div>
     );
   }

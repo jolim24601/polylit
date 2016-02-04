@@ -49,7 +49,7 @@ function _ensureSignIn(nextState, replace, callback) {
 
   function _redirectIfNotLoggedIn() {
     if (!CurrentAuthorStore.isLoggedIn()) {
-      replace(null, '/oauth', {});
+      replace(null, '/auth', {});
     }
     callback();
   }

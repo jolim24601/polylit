@@ -36,11 +36,10 @@ module.exports = {
       }
     });
   },
-  fetchBookmarks: function (data, callback) {
+  fetchBookmarkedStories: function (data, callback) {
     $.ajax({
       type: "GET",
       url: "api/bookmarks",
-      data: data,
       success: function (stories) {
         ApiActions.receiveBookmarkedStories(stories);
         callback && callback(stories);

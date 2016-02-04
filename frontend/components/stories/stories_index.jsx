@@ -32,6 +32,7 @@ var StoriesIndex = React.createClass({
   componentWillUnmount: function () {
     this.storyStoreListener.remove();
     $(window).off('scroll', this.throttled);
+    $(window).off('scroll', this.nextPage);
   },
   render: function () {
     var stories = this.state.stories;
@@ -40,13 +41,15 @@ var StoriesIndex = React.createClass({
       return <StoryIndexItem key={story.id} story={story} />;
     });
 
-    var heading = this.props.location === '/' ? "Latest Stories" : "Top Stories";
+    var heading = this.props.location.pathname === '/' ? "Latest Stories" : "Top Stories";
+    // home component passes a dummy prop if it doesn't want to show the sidebar
+    var sidebar = this.props.children || <Sidebar />;
 
     return (
       <div className="main-content">
         <Navbar><HomeTools location={this.props.location} /><NavTools /></Navbar>
+        {sidebar}
         <ul className="story-feed">
-          <Sidebar />
           <li className="heading-title">{heading}</li>
           {storyList}
         </ul>

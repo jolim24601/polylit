@@ -1,6 +1,8 @@
 class Api::BookmarksController < ApplicationController
   def index
-    @stories = current_author.bookmarks.includes(:stories)
+    @stories = Story.joins(bookmarks: :author)
+                    .where("bookmarks.author_id = ?", current_author.id)
+
     render "api/stories/index"
   end
 

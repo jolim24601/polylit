@@ -17,7 +17,7 @@ var auth = React.createClass({
   },
   handleSubmit: function (e) {
     e.preventDefault();
-    SessionApiUtil.loginAuthor(this.state, function () {
+    var something = SessionApiUtil.loginAuthor(this.state, function () {
       this.history.pushState(null, '/', {});
     }.bind(this));
   },

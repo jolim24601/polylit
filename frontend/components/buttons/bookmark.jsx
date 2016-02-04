@@ -12,9 +12,12 @@ var Bookmark = React.createClass({
 
   getStateFromStore: function () {
     var bookmarks = StoryStore.find(this.props.storyId).bookmarks;
-    var authorIds = bookmarks.map(function (bk) {
-      return bk.author_id;
-    });
+    var authorIds = [];
+    if (bookmarks) {
+      authorIds = bookmarks.map(function (bk) {
+        return bk.author_id;
+      });
+    }
     if (authorIds.indexOf(CurrentAuthorStore.currentAuthor().id) !== -1) {
       return { bookmarked: true};
     }

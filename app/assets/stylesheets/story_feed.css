@@ -45,6 +45,7 @@
 }
 
 .story-preview-footer span {
+  cursor: pointer;
   font-size: 20px;
   margin-right: 5px;
 }
@@ -53,7 +54,12 @@
   color: #00ab6b;
 }
 
-.story-preview-footer span:hover {
+.favorite-button:hover {
+  color: rgb(65, 230, 83);
+}
+
+.bookmark-button:hover {
+  color: black;
 }
 
 .feed-subtitle {

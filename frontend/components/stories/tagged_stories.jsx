@@ -46,7 +46,7 @@ var TaggedStoriesIndex = React.createClass({
     $(window).off('scroll', this.throttled);
   },
   render: function () {
-    var storiesList = StoryStore.all().map(function (story) {
+    var storyList = StoryStore.all().map(function (story) {
       return <StoryIndexItem key={story.id} story={story} />;
     });
 
@@ -59,7 +59,7 @@ var TaggedStoriesIndex = React.createClass({
             <span>TAGGED IN</span>
             <h3>{this.props.params.name}</h3>
           </li>
-          {storiesList}
+          {storyList}
         </ul>
       </div>
     );
