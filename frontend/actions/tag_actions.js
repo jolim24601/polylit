@@ -13,5 +13,17 @@ module.exports = {
       actionType: TagConstants.TOP_TAGS_RECEIVED,
       tags: tags
     });
+  },
+  receiveTag: function (tag) {
+    AppDispatcher.dispatch({
+      actionType: TagConstants.TAG_RECEIVED,
+      tag: tag
+    });
+  },
+  updateFollow: function (follow) {
+    AppDispatcher.dispatch({
+      actionType: TagConstants.TAG_FOLLOW_RECEIVED,
+      follow: follow
+    });
   }
 };

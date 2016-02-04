@@ -1,8 +1,21 @@
 var React = require('react'),
+    AuthorStore = require('../../stores/author_store'),
     AuthorCard = require('../authors/author_card'),
     StoryIndexItemFooter = require('./index_item_footer');
 
 var StoryIndexItem = React.createClass({
+  getStateFromStore: function () {
+    return { author: AuthorStore.find(this.props.story.author_id) };
+  },
+  getInitialState: function () {
+    return this.getStateFromStore();
+  },
+  componentDidMount: function () {
+    this.listener = AuthorStore.addListener(this._onChange);
+  },
+  componentWillUnmount: function () {
+    this.listener.remove();
+  },
   render: function () {
     var story = this.props.story;
     var link = "#/stories/" + story.id;
@@ -12,11 +25,17 @@ var StoryIndexItem = React.createClass({
       bannerImage = <img className="banner-index" src={story.banner} />;
     }
 
-    // story feed || author profile
-    story.author = story.author || this.props.author;
+    // listen for any follow updates on the author
+    var author;
+    if (this.state.author.id) {
+      author = this.state.author;
+    } else {
+      author = this.props.story.author;
+    }
+
     return (
       <li className="story-feed-item">
-        <AuthorCard author={story.author} />
+        <AuthorCard author={author} />
         <small>{story.timeAgo} ago </small>
         &middot;
         <small> {story.readTime}</small>
@@ -27,6 +46,9 @@ var StoryIndexItem = React.createClass({
         <StoryIndexItemFooter story={story} />
       </li>
     );
+  },
+  _onChange: function () {
+    this.setState(this.getStateFromStore());
   }
 });
 

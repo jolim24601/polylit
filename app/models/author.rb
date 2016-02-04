@@ -18,10 +18,7 @@ class Author < ActiveRecord::Base
   attr_reader :password
 
   has_many :stories, inverse_of: :author, dependent: :destroy
-  has_attached_file :avatar, default_url: 'avatar.png', styles: {
-    small: '37x37#',
-    large: '100x100#'
-  }
+  has_attached_file :avatar, default_url: 'avatar.png'
 
   has_many :favorites, dependent: :destroy
   has_many :bookmarks, dependent: :destroy

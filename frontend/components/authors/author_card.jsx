@@ -1,4 +1,6 @@
-var React = require('react');
+var React = require('react'),
+    AuthorStore = require('../../stores/author_store'),
+    Follow = require('../buttons/follow');
 
 var AuthorCard = React.createClass({
   getInitialState: function () {
@@ -19,9 +21,9 @@ var AuthorCard = React.createClass({
   },
   render: function () {
     var author = this.props.author;
+
     var cardClass =
       this.state.active ? "profile-card" : "profile-card hide";
-
     return (
       <div
         onMouseEnter={this.setTimer}
@@ -35,9 +37,10 @@ var AuthorCard = React.createClass({
           <a className="card-title" href={author.url}>{author.name}</a>
           <p>{author.description}</p>
           <footer className="follow-footer">
-            <small>Following {author.following.length}</small>
-            <small>Followers {author.followers.length}</small>
-            <button className="primary mini">Follow</button>
+            <small>Following </small>
+            <small>Followers {author.follows.length}</small>
+
+            <Follow followable={author} />
           </footer>
         </div>
       </div>

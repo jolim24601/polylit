@@ -6,6 +6,7 @@
 
 .ProseMirror {
   border-style: none;
+  margin-bottom: 80px;
 }
 
 .ProseMirror-content {

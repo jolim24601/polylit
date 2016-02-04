@@ -1,9 +1,6 @@
 var React = require('react');
 
 var Tag = React.createClass({
-  blankoutTag: function () {
-
-  },
   render: function () {
     var tag = this.props.tag;
 

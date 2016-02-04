@@ -14,7 +14,7 @@ var AuthorEditable = React.createClass({
     return {
       name: author.name,
       description: author.description,
-      imageURL: author.avatarLarge,
+      imageURL: author.avatar,
       imageFile: null,
       editable: false,
       disabled: false
@@ -73,6 +73,8 @@ var AuthorEditable = React.createClass({
     var field = this.state;
     var author = AuthorStore.find(this.props.authorId);
     var buttons = this._getButtons();
+    var follow = this.props.isOwner ? null : <Follow followable={author}/>;
+  
     return (
       <div className="profile-banner">
         <div className="inner-profile group">
@@ -85,16 +87,18 @@ var AuthorEditable = React.createClass({
             />
 
           <div className="social-button-set group">
-            <small>{author.following.length} Following</small>
-            <small>{author.followers.length} Followers</small>
+            <small> Following</small>
+            <small>{author.follows.length} Followers</small>
           </div>
           {buttons}
 
           <AvatarEditable
             editable={this.state.editable}
-            defaultURL={author.avatarLarge}
+            defaultURL={author.avatar}
             imageURL={this.state.imageURL} handleUpload={this.handleUpload}
             />
+
+          {follow}
         </div>
       </div>
     );
@@ -124,8 +128,6 @@ var AuthorEditable = React.createClass({
         </div>
       );
     }
-
-    return <Follow />;
   }
 });
 

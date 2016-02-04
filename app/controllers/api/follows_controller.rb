@@ -1,18 +1,24 @@
 class Api::FollowsController < ApplicationController
   def create
-    Follow.create(follow_params)
-    @author = Author.find(params[:follower_id])
-    render "api/authors/show"
+    @follow = Follow.create(
+      follower_id: params[:follower_id],
+      followable_id: params[:followable_id],
+      followable_type: params[:followable_type]
+    )
+
+    render :show
+  end
+
+  def show
   end
 
   def destroy
-    Follow.find_by(
+    @follow = Follow.find_by(
       follower_id: params[:follower_id],
       followable_id: params[:followable_id],
       followable_type: params[:followable_type]
     ).destroy
 
-    @author = Author.find(params[:follower_id])
-    render "api/authors/show"
+    render :show
   end
 end

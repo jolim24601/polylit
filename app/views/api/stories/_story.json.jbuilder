@@ -1,4 +1,4 @@
-json.extract!       story, :id, :title, :subtitle
+json.extract!       story, :id, :title, :subtitle, :author_id
 json.timeAgo        time_ago_in_words(story.created_at)
 json.published      story.published
 json.favorites      story.favorites

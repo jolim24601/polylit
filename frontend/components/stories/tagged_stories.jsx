@@ -1,6 +1,8 @@
 var React = require('react'),
+    TagStore = require('../../stores/tag_store'),
     StoryStore = require('../../stores/story_store'),
     StoryIndexItem = require('./story_index_item'),
+    Follow = require('../buttons/follow'),
     ApiUtil = require('../../util/api_util');
 
 var Navbar = require('../navbar/navbar'),
@@ -9,13 +11,13 @@ var Navbar = require('../navbar/navbar'),
 
 var TaggedStoriesIndex = React.createClass({
   getInitialState: function () {
-    return { page: 1, stories: [] };
+    return { page: 1, stories: [], tag: TagStore.find(this.props.params.name) };
   },
   componentWillReceiveProps: function (newProps) {
     var data = { page: 1, tag: newProps.params.name };
     this.setState({ page: 1 },
       ApiUtil.fetchStoriesByTag(data, function (stories) {
-        this.setState({ stories: stories });
+        this.setState({ stories: stories, tag: TagStore.find(this.props.params.name) });
       }.bind(this))
     );
   },
@@ -33,14 +35,16 @@ var TaggedStoriesIndex = React.createClass({
   componentDidMount: function () {
     var data = { page: 1, tag: this.props.params.name };
     ApiUtil.fetchStoriesByTag(data, function (stories) {
-      this.listener = StoryStore.addListener(this._onChange);
+      this.storyListener = StoryStore.addListener(this._onChange);
       this.setState({ stories: stories });
     }.bind(this));
 
+    this.tagListener = TagStore.addListener(this._onChange);
     // this.throttled = infiniteScroller(this.nextPage);
   },
   componentWillUnmount: function () {
-    this.listener.remove();
+    this.storyListener.remove();
+    this.tagListener.remove();
     $(window).off('scroll', this.throttled);
   },
   render: function () {
@@ -53,6 +57,7 @@ var TaggedStoriesIndex = React.createClass({
         <Navbar><NavTools /></Navbar>
         <Sidebar />
         <ul className="tagged story-feed">
+          <Follow followable={this.state.tag} />
           <li>
             <span>TAGGED IN</span>
             <h3>{this.props.params.name}</h3>
@@ -63,7 +68,7 @@ var TaggedStoriesIndex = React.createClass({
     );
   },
   _onChange: function () {
-    this.setState({ stories: StoryStore.all() });
+    this.setState({ stories: StoryStore.all(), tag: TagStore.find(this.props.params.name) });
   }
 });
 

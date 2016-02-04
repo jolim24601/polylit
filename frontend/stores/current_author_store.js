@@ -29,6 +29,17 @@ function destroyStory(story) {
   }
 }
 
+function updateFollows(follow) {
+  for (var i=0; i < _currentAuthor.follows.length; i++) {
+    if (_currentAuthor.follows[i].id === follow.id) {
+      _currentAuthor.follows.splice(i, 1);
+      return;
+    }
+  }
+
+  _currentAuthor.follows.push(follow);
+}
+
 CurrentAuthorStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
   case CurrentAuthorConstants.RECEIVE_CURRENT_AUTHOR:
@@ -42,6 +53,10 @@ CurrentAuthorStore.__onDispatch = function (payload) {
     break;
   case CurrentAuthorConstants.LOSE_STORY:
     destroyStory(payload.story);
+    CurrentAuthorStore.__emitChange();
+    break;
+  case CurrentAuthorConstants.FOLLOW_RECEIVED:
+    updateFollows(payload.follow);
     CurrentAuthorStore.__emitChange();
     break;
   default:

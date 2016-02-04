@@ -7,5 +7,11 @@ module.exports = {
       actionType: AuthorConstants.AUTHOR_RECEIVED,
       author: author
     });
+  },
+  updateFollow: function (follow) {
+    AppDispatcher.dispatch({
+      actionType: AuthorConstants.AUTHOR_FOLLOW_RECEIVED,
+      follow: follow
+    });
   }
 };

@@ -18,5 +18,11 @@ module.exports = {
       actionType: CurrentAuthorConstants.LOSE_STORY,
       story: story
     });
+  },
+  updateFollow: function (follow) {
+    AppDispatcher.dispatch({
+      actionType: CurrentAuthorConstants.FOLLOW_RECEIVED,
+      follow: follow
+    });
   }
 };

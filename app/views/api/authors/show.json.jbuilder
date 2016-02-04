@@ -1,6 +1,5 @@
 json.partial! 'api/authors/author', author: @author
 
-json.avatarLarge  asset_url(@author.avatar.url(:large))
 json.favorites    @author.favorites
 json.bookmarks    @author.bookmarks
 
