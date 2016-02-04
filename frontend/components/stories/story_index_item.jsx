@@ -6,8 +6,8 @@ var StoryIndexItem = React.createClass({
   render: function () {
     var story = this.props.story;
     var link = "#/stories/" + story.id;
-    var bannerImage;
 
+    var bannerImage;
     if (story.banner) {
       bannerImage = <img className="banner-index" src={story.banner} />;
     }

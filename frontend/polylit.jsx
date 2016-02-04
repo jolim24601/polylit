@@ -25,18 +25,18 @@ var Home = require('./components/home');
 var routes = (
   <Route onEnter={SessionApiUtil.fetchCurrentAuthor} path='/' component={App}>
     <IndexRoute component={Home} />
+    <Route path='auth' component={oauth} />
     <Route path='login' component={newSession} />
     <Route path='signup' component={newAuthor} />
-    <Route path='auth' component={oauth} />
-    <Route path='new-story' onEnter={_ensureSignIn} component={StoryForm} />
-    <Route path='top-stories' component={StoriesIndex} />
     <Route path='stories/:id' component={StoryView} />
-    <Route path='stories/:id/edit' onEnter={_ensureSignIn} component={StoryForm} />
     <Route path='authors/:id' component={AuthorProfile} />
-    <Route path='me/stories' onEnter={_ensureSignIn} component={AuthorStories} />
-    <Route path='me/bookmarks' onEnter={_ensureSignIn} component={BookmarksIndex} />
+    <Route path='top-stories' component={StoriesIndex} />
     <Route path='search' component={Search} />
     <Route path='tag/:name' component={TaggedStoriesIndex} />
+    <Route path='me/stories' onEnter={_ensureSignIn} component={AuthorStories} />
+    <Route path='me/bookmarks' onEnter={_ensureSignIn} component={BookmarksIndex} />
+    <Route path='stories/:id/edit' onEnter={_ensureSignIn} component={StoryForm} />
+    <Route path='new-story' onEnter={_ensureSignIn} component={StoryForm} />
   </Route>
 );
 
@@ -54,7 +54,6 @@ function _ensureSignIn(nextState, replace, callback) {
     callback();
   }
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(

@@ -16,13 +16,11 @@ else
 end
 
 json.author do
-  json.partial! 'api/authors/author', author: story.author, show_full: false
+  json.partial! 'api/authors/author', author: story.author
 end
 
-if show_full
-  json.tags do
-    json.partial! 'api/tags/tag', collection: story.tags, as: :tag
-  end
-
-  json.node       story.node
+json.tags do
+  json.partial! 'api/tags/tag', collection: story.tags, as: :tag
 end
+
+json.node story.node unless defined? hide_node

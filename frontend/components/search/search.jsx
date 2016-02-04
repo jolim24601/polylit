@@ -2,12 +2,10 @@ var React = require('react'),
     SearchResultsStore = require('../../stores/search_results_store'),
     SearchApiUtil = require('../../util/search_api_util'),
     StoryIndexItem = require('../stories/story_index_item'),
-    InfiniteScroll = require('react-infinite-scroll')(React);
+    infiniteScroller = require('../../util/helpers').infiniteScroller;
 
 var Navbar = require('../navbar/navbar'),
     NavTools = require('../navbar/nav_tools');
-
-var infiniteScroller = require('../../util/helpers').infiniteScroller;
 
 var Search = React.createClass({
   getInitialState: function () {
@@ -39,11 +37,11 @@ var Search = React.createClass({
   render: function () {
     // add cases for tags, authors search
     var results = this.findByType();
-    var pluralType, storyActive, peopleActive;
+    var pluralType, storyActive, peopleActive, tagActive;
     if (this.state.type === "Story") {
       pluralType = "Stories";
       storyActive = "darken-border";
-    } else {
+    } else if (this.state.type === "Author") {
       pluralType = "People";
       peopleActive = "darken-border";
     }

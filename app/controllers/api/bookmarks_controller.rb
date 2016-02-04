@@ -4,7 +4,7 @@ class Api::BookmarksController < ApplicationController
                     .per(Story.default_per_page * params[:page].to_i)
                     .joins(bookmarks: :author)
                     .where("bookmarks.author_id = ?", current_author.id)
-                    .order("bookmarks.created_at ASC")
+                    .order("bookmarks.created_at DESC")
 
     render "api/stories/index"
   end

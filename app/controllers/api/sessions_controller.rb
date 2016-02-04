@@ -10,7 +10,6 @@ class Api::SessionsController < ApplicationController
   def show
     if current_author
       @author = current_author
-      @show_full = true
       render "api/authors/show"
     else
       render json: {}
@@ -27,7 +26,6 @@ class Api::SessionsController < ApplicationController
       render json: { errors: "Incorrect email/password combination." }, status: 401
     else
       login_author(@author)
-      @show_full = true
       render "api/authors/show"
     end
   end

@@ -3,11 +3,11 @@ var React = require('react'),
     StoryIndexItem = require('./story_index_item'),
     StoryStore = require('../../stores/story_store'),
     History = require('react-router').History,
-    ApiUtil = require('../../util/api_util');
-
-var infiniteScroller = require('../../util/helpers').infiniteScroller;
+    ApiUtil = require('../../util/api_util'),
+    infiniteScroller = require('../../util/helpers').infiniteScroller;
 
 var Navbar = require('../navbar/navbar'),
+    HomeTools = require('../navbar/home_tools'),
     Sidebar = require('../sidebar/sidebar'),
     NavTools = require('../navbar/nav_tools');
 
@@ -16,10 +16,6 @@ var BookmarksIndex = React.createClass({
 
   getInitialState: function () {
     return { stories: [], page: 1 };
-  },
-  componentWillReceiveProps: function () {
-    var data = { page: this.state.page };
-    this.fetchBookmarkedStories(data);
   },
   nextPage: function () {
     var nextPage = this.state.page + 1;
@@ -31,21 +27,24 @@ var BookmarksIndex = React.createClass({
     if (!CurrentAuthorStore.isLoggedIn()) {
       this.history.pushState(null, 'auth', {});
     }
-    this.listener = StoryStore.addListener(this._onChange);
 
+    var self = this;
     var data = { page: 1 };
-    this.fetchBookmarkedStories(data);
+    ApiUtil.fetchBookmarkedStories(data, function (stories) {
+      self.setState({ stories: stories }, function () {
+        self.listener = StoryStore.addListener(this._onChange);
+      });
+    });
 
-    this.throttled = infiniteScroller(this.nextPage);
+    // this.throttled = infiniteScroller(this.nextPage);
   },
   fetchBookmarkedStories: function (data) {
-    this.serverRequest = ApiUtil.fetchBookmarkedStories(data, function (stories) {
+    ApiUtil.fetchBookmarkedStories(data, function (stories) {
       this.setState({ stories: stories });
     }.bind(this));
   },
   componentWillUnmount: function () {
     $(window).off('scroll', this.throttled);
-    if (this.serverRequest) { this.serverRequest.abort(); }
     this.listener.remove();
   },
   render: function () {
@@ -55,10 +54,10 @@ var BookmarksIndex = React.createClass({
 
     return (
       <div className="main-content">
-        <Navbar><NavTools /></Navbar>
+        <Navbar><HomeTools location={this.props.location} /><NavTools /></Navbar>
         <Sidebar />
         <ul className="bookmarked story-feed">
-          <li className="heading-title">Your bookmarks</li>
+          <li className="heading-title">Your most recent bookmarks</li>
           {storyList}
         </ul>
       </div>

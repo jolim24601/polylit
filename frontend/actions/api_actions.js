@@ -20,6 +20,12 @@ module.exports = {
       stories: stories
     });
   },
+  receiveAuthorStories: function (stories) {
+    AppDispatcher.dispatch({
+      actionType: StoryConstants.STORIES_RECEIVED,
+      stories: stories
+    });
+  },
   receiveStoriesByTag: function (stories) {
     AppDispatcher.dispatch({
       actionType: StoryConstants.STORIES_RECEIVED,

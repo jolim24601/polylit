@@ -1,7 +1,6 @@
-var React = require('react');
-var FontAwesome = require('react-fontawesome');
-
-var ApiUtil = require('../../util/api_util'),
+var React = require('react'),
+    FontAwesome = require('react-fontawesome'),
+    ApiUtil = require('../../util/api_util'),
     StoryStore = require('../../stores/story_store'),
     CurrentAuthorStore = require('../../stores/current_author_store');
 
@@ -11,12 +10,13 @@ var Favorite = React.createClass({
   mixins: [History],
 
   getStateFromStore: function () {
-    var favorites = StoryStore.find(this.props.storyId).favorites;
-    var authorIds = favorites.map(function (fav) {
+    var story = StoryStore.find(this.props.story.id);
+
+    var authorIds = story.favorites.map(function (fav) {
       return fav.author_id;
     });
     if (authorIds.indexOf(CurrentAuthorStore.currentAuthor().id) !== -1) {
-      return { favorited: true};
+      return { favorited: true };
     }
     return { favorited: false };
   },
@@ -38,7 +38,7 @@ var Favorite = React.createClass({
 
     ApiUtil.toggleFavorite({
       favorite: {
-        story_id: this.props.storyId,
+        story_id: this.props.story.id,
         author_id: CurrentAuthorStore.currentAuthor().id
       },
       type: type

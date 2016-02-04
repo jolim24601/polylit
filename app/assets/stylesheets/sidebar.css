@@ -7,7 +7,7 @@
   top: 65px; right: 0; bottom: 0;
   height: auto;
   overflow-y: scroll;
-  transition: top 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .sidebar-header {
@@ -90,6 +90,6 @@
   top: 0;
 }
 
-.side-down {
-  top: 639px;
+.side-right {
+  transform: translateX(500px);
 }

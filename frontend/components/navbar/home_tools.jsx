@@ -5,16 +5,17 @@ var blankState = { tabActive1: "", tabActive2: "", tabActive3: "" };
 
 var HomeTools = React.createClass({
   getInitialState: function () {
-    return objectAssign({}, blankState, { tabActive1: "is-active" });
+    return objectAssign({}, blankState);
   },
   componentWillReceiveProps: function (newProps) {
     var path = newProps.location.pathname;
 
     var newState;
-    if (path === '/top-stories') {
+    if (path === '/') {
+      newState = objectAssign({}, blankState, { tabActive1: "is-active" });
+    } else if (path === '/top-stories') {
       newState = objectAssign({}, blankState, { tabActive2: "is-active" });
-    } else if (path === '/') {
-      newState = this.getInitialState();
+
     } else {
       newState = objectAssign({}, blankState, { tabActive3: "is-active" });
     }

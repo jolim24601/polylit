@@ -4,9 +4,8 @@ var React = require('react'),
     TagApiUtil = require('../../util/tag_api_util'),
     ApiUtil = require('../../util/api_util'),
     StoryStore = require('../../stores/story_store'),
-    CurrentAuthorStore = require('../../stores/current_author_store');
-
-var FontAwesome = require('react-fontawesome');
+    CurrentAuthorStore = require('../../stores/current_author_store'),
+    FontAwesome = require('react-fontawesome');
 
 var Sidebar = React.createClass({
   getInitialState: function () {

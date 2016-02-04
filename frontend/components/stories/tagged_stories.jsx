@@ -1,9 +1,8 @@
 var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     StoryIndexItem = require('./story_index_item'),
-    ApiUtil = require('../../util/api_util');
-
-var infiniteScroller = require('../../util/helpers').infiniteScroller;
+    ApiUtil = require('../../util/api_util'),
+    infiniteScroller = require('../../util/helpers').infiniteScroller;
 
 var Navbar = require('../navbar/navbar'),
     Sidebar = require('../sidebar/sidebar'),
@@ -11,14 +10,14 @@ var Navbar = require('../navbar/navbar'),
 
 var TaggedStoriesIndex = React.createClass({
   getInitialState: function () {
-    return { page: 1 };
+    return { page: 1, stories: [] };
   },
   componentWillReceiveProps: function (newProps) {
+    var data = { page: 1, tag: newProps.params.name };
     this.setState({ page: 1 },
-      ApiUtil.fetchStoriesByTag({
-        page: 1,
-        tag: newProps.params.name
-      })
+      ApiUtil.fetchStoriesByTag(data, function (stories) {
+        this.setState({ stories: stories });
+      }.bind(this))
     );
   },
   nextPage: function () {
@@ -33,20 +32,20 @@ var TaggedStoriesIndex = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.listener = StoryStore.addListener(this._onChange);
-    ApiUtil.fetchStoriesByTag({
-      page: 1,
-      tag: this.props.params.name
-    });
+    var data = { page: 1, tag: this.props.params.name };
+    ApiUtil.fetchStoriesByTag(data, function (stories) {
+      this.listener = StoryStore.addListener(this._onChange);
+      this.setState({ stories: stories });
+    }.bind(this));
 
-    this.throttled = infiniteScroller(this.nextPage);
+    // this.throttled = infiniteScroller(this.nextPage);
   },
   componentWillUnmount: function () {
     this.listener.remove();
     $(window).off('scroll', this.throttled);
   },
   render: function () {
-    var storyList = StoryStore.all().map(function (story) {
+    var storyList = this.state.stories.map(function (story) {
       return <StoryIndexItem key={story.id} story={story} />;
     });
 
@@ -65,7 +64,7 @@ var TaggedStoriesIndex = React.createClass({
     );
   },
   _onChange: function () {
-    this.forceUpdate();
+    this.setState({ stories: StoryStore.all() });
   }
 });
 

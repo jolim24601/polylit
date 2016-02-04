@@ -11,8 +11,9 @@ var Navbar = React.createClass({
      });
   },
   componentDidMount: function () {
-    $(window).scroll(this.scrollHandler);
+    this.slideSidebar();
 
+    $(window).scroll(this.scrollHandler);
     this.intervalId = setInterval(function() {
       if (this.state.didScroll) {
         this.hasScrolled();
@@ -41,14 +42,24 @@ var Navbar = React.createClass({
       $('.sidebar').removeClass('side-up');
     }
 
+    this.slideSidebar();
+
     this.setState({ lastScrollTop: st });
+  },
+  slideSidebar: function () {
+    var st = $(document).scrollTop();
+    if (document.querySelector('.promotron') && st < 660) {
+      $('.sidebar').addClass('side-right');
+    } else {
+      $('.sidebar').removeClass('side-right');
+    }
   },
   render: function () {
     return (
       <header className="navbar">
         <nav className="navbar-nav group">
-          <a href="/" className="navbar-logo floatLeft">
-            <img className="logo" alt="site-logo" onClick={this.redirect}
+          <a href="#" className="navbar-logo floatLeft">
+            <img className="logo" alt="site-logo"
               src="https://s3-us-west-2.amazonaws.com/jolim24601/polylit-prod/logo.png" />
           </a>
 

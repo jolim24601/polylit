@@ -1,25 +1,21 @@
-var React = require('react');
-var FontAwesome = require('react-fontawesome');
-
-var ApiUtil = require('../../util/api_util'),
+var React = require('react'),
+    FontAwesome = require('react-fontawesome'),
+    ApiUtil = require('../../util/api_util'),
     StoryStore = require('../../stores/story_store'),
-    CurrentAuthorStore = require('../../stores/current_author_store');
-
-var History = require('react-router').History;
+    CurrentAuthorStore = require('../../stores/current_author_store'),
+    History = require('react-router').History;
 
 var Bookmark = React.createClass({
   mixins: [History],
 
   getStateFromStore: function () {
-    var bookmarks = StoryStore.find(this.props.storyId).bookmarks;
-    var authorIds = [];
-    if (bookmarks) {
-      authorIds = bookmarks.map(function (bk) {
-        return bk.author_id;
-      });
-    }
+    var story = StoryStore.find(this.props.story.id);
+
+    var authorIds = story.bookmarks.map(function (bk) {
+      return bk.author_id;
+    });
     if (authorIds.indexOf(CurrentAuthorStore.currentAuthor().id) !== -1) {
-      return { bookmarked: true};
+      return { bookmarked: true };
     }
     return { bookmarked: false };
   },
@@ -41,7 +37,7 @@ var Bookmark = React.createClass({
 
     ApiUtil.toggleBookmark({
       bookmark: {
-        story_id: this.props.storyId,
+        story_id: this.props.story.id,
         author_id: CurrentAuthorStore.currentAuthor().id
       },
       type: type

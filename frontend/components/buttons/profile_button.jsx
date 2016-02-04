@@ -1,9 +1,8 @@
 var React = require('react'),
     SessionApiUtil = require('../../util/session_api_util'),
     CurrentAuthorActions = require('../../actions/current_author_actions'),
-    CurrentAuthorStore = require('../../stores/current_author_store');
-
-var History = require('react-router').History;
+    CurrentAuthorStore = require('../../stores/current_author_store'),
+    History = require('react-router').History;
 
 var ProfileButton = React.createClass({
   mixins: [History],
@@ -19,6 +18,9 @@ var ProfileButton = React.createClass({
       this.toggleView();
     }
   },
+  componentDidMount: function () {
+    this.listener = CurrentAuthorStore.addListener(this._onChange);
+  },
   componentDidUpdate: function () {
     if (this.state.active) {
       $(document).on('click', this.clickHandler);
@@ -27,6 +29,7 @@ var ProfileButton = React.createClass({
     }
   },
   componentWillUnmount: function () {
+    this.listener.remove();
     $(document).off('click', this.clickHandler);
   },
   logoutAuthor: function () {
@@ -57,6 +60,9 @@ var ProfileButton = React.createClass({
         </ul>
       </div>
     );
+  },
+  _onChange: function () {
+    this.forceUpdate();
   }
 });
 

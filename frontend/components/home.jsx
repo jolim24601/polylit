@@ -1,26 +1,18 @@
 var React = require('react'),
     CurrentAuthorStore = require('../stores/current_author_store'),
-    StoriesIndex = require('./stories/stories_index'),
-    Sidebar = require('./sidebar/sidebar');
+    StoriesIndex = require('./stories/stories_index');
 
 var Home = React.createClass({
-  // componentDidMount: function () {
-  //   this.listener = CurrentAuthorStore.addListener(this.forceUpdate.bind(this));
-  // },
   componentWillMount: function () {
     this.isFirstRender = true;
   },
-  // componentWillUnmount: function () {
-  //   this.listener.remove();
-  // },
   componentDidUpdate: function () {
     this.isFirstRender = false;
   },
   render: function () {
     var promo;
-    var sidebar = <div className="dummy-sidebar"></div>;
     if (!CurrentAuthorStore.isLoggedIn()
-      && this.isFirstRender && this.props.location.pathname === "/") {
+        && this.isFirstRender && this.props.location.pathname === "/") {
       promo = (
         <div className="promotron">
           <div className="inner-promotron">
@@ -35,14 +27,12 @@ var Home = React.createClass({
           </div>
         </div>
       );
-    } else {
-      sidebar = <Sidebar />;
     }
 
     return (
-      <div id="page-wrap">
+      <div id="main-content">
         {promo}
-        <StoriesIndex location={this.props.location}>{sidebar}</StoriesIndex>
+        <StoriesIndex location={this.props.location} />
       </div>
     );
   }

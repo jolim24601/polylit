@@ -10,7 +10,6 @@ var App = React.createClass({
   },
   componentDidMount: function () {
     this.listener = CurrentAuthorStore.addListener(this.forceUpdate.bind(this));
-    SessionApiUtil.fetchCurrentAuthor();
     NProgress.done();
   },
   componentWillUnmount: function () {

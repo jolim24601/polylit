@@ -8,14 +8,13 @@ var React = require('react'),
     AuthorCard = require('../authors/author_card'),
     objectAssign = require('object-assign');
 
-var pmFormat = require('prosemirror/dist/format');
-var ProseMirror = require('prosemirror/dist/edit');
+var ProseMirror = require('prosemirror/dist/edit'),
+    pmFormat = require('prosemirror/dist/format');
 
 var Navbar = require('../navbar/navbar'),
     WriteTools = require('../navbar/write_tools'),
     ShortcutHelper = require('./shortcuts'),
     PublishButton = require('../buttons/publish_button'),
-    ProseMirror = require('prosemirror/dist/edit'),
     ProfileTools = require('../navbar/profile_tools');
 
 var blankAttrs = ({
@@ -151,7 +150,7 @@ var StoryForm = React.createClass({
       form.setState({ draftState: 'Saving...' });
       form.intervalId = setInterval(function () {
         form.saveStory();
-      }, 2500); // shortened for testing
+      }, 1000); // shortened for testing
     }
   },
   updateOutput: function (value) {

@@ -1,26 +1,26 @@
 var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     StoryIndexItem = require('./story_index_item'),
-    ApiUtil = require('../../util/api_util');
+    ApiUtil = require('../../util/api_util'),
+    infiniteScroller = require('../../util/helpers').infiniteScroller;
 
 var Navbar = require('../navbar/navbar'),
     Sidebar = require('../sidebar/sidebar'),
     HomeTools = require('../navbar/home_tools'),
     NavTools = require('../navbar/nav_tools');
 
-var infiniteScroller = require('../../util/helpers').infiniteScroller;
 
 var StoriesIndex = React.createClass({
   getInitialState: function () {
     return ({ stories: StoryStore.all(), page: 1 });
   },
   componentDidMount: function () {
-    this.storyStoreListener = StoryStore.addListener(this._onChange);
+    this.listener = StoryStore.addListener(this._onChange);
 
     // Feed options and have the controller make queries,
     // eventually pass the API request in as a prop
     ApiUtil.fetchStories({ page: this.state.page});
-    this.throttled = infiniteScroller(this.nextPage);
+    // this.throttled = infiniteScroller(this.nextPage);
   },
   nextPage: function () {
     if ($(window).scrollTop() + $(window).height() === $(document).height()) {
@@ -30,9 +30,9 @@ var StoriesIndex = React.createClass({
     }
   },
   componentWillUnmount: function () {
-    this.storyStoreListener.remove();
-    $(window).off('scroll', this.throttled);
-    $(window).off('scroll', this.nextPage);
+    this.listener.remove();
+    // $(window).off('scroll', this.throttled);
+    // $(window).off('scroll', this.nextPage);
   },
   render: function () {
     var stories = this.state.stories;
@@ -42,13 +42,11 @@ var StoriesIndex = React.createClass({
     });
 
     var heading = this.props.location.pathname === '/' ? "Latest Stories" : "Top Stories";
-    // home component passes a dummy prop if it doesn't want to show the sidebar
-    var sidebar = this.props.children || <Sidebar />;
 
     return (
       <div className="main-content">
         <Navbar><HomeTools location={this.props.location} /><NavTools /></Navbar>
-        {sidebar}
+        <Sidebar />
         <ul className="story-feed">
           <li className="heading-title">{heading}</li>
           {storyList}
