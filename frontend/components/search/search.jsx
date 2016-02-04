@@ -16,7 +16,7 @@ var Search = React.createClass({
   },
   componentWillUnmount: function () {
     this.listener.remove();
-    $(window).off('scroll', this.throttled);
+    // $(window).off('scroll', this.throttled);
   },
   componentWillReceiveProps: function (newProps) {
     var newQuery = newProps.location.query.query;
@@ -25,7 +25,7 @@ var Search = React.createClass({
   },
   search: function (newQuery, newType) {
     SearchApiUtil.search(newQuery, newType, this.state.page);
-    this.throttled = infiniteScroller(this.nextPage);
+    // this.throttled = infiniteScroller(this.nextPage);
   },
   nextPage: function () {
     if ($(window).scrollTop() + $(window).height() === $(document).height()) {
