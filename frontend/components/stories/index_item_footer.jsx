@@ -12,6 +12,10 @@ var Footer = React.createClass({
   render: function () {
     var story = this.props.story;
 
+    if (!story) {
+      return <div></div>;
+    }
+
     return (
       <footer className="story-preview-footer group">
         <Bookmark storyId={story.id} />

@@ -15,7 +15,20 @@ var BookmarksIndex = React.createClass({
   mixins: [History],
 
   getInitialState: function () {
-    return { stories: [] };
+    return { stories: [], page: 1 };
+  },
+  componentWillReceiveProps: function () {
+    var data = { page: this.state.page };
+    ApiUtil.fetchBookmarkedStories(data, function (stories) {
+      this.setState({ stories: stories });
+    }.bind(this));
+  },
+  nextPage: function () {
+    var nextPage = this.state.page + 1;
+    var data = { page: nextPage };
+    ApiUtil.fetchBookmarkedStories(data, function (stories) {
+      this.setState({ stories: stories, page: nextPage });
+    }.bind(this));
   },
   componentDidMount: function () {
     if (!CurrentAuthorStore.isLoggedIn()) {
