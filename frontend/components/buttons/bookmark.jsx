@@ -10,7 +10,6 @@ var Bookmark = React.createClass({
 
   getStateFromStore: function () {
     var story = StoryStore.find(this.props.story.id);
-
     var authorIds = story.bookmarks.map(function (bk) {
       return bk.author_id;
     });

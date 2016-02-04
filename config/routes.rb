@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     delete 'bookmarks', to: 'bookmarks#destroy'
 
     resources :follows, only: [:create, :show, :index]
+    delete 'follows', to: 'follows#destroy'
 
     resources :taggings, only: [:create]
     delete 'taggings', to: 'taggings#destroy'

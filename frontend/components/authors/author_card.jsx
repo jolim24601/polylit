@@ -35,8 +35,8 @@ var AuthorCard = React.createClass({
           <a className="card-title" href={author.url}>{author.name}</a>
           <p>{author.description}</p>
           <footer className="follow-footer">
-            <small>Following {author.following}</small>
-            <small>Followers {author.followers}</small>
+            <small>Following {author.following.length}</small>
+            <small>Followers {author.followers.length}</small>
             <button className="primary mini">Follow</button>
           </footer>
         </div>

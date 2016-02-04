@@ -53,8 +53,10 @@ var StoryView = React.createClass({
 
         <div className="story-author-header group">
           <AuthorCard author={this.state.story.author} />
+          <small>{this.state.story.lastUpdated}</small>
+          &middot;
+          <small> {this.state.story.readTime}</small>
         </div>
-
         <div ref="pm"></div>
       </article>
     );

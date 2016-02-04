@@ -5,6 +5,7 @@ json.favorites      story.favorites
 json.bookmarks      story.bookmarks
 json.responses      0
 json.banner         asset_url(story.banner.url)
+json.lastUpdated    story.updated_at.strftime("%m/%d")
 
 read_time = (story.wordcount / 200).to_s + ' min read'
 if story.published

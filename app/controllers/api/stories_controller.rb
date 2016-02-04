@@ -29,6 +29,7 @@ class Api::StoriesController < ApplicationController
   def create
     @story = current_author.stories.new(story_params)
     if @story.save
+      current_author.favorites.create(story_id: @story.id)
       render :show
     else
       render json: { errors: @story.errors.full_messages }, status: 422

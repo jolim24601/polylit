@@ -1,5 +1,6 @@
 class Tag < ActiveRecord::Base
   include PgSearch
+  include Followable
   multisearchable against: :name
   PgSearch.multisearch_options = { using: { tsearch: { prefix: true } } }
   pg_search_scope :search, against: :name, using: { tsearch: { prefix: true } }
