@@ -19,31 +19,33 @@ var BookmarksIndex = React.createClass({
   },
   componentWillReceiveProps: function () {
     var data = { page: this.state.page };
-    ApiUtil.fetchBookmarkedStories(data, function (stories) {
-      this.setState({ stories: stories });
-    }.bind(this));
+    this.fetchBookmarkedStories(data);
   },
   nextPage: function () {
     var nextPage = this.state.page + 1;
     var data = { page: nextPage };
-    ApiUtil.fetchBookmarkedStories(data, function (stories) {
-      this.setState({ stories: stories, page: nextPage });
-    }.bind(this));
+    this.setState({ page: nextPage });
+    this.fetchBookmarkedStories(data);
   },
   componentDidMount: function () {
     if (!CurrentAuthorStore.isLoggedIn()) {
       this.history.pushState(null, 'auth', {});
     }
-
     this.listener = StoryStore.addListener(this._onChange);
-    ApiUtil.fetchBookmarkedStories(function (stories) {
-      this.setState({ stories: stories });
-    });
+
+    var data = { page: 1 };
+    this.fetchBookmarkedStories(data);
 
     this.throttled = infiniteScroller(this.nextPage);
   },
+  fetchBookmarkedStories: function (data) {
+    this.serverRequest = ApiUtil.fetchBookmarkedStories(data, function (stories) {
+      this.setState({ stories: stories });
+    }.bind(this));
+  },
   componentWillUnmount: function () {
     $(window).off('scroll', this.throttled);
+    if (this.serverRequest) { this.serverRequest.abort(); }
     this.listener.remove();
   },
   render: function () {

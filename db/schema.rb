@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203224343) do
+ActiveRecord::Schema.define(version: 20160204022453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,8 +42,10 @@ ActiveRecord::Schema.define(version: 20160203224343) do
   add_index "authors", ["username"], name: "index_authors_on_username", unique: true, using: :btree
 
   create_table "bookmarks", force: :cascade do |t|
-    t.integer "author_id", null: false
-    t.integer "story_id",  null: false
+    t.integer  "author_id",  null: false
+    t.integer  "story_id",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "bookmarks", ["author_id", "story_id"], name: "index_bookmarks_on_author_id_and_story_id", using: :btree
@@ -51,8 +53,10 @@ ActiveRecord::Schema.define(version: 20160203224343) do
   add_index "bookmarks", ["story_id"], name: "index_bookmarks_on_story_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "author_id", null: false
-    t.integer "story_id",  null: false
+    t.integer  "author_id",  null: false
+    t.integer  "story_id",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "favorites", ["author_id"], name: "index_favorites_on_author_id", using: :btree
