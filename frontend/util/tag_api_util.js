@@ -45,5 +45,16 @@ module.exports = {
         callback && callback();
       }
     });
+  },
+  fetchTagDetails: function (data, callback) {
+    $.ajax({
+      type: "GET",
+      url: "api/tags/" + data,
+      dataType: "json",
+      success: function (tag) {
+        TagActions.receiveTag(tag);
+        callback && callback(tag);
+      }
+    });
   }
 };

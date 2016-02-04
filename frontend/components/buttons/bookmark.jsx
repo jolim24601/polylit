@@ -9,7 +9,8 @@ var Bookmark = React.createClass({
   mixins: [History],
 
   getStateFromStore: function () {
-    var story = StoryStore.find(this.props.story.id);
+    var story = StoryStore.find(this.props.story.id) || this.props.story;
+
     var authorIds = story.bookmarks.map(function (bk) {
       return bk.author_id;
     });

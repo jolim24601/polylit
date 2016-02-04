@@ -12,6 +12,8 @@ class Api::TagsController < ApplicationController
   end
 
   def show
+    # grab the tags full details by name
+    @tag = Tag.find_by(name: params[:id])
   end
 
   def create

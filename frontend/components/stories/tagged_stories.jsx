@@ -3,6 +3,7 @@ var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     StoryIndexItem = require('./story_index_item'),
     Follow = require('../buttons/follow'),
+    TagApiUtil = require('../../util/tag_api_util'),
     ApiUtil = require('../../util/api_util');
 
 var Navbar = require('../navbar/navbar'),
@@ -11,46 +12,62 @@ var Navbar = require('../navbar/navbar'),
 
 var TaggedStoriesIndex = React.createClass({
   getInitialState: function () {
-    return { page: 1, stories: [], tag: TagStore.find(this.props.params.name) };
+    return { page: 1, stories: [], tag: null, tagName: this.props.params.name };
+  },
+  fetchTagDetails: function (tagName) {
+    TagApiUtil.fetchTagDetails(tagName, function (tag) {
+      this.setState({ tag: tag });
+    }.bind(this));
   },
   componentWillReceiveProps: function (newProps) {
-    var data = { page: 1, tag: newProps.params.name };
-    this.setState({ page: 1 },
-      ApiUtil.fetchStoriesByTag(data, function (stories) {
-        this.setState({ stories: stories, tag: TagStore.find(this.props.params.name) });
-      }.bind(this))
-    );
+    var data = { page: 1, tagName: newProps.params.name };
+    this.setState({ page: 1, tagName: newProps.params.name });
+
+    ApiUtil.fetchStoriesByTagName(data, function (stories) {
+      this.setState({ stories: stories });
+    }.bind(this));
+
+    this.fetchTagDetails(newProps.params.name);
   },
   nextPage: function () {
     if ($(window).scrollTop() + $(window).height() === $(document).height()) {
       var nextPage = this.state.page + 1;
       this.setState({ page: nextPage });
 
-      ApiUtil.fetchStoriesByTag({
-        tag: this.props.params.name,
+      ApiUtil.fetchStoriesByTagName({
+        tagName: this.props.params.name,
         page: nextPage
       });
     }
   },
   componentDidMount: function () {
-    var data = { page: 1, tag: this.props.params.name };
-    ApiUtil.fetchStoriesByTag(data, function (stories) {
+    var data = { page: 1, tagName: this.props.params.name };
+    ApiUtil.fetchStoriesByTagName(data, function (stories) {
       this.storyListener = StoryStore.addListener(this._onChange);
       this.setState({ stories: stories });
     }.bind(this));
 
     this.tagListener = TagStore.addListener(this._onChange);
+    this.fetchTagDetails(this.props.params.name);
     // this.throttled = infiniteScroller(this.nextPage);
   },
   componentWillUnmount: function () {
     this.storyListener.remove();
     this.tagListener.remove();
-    $(window).off('scroll', this.throttled);
+    // $(window).off('scroll', this.throttled);
   },
   render: function () {
     var storyList = this.state.stories.map(function (story) {
       return <StoryIndexItem key={story.id} story={story} />;
     });
+
+    if (!this.state.tag) {
+      return (
+        <div className="spinner">
+          <small className="loading">Loading...</small>
+        </div>
+      );
+    }
 
     return (
       <div className="main-content">
@@ -68,7 +85,12 @@ var TaggedStoriesIndex = React.createClass({
     );
   },
   _onChange: function () {
-    this.setState({ stories: StoryStore.all(), tag: TagStore.find(this.props.params.name) });
+
+    this.setState({
+      stories: StoryStore.all(),
+      tagName: this.props.params.name,
+      tag: TagStore.find(this.props.params.name)
+   });
   }
 });
 

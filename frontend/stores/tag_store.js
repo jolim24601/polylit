@@ -22,26 +22,27 @@ TagStore.find = function (name) {
   }
 };
 
-TagStore.findById = function (id) {
+function findById(id) {
   for (var i=0; i < _tags.length; i++) {
     if (_tags[i].id === id) {
       return _tags[i];
     }
   }
-};
+}
 
-function resetTag (tag) {
+function resetTag(tag) {
   for (var i=0; i < _tags.length; i++) {
     if (_tags[i].id === tag.id) {
       _tags[i] = tag;
-      break;
+      return;
     }
   }
+  _tags.push(tag);
 }
 
 // if follow exists, delete it, else add it.
 function updateTagFollows(follow) {
-  var tag = TagStore.findById(follow.followable_id);
+  var tag = findById(follow.followable_id);
   var followsIds = tag.follows.map(function (f) { return f.id; });
   for (var i=0; i < tag.follows.length; i++) {
     if (tag.follows[i].id === follow.id) {

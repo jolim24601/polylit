@@ -12,14 +12,14 @@ var Search = React.createClass({
     return { query: '', page: 1, type: "Story" };
   },
   componentDidMount: function () {
-    this.throttled = _.throttle(this.nextPage, 1500);
-    $(window).scroll(this.throttled);
+    // this.throttled = _.throttle(this.nextPage, 1500);
+    // $(window).scroll(this.throttled);
 
     this.listener = SearchResultsStore.addListener(this._onChange);
   },
   componentWillUnmount: function () {
     this.listener.remove();
-    $(window).off('scroll', this.throttled);
+    // $(window).off('scroll', this.throttled);
   },
   componentWillReceiveProps: function (newProps) {
     var newQuery = newProps.location.query.query;

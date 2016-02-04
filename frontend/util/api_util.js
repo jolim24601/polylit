@@ -25,10 +25,10 @@ module.exports = {
       }
     });
   },
-  fetchStoriesByTag: function (data, callback) {
+  fetchStoriesByTagName: function (data, callback) {
     $.ajax({
       type: "GET",
-      url: "api/stories/tag/" + data.tag,
+      url: "api/stories/tag/" + data.tagName,
       data: data,
       success: function (stories) {
         ApiActions.receiveStoriesByTag(stories);

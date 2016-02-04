@@ -72,9 +72,9 @@ var AuthorEditable = React.createClass({
   render: function () {
     var field = this.state;
     var author = AuthorStore.find(this.props.authorId);
-    var buttons = this._getButtons();
+    var buttons = this._getButtons(author);
     var follow = this.props.isOwner ? null : <Follow followable={author}/>;
-  
+
     return (
       <div className="profile-banner">
         <div className="inner-profile group">
@@ -103,7 +103,7 @@ var AuthorEditable = React.createClass({
       </div>
     );
   },
-  _getButtons: function () {
+  _getButtons: function (author) {
     if (this.state.editable && this.props.isOwner) {
       return (
         <div className="author-edit-button">
@@ -116,15 +116,23 @@ var AuthorEditable = React.createClass({
         </div>
       );
     } else if (this.props.isOwner) {
+      var deleteAccount = (
+        <button id="delete-account" onClick={this.destroyAuthor}>
+        Delete this account
+        </button>
+      );
+      
+      // Prevent demo user from getting deleted!
+      if (author.name === "Leo Tolstoy") { deleteAccount = null; }
+
+
       return (
         <div className="author-edit-button">
           <button
             className="edit-button"
             onClick={this.openEdit}>Edit
           </button>
-          <button id="delete-account" onClick={this.destroyAuthor}>
-            Delete this account
-          </button>
+          {deleteAccount}
         </div>
       );
     }

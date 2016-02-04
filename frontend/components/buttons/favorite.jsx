@@ -10,7 +10,7 @@ var Favorite = React.createClass({
   mixins: [History],
 
   getStateFromStore: function () {
-    var story = StoryStore.find(this.props.story.id);
+    var story = StoryStore.find(this.props.story.id) || this.props.story;
 
     var authorIds = story.favorites.map(function (fav) {
       return fav.author_id;
