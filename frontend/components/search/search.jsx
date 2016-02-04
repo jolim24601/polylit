@@ -18,7 +18,7 @@ var Search = React.createClass({
   },
   componentWillUnmount: function () {
     this.listener.remove();
-    $(window).off('scroll', infiniteScroller);
+    $(window).off('scroll', this.throttled);
   },
   componentWillReceiveProps: function (newProps) {
     var newQuery = newProps.location.query.query;
@@ -26,13 +26,15 @@ var Search = React.createClass({
     this.search(newQuery, this.state.type);
   },
   search: function (newQuery, newType) {
-    SearchApiUtil.search(newQuery, newType, this.state.page,
-      infiniteScroller(this.nextPage));
+    SearchApiUtil.search(newQuery, newType, this.state.page);
+    this.throttled = infiniteScroller(this.nextPage);
   },
   nextPage: function () {
-    var nextPage = this.state.page + 1;
-    SearchApiUtil.search(this.state.query, this.state.type, nextPage);
-    this.setState({ page: nextPage });
+    if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+      var nextPage = this.state.page + 1;
+      this.setState({ page: nextPage });
+      SearchApiUtil.search(this.state.query, this.state.type, nextPage);
+    }
   },
   render: function () {
     // add cases for tags, authors search

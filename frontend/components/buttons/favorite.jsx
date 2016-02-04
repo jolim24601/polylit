@@ -5,7 +5,11 @@ var ApiUtil = require('../../util/api_util'),
     StoryStore = require('../../stores/story_store'),
     CurrentAuthorStore = require('../../stores/current_author_store');
 
+var History = require('react-router').History;
+
 var Favorite = React.createClass({
+  mixins: [History],
+
   getStateFromStore: function () {
     var favorites = StoryStore.find(this.props.storyId).favorites;
     var authorIds = favorites.map(function (fav) {
@@ -26,6 +30,10 @@ var Favorite = React.createClass({
     this.listener.remove();
   },
   favoriteStory: function () {
+    if (!CurrentAuthorStore.isLoggedIn()) {
+      this.history.pushState(null, 'auth', {});
+    }
+
     var type = this.state.favorited ? "DELETE" : "POST";
 
     ApiUtil.toggleFavorite({

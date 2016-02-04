@@ -39,7 +39,7 @@ var Home = React.createClass({
     return (
       <div id="page-wrap">
         {promo}
-        <StoriesIndex location={{pathname: '/'}} />
+        <StoriesIndex location={'/'} />
       </div>
     );
   }

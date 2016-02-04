@@ -22,13 +22,15 @@ var TaggedStoriesIndex = React.createClass({
     );
   },
   nextPage: function () {
-    var nextPage = this.state.page + 1;
-    ApiUtil.fetchStoriesByTag({
-      tag: this.props.params.name,
-      page: nextPage
-    });
+    if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+      var nextPage = this.state.page + 1;
+      this.setState({ page: nextPage });
 
-    this.setState({ page: nextPage });
+      ApiUtil.fetchStoriesByTag({
+        tag: this.props.params.name,
+        page: nextPage
+      });
+    }
   },
   componentDidMount: function () {
     this.listener = StoryStore.addListener(this._onChange);
@@ -37,11 +39,11 @@ var TaggedStoriesIndex = React.createClass({
       tag: this.props.params.name
     });
 
-    infiniteScroller(this.nextPage);
+    this.throttled = infiniteScroller(this.nextPage);
   },
   componentWillUnmount: function () {
     this.listener.remove();
-    $(window).off('scroll', infiniteScroller);
+    $(window).off('scroll', this.throttled);
   },
   render: function () {
     var storiesList = StoryStore.all().map(function (story) {

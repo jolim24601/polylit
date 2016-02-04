@@ -19,17 +19,19 @@ var StoriesIndex = React.createClass({
 
     // Feed options and have the controller make queries,
     // eventually pass the API request in as a prop
-    ApiUtil.fetchStories({ page: this.state.page},
-    infiniteScroller(this.nextPage));
+    ApiUtil.fetchStories({ page: this.state.page});
+    this.throttled = infiniteScroller(this.nextPage);
   },
   nextPage: function () {
-    var nextPage = this.state.page + 1;
-    ApiUtil.fetchStories({ page: nextPage });
-    this.setState({ page: nextPage });
+    if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+      var nextPage = this.state.page + 1;
+      this.setState({ page: nextPage });
+      ApiUtil.fetchStories({ page: nextPage });
+    }
   },
   componentWillUnmount: function () {
     this.storyStoreListener.remove();
-    $(window).off('scroll', infiniteScroller);
+    $(window).off('scroll', this.throttled);
   },
   render: function () {
     var stories = this.state.stories;
@@ -38,13 +40,13 @@ var StoriesIndex = React.createClass({
       return <StoryIndexItem key={story.id} story={story} />;
     });
 
-    var heading = this.props.location.pathname === '/' ? "Latest Stories" : "Top Stories";
+    var heading = this.props.location === '/' ? "Latest Stories" : "Top Stories";
 
     return (
       <div className="main-content">
         <Navbar><HomeTools location={this.props.location} /><NavTools /></Navbar>
-        <Sidebar />
         <ul className="story-feed">
+          <Sidebar />
           <li className="heading-title">{heading}</li>
           {storyList}
         </ul>

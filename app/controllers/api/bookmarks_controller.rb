@@ -1,6 +1,7 @@
 class Api::BookmarksController < ApplicationController
   def index
-    current_author.bookmarks.includes(:stories)
+    @stories = current_author.bookmarks.includes(:stories)
+    render "api/stories/index"
   end
 
   def create
