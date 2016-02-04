@@ -7,6 +7,9 @@ var FontAwesome = require('react-fontawesome');
 var auth = React.createClass({
   mixins: [History],
 
+  getInitialState: function () {
+    return { loggingIn: false };
+  },
   demoSignIn: function (e) {
     e.preventDefault();
     var demoCredentials = { email: 'leo@example.com', password: 'annakarenina123' };
@@ -17,11 +20,21 @@ var auth = React.createClass({
   },
   handleSubmit: function (e) {
     e.preventDefault();
+    this.setState({ loggingIn: true });
     var something = SessionApiUtil.loginAuthor(this.state, function () {
       this.history.pushState(null, '/', {});
     }.bind(this));
   },
   render: function () {
+    if (this.state.loggingIn) {
+      return (
+        <div className="spinner">
+          <small className="loading">Signing In...</small>
+        </div>
+      );
+    }
+
+
     return (
       <form className="oauth-form modal-form" onSubmit={this.handleSubmit}>
         <img className="modal-logo logo"

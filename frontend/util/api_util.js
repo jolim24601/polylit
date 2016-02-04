@@ -147,5 +147,15 @@ module.exports = {
         callback && callback();
       }
     });
+  },
+  destroyAuthor: function (data, callback) {
+    $.ajax({
+      type: "DELETE",
+      url: "api/authors/" + data,
+      success: function () {
+        CurrentAuthorActions.destroyCurrentAuthor();
+        callback && callback();
+      }
+    });
   }
 };

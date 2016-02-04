@@ -3,8 +3,7 @@ var React = require('react'),
     StoryIndexItem = require('./story_index_item'),
     StoryStore = require('../../stores/story_store'),
     History = require('react-router').History,
-    ApiUtil = require('../../util/api_util'),
-    infiniteScroller = require('../../util/helpers').infiniteScroller;
+    ApiUtil = require('../../util/api_util');
 
 var Navbar = require('../navbar/navbar'),
     HomeTools = require('../navbar/home_tools'),

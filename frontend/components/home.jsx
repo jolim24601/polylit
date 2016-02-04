@@ -13,6 +13,7 @@ var Home = React.createClass({
     var promo;
     if (!CurrentAuthorStore.isLoggedIn()
         && this.isFirstRender && this.props.location.pathname === "/") {
+
       promo = (
         <div className="promotron">
           <div className="inner-promotron">
@@ -27,7 +28,7 @@ var Home = React.createClass({
           </div>
         </div>
       );
-    }
+    } 
 
     return (
       <div id="main-content">

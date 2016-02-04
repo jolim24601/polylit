@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
     get 'stories/tag/:name', to: 'stories#by_tag'
 
-    resources :authors, only: [:show, :create, :update]
+    resources :authors, only: [:show, :create, :update, :destroy]
     resource :session, only: [:show, :create, :destroy]
 
     resources :tags, only: [:create, :show] do

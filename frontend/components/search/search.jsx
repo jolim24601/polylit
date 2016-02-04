@@ -2,7 +2,7 @@ var React = require('react'),
     SearchResultsStore = require('../../stores/search_results_store'),
     SearchApiUtil = require('../../util/search_api_util'),
     StoryIndexItem = require('../stories/story_index_item'),
-    infiniteScroller = require('../../util/helpers').infiniteScroller;
+    _ = require('underscore');
 
 var Navbar = require('../navbar/navbar'),
     NavTools = require('../navbar/nav_tools');
@@ -12,11 +12,14 @@ var Search = React.createClass({
     return { query: '', page: 1, type: "Story" };
   },
   componentDidMount: function () {
+    this.throttled = _.throttle(this.nextPage, 1500);
+    $(window).scroll(this.throttled);
+
     this.listener = SearchResultsStore.addListener(this._onChange);
   },
   componentWillUnmount: function () {
     this.listener.remove();
-    // $(window).off('scroll', this.throttled);
+    $(window).off('scroll', this.throttled);
   },
   componentWillReceiveProps: function (newProps) {
     var newQuery = newProps.location.query.query;
@@ -25,7 +28,6 @@ var Search = React.createClass({
   },
   search: function (newQuery, newType) {
     SearchApiUtil.search(newQuery, newType, this.state.page);
-    // this.throttled = infiniteScroller(this.nextPage);
   },
   nextPage: function () {
     if ($(window).scrollTop() + $(window).height() === $(document).height()) {

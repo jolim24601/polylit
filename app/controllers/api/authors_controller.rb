@@ -24,19 +24,24 @@ class Api::AuthorsController < ApplicationController
     end
   end
 
+  def destroy
+    Author.find(params[:id]).destroy
+    render json: {}
+  end
+
   private
 
-  def author_params
-    params.require(:author).permit(
-      :email,
-      :password,
-      :username,
-      :pen_name,
-      :name,
-      :description,
-      :avatar,
-      :provider,
-      :uid
-    )
-  end
+    def author_params
+      params.require(:author).permit(
+        :email,
+        :password,
+        :username,
+        :pen_name,
+        :name,
+        :description,
+        :avatar,
+        :provider,
+        :uid
+      )
+    end
 end

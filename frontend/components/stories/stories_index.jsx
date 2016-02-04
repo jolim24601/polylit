@@ -1,8 +1,7 @@
 var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     StoryIndexItem = require('./story_index_item'),
-    ApiUtil = require('../../util/api_util'),
-    infiniteScroller = require('../../util/helpers').infiniteScroller;
+    ApiUtil = require('../../util/api_util');
 
 var Navbar = require('../navbar/navbar'),
     Sidebar = require('../sidebar/sidebar'),
@@ -20,7 +19,7 @@ var StoriesIndex = React.createClass({
     // Feed options and have the controller make queries,
     // eventually pass the API request in as a prop
     ApiUtil.fetchStories({ page: this.state.page});
-    // this.throttled = infiniteScroller(this.nextPage);
+    // this.throttled = _.(this.nextPage, 250);
   },
   nextPage: function () {
     if ($(window).scrollTop() + $(window).height() === $(document).height()) {
@@ -32,7 +31,6 @@ var StoriesIndex = React.createClass({
   componentWillUnmount: function () {
     this.listener.remove();
     // $(window).off('scroll', this.throttled);
-    // $(window).off('scroll', this.nextPage);
   },
   render: function () {
     var stories = this.state.stories;

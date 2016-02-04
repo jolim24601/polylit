@@ -3,9 +3,12 @@ var React = require('react'),
     ApiUtil = require('../../util/api_util'),
     Follow = require('../buttons/follow'),
     AuthorStore = require('../../stores/author_store'),
+    History = require('react-router').History,
     BioEditable = require('./bio_editable');
 
 var AuthorEditable = React.createClass({
+  mixins: [History],
+
   getStateFromStore: function () {
     var author = AuthorStore.find(this.props.authorId);
     return {
@@ -31,6 +34,11 @@ var AuthorEditable = React.createClass({
   },
   componentWillUnmount: function () {
     this.authorListener.remove();
+  },
+  destroyAuthor: function () {
+    ApiUtil.destroyAuthor(this.props.authorId, function () {
+      this.history.pushState(null, '/', {});
+    }.bind(this));
   },
   handleClick: function (e) {
     e.preventDefault();
@@ -109,6 +117,9 @@ var AuthorEditable = React.createClass({
           <button
             className="edit-button"
             onClick={this.openEdit}>Edit
+          </button>
+          <button id="delete-account" onClick={this.destroyAuthor}>
+            Delete this account
           </button>
         </div>
       );

@@ -1,8 +1,7 @@
 var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     StoryIndexItem = require('./story_index_item'),
-    ApiUtil = require('../../util/api_util'),
-    infiniteScroller = require('../../util/helpers').infiniteScroller;
+    ApiUtil = require('../../util/api_util');
 
 var Navbar = require('../navbar/navbar'),
     Sidebar = require('../sidebar/sidebar'),

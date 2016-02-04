@@ -51,6 +51,7 @@ var Navbar = React.createClass({
     if (document.querySelector('.promotron') && st < 660) {
       $('.sidebar').addClass('side-right');
     } else {
+      $('.sidebar').removeClass('hide');
       $('.sidebar').removeClass('side-right');
     }
   },
