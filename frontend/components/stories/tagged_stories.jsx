@@ -49,12 +49,10 @@ var TaggedStoriesIndex = React.createClass({
 
     this.tagListener = TagStore.addListener(this._onChange);
     this.fetchTagDetails(this.props.params.name);
-    // this.throttled = infiniteScroller(this.nextPage);
   },
   componentWillUnmount: function () {
     this.storyListener.remove();
     this.tagListener.remove();
-    // $(window).off('scroll', this.throttled);
   },
   render: function () {
     var storyList = this.state.stories.map(function (story) {

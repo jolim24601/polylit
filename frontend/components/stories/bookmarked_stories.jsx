@@ -34,8 +34,6 @@ var BookmarksIndex = React.createClass({
         self.listener = StoryStore.addListener(this._onChange);
       });
     });
-
-    // this.throttled = infiniteScroller(this.nextPage);
   },
   fetchBookmarkedStories: function (data) {
     ApiUtil.fetchBookmarkedStories(data, function (stories) {
