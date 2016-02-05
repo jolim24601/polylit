@@ -35,9 +35,7 @@ var AuthorProfile = React.createClass({
   },
   render: function () {
     var author = this.state.author;
-
-    if (typeof this.state.author.id === 'undefined'
-        || this.state.author.stories.length !== StoryStore.all().length) {
+    if (typeof this.state.author.id === 'undefined' || !this.state.author.stories) {
       return (
         <div className="spinner">
           <small className="loading">Loading...</small>

@@ -260,3 +260,12 @@ button:disabled {
   font-weight: 700;
   color: black !important;
 }
+
+.Following {
+  background-color: #00ab6b !important;
+  color: #fff;
+}
+
+#delete-account {
+  background: rgb(221, 36, 18);
+}

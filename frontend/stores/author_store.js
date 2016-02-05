@@ -10,6 +10,7 @@ function resetAuthors(authors) {
   authors.forEach(function (author) {
     _authors[author.id] = author;
   });
+
 }
 
 function resetAuthor(author) {

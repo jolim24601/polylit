@@ -74,10 +74,14 @@ var TaggedStoriesIndex = React.createClass({
         <Navbar><NavTools /></Navbar>
         <Sidebar />
         <ul className="tagged story-feed">
-          <Follow followable={this.state.tag} />
-          <li>
-            <span>TAGGED IN</span>
-            <h3>{this.props.params.name}</h3>
+          <li className="tag-feed group">
+            <div className="tag-feed-heading floatLeft">
+              <span>TAGGED IN</span>
+              <h3>{this.props.params.name}</h3>
+            </div>
+            <div className="tag-feed-follow floatRight">
+              <Follow followable={this.state.tag} />
+            </div>
           </li>
           {storyList}
         </ul>

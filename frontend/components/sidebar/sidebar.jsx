@@ -14,6 +14,7 @@ var Sidebar = React.createClass({
   componentDidMount: function () {
     this.tagListener = TagStore.addListener(this.handleTags);
     this.storyListener = StoryStore.addListener(this.handleStories);
+    this.currentAuthorListener = CurrentAuthorStore.addListener(this.forceUpdate.bind(this));
 
     TagApiUtil.fetchTopTags();
     ApiUtil.fetchTopStories();
@@ -21,6 +22,7 @@ var Sidebar = React.createClass({
   componentWillUnmount: function () {
     this.tagListener.remove();
     this.storyListener.remove();
+    this.currentAuthorListener.remove();
   },
   handleTags: function () {
     this.setState({ topTags: TagStore.topTags() });
@@ -29,7 +31,7 @@ var Sidebar = React.createClass({
     this.setState({ topStories: StoryStore.topStories() });
   },
   createTags: function (tags) {
-    if (tags) {
+    if (tags.length > 0) {
       return tags.map(function (tag) {
         return <li key={tag.id} className="sidebar-tag"><Tag tag={tag} /></li>;
       });
@@ -60,7 +62,7 @@ var Sidebar = React.createClass({
     return (
       <aside className="sidebar">
         <div className="sidebox group">
-          <h3 className="sidebar-header">FEATURED TAGS</h3>
+          <h3 className="sidebar-header">MOST POPULAR TAGS</h3>
           <ul className="top-tags">
             {topTags}
           </ul>
@@ -81,6 +83,9 @@ var Sidebar = React.createClass({
         </div>
       </aside>
     );
+  },
+  _onChange: function () {
+
   }
 });
 

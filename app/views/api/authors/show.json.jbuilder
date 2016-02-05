@@ -8,6 +8,7 @@ json.stories do
     collection: @author.stories.order(created_at: :desc), as: :story, hide_node: true
 end
 
+tags = Tag.joins(:follows).where("follows.follower_id = ?", @author.id)
 json.tags do
-  json.partial! 'api/tags/tag', collection: Tag.page(1).per(15), as: :tag
+  json.partial! 'api/tags/tag', collection: tags, as: :tag
 end

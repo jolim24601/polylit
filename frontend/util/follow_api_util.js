@@ -1,5 +1,3 @@
-var CurrentAuthorActions = require('../actions/current_author_actions');
-
 module.exports = {
   toggleFollow: function (data, callback) {
     $.ajax({
@@ -8,7 +6,6 @@ module.exports = {
       data: data,
       dataType: "json",
       success: function (follow) {
-        CurrentAuthorActions.updateFollow(follow);
         callback && callback(follow);
       }
     });

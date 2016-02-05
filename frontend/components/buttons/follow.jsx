@@ -3,6 +3,7 @@ var React = require('react'),
     AuthorActions = require('../../actions/author_actions'),
     TagActions = require('../../actions/tag_actions'),
     TagStore = require('../../stores/tag_store'),
+    CurrentAuthorActions = require('../../actions/current_author_actions'),
     CurrentAuthorStore = require('../../stores/current_author_store'),
     FollowApiUtil = require('../../util/follow_api_util');
 
@@ -40,13 +41,14 @@ var Follow = React.createClass({
     } else {
       data.type = "POST";
     }
-
+    // Current Author gets updated
     FollowApiUtil.toggleFollow(data, function(follow) {
       if (follow.followable_type === "Author") {
         AuthorActions.updateFollow(follow);
       } else if (follow.followable_type === "Tag") {
         TagActions.updateFollow(follow);
       }
+      CurrentAuthorActions.updateFollow(follow);
     });
   },
   render: function () {
@@ -59,7 +61,7 @@ var Follow = React.createClass({
     return (
       <button
         onClick={this.toggleFollow}
-        className="follow primary"
+        className={this.state.message + " primary"}
         >
       {this.state.message}
       </button>
