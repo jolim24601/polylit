@@ -11,7 +11,7 @@ var React = require('react'),
 
 var Follow = React.createClass({
   mixins: [History],
-  
+
   getStateFromStore: function () {
     var author = CurrentAuthorStore.currentAuthor();
     var followerIds = this.props.followable.follows.map(function (f) {
@@ -36,6 +36,7 @@ var Follow = React.createClass({
   toggleFollow: function () {
     if (!CurrentAuthorStore.isLoggedIn()) {
       this.history.pushState(null, 'auth', {});
+      return;
     }
 
     this.setState({ disabled: true });
