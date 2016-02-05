@@ -31,7 +31,7 @@ var Sidebar = React.createClass({
     this.setState({ topStories: StoryStore.topStories() });
   },
   createTags: function (tags) {
-    if (tags.length > 0) {
+    if (tags && tags.length > 0) {
       return tags.map(function (tag) {
         return <li key={tag.id} className="sidebar-tag"><Tag tag={tag} /></li>;
       });

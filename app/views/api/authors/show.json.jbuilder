@@ -9,6 +9,7 @@ json.stories do
 end
 
 tags = Tag.joins(:follows).where("follows.follower_id = ?", @author.id)
+
 json.tags do
   json.partial! 'api/tags/tag', collection: tags, as: :tag
 end
