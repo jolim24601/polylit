@@ -23,9 +23,9 @@ var ProfileButton = React.createClass({
   },
   componentDidUpdate: function () {
     if (this.state.active) {
-      $(document).on('click', this.clickHandler);
+      document.addEventListener('click', this.toggleView);
     } else {
-      $(document).off('click', this.clickHandler);
+      document.removeEventListener('click', this.toggleView);
     }
   },
   componentWillUnmount: function () {

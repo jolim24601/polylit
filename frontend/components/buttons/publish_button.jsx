@@ -25,10 +25,18 @@ var PublishButton = React.createClass({
     });
   },
   toggleView: function (e) {
-    if (document.getElementById('pub-parent').contains(e.target)) {
+    if ($(e.target).parents('#pub-parent').length > 0) {
       return;
     }
+
     this.setState({ menuActive: !this.state.menuActive });
+  },
+  componentDidUpdate: function () {
+    if (this.state.menuActive) {
+      document.addEventListener('click', this.toggleView);
+    } else {
+      document.removeEventListener('click', this.toggleView);
+    }
   },
   handleSubmit: function (e) {
     this.setState({ value: e.target.value });
@@ -78,6 +86,7 @@ var PublishButton = React.createClass({
           <div className="tag-box group">
             {tags}
             <input
+              autoFocus
               type="text"
               onChange={this.handleChange}
               onKeyDown={this.handleSubmit}
@@ -98,9 +107,10 @@ var PublishButton = React.createClass({
 
     return (
       <div onClick={this.toggleView} className="prepublish primary button">
-        <span id="pub-parent">Publish &or;
+        <span>Publish &or;</span>
+        <div id="pub-parent">
           {tagMenu}
-        </span>
+        </div>
       </div>
     );
   },
