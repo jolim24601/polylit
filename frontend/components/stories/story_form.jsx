@@ -62,7 +62,8 @@ var StoryForm = React.createClass({
   },
   componentWillReceiveProps: function (newProps) {
     // make a blank page if the author just came from viewing something else
-    if (newProps.location.pathname === '/new-story') {
+    if (newProps.location.pathname === '/new-story'
+        && this.props.params.id && this.refs.pm.pm.getContent('text')) {
       this.history.pushState(null, 'new-story', {});
     }
   },
@@ -156,7 +157,7 @@ var StoryForm = React.createClass({
       form.setState({ draftState: 'Saving...' });
       form.intervalId = setInterval(function () {
         form.saveStory();
-      }, 500); // shortened for testing
+      }, 3500); // shortened for testing
     }
   },
   updateOutput: function (value) {
