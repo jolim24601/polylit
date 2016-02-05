@@ -1,8 +1,7 @@
 var React = require('react'),
     SearchResultsStore = require('../../stores/search_results_store'),
     SearchApiUtil = require('../../util/search_api_util'),
-    StoryIndexItem = require('../stories/story_index_item'),
-    _ = require('underscore');
+    StoryIndexItem = require('../stories/story_index_item');
 
 var Navbar = require('../navbar/navbar'),
     NavTools = require('../navbar/nav_tools');
@@ -12,14 +11,10 @@ var Search = React.createClass({
     return { query: '', page: 1, type: "Story" };
   },
   componentDidMount: function () {
-    // this.throttled = _.throttle(this.nextPage, 1500);
-    // $(window).scroll(this.throttled);
-
     this.listener = SearchResultsStore.addListener(this._onChange);
   },
   componentWillUnmount: function () {
     this.listener.remove();
-    // $(window).off('scroll', this.throttled);
   },
   componentWillReceiveProps: function (newProps) {
     var newQuery = newProps.location.query.query;
@@ -37,7 +32,6 @@ var Search = React.createClass({
     }
   },
   render: function () {
-    // add cases for tags, authors search
     var results = this.findByType();
     var pluralType, storyActive, peopleActive, tagActive;
     if (this.state.type === "Story") {

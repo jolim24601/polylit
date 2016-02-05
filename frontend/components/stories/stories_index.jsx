@@ -22,13 +22,6 @@ var StoriesIndex = React.createClass({
     this.listener = StoryStore.addListener(this._onChange);
 
     ApiUtil.fetchStories({ page: this.state.page});
-    // this.throttled = _.(this.nextPage, 250);
-  },
-  componentWillReceiveProps: function (newProps) {
-
-  },
-  fetchStoriesByParam: function () {
-
   },
   nextPage: function () {
     if ($(window).scrollTop() + $(window).height() === $(document).height()) {
@@ -39,7 +32,6 @@ var StoriesIndex = React.createClass({
   },
   componentWillUnmount: function () {
     this.listener.remove();
-    // $(window).off('scroll', this.throttled);
   },
   render: function () {
     var stories = this.state.stories;
