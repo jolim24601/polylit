@@ -16,8 +16,8 @@ var Sidebar = React.createClass({
     this.storyListener = StoryStore.addListener(this.handleStories);
     this.currentAuthorListener = CurrentAuthorStore.addListener(this._onChange);
 
-    TagApiUtil.fetchTopTags();
-    ApiUtil.fetchTopStories();
+    // TagApiUtil.fetchTopTags();
+    // ApiUtil.fetchTopStories();
   },
   componentWillUnmount: function () {
     this.tagListener.remove();

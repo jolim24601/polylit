@@ -1,6 +1,7 @@
 var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     StoryIndexItem = require('./story_index_item'),
+    TagApiUtil = require('../../util/tag_api_util'),
     ApiUtil = require('../../util/api_util'),
     objectAssign = require('object-assign');
 
@@ -23,8 +24,9 @@ var StoriesIndex = React.createClass({
     this.lastTime = Date.now();
     this.listener = StoryStore.addListener(this._onChange);
 
+    TagApiUtil.fetchTopTags();
     ApiUtil.fetchStories({ page: this.state.page});
-
+    ApiUtil.fetchTopStories({ page: this.state.page });
     document.addEventListener('scroll', this.nextPage);
   },
   nextPage: function () {
