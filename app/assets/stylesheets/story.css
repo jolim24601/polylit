@@ -37,5 +37,20 @@ strong {
   margin: 10px auto;
 }
 
-.banner-link {
+.story-tags-footer {
+  margin: auto;
+  width: 900px;
+}
+
+.footer-tags {
+  display: block;
+}
+
+.story-view-actions {
+  float: right;
+  list-style: none;
+}
+
+.fav-count {
+  margin-right: 10px;
 }

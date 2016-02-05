@@ -15,10 +15,15 @@ var StoriesIndex = React.createClass({
   componentDidMount: function () {
     this.listener = StoryStore.addListener(this._onChange);
 
-    // Feed options and have the controller make queries,
-    // eventually pass the API request in as a prop
+
     ApiUtil.fetchStories({ page: this.state.page});
     // this.throttled = _.(this.nextPage, 250);
+  },
+  componentWillReceiveProps: function (newProps) {
+
+  },
+  fetchStoriesByParam: function () {
+
   },
   nextPage: function () {
     if ($(window).scrollTop() + $(window).height() === $(document).height()) {

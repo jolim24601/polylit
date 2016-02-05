@@ -8,9 +8,12 @@ class Api::StoriesController < ApplicationController
 
   def top_stories
     @stories = Story.page(1)
-                    .per(5)
+                    .per(Story.default_per_page * params[:page].to_i)
+                    .select("stories.*, count(favorites.id) as like_count")
+                    .joins(:favorites)
+                    .group("stories.id")
                     .where(published: true)
-                    .order(created_at: :desc)
+                    .order("like_count desc")
 
     render :index
   end
