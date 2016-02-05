@@ -138,6 +138,7 @@
 }
 
 button:disabled {
+  background-color: white !important;
   border-color: gray;
   color: gray;
   cursor-pointer: none;

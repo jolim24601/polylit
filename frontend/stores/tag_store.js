@@ -22,13 +22,13 @@ TagStore.find = function (name) {
   }
 };
 
-function findById(id) {
+TagStore.findById = function (id) {
   for (var i=0; i < _tags.length; i++) {
     if (_tags[i].id === id) {
       return _tags[i];
     }
   }
-}
+};
 
 function resetTag(tag) {
   for (var i=0; i < _tags.length; i++) {
@@ -42,7 +42,7 @@ function resetTag(tag) {
 
 // if follow exists, delete it, else add it.
 function updateTagFollows(follow) {
-  var tag = findById(follow.followable_id);
+  var tag = TagStore.findById(follow.followable_id);
   var followsIds = tag.follows.map(function (f) { return f.id; });
   for (var i=0; i < tag.follows.length; i++) {
     if (tag.follows[i].id === follow.id) {

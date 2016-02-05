@@ -19,9 +19,9 @@ module.exports = {
       story: story
     });
   },
-  updateFollow: function (follow) {
+  addFollow: function (follow) {
     AppDispatcher.dispatch({
-      actionType: CurrentAuthorConstants.FOLLOW_RECEIVED,
+      actionType: CurrentAuthorConstants.FOLLOW_GIVEN,
       follow: follow
     });
   }

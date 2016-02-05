@@ -5,6 +5,7 @@ var React = require('react'),
     TagStore = require('../../stores/tag_store'),
     CurrentAuthorActions = require('../../actions/current_author_actions'),
     CurrentAuthorStore = require('../../stores/current_author_store'),
+    objectAssign = require('object-assign'),
     FollowApiUtil = require('../../util/follow_api_util');
 
 var Follow = React.createClass({
@@ -19,7 +20,7 @@ var Follow = React.createClass({
     return { message: "Follow" };
   },
   getInitialState: function () {
-    return this.getStateFromStore();
+    return objectAssign(this.getStateFromStore(), { disabled: false });
   },
   componentDidMount: function () {
     this.authorListener = AuthorStore.addListener(this._onChange);
@@ -30,6 +31,8 @@ var Follow = React.createClass({
     this.tagListener.remove();
   },
   toggleFollow: function () {
+    this.setState({ disabled: true });
+
     var data = {
       followable_type: this.props.followable._type,
       followable_id: this.props.followable.id,
@@ -41,15 +44,17 @@ var Follow = React.createClass({
     } else {
       data.type = "POST";
     }
-    // Current Author gets updated
+
     FollowApiUtil.toggleFollow(data, function(follow) {
       if (follow.followable_type === "Author") {
         AuthorActions.updateFollow(follow);
       } else if (follow.followable_type === "Tag") {
         TagActions.updateFollow(follow);
       }
-      CurrentAuthorActions.updateFollow(follow);
-    });
+      CurrentAuthorActions.addFollow(follow);
+
+      this.setState({ disabled: false });
+    }.bind(this));
   },
   render: function () {
     if (CurrentAuthorStore.currentAuthor().id === this.props.followable.id
@@ -60,6 +65,7 @@ var Follow = React.createClass({
 
     return (
       <button
+        disabled={this.state.disabled}
         onClick={this.toggleFollow}
         className={this.state.message + " primary"}
         >

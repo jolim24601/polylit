@@ -14,7 +14,7 @@ var Sidebar = React.createClass({
   componentDidMount: function () {
     this.tagListener = TagStore.addListener(this.handleTags);
     this.storyListener = StoryStore.addListener(this.handleStories);
-    this.currentAuthorListener = CurrentAuthorStore.addListener(this.forceUpdate.bind(this));
+    this.currentAuthorListener = CurrentAuthorStore.addListener(this._onChange);
 
     TagApiUtil.fetchTopTags();
     ApiUtil.fetchTopStories();
@@ -83,6 +83,9 @@ var Sidebar = React.createClass({
         </div>
       </aside>
     );
+  },
+  _onChange: function () {
+    this.forceUpdate();
   }
 });
 
