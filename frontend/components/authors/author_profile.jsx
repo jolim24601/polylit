@@ -45,10 +45,9 @@ var AuthorProfile = React.createClass({
       );
     }
 
-    var authorEditable, authorStoriesIndex;
     var isOwner = author.id === CurrentAuthorStore.currentAuthor().id;
-    authorEditable = <AuthorEditable authorId={author.id} isOwner={isOwner} />;
-    authorStoriesIndex = author.stories.map(function (story) {
+    var authorEditable = <AuthorEditable authorId={author.id} isOwner={isOwner} />;
+    var authorStoriesIndex = author.stories.map(function (story) {
       return <StoryIndexItem key={story.id} story={story} />;
     });
 

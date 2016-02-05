@@ -13,5 +13,11 @@ module.exports = {
       actionType: AuthorConstants.AUTHOR_FOLLOW_RECEIVED,
       follow: follow
     });
+  },
+  receiveAuthorsFromStories: function (stories) {
+    AppDispatcher.dispatch({
+      actionType: AuthorConstants.AUTHOR_STORIES_RECEIVED,
+      stories: stories
+    });
   }
 };

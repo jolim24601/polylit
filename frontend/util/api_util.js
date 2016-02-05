@@ -10,6 +10,7 @@ module.exports = {
       url: "api/stories/top-stories",
       success: function (stories) {
         ApiActions.receiveTopStories(stories);
+        AuthorActions.receiveAuthorsFromStories(stories);
         callback && callback();
       }
     });
@@ -21,6 +22,7 @@ module.exports = {
       data: data,
       success: function (stories) {
         ApiActions.receiveLatestStories(stories);
+        AuthorActions.receiveAuthorsFromStories(stories);
         callback && callback();
       }
     });
@@ -32,6 +34,7 @@ module.exports = {
       data: data,
       success: function (stories) {
         ApiActions.receiveStoriesByTag(stories);
+        AuthorActions.receiveAuthorsFromStories(stories);
         callback && callback(stories);
       }
     });
@@ -43,6 +46,7 @@ module.exports = {
       data: data,
       success: function (stories) {
         ApiActions.receiveBookmarkedStories(stories);
+        AuthorActions.receiveAuthorsFromStories(stories);
         callback && callback(stories);
       }
     });

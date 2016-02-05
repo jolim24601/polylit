@@ -1,6 +1,6 @@
 var React = require('react'),
-    AuthorStore = require('../../stores/author_store'),
     AuthorCard = require('../authors/author_card'),
+    AuthorStore = require('../../stores/author_store'),
     StoryIndexItemFooter = require('./index_item_footer');
 
 var StoryIndexItem = React.createClass({

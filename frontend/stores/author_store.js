@@ -7,7 +7,9 @@ var AuthorStore = new Store(AppDispatcher);
 var _authors = {};
 
 function resetAuthors(authors) {
-  _authors = authors;
+  authors.forEach(function (author) {
+    _authors[author.id] = author;
+  });
 }
 
 function resetAuthor(author) {
@@ -26,6 +28,14 @@ function updateAuthorFollows(follow) {
   author.follows.push(follow);
 }
 
+function resetAuthorsFromStories(stories) {
+  var authors = stories.map(function (story) {
+    return story.author;
+  });
+
+  resetAuthors(authors);
+}
+
 AuthorStore.find = function (id) {
   return objectAssign({}, _authors[id]);
 };
@@ -42,6 +52,10 @@ AuthorStore.__onDispatch = function (payload) {
     break;
   case AuthorConstants.AUTHOR_FOLLOW_RECEIVED:
     updateAuthorFollows(payload.follow);
+    AuthorStore.__emitChange();
+    break;
+  case AuthorConstants.AUTHOR_STORIES_RECEIVED:
+    resetAuthorsFromStories(payload.stories);
     AuthorStore.__emitChange();
     break;
   default:

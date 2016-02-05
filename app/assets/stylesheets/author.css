@@ -84,6 +84,12 @@
   width: auto;
 }
 
+.author-card-entry span, small {
+  color: rgba(0,0,0,0.44);
+  padding: 1px;
+  font-size: 12px;
+}
+
 .author-card-entry > a {
   color: #00ab6b;
 }

@@ -8,7 +8,6 @@ var Navbar = require('../navbar/navbar'),
     HomeTools = require('../navbar/home_tools'),
     NavTools = require('../navbar/nav_tools');
 
-
 var StoriesIndex = React.createClass({
   getInitialState: function () {
     return ({ stories: StoryStore.all(), page: 1 });

@@ -50,6 +50,12 @@ var Follow = React.createClass({
     });
   },
   render: function () {
+    if (CurrentAuthorStore.currentAuthor().id === this.props.followable.id
+      && this.props.followable._type === "Author") {
+
+      return null;
+    }
+
     return (
       <button
         onClick={this.toggleFollow}
