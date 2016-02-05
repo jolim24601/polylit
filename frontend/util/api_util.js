@@ -134,6 +134,7 @@ module.exports = {
       contentType: false,
       data: formData,
       success: function (author) {
+        CurrentAuthorActions.receiveCurrentAuthor(author);
         AuthorActions.receiveAuthor(author);
         callback && callback();
       }

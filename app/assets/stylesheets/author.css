@@ -71,7 +71,9 @@
 }
 
 #delete-account {
-  margin-left: 5px;
+  margin-left: 18px;
+  margin-top: 9px;
+  padding: 0 11px;
 }
 
 .author-profile .predictiveSearch {
