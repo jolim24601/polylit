@@ -6,9 +6,12 @@ var React = require('react'),
     CurrentAuthorActions = require('../../actions/current_author_actions'),
     CurrentAuthorStore = require('../../stores/current_author_store'),
     objectAssign = require('object-assign'),
+    History = require('react-router').History,
     FollowApiUtil = require('../../util/follow_api_util');
 
 var Follow = React.createClass({
+  mixins: [History],
+  
   getStateFromStore: function () {
     var author = CurrentAuthorStore.currentAuthor();
     var followerIds = this.props.followable.follows.map(function (f) {
@@ -34,7 +37,7 @@ var Follow = React.createClass({
     if (!CurrentAuthorStore.isLoggedIn()) {
       this.history.pushState(null, 'auth', {});
     }
-    
+
     this.setState({ disabled: true });
 
     var data = {
