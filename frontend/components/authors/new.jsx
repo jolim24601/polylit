@@ -14,7 +14,7 @@ var newAuthor = React.createClass({
     e.preventDefault();
 
     ApiUtil.createAuthor(this.state, function () {
-      this.history.goBack();
+      this.history.pushState(null, '/', {});
     }.bind(this));
   },
   render: function () {

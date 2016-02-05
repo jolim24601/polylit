@@ -12,7 +12,7 @@ var newSession = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     SessionApiUtil.loginAuthor(this.state, function () {
-      this.history.goBack();
+      this.history.pushState(null, '/', {});
     }.bind(this));
   },
   render: function () {
