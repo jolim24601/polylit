@@ -28,7 +28,7 @@ var Sidebar = React.createClass({
     this.setState({ topTags: TagStore.topTags() });
   },
   handleStories: function () {
-    this.setState({ topStories: StoryStore.topStories() });
+    this.setState({ topStories: StoryStore.topStories().slice(0, 10) });
   },
   createTags: function (tags) {
     if (tags && tags.length > 0) {
@@ -83,9 +83,6 @@ var Sidebar = React.createClass({
         </div>
       </aside>
     );
-  },
-  _onChange: function () {
-
   }
 });
 

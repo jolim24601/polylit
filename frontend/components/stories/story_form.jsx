@@ -60,6 +60,12 @@ var StoryForm = React.createClass({
   getInitialState: function () {
     return blankAttrs;
   },
+  componentWillReceiveProps: function (newProps) {
+    // make a blank page if the author just came from viewing something else
+    if (newProps.location.pathname === '/new-story') {
+      this.history.pushState(null, 'new-story', {});
+    }
+  },
   createParams: function () {
     var pmNode = this.refs.pm.pm.getContent();
     var story = objectAssign({}, this.state.story);

@@ -29,6 +29,7 @@
 }
 
 .tag-menu {
+  background: white;
   cursor: default;
   position: absolute;
   z-index: 900 !important;
