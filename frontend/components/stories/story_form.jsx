@@ -156,7 +156,7 @@ var StoryForm = React.createClass({
       form.setState({ draftState: 'Saving...' });
       form.intervalId = setInterval(function () {
         form.saveStory();
-      }, 3000); // shortened for testing
+      }, 500); // shortened for testing
     }
   },
   updateOutput: function (value) {

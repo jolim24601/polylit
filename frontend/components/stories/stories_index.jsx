@@ -1,7 +1,8 @@
 var React = require('react'),
     StoryStore = require('../../stores/story_store'),
     StoryIndexItem = require('./story_index_item'),
-    ApiUtil = require('../../util/api_util');
+    ApiUtil = require('../../util/api_util'),
+    objectAssign = require('object-assign');
 
 var Navbar = require('../navbar/navbar'),
     Sidebar = require('../sidebar/sidebar'),
@@ -11,27 +12,34 @@ var Navbar = require('../navbar/navbar'),
 var StoriesIndex = React.createClass({
   getStateFromStore: function () {
     if (this.props.location.pathname === '/') {
-      return ({ stories: StoryStore.all(), page: 1 });
+      return ({ stories: StoryStore.all() });
     }
-    return ({ stories: StoryStore.topStories(), page: 1 });
+    return ({ stories: StoryStore.topStories() });
   },
   getInitialState: function () {
-    return this.getStateFromStore();
+    return objectAssign(this.getStateFromStore(), { page: 1 });
   },
   componentDidMount: function () {
+    this.lastTime = Date.now();
     this.listener = StoryStore.addListener(this._onChange);
 
     ApiUtil.fetchStories({ page: this.state.page});
+
+    document.addEventListener('scroll', this.nextPage);
   },
   nextPage: function () {
-    if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+    // Throttle the AJAX call to prevent thrashing the server
+    if ($(window).scrollTop() + $(window).height() === $(document).height()
+        && (Date.now() - this.lastTime) > 2500) {
       var nextPage = this.state.page + 1;
       this.setState({ page: nextPage });
       ApiUtil.fetchStories({ page: nextPage });
+      this.lastTime = Date.now();
     }
   },
   componentWillUnmount: function () {
     this.listener.remove();
+    document.removeEventListener('scroll', this.nextPage);
   },
   render: function () {
     var stories = this.state.stories;
