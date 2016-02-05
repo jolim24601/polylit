@@ -31,7 +31,6 @@ function destroyStory(story) {
 }
 
 function updateTags(follow) {
-  if (_currentAuthor.tags) { return; }
   for (var i=0; i < _currentAuthor.tags.length; i++) {
     if (_currentAuthor.tags[i].id === follow.followable_id) {
       _currentAuthor.tags.splice(i, 1);

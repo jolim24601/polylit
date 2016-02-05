@@ -31,6 +31,10 @@ var Follow = React.createClass({
     this.tagListener.remove();
   },
   toggleFollow: function () {
+    if (!CurrentAuthorStore.isLoggedIn()) {
+      this.history.pushState(null, 'auth', {});
+    }
+    
     this.setState({ disabled: true });
 
     var data = {
