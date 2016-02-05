@@ -32,7 +32,6 @@ var auth = React.createClass({
       );
     }
 
-
     return (
       <form className="oauth-form modal-form" onSubmit={this.handleSubmit}>
         <img className="modal-logo logo"

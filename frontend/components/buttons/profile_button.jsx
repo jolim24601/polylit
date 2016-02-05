@@ -30,7 +30,7 @@ var ProfileButton = React.createClass({
   },
   componentWillUnmount: function () {
     this.listener.remove();
-    $(document).off('click', this.clickHandler);
+    document.removeEventListener('click', this.toggleView);
   },
   logoutAuthor: function () {
     SessionApiUtil.logoutAuthor(function () {

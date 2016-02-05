@@ -14,7 +14,7 @@ var PublishButton = React.createClass({
   },
   componentWillUnmount: function () {
     this.listener.remove();
-    $(document).off('click', this.toggleView);
+    document.removeEventListener('click', this.toggleView);
   },
   getInitialState: function () {
     return ({
