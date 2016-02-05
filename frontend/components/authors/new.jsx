@@ -14,16 +14,7 @@ var newAuthor = React.createClass({
     e.preventDefault();
 
     ApiUtil.createAuthor(this.state, function () {
-      this.history.pushState(null, '/', {});
-    }.bind(this));
-  },
-  demoSignIn: function (e) {
-    e.preventDefault();
-    var demoCredentials = { email: 'leo@example.com', password: 'annakarenina123' };
-
-
-    SessionApiUtil.loginAuthor(demoCredentials, function () {
-      this.history.pushState(null, '/', {});
+      this.history.goBack();
     }.bind(this));
   },
   render: function () {

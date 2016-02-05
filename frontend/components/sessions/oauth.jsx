@@ -15,15 +15,13 @@ var auth = React.createClass({
     var demoCredentials = { email: 'leo@example.com', password: 'annakarenina123' };
 
     SessionApiUtil.loginAuthor(demoCredentials, function () {
-      this.history.pushState(null, '/', {});
+      this.history.goBack();
     }.bind(this));
   },
   handleSubmit: function (e) {
     e.preventDefault();
     this.setState({ loggingIn: true });
-    var something = SessionApiUtil.loginAuthor(this.state, function () {
-      this.history.pushState(null, '/', {});
-    }.bind(this));
+    var something = SessionApiUtil.loginAuthor(this.state);
   },
   render: function () {
     if (this.state.loggingIn) {
@@ -61,7 +59,7 @@ var auth = React.createClass({
           <a href="#/signup">Sign up with email</a>
           <a href="#/login">I already have an account.</a>
 
-          <a href="#">Cancel</a>
+          <a onClick={this.history.goBack}>Cancel</a>
         </div>
       </form>
     );

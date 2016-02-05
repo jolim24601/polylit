@@ -9,18 +9,10 @@ var newSession = React.createClass({
   getInitialState: function () {
     return { email: '', password: '' };
   },
-  demoSignIn: function (e) {
-    e.preventDefault();
-    var demoCredentials = { email: 'leo@example.com', password: 'annakarenina123' };
-
-    SessionApiUtil.loginAuthor(demoCredentials, function () {
-      this.history.pushState(null, '/', {});
-    }.bind(this));
-  },
   handleSubmit: function (e) {
     e.preventDefault();
     SessionApiUtil.loginAuthor(this.state, function () {
-      this.history.pushState(null, '/', {});
+      this.history.goBack();
     }.bind(this));
   },
   render: function () {
@@ -46,7 +38,7 @@ var newSession = React.createClass({
           <div className="signin-button">
             <button className="primary">Sign In</button>
             <span className="button-alternative js-modal-close">
-              <a href="#">Cancel</a>
+              <a onClick={this.history.goBack}>Cancel</a>
             </span>
           </div>
       </form>
