@@ -46,7 +46,9 @@ var AuthorProfile = React.createClass({
     var isOwner = author.id === CurrentAuthorStore.currentAuthor().id;
     var authorEditable = <AuthorEditable authorId={author.id} isOwner={isOwner} />;
     var authorStoriesIndex = author.stories.map(function (story) {
-      return <StoryIndexItem key={story.id} story={story} />;
+      if (story.published) {
+        return <StoryIndexItem key={story.id} story={story} />;
+      }
     });
 
     return (
