@@ -9,12 +9,17 @@ var Navbar = require('../navbar/navbar'),
     NavTools = require('../navbar/nav_tools');
 
 var StoriesIndex = React.createClass({
+  getStateFromStore: function () {
+    if (this.props.location.pathname === '/') {
+      return ({ stories: StoryStore.all(), page: 1 });
+    }
+    return ({ stories: StoryStore.topStories(), page: 1 });
+  },
   getInitialState: function () {
-    return ({ stories: StoryStore.all(), page: 1 });
+    return this.getStateFromStore();
   },
   componentDidMount: function () {
     this.listener = StoryStore.addListener(this._onChange);
-
 
     ApiUtil.fetchStories({ page: this.state.page});
     // this.throttled = _.(this.nextPage, 250);
@@ -57,7 +62,7 @@ var StoriesIndex = React.createClass({
     );
   },
   _onChange: function () {
-    this.setState({ stories: StoryStore.all() });
+    this.setState(this.getStateFromStore());
   }
 });
 
