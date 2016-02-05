@@ -87,9 +87,8 @@ var TaggedStoriesIndex = React.createClass({
     );
   },
   _onChange: function () {
-
     this.setState({
-      stories: StoryStore.topStories(),
+      stories: StoryStore.all(),
       tagName: this.props.params.name,
       tag: TagStore.find(this.props.params.name)
    });

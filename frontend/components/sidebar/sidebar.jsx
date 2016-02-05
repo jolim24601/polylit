@@ -1,6 +1,5 @@
 var React = require('react'),
     Tag = require('../tags/tag'),
-    ApiUtil = require('../../util/api_util'),
     TagApiUtil = require('../../util/tag_api_util'),
     TagStore = require('../../stores/tag_store'),
     StoryStore = require('../../stores/story_store'),
@@ -17,7 +16,6 @@ var Sidebar = React.createClass({
     this.currentAuthorListener = CurrentAuthorStore.addListener(this._onChange);
 
     TagApiUtil.fetchTopTags();
-    ApiUtil.fetchTopStories({ page: 1 });
   },
   componentWillUnmount: function () {
     this.tagListener.remove();

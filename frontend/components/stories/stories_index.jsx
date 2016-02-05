@@ -24,6 +24,7 @@ var StoriesIndex = React.createClass({
     this.listener = StoryStore.addListener(this._onChange);
 
     ApiUtil.fetchStories({ page: this.state.page});
+    ApiUtil.fetchTopStories({ page: this.state.page });
     document.addEventListener('scroll', this.nextPage);
   },
   nextPage: function () {
@@ -33,6 +34,7 @@ var StoriesIndex = React.createClass({
       var nextPage = this.state.page + 1;
       this.setState({ page: nextPage });
       ApiUtil.fetchStories({ page: nextPage });
+      ApiUtil.fetchTopStories({ page: nextPage });
       this.lastTime = Date.now();
     }
   },
