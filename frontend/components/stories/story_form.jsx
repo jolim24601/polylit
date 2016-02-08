@@ -8,8 +8,7 @@ var React = require('react'),
     AuthorCard = require('../authors/author_card'),
     objectAssign = require('object-assign');
 
-var ProseMirror = require('prosemirror/dist/edit'),
-    pmFormat = require('prosemirror/dist/format');
+var ProseMirror = require('prosemirror/dist/edit');
 
 var Navbar = require('../navbar/navbar'),
     WriteTools = require('../navbar/write_tools'),
@@ -67,33 +66,8 @@ var StoryForm = React.createClass({
       this.history.pushState(null, 'new-story', {});
     }
   },
-  createParams: function () {
-    var pmNode = this.refs.pm.pm.getContent();
-    var story = objectAssign({}, this.state.story);
-
-    story.title = pmNode.firstChild.textContent;
-
-    var words = pmFormat.toText(pmNode).split(/\s+/);
-    story.wordcount = words.length;
-    var titleLength = story.title.split(/\s+/).length;
-    story.subtitle = words
-      .slice(titleLength, titleLength + 60)
-      .join(' ');
-    if (words.length >= 60) { story.subtitle += '...'; }
-
-    story.node = JSON.stringify(this.refs.pm.pm.getContent('json'));
-    var params = objectAssign({}, {
-      story: story,
-      verb: this.state.verb,
-      storyId: this.state.storyId
-    });
-
-    return params;
-  },
   saveStory: function (cb) {
-    var params = this.createParams();
-    clearInterval(this.intervalId);
-    this.intervalId = null;
+    var params = this._createParams();
 
     ApiUtil.saveStory(params, function (saved) {
       this.setState({ storyId: saved.id, verb: 'PATCH', draftState: 'Saved.' });
@@ -102,12 +76,10 @@ var StoryForm = React.createClass({
   },
   publishStory: function (e) {
     e.preventDefault();
-    clearInterval(this.intervalId);
-    this.intervalId = null;
 
     var story = objectAssign({}, this.state.story);
     story.published = true;
-
+    // pull first image found in body and set as the banner image for index
     var image = document.querySelector('.ProseMirror-content')
                         .querySelector('img');
     if (image) { story.banner = image.src; }
@@ -151,31 +123,32 @@ var StoryForm = React.createClass({
     );
   },
   handleDraft: function () {
-    var form = this;
-
-    if (!this.intervalId && this.refs.pm.pm.getContent('text')) {
-      form.setState({ draftState: 'Saving...' });
-      form.intervalId = setInterval(function () {
-        form.saveStory();
-      }, 3500); // shortened for testing
+    this.timer = this.timer || Date.now();
+    if (Date.now() - this.timer > 5000
+        && this.state.value !== this.refs.pm.pm.getContent('html')) {
+      this.setState({ draftState: 'Saving...' }, this.saveStory);
+      this.timer = Date.now();
     }
   },
   updateOutput: function (value) {
     var draftState = this.intervalId ? this.state.draftState : 'Draft';
-    this.setState({ draftState: draftState, value: value },
-      this.handleDraft);
+    this.setState({ draftState: draftState, value: value });
+
+    // start auto-save
+    if (!this.intervalId) {
+      this.intervalId = setInterval(this.handleDraft, 5000);
+    }
   },
   componentDidMount: function () {
     if (this.props.params.id) {
       return this.fetchStory();
     }
-
     this.updateOutput(this.refs.pm.getContent());
     document.querySelector('.ProseMirror-content').focus();
   },
   componentWillUnmount: function () {
     clearInterval(this.intervalId);
-    this.intervalId = null;
+    this.intervalid = null;
   },
   _isAuthorOwner: function (authorId) {
     if (authorId === CurrentAuthorStore.currentAuthor().id) {
@@ -185,6 +158,34 @@ var StoryForm = React.createClass({
   },
   _redirect: function () {
     this.history.push('/');
+  },
+  _createParams: function () {
+    var pm = this.refs.pm.pm;
+    var pmNode = pm.getContent();
+    var story = objectAssign({}, this.state.story);
+    var words = pm.getContent('text').split(/\s+/);
+    story.wordcount = words.length;
+
+    // pull title and subtitle
+    var lines = pm.getContent('text')
+                  .split('\n')
+                  .filter(function (line) { return line; });
+
+    story.title = lines[0] || 'Untitled Story';
+    var titleLength = story.title.split(/\s+/).length;
+    story.subtitle = words
+      .slice(titleLength, titleLength + 60)
+      .join(' ');
+    if (words.length >= 60) { story.subtitle += '...'; }
+
+    story.node = JSON.stringify(this.refs.pm.pm.getContent('json'));
+    var params = objectAssign({}, {
+      story: story,
+      verb: this.state.verb,
+      storyId: this.state.storyId
+    });
+
+    return params;
   }
 });
 
