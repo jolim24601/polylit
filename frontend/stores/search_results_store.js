@@ -4,7 +4,7 @@ var Store = require('flux/utils').Store,
     objectAssign = require('object-assign');
 
 var SearchResultsStore = new Store(AppDispatcher),
-    _searchResults = { "Story": [], "Tag": [], "Author": [] };
+    _searchResults = { 'Story': [], 'Tag': [], 'Author': [] };
 
 SearchResultsStore.all = function () {
   return objectAssign({}, _searchResults);
@@ -24,7 +24,7 @@ SearchResultsStore.authors = function () {
 
 function resetSearchResults(results) {
   // Have a catch-all for unexpected results
-  _searchResults = { "Story": [], "Tag": [], "Author": [], "MISC": [] };
+  _searchResults = { 'Story': [], 'Tag': [], 'Author': [], 'MISC': [] };
   results.forEach(function (result) {
     _searchResults[result._type].push(result);
   });

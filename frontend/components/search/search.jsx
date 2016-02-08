@@ -79,10 +79,9 @@ var Search = React.createClass({
               <a href={author.url}>{author.name}</a>
               <p>{author.description}</p>
             </div>
-            <button className="primary floatRight">Follow</button>
           </li>
         );
-      });
+      }, this);
     }
   },
   handleChange: function (e) {
