@@ -18,10 +18,8 @@ var auth = React.createClass({
       this.history.goBack();
     }.bind(this));
   },
-  handleSubmit: function (e) {
-    e.preventDefault();
+  handleClick: function () {
     this.setState({ loggingIn: true });
-    var something = SessionApiUtil.loginAuthor(this.state);
   },
   render: function () {
     if (this.state.loggingIn) {
@@ -41,12 +39,12 @@ var auth = React.createClass({
 
         <div className="twitter-login oauth-login">
           <FontAwesome name="fa fa-twitter" />
-          <a href="/auth/twitter">Sign in with Twitter</a>
+          <a onClick={this.handleClick} href="/auth/twitter">Sign in with Twitter</a>
         </div>
 
         <div className="fb-login oauth-login">
           <FontAwesome name="fa fa-facebook-official" />
-          <a href="/auth/facebook">Sign in with Facebook</a>
+          <a onClick={this.handleClick} href="/auth/facebook">Sign in with Facebook</a>
         </div>
 
         <div className="demo-login oauth-login">
