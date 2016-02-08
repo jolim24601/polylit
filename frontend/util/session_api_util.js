@@ -1,4 +1,5 @@
-var CurrentAuthorActions = require('../actions/current_author_actions');
+var CurrentAuthorActions = require('../actions/current_author_actions'),
+    FlashActions = require('../actions/flash_actions');
 
 module.exports = {
   fetchCurrentAuthor: function (callback) {
@@ -21,6 +22,9 @@ module.exports = {
       success: function (author) {
         CurrentAuthorActions.receiveCurrentAuthor(author);
         callback && callback();
+      },
+      error: function (flash) {
+        FlashActions.updateFlash(flash);
       }
     });
   },

@@ -1,5 +1,6 @@
 var ApiActions = require('../actions/api_actions'),
     TagActions = require('../actions/tag_actions'),
+    FlashActions = require('../actions/flash_actions'),
     AuthorActions = require('../actions/author_actions'),
     CurrentAuthorActions = require('../actions/current_author_actions');
 
@@ -69,7 +70,8 @@ module.exports = {
         ApiActions.receiveSingleStory(story);
         callback && callback(story);
       },
-      error: function (message) {
+      error: function (flash) {
+        FlashActions.updateFlash(flash);
       }
     });
   },
@@ -138,6 +140,9 @@ module.exports = {
         CurrentAuthorActions.receiveCurrentAuthor(author);
         AuthorActions.receiveAuthor(author);
         callback && callback();
+      },
+      error: function (flash) {
+        FlashActions.updateFlash(flash);
       }
     });
   },
@@ -151,6 +156,9 @@ module.exports = {
         AuthorActions.receiveAuthor(author);
         CurrentAuthorActions.receiveCurrentAuthor(author);
         callback && callback();
+      },
+      error: function (flash) {
+        FlashActions.updateFlash(flash);
       }
     });
   },

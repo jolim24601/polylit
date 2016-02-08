@@ -46,7 +46,7 @@ var newAuthor = React.createClass({
           <div className="signin-button">
             <button className="primary">Sign Up</button>
             <span className="button-alternative js-modal-close">
-              <a href="#">Cancel</a>
+              <a onClick={this.history.goBack}>Cancel</a>
             </span>
           </div>
       </form>

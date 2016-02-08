@@ -23,7 +23,9 @@ class Api::SessionsController < ApplicationController
     )
 
     if @author.nil?
-      render json: { errors: "Incorrect email/password combination." }, status: 401
+      render json: {
+        errors: ["Incorrect email/password combination."]
+      }, status: 401
     else
       login_author(@author)
       render "api/authors/show"
