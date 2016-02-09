@@ -70,6 +70,7 @@ var StoryForm = React.createClass({
     var params = this._createParams();
 
     ApiUtil.saveStory(params, function (saved) {
+      this.timeoutId = null;
       this.setState({ storyId: saved.id, verb: 'PATCH', draftState: 'Saved.' });
       cb && cb();
     }.bind(this));
@@ -122,21 +123,16 @@ var StoryForm = React.createClass({
       </div>
     );
   },
-  handleDraft: function () {
-    this.timer = this.timer || Date.now();
-    if (Date.now() - this.timer > 5000
-        && this.state.value !== this.refs.pm.pm.getContent('html')) {
-      this.setState({ draftState: 'Saving...' }, this.saveStory);
-      this.timer = Date.now();
-    }
-  },
   updateOutput: function (value) {
-    var draftState = this.intervalId ? this.state.draftState : 'Draft';
-    this.setState({ draftState: draftState, value: value });
+    this.setState({ value: value }, this.handleDraft);
+  },
+  handleDraft: function () {
+    if (!this.timeoutId
+        && this.refs.pm.pm.getContent('text')) {
 
-    // start auto-save
-    if (!this.intervalId) {
-      this.intervalId = setInterval(this.handleDraft, 5000);
+      this.timeoutId = setTimeout(function () {
+        this.setState({ draftState: 'Saving...' }, this.saveStory);
+      }.bind(this), 1500);
     }
   },
   componentDidMount: function () {
@@ -147,8 +143,8 @@ var StoryForm = React.createClass({
     document.querySelector('.ProseMirror-content').focus();
   },
   componentWillUnmount: function () {
-    clearInterval(this.intervalId);
-    this.intervalid = null;
+    clearTimeout(this.timeoutId);
+    this.timeoutId = null;
   },
   _isAuthorOwner: function (authorId) {
     if (authorId === CurrentAuthorStore.currentAuthor().id) {
