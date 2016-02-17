@@ -59,12 +59,9 @@ var StoryForm = React.createClass({
   getInitialState: function () {
     return blankAttrs;
   },
-  componentWillReceiveProps: function (newProps) {
-    // make a blank page if the author just came from viewing something else
-    if (newProps.location.pathname === '/new-story'
-        && this.props.params.id && this.refs.pm.pm.getContent('text')) {
-      this.history.pushState(null, 'new-story', {});
-    }
+  componentWillReceiveProps: function () {
+    // force page refresh if they try to go to new story or access a different story id while in edit mode
+    document.location.reload();
   },
   saveStory: function (cb) {
     var params = this._createParams();
