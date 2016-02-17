@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :stories, only: [:create, :index, :show, :update, :destroy] do
       collection do
         get 'top-stories'
+        get 'followed-stories'
       end
     end
 

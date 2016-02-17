@@ -4,7 +4,8 @@ var Store = require('flux/utils').Store,
 
 var StoryStore = new Store(AppDispatcher);
 var _stories = [],
-    _topStories = [];
+    _topStories = [],
+    _followedStories =[];
 
 function resetStories(stories) {
   _stories = stories;
@@ -37,6 +38,10 @@ StoryStore.topStories = function () {
   return _topStories.slice();
 };
 
+StoryStore.followedStories = function () {
+  return _followedStories.slice();
+};
+
 StoryStore.find = function (id) {
   for (var i=0; i < _stories.length; i++) {
     if (_stories[i].id === parseInt(id, 10)) {
@@ -58,6 +63,10 @@ StoryStore.__onDispatch = function (payload) {
     break;
   case StoryConstants.TOP_STORIES_RECEIVED:
     _topStories = payload.stories;
+    StoryStore.__emitChange();
+    break;
+  case StoryConstants.FOLLOWED_STORIES_RECEIVED:
+    _followedStories = payload.stories;
     StoryStore.__emitChange();
     break;
   default:

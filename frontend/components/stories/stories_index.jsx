@@ -1,4 +1,5 @@
 var React = require('react'),
+    CustomFeed = require('./custom_feed'),
     StoryStore = require('../../stores/story_store'),
     StoryIndexItem = require('./story_index_item'),
     ApiUtil = require('../../util/api_util'),
@@ -55,6 +56,7 @@ var StoriesIndex = React.createClass({
       <div className="main-content">
         <Navbar><HomeTools location={this.props.location} /><NavTools /></Navbar>
         <Sidebar />
+        <CustomFeed />
         <ul className="story-feed">
           <li className="heading-title">{heading}</li>
           {storyList}

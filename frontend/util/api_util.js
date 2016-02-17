@@ -53,6 +53,16 @@ module.exports = {
       }
     });
   },
+  fetchFollowedAuthorStories: function (callback) {
+    $.ajax({
+      type: "GET",
+      url: "api/stories/followed-stories",
+      success: function (stories) {
+        ApiActions.receiveFollowedStories(stories);
+        callback && callback(stories);
+      }
+    });
+  },
   saveStory: function (data, callback) {
     var url;
     if (data.storyId) {

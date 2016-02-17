@@ -72,7 +72,7 @@ var Sidebar = React.createClass({
           </ul>
         </div>
         <div className="sidebox group">
-          <h3 className="sidebar-header">TOP STORIES ON MEDIUM</h3>
+          <h3 className="sidebar-header">TOP STORIES ON POLYLIT</h3>
           <a className="more-top-stories" href="#/top-stories">SEE MORE</a>
 
           <ol className="top-five">

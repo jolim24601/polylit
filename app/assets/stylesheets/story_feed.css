@@ -91,3 +91,13 @@ button.mini {
 .tag-feed-follow {
   margin-top: 20px;
 }
+
+.close-feed {
+  border: none;
+  color: rgba(0,0,0,.6);
+  font-size: 20px;
+}
+
+.close-feed:hover {
+  color: black;
+}

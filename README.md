@@ -36,7 +36,7 @@ rich text editor built on top of Marijn Haverbeke's Prosemirror API.
 - Login using Twitter or FB
 - Periodic auto-save of stories, which automatically go into a drafts folder
 - Infinite scrolling on the home page
-- View any profile and on-the-spot editing of profile info. if you are the account's owner
+- View any profile and on-the-spot editing of profile for account owners.
 - Tag, favorite, and bookmark stories as well as search for stories by tag, author, or title
 - Style stories using the tooltip menu that appears after highlighting content
 - Insert images and gifs into your stories. Your first image will auto-save as the banner image for the index show page.

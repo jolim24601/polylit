@@ -4,6 +4,7 @@ class Api::StoriesController < ApplicationController
                     .per(Story.default_per_page * params[:page].to_i)
                     .where(published: true)
                     .order(created_at: :desc)
+
   end
 
   def top_stories
@@ -26,6 +27,17 @@ class Api::StoriesController < ApplicationController
                   .where(published: true)
                   .order(created_at: :desc)
 
+
+    render :index
+  end
+
+  def followed_stories
+    # stories where the author has a follower that is the current author
+    @stories = Story.joins(author: :follows)
+                    .where(follows: { follower_id: current_author.id })
+                    .where(published: true)
+                    .order(created_at: :desc)
+                    .limit(5)
     render :index
   end
 

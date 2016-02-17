@@ -1,5 +1,5 @@
 var React = require('react'),
-  FontAwesome = require('react-fontawesome');
+    FontAwesome = require('react-fontawesome');
 
 
 var AvatarEditable = React.createClass({

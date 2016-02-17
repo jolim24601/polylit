@@ -38,6 +38,12 @@ module.exports = {
       stories: stories
     });
   },
+  receiveFollowedStories: function (stories) {
+    AppDispatcher.dispatch({
+      actionType: StoryConstants.FOLLOWED_STORIES_RECEIVED,
+      stories: stories
+    });
+  },
   destroyStory: function (story) {
     AppDispatcher.dispatch({
       actionType: StoryConstants.STORY_DESTROYED,

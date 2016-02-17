@@ -20,10 +20,4 @@ class Story < ActiveRecord::Base
 
   has_attached_file :banner, default_url: ""
   validates_attachment_content_type :banner, content_type: /\Aimage\/.*\Z/
-
-  def top_stories
-  end
-
-  def most_recommended_stories
-  end
 end

@@ -123,7 +123,7 @@ var AuthorEditable = React.createClass({
       );
 
       // Prevent demo user from getting deleted!
-      if (author.username === "leo") { deleteAccount = null; }
+      if (author.username === "leo_tolstoy") { deleteAccount = null; }
 
       return (
         <div className="author-edit-button">
