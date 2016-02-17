@@ -56,7 +56,7 @@ var StoriesIndex = React.createClass({
       <div className="main-content">
         <Navbar><HomeTools location={this.props.location} /><NavTools /></Navbar>
         <Sidebar />
-        <CustomFeed />
+        <CustomFeed location={this.props.location} />
         <ul className="story-feed">
           <li className="heading-title">{heading}</li>
           {storyList}

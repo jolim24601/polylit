@@ -37,7 +37,7 @@ class Api::StoriesController < ApplicationController
                     .where(follows: { follower_id: current_author.id })
                     .where(published: true)
                     .order(created_at: :desc)
-                    .limit(5)
+                    .limit(3)
     render :index
   end
 

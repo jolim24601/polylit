@@ -19,7 +19,9 @@ var CustomFeed = React.createClass({
     this.setState({ show: false });
   },
   render: function () {
-    if (!this.state.show || !CurrentAuthorStore.currentAuthor().id) {
+    if (!this.state.show
+        || !CurrentAuthorStore.currentAuthor().id
+        || this.props.location.pathname !== '/') {
       return <div></div>;
     }
 

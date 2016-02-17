@@ -11,6 +11,15 @@ function resetStories(stories) {
   _stories = stories;
 }
 
+function resetFollowedStory(story) {
+  for (var i=0; i < _followedStories.length; i++) {
+    if (_followedStories[i].id === parseInt(story.id, 10)) {
+      _followedStories[i] = story;
+      break;
+    }
+  }
+}
+
 function resetTopStory(story) {
   for (var i=0; i < _topStories.length; i++) {
     if (_topStories[i].id === parseInt(story.id, 10)) {
@@ -59,6 +68,7 @@ StoryStore.__onDispatch = function (payload) {
   case StoryConstants.STORY_RECEIVED:
     resetStory(payload.story);
     resetTopStory(payload.story);
+    resetFollowedStory(payload.story);
     StoryStore.__emitChange();
     break;
   case StoryConstants.TOP_STORIES_RECEIVED:
