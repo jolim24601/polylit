@@ -19,13 +19,21 @@ var CustomFeed = React.createClass({
     this.setState({ show: false });
   },
   render: function () {
-    if (!this.state.show || !CurrentAuthorStore.currentAuthor().id) {
-      return <div></div>;
-    }
+    var topStoryIds = StoryStore.topStories().map(function (story) { return story.id; });
 
-    var followedStories = this.state.stories.map(function (story) {
+    var followedStories = this.state.stories.filter(function (story) {
+      // skips over repeats
+      if (topStoryIds.indexOf(story.id) === -1) { return true; }
+    })
+    .map(function (story) {
       return <StoryIndexItem key={story.id} story={story} />;
     });
+
+    if (!this.state.show
+        || !CurrentAuthorStore.currentAuthor().id
+        || followedStories.length < 1) {
+      return <div></div>;
+    }
 
     return (
       <ul className="custom story-feed">
