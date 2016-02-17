@@ -19,15 +19,16 @@ var CustomFeed = React.createClass({
     this.setState({ show: false });
   },
   render: function () {
-    if (!this.state.show
-        || !CurrentAuthorStore.currentAuthor().id
-        || this.props.location.pathname !== '/') {
-      return <div></div>;
-    }
-
     var followedStories = this.state.stories.map(function (story) {
       return <StoryIndexItem key={story.id} story={story} />;
     });
+
+    if (!this.state.show
+        || !CurrentAuthorStore.currentAuthor().id
+        || this.props.location.pathname !== '/'
+        || !followedStories.length) {
+      return <div></div>;
+    }
 
     return (
       <ul className="custom story-feed">
