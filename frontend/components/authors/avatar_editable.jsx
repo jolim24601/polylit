@@ -18,7 +18,10 @@ var AvatarEditable = React.createClass({
     if (this.props.editable && !this.state.clicked) {
       iconOverlay = (
         <div onClick={this.getFile} className="camera-overlay">
-          <FontAwesome className="fa fa-camera fa-3x" />
+          <FontAwesome
+            className="camera-icon"
+            name="fa fa-camera fa-3x"
+            />
         </div>
       );
     }

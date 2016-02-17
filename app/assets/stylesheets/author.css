@@ -272,6 +272,7 @@ button:disabled {
 }
 
 .camera-overlay {
+  cursor: pointer;
   opacity: 0.5;
   border-radius: 100%;
   background-color: #d3d3d3;
@@ -282,7 +283,7 @@ button:disabled {
   border-radius: 100%;
 }
 
-.fa-camera {
+.camera-icon {
   margin: 25px;
 }
 
