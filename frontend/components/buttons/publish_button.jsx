@@ -21,7 +21,8 @@ var PublishButton = React.createClass({
       story: this.getStoryFromStore(),
       value: '',
       helperActive: "hide",
-      menuActive: false
+      menuActive: false,
+      disabled: false
     });
   },
   toggleView: function (e) {
@@ -70,6 +71,10 @@ var PublishButton = React.createClass({
       }.bind(this), 3000);
     }
   },
+  handleClick: function (e) {
+    this.setState({ disabled: true });
+    this.props.publishStory(e);
+  },
   render: function () {
     if (this.state.story && this.state.story.tags) {
       var tags = this.state.story.tags.map(function (tag) {
@@ -96,8 +101,9 @@ var PublishButton = React.createClass({
           </div>
 
           <button
+            disabled={this.state.disabled}
             id="full-publish"
-            onClick={this.props.publishStory}
+            onClick={this.handleClick}
             className="primary"
             >
             Publish</button>
