@@ -49,9 +49,7 @@
 .avatar-large {
   position: absolute;
   bottom: 40%; right: 2%;
-  vertical-align: middle;
   border-radius: 100%;
-  background: #f0f0f0;
   width: 100px;
   height: 100px;
 }
@@ -271,6 +269,21 @@ button:disabled {
 .Following {
   background-color: #00ab6b !important;
   color: #fff;
+}
+
+.camera-overlay {
+  opacity: 0.5;
+  border-radius: 100%;
+  background-color: #d3d3d3;
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  bottom: 40%; right: 2%;
+  border-radius: 100%;
+}
+
+.fa-camera {
+  margin: 25px;
 }
 
 #delete-account {
