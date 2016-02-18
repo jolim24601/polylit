@@ -35,27 +35,32 @@ module Authentication
     end
 
     def from_omniauth(auth_hash)
-      author = Author.find_by(email: auth_hash['info']['email'])
-      return author if author
-
       author = Author.find_or_create_by(
         uid: auth_hash['uid'],
         provider: auth_hash['provider']
       )
 
       if auth_hash['provider'] == 'twitter'
-        author.username = auth_hash['info']['nickname']
         author.email = auth_hash['info']['email']
+        author.username = auth_hash['info']['nickname']
       else
         author.email = auth_hash['extra']['raw_info']['email']
         author.username = author.email[/[^@]+/]
       end
 
+      author_check = Author.where(
+        "authors.email = ? OR authors.username = ?",
+        author.email,
+        author.username
+      ).take
+
+      return author_check if author_check
+
       author.email ||= author.generate_unique_token_for_field(:email)
       author.pen_name = auth_hash['info']['name']
       author.description = auth_hash['info']['description']
       author.avatar = auth_hash['info']['image']
-      author.password = SecureRandom.base64
+      author.password = author.generate_unique_token_for_field(:password_digest)
       author.save!
       author
     end
