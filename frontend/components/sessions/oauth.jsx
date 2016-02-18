@@ -37,19 +37,19 @@ var auth = React.createClass({
 
         <p className="modal-content">Sign In</p>
 
-        <div className="twitter-login oauth-login">
+        <a href="/auth/twitter" onClick={this.handleClick} className="twitter-login oauth-login">
           <FontAwesome name="fa fa-twitter" />
-          <a onClick={this.handleClick} href="/auth/twitter">Sign in with Twitter</a>
-        </div>
+          <span>Sign in with Twitter</span>
+        </a>
 
-        <div className="fb-login oauth-login">
+        <a href="/auth/facebook" onClick={this.handleClick} className="fb-login oauth-login">
           <FontAwesome name="fa fa-facebook-official" />
-          <a onClick={this.handleClick} href="/auth/facebook">Sign in with Facebook</a>
-        </div>
+          <span>Sign in with Facebook</span>
+        </a>
 
-        <div className="demo-login oauth-login">
+        <div onClick={this.demoSignIn} className="demo-login oauth-login">
           <FontAwesome name="fa fa-user" />
-          <a onClick={this.demoSignIn}>Sign in as Leo Tolstoy</a>
+          <a >Sign in as Leo Tolstoy</a>
         </div>
 
         <div className="auth-alts">
