@@ -68,10 +68,47 @@
   font-size: 14px;
 }
 
+.author-edit-button button:not(:first-child) {
+  margin-left: 5px;
+}
+
 #delete-account {
-  margin-left: 18px;
-  margin-top: 9px;
-  padding: 0 11px;
+  padding: 0;
+  color: rgba(0,0,0,0.44);
+  border: none;
+  float: right;
+}
+
+#delete-account:hover {
+  color: #cc5454;
+}
+
+.overlay {
+  background-color: #ffffff;
+  z-index: 1200;
+  background: rgba(255, 255, 255, 0.97);
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%;
+}
+
+.overlay-dialog {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 0; left: 0; right: 0; bottom: 0;
+  text-align: center;
+  margin: auto;
+  max-width: 580px;
+}
+
+.overlay-dialog p {
+  margin: 30px;
+}
+
+.overlay-dialog button {
+  padding: 8px 22px;
+  margin-left: 5px;
 }
 
 .author-profile .predictiveSearch {
@@ -285,8 +322,4 @@ button:disabled {
 
 .camera-icon {
   margin: 25px;
-}
-
-#delete-account {
-  background: rgb(221, 36, 18);
 }

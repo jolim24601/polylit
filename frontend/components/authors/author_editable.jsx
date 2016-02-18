@@ -17,7 +17,8 @@ var AuthorEditable = React.createClass({
       imageURL: author.avatar,
       imageFile: null,
       editable: false,
-      disabled: false
+      disabled: false,
+      showOverlay: false
     };
   },
   getInitialState: function () {
@@ -34,6 +35,15 @@ var AuthorEditable = React.createClass({
   },
   componentWillUnmount: function () {
     this.authorListener.remove();
+  },
+  confirmDelete: function () {
+    this.showOverlay();
+  },
+  showOverlay: function () {
+    this.setState({ showOverlay: true });
+  },
+  hideOverlay: function () {
+    this.setState({ showOverlay: false });
   },
   destroyAuthor: function () {
     ApiUtil.destroyAuthor(this.props.authorId, function () {
@@ -70,6 +80,25 @@ var AuthorEditable = React.createClass({
     this.setState({ description: e.target.value });
   },
   render: function () {
+    if (this.state.showOverlay) {
+      return (
+        <div className="overlay">
+          <div className="overlay-dialog">
+            <h3>Request account deletion</h3>
+            <p>
+              Sorry to see you go! This action will delete all of your content permanently.
+              Are you sure you want to do this?
+            </p>
+
+            <button className="submit-button primary" onClick={this.destroyAuthor}>
+              Confirm deletion
+            </button>
+            <button onClick={this.hideOverlay}>Cancel</button>
+          </div>
+        </div>
+      );
+    }
+
     var field = this.state;
     var author = AuthorStore.find(this.props.authorId);
     var buttons = this._getButtons(author);
@@ -105,6 +134,14 @@ var AuthorEditable = React.createClass({
   },
   _getButtons: function (author) {
     if (this.state.editable && this.props.isOwner) {
+      var deleteAccount = (
+        <button id="delete-account" onClick={this.confirmDelete}>
+          (Delete this account)
+        </button>
+      );
+      // Prevent demo user from getting deleted!
+      if (author.username === "leo_tolstoy") { deleteAccount = null; }
+
       return (
         <div className="author-edit-button">
           <button
@@ -113,25 +150,17 @@ var AuthorEditable = React.createClass({
             onClick={this.handleClick}>Save
           </button>
           <button onClick={this.refresh}>Cancel</button>
+
+          {deleteAccount}
         </div>
       );
     } else if (this.props.isOwner) {
-      var deleteAccount = (
-        <button id="delete-account" onClick={this.destroyAuthor}>
-        Delete this account
-        </button>
-      );
-
-      // Prevent demo user from getting deleted!
-      if (author.username === "leo_tolstoy") { deleteAccount = null; }
-
       return (
         <div className="author-edit-button">
           <button
             className="edit-button"
             onClick={this.openEdit}>Edit
           </button>
-          {deleteAccount}
         </div>
       );
     }
