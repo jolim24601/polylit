@@ -48,7 +48,8 @@ var Navbar = React.createClass({
   },
   slideSidebar: function () {
     var st = $(document).scrollTop();
-    if (document.querySelector('.promotron') && st < $('.promotron').outerHeight()) {
+    var promoHeight =  $('.promotron').outerHeight();
+    if (document.querySelector('.promotron') && (st < promoHeight || promoHeight === 0)) {
       $('.sidebar').addClass('side-right');
     } else {
       $('.sidebar').removeClass('hide');
