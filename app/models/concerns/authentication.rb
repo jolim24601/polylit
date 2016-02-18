@@ -35,6 +35,9 @@ module Authentication
     end
 
     def from_omniauth(auth_hash)
+      author = Author.find_by(email: auth_hash['info']['email'])
+      return author if author
+
       author = Author.find_or_create_by(
         uid: auth_hash['uid'],
         provider: auth_hash['provider']
@@ -48,7 +51,7 @@ module Authentication
         author.username = author.email[/[^@]+/]
       end
 
-      author.email ||= 'blank'
+      author.email ||= generate_unique_token_for_field(:email)
       author.pen_name = auth_hash['info']['name']
       author.description = auth_hash['info']['description']
       author.avatar = auth_hash['info']['image']
