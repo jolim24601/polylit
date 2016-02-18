@@ -51,7 +51,7 @@ module Authentication
         author.username = author.email[/[^@]+/]
       end
 
-      author.email ||= generate_unique_token_for_field(:email)
+      author.email ||= author.generate_unique_token_for_field(:email)
       author.pen_name = auth_hash['info']['name']
       author.description = auth_hash['info']['description']
       author.avatar = auth_hash['info']['image']
