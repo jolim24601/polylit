@@ -3,6 +3,8 @@
 [Site][site]
 [site]: http://www.polylit.net
 
+![Screenshot](/docs/polylit_home_page.png)
+
 # Summary
 Polylit is a web application inspired by Medium built using Ruby on Rails
 and React.js. Authors can read, write and edit stories using the WYSIWYG
