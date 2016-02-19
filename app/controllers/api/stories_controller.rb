@@ -33,11 +33,16 @@ class Api::StoriesController < ApplicationController
 
   def followed_stories
     # stories where the author has a follower that is the current author
-    @stories = Story.joins(author: :follows)
-                    .where(follows: { follower_id: current_author.id })
-                    .where(published: true)
-                    .order(created_at: :desc)
-                    .limit(3)
+    if current_author
+      @stories = Story.joins(author: :follows)
+                      .where(follows: { follower_id: current_author.id })
+                      .where(published: true)
+                      .order(created_at: :desc)
+                      .limit(3)
+    else
+      @stories = []
+    end
+
     render :index
   end
 
