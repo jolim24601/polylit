@@ -17,10 +17,12 @@
  *= require 'landing'
  *= require 'sidebar'
  *= require 'story_feed'
+ *= require 'author'
  *= require 'search'
  *= require 'story'
  *= require 'publish'
  *= require font-awesome
+ *= require 'mobile'
  *= require_self
  *= require_tree
  */
