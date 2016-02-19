@@ -55,6 +55,14 @@ var StoryView = React.createClass({
       editButton = <a className="story-edit button" href={editLink}>Edit</a>;
     }
 
+    if (!this.state.story) {
+      return (
+        <div className="spinner">
+          <small className="loading">Loading...</small>
+        </div>
+      );
+    }
+
     return (
       <article className="story">
         <Navbar>
