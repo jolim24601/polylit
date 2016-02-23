@@ -64,6 +64,10 @@
   .search-feed {
     margin: 150px 60px;
   }
+
+  .promotron {
+    display: none;
+  }
 }
 
 @media (max-width: 584px) {
