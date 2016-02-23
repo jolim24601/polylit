@@ -1,8 +1,9 @@
 # Polylit
-![Screenshot](/docs/polylit_home_page.png)
+[Live][live]
+[live]: http://www.polylit.net
 
-[Site][site]
-[site]: http://www.polylit.net
+[![Screenshot](/docs/polylit_home_page.png)](http://www.polylit.net)
+
 
 # Summary
 Polylit is a web application inspired by Medium built using Ruby on Rails
