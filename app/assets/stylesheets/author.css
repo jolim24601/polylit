@@ -4,7 +4,7 @@
 }
 
 .inner-profile {
-  width: 600px;
+  max-width: 600px;
   height: 240px;
   margin: 0 auto;
   padding: 2% 0;

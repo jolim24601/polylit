@@ -12,7 +12,7 @@
 .ProseMirror-content {
   height: auto;
   margin: auto;
-  width: 900px;
+  max-width: 900px;
   min-height: 200px;
   font-size: 21px;
 }
