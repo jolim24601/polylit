@@ -66,6 +66,10 @@
     margin: 150px 60px;
   }
 
+  .search-feed li:not(:first-child) {
+    margin-bottom: 20px;
+  }
+
   .promotron {
     display: none;
   }
