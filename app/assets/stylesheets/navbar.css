@@ -17,12 +17,18 @@
   height: 65px;
 }
 
-.navbar-center {
+.navbar-center, .navbar-dropdown {
   margin-left: 50px;
   font-weight: 400;
   font-size: 14px;
   max-width: 600px;
   letter-spacing: 1.5px;
+}
+
+.navbar-dropdown {
+  border: none;
+  background: #fff;
+  margin-top: 28px;
 }
 
 .is-active a {

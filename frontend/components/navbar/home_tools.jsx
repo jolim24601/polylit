@@ -1,5 +1,6 @@
 var React = require('react'),
     objectAssign = require('object-assign'),
+    CurrentAuthorStore = require('../../stores/current_author_store'),
     History = require('react-router').History;
 
 var blankState = { 
@@ -15,9 +16,10 @@ var HomeTools = React.createClass({
     return objectAssign({}, blankState);
   },
   componentDidMount: function () {
-    window.addEventListener('resize', function (e) {
-      this.forceUpdate();
-    }.bind(this), false);
+    window.addEventListener('resize', this._onChange, false);
+  },
+  componentWillUnmount: function () {
+    window.removeEventListener('resize', this._onChange, false);
   },
   componentWillReceiveProps: function (newProps) {
     var path = newProps.location.pathname;
@@ -46,11 +48,12 @@ var HomeTools = React.createClass({
     this.history.pushState(null, e.target.value, {});
   },
   render: function () {
-    if (window.innerWidth <= 484) {
+    if (window.innerWidth <= 484 
+        || (!CurrentAuthorStore.isLoggedIn() && window.innerWidth <= 643)) {
       return (
         <select value={this.state.optionsState}
                 onChange={this.handleChange}
-                className="navbar-center group floatLeft">
+                className="navbar-dropdown group floatLeft">
 
           <option value="/">HOME</option>
           <option value="/top-stories">TOP STORIES</option>
@@ -72,6 +75,9 @@ var HomeTools = React.createClass({
         </li>
       </ul>
     );
+  },
+  _onChange: function (_e) {
+    this.forceUpdate();
   }
 });
 

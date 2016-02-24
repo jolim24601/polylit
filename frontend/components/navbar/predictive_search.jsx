@@ -12,13 +12,12 @@ var PredictiveSearch = React.createClass({
     return { query: '' };
   },
   componentDidMount: function () {    
-    window.addEventListener('resize', function (e) {
-      this.forceUpdate();
-    }.bind(this), false);
+    window.addEventListener('resize', this._onChange, false);
 
     this.listener = SearchResultsStore.addListener(this._onChange);
   },
   componentWillUnmount: function () {
+    window.removeEventListener('resize', this._onChange, false);
     this.listener.remove();
   },
   search: function (e) {
@@ -59,7 +58,7 @@ var PredictiveSearch = React.createClass({
       </div>
     );
   },
-  _onChange: function () {
+  _onChange: function (_e) {
     this.forceUpdate();
   }
 });

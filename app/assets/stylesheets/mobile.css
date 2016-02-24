@@ -79,6 +79,7 @@
   .navbar-center {
     margin-left: 25px;
   }
+
   .draft-list-header {
     left: 25px;
   }
@@ -103,7 +104,7 @@
   .navbar-center {
     border: none;
     background: #fff;
-    margin-top: 32px;
+    margin-top: 28px;
   }
 
   .navbar-tools {
@@ -111,7 +112,11 @@
   }
 }
 
-@media (max-width: 382px) {
+@media (max-width: 388px) {
+  .navbar {
+    position: inherit;
+  }
+
   .story-feed {
     margin: 80px 15px;
     min-width: 250px;
