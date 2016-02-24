@@ -34,13 +34,6 @@
 @media (max-width: 912px) {
   .story {
     margin: 100px 25px;
-  }
-
-  .story-view {
-    width: 80%;
-  }
-
-  .ProseMirror {
     width: 90%;
   }
 
