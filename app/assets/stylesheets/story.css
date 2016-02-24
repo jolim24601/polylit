@@ -33,7 +33,7 @@ strong {
 }
 
 .story-author-header {
-  width: 875px;
+  max-width: 875px;
   margin: 10px auto;
 }
 
