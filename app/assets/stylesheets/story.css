@@ -38,8 +38,9 @@ strong {
 }
 
 .story-tags-footer {
+  width: 100%;
   margin: auto;
-  width: 900px;
+  max-width: 900px;
   margin-top: -65px;
 }
 
