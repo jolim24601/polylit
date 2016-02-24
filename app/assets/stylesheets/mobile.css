@@ -93,10 +93,6 @@
 }
 
 @media (max-width: 545px) {
-  .navbar {
-    position: inherit;
-  }
-
   .story-feed {
     margin: 80px 25px;
     min-width: 350px;
