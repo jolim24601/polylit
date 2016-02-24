@@ -36,6 +36,10 @@
     margin: 100px 25px;
   }
 
+  .ProseMirror {
+    width: 80%;
+  }
+
   .write-link {
     display: none;
   }
@@ -61,6 +65,10 @@
     padding-left: 50px;
   }
 
+  .ProseMirror {
+    width: 65%;
+  }
+
   .search-feed {
     margin: 150px 60px;
   }
@@ -82,6 +90,10 @@
     margin: 30px 5px;
   }
 
+  .ProseMirror {
+    width: 60%;
+  }
+
   .story-feed {
     margin: 80px 50px;
   }
@@ -92,6 +104,10 @@
     position: inherit;
   }
 
+  .ProseMirror {
+    width: 40%;
+  }
+
   .story-feed {
     margin: 80px 25px;
     min-width: 350px;
@@ -99,6 +115,10 @@
 }
 
 @media (max-width: 382px) {
+  .ProseMirror {
+    width: 30%;
+  }
+  
   .story-feed {
     margin: 150px 15px;
     min-width: 250px;
