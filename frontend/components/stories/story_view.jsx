@@ -75,9 +75,9 @@ var StoryView = React.createClass({
           <small>{this.state.story.lastUpdated}</small>
           &middot;
           <small> {this.state.story.readTime}</small>
-          <div ref="pm"></div>
         </div>
 
+        <div className="story-view" ref="pm"></div>
         <StoryFooter story={this.state.story} tags={this.state.story.tags} />
       </article>
     );
