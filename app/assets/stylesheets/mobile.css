@@ -40,6 +40,10 @@
     width: 80%;
   }
 
+  .ProseMirror {
+    width: 90%;
+  }
+
   .write-link {
     display: none;
   }
