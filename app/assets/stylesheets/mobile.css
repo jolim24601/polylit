@@ -41,8 +41,8 @@
     display: none;
   }
 
-  .predictiveSearch {
-    width: 60px;
+  .search-link {
+    margin-right: 15px;
   }
 }
 
@@ -103,9 +103,21 @@
   }
 }
 
+@media (max-width: 484px) {
+  .navbar-center {
+    border: none;
+    background: #fff;
+    margin-top: 32px;
+  }
+
+  .navbar-tools {
+    margin-top: 5px;
+  }
+}
+
 @media (max-width: 382px) {
   .story-feed {
-    margin: 150px 15px;
+    margin: 80px 15px;
     min-width: 250px;
   }
 }

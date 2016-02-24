@@ -11,7 +11,11 @@ var PredictiveSearch = React.createClass({
   getInitialState: function () {
     return { query: '' };
   },
-  componentDidMount: function () {
+  componentDidMount: function () {    
+    window.addEventListener('resize', function (e) {
+      this.forceUpdate();
+    }.bind(this), false);
+
     this.listener = SearchResultsStore.addListener(this._onChange);
   },
   componentWillUnmount: function () {
@@ -29,6 +33,17 @@ var PredictiveSearch = React.createClass({
     this.history.pushState(null, 'search', this.state);
   },
   render: function () {
+    if (window.innerWidth <= 912) {
+      return (
+        <a href="#/search" className="search-link">
+          <FontAwesome
+            className="search-icon"
+            onClick={this.handleClick}
+            name="fa fa-search" />
+        </a>
+      );
+    }
+
     return (
       <div className="navbar-search">
         <FontAwesome
