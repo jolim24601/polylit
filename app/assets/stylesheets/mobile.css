@@ -122,13 +122,13 @@
 
 @media (max-width: 388px) {
   .story-feed {
-    margin: 80px 15px;
+    margin: 100px 15px;
     min-width: 250px;
   }
 }
 
 @media (max-width: 262px) {
   .navbar {
-    margin-bottom: 0;
+    position: inherit;
   }
 }
