@@ -33,17 +33,27 @@ var StoriesIndex = React.createClass({
     if ($(window).scrollTop() + $(window).height() === $(document).height()
         && (Date.now() - this.lastTime) > 2500) {
       var nextPage = this.state.page + 1;
-      this.setState({ page: nextPage });
-      ApiUtil.fetchStories({ page: nextPage });
-      ApiUtil.fetchTopStories({ page: nextPage });
+      var pageParams = { page: nextPage };
+
+      this.setState(objectAssign({}, pageParams, { loading: true}));
+      ApiUtil.fetchStories(pageParams, this.stopLoading);
+      ApiUtil.fetchTopStories(pageParams, this.stopLoading);
       this.lastTime = Date.now();
     }
+  },
+  stopLoading: function () {
+    // this.setState({ loading: false });
   },
   componentWillUnmount: function () {
     this.listener.remove();
     document.removeEventListener('scroll', this.nextPage);
   },
   render: function () {
+    var loadingAnimation;
+    if (this.state.loading) {
+      loadingAnimation = <div className="ellipsis" />;
+    }
+
     var stories = this.state.stories;
 
     var storyList = stories.map(function (story) {
@@ -60,6 +70,7 @@ var StoriesIndex = React.createClass({
         <ul className="story-feed">
           <li className="heading-title">{heading}</li>
           {storyList}
+          {loadingAnimation}
         </ul>
       </div>
     );
