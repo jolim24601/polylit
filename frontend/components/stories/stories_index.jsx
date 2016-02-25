@@ -42,7 +42,7 @@ var StoriesIndex = React.createClass({
     }
   },
   stopLoading: function () {
-    // this.setState({ loading: false });
+    this.setState({ loading: false });
   },
   componentWillUnmount: function () {
     this.listener.remove();
