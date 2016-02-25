@@ -11,12 +11,8 @@ class Api::StoriesController < ApplicationController
   def top_stories
     @stories = Story.page(1)
                     .per(Story.default_per_page * params[:page].to_i)
-                    .select("stories.*, count(favorites.id) as like_count")
-                    .includes(:bookmarks, :tags, author: :follows)
-                    .joins(:favorites)
-                    .group("stories.id")
+                    .includes(:favorites, :bookmarks, :tags, author: :follows)
                     .where(published: true)
-                    .order("like_count desc")
 
     render :index
   end
@@ -29,14 +25,15 @@ class Api::StoriesController < ApplicationController
                   .where(published: true)
                   .order(created_at: :desc)
 
-
+    
     render :index
   end
 
   def followed_stories
     # stories where the author has a follower that is the current author
     if current_author
-      @stories = Story.joins(author: :follows)
+      @stories = Story.includes(:bookmarks, :favorites)
+                      .joins(author: :follows)
                       .where(follows: { follower_id: current_author.id })
                       .where(published: true)
                       .order(created_at: :desc)

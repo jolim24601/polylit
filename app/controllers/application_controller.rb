@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_author
 
   def current_author
-    @current_author ||= Author.find_by_session_token(session[:session_token])
+    @current_author ||= Author.includes(:bookmarks, :favorites)
+                              .find_by_session_token(session[:session_token])
   end
 
   def require_logged_in_author
