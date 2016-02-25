@@ -84,8 +84,9 @@ var StoriesIndex = React.createClass({
     );
   },
   _onChange: function () {
+    var storyCount = this.state.stories.length;
     this.setState(this.getStateFromStore(), function () {
-      if (this.state.stories.length < (25 * this.state.page)) {
+      if (storyCount > 0 && storyCount < (25 * this.state.page)) {
         this.setState({ noMoreStories: true });
       }
     }.bind(this));
