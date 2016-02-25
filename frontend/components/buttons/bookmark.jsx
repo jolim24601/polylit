@@ -9,7 +9,7 @@ var Bookmark = React.createClass({
   mixins: [History],
 
   getStateFromStore: function () {
-    if (!CurrentAuthorStore.isLoggedIn()) { 
+    if (!CurrentAuthorStore.isLoggedIn()) {
       return { bookmarked: false };
     }
 

@@ -48,12 +48,7 @@ module Authentication
         author.username = author.email[/[^@]+/]
       end
 
-      author_check = Author.where(
-        "authors.email = ? OR authors.username = ?",
-        author.email,
-        author.username
-      ).take
-
+      author_check = Author.find_by(email: author.email)
       return author_check if author_check
 
       author.email ||= author.generate_unique_token_for_field(:email)

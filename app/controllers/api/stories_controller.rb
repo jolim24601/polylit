@@ -27,7 +27,6 @@ class Api::StoriesController < ApplicationController
                   .where(published: true)
                   .order(created_at: :desc)
 
-    
     render :index
   end
 
