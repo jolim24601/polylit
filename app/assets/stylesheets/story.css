@@ -27,9 +27,8 @@ strong {
 
 .story-edit {
   padding: 8px 22px;
-  position: absolute;
-  right: 460px;
-  top: 18px;
+  margin-top: 15px;
+  margin-right: 10px;
 }
 
 .story-author-header {

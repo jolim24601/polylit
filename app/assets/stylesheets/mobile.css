@@ -101,14 +101,15 @@
 }
 
 @media (max-width: 484px) {
-  .navbar {
-    position: inherit;
-  }
-
   .navbar-center {
     border: none;
     background: #fff;
     margin-top: 28px;
+  }
+
+  .story-edit {
+    margin-top: 20px;
+
   }
 
   .navbar-tools {
