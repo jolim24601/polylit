@@ -19,29 +19,30 @@ var StoriesIndex = React.createClass({
   },
   getInitialState: function () {
     return objectAssign(
-      this.getStateFromStore(), { page: 1, loading: false }
+      this.getStateFromStore(), { page: 0, loading: false }
     );
   },
   componentDidMount: function () {
     this.lastTime = Date.now();
     this.listener = StoryStore.addListener(this._onChange);
 
-    ApiUtil.fetchStories({ page: this.state.page});
-    ApiUtil.fetchTopStories({ page: this.state.page });
+    this.fetchStories();
     document.addEventListener('scroll', this.nextPage);
   },
   nextPage: function () {
     // Throttle the AJAX call to prevent thrashing the server
     if ($(window).scrollTop() + $(window).height() === $(document).height()
         && (Date.now() - this.lastTime) > 2500) {
-      var nextPage = this.state.page + 1;
-      var pageParams = { page: nextPage };
 
-      this.setState(objectAssign({}, pageParams, { loading: true}));
-      ApiUtil.fetchStories(pageParams, this.stopLoading);
-      ApiUtil.fetchTopStories(pageParams, this.stopLoading);
+      this.fetchStories();
       this.lastTime = Date.now();
     }
+  },
+  fetchStories: function () {
+    var pageParams = { page: this.state.page + 1 };
+    this.setState(objectAssign({}, pageParams, { loading: true }));
+    ApiUtil.fetchStories(pageParams, this.stopLoading);
+    ApiUtil.fetchTopStories(pageParams, this.stopLoading);
   },
   stopLoading: function () {
     this.setState({ loading: false });
