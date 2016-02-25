@@ -101,6 +101,11 @@
 }
 
 @media (max-width: 484px) {
+  .navbar {
+    position: inherit;
+    margin-bottom: -50px;
+  }
+
   .navbar-center {
     border: none;
     background: #fff;
@@ -113,12 +118,14 @@
 }
 
 @media (max-width: 388px) {
-  .navbar {
-    position: inherit;
-  }
-
   .story-feed {
     margin: 80px 15px;
     min-width: 250px;
+  }
+}
+
+@media (max-width: 262px) {
+  .navbar {
+    margin-bottom: 0;
   }
 }
