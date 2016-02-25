@@ -2,6 +2,7 @@ class Api::StoriesController < ApplicationController
   def index
     @stories = Story.page(1)
                     .per(Story.default_per_page * params[:page].to_i)
+                    .includes(:favorites, :bookmarks, :tags, author: :follows)
                     .where(published: true)
                     .order(created_at: :desc)
 
@@ -11,6 +12,7 @@ class Api::StoriesController < ApplicationController
     @stories = Story.page(1)
                     .per(Story.default_per_page * params[:page].to_i)
                     .select("stories.*, count(favorites.id) as like_count")
+                    .includes(:bookmarks, :tags, author: :follows)
                     .joins(:favorites)
                     .group("stories.id")
                     .where(published: true)
