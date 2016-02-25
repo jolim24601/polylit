@@ -18,7 +18,9 @@ var StoriesIndex = React.createClass({
     return ({ stories: StoryStore.topStories() });
   },
   getInitialState: function () {
-    return objectAssign(this.getStateFromStore(), { page: 1 });
+    return objectAssign(
+      this.getStateFromStore(), { page: 1, loading: false }
+    );
   },
   componentDidMount: function () {
     this.lastTime = Date.now();
