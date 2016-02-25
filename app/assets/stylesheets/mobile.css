@@ -103,7 +103,6 @@
 @media (max-width: 484px) {
   .navbar {
     position: inherit;
-    margin-bottom: -50px;
   }
 
   .navbar-center {
