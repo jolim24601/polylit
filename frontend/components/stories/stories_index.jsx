@@ -19,7 +19,11 @@ var StoriesIndex = React.createClass({
   },
   getInitialState: function () {
     return objectAssign(
-      this.getStateFromStore(), { page: 0, loading: false }
+      this.getStateFromStore(), { 
+        page: 0, 
+        loading: false,
+        noMoreStories: false 
+      }
     );
   },
   componentDidMount: function () {
@@ -53,7 +57,7 @@ var StoriesIndex = React.createClass({
   },
   render: function () {
     var loadingAnimation;
-    if (this.state.loading) {
+    if (this.state.loading && !this.state.noMoreStories) {
       loadingAnimation = <div className="ellipsis" />;
     }
 
@@ -79,7 +83,11 @@ var StoriesIndex = React.createClass({
     );
   },
   _onChange: function () {
-    this.setState(this.getStateFromStore());
+    this.setState(this.getStateFromStore(), function () {
+      if (this.state.stories.length < 25) {
+        this.setState({ noMoreStories: true });
+      }
+    }.bind(this));
   }
 });
 
