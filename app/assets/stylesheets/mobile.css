@@ -107,9 +107,12 @@
     margin-top: 28px;
   }
 
+  .story-feed {
+    margin-top: 100px;
+  }
+
   .story-edit {
     margin-top: 20px;
-
   }
 
   .navbar-tools {
