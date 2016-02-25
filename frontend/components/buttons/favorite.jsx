@@ -11,8 +11,11 @@ var Favorite = React.createClass({
   mixins: [History],
 
   getStateFromStore: function () {
-    var story = StoryStore.find(this.props.story.id) || this.props.story;
+    if (!CurrentAuthorStore.isLoggedIn()) { 
+      return { favorited: false };
+    }
 
+    var story = StoryStore.find(this.props.story.id) || this.props.story;
     var favorites = CurrentAuthorStore.currentAuthor().favorites;
     var storyIds = favorites.map(function (favorite) {
       return favorite.story_id;

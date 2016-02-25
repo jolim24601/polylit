@@ -81,3 +81,4 @@ class Api::StoriesController < ApplicationController
         .permit(:title, :subtitle, :published, :node, :wordcount, :banner)
     end
 end
+

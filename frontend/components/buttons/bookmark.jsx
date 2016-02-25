@@ -9,11 +9,14 @@ var Bookmark = React.createClass({
   mixins: [History],
 
   getStateFromStore: function () {
-    var story = StoryStore.find(this.props.story.id) || this.props.story;
+    if (!CurrentAuthorStore.isLoggedIn()) { 
+      return { bookmarked: false };
+    }
 
+    var story = StoryStore.find(this.props.story.id) || this.props.story;
     var bookmarks = CurrentAuthorStore.currentAuthor().bookmarks;
     var storyIds = bookmarks.map(function (bookmark) {
-      return bookmark.story_id;
+        return bookmark.story_id;
     });
 
     if (storyIds.indexOf(story.id) !== -1) {
