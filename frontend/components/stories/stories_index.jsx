@@ -43,6 +43,8 @@ var StoriesIndex = React.createClass({
     }
   },
   fetchStories: function () {
+    if (this.state.noMoreStories) { return; }
+
     var pageParams = { page: this.state.page + 1 };
     this.setState(objectAssign({}, pageParams, { loading: true }));
     ApiUtil.fetchStories(pageParams, this.stopLoading);
@@ -60,7 +62,6 @@ var StoriesIndex = React.createClass({
     if (this.state.loading && !this.state.noMoreStories) {
       loadingAnimation = <div className="ellipsis" />;
     }
-
     var stories = this.state.stories;
 
     var storyList = stories.map(function (story) {
@@ -84,7 +85,7 @@ var StoriesIndex = React.createClass({
   },
   _onChange: function () {
     this.setState(this.getStateFromStore(), function () {
-      if (this.state.stories.length < 25) {
+      if (this.state.stories.length < (25 * this.state.page)) {
         this.setState({ noMoreStories: true });
       }
     }.bind(this));
