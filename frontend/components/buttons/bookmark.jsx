@@ -35,7 +35,7 @@ var Bookmark = React.createClass({
   },
   bookmarkStory: function () {
     if (!CurrentAuthorStore.isLoggedIn()) {
-      this.history.pushState(null, 'auth', {});
+      return this.history.pushState(null, 'auth', {});
     }
 
     var type = this.state.bookmarked ? "DELETE" : "POST";

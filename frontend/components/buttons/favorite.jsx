@@ -37,7 +37,7 @@ var Favorite = React.createClass({
   },
   favoriteStory: function () {
     if (!CurrentAuthorStore.isLoggedIn()) {
-      this.history.pushState(null, 'auth', {});
+      return this.history.pushState(null, 'auth', {});
     }
 
     var story = this.props.story;
