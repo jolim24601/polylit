@@ -1,16 +1,21 @@
 class Api::FavoritesController < ApplicationController
   def create
-    favorite = Favorite.create(favorite_params)
-    @story = favorite.story
-    render "api/stories/show"
+    Story.find(favorite_params[:story_id])
+         .favorites
+         .create!(author_id: favorite_params[:author_id])
+
+    @author = current_author
+    render "api/authors/show"
   end
 
   def destroy
-    favorite = Favorite.find_by(
-      author_id: params[:favorite][:author_id],
-      story_id: params[:favorite][:story_id]).destroy
-    @story = favorite.story
-    render "api/stories/show"
+    Favorite.find_by(
+      author_id: favorite_params[:author_id],
+      story_id: favorite_params[:story_id]
+    ).destroy
+
+    @author = current_author
+    render "api/authors/show"
   end
 
   private

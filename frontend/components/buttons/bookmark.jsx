@@ -11,10 +11,12 @@ var Bookmark = React.createClass({
   getStateFromStore: function () {
     var story = StoryStore.find(this.props.story.id) || this.props.story;
 
-    var authorIds = story.bookmarks.map(function (bk) {
-      return bk.author_id;
+    var bookmarks = CurrentAuthorStore.currentAuthor().bookmarks;
+    var storyIds = bookmarks.map(function (bookmark) {
+      return bookmark.story_id;
     });
-    if (authorIds.indexOf(CurrentAuthorStore.currentAuthor().id) !== -1) {
+
+    if (storyIds.indexOf(story.id) !== -1) {
       return { bookmarked: true };
     }
     return { bookmarked: false };
@@ -23,7 +25,7 @@ var Bookmark = React.createClass({
     return this.getStateFromStore();
   },
   componentDidMount: function () {
-    this.listener = StoryStore.addListener(this._onChange);
+    this.listener = CurrentAuthorStore.addListener(this._onChange);
   },
   componentWillUnmount: function () {
     this.listener.remove();

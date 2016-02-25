@@ -15,7 +15,7 @@ var Footer = React.createClass({
     return (
       <div className="story-preview-footer group">
         <Bookmark story={story} />
-        <div className="fav-count">{story.favorites.length}</div>
+        <div className="fav-count">{story.favoritesCount}</div>
         <Favorite story={story} />
       </div>
     );

@@ -49,5 +49,11 @@ module.exports = {
       actionType: StoryConstants.STORY_DESTROYED,
       story: story
     });
+  },
+  updateStoryFavorites: function (story) {
+    AppDispatcher.dispatch({
+      actionType: StoryConstants.STORY_RECEIVED,
+      story: story
+    });
   }
 };

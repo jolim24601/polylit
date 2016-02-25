@@ -12,8 +12,8 @@ class Api::BookmarksController < ApplicationController
   def create
     bookmark = Bookmark.create(bookmark_params)
 
-    @story = bookmark.story
-    render "api/stories/show"
+    @author = current_author
+    render "api/authors/show"
   end
 
   def destroy
@@ -21,8 +21,8 @@ class Api::BookmarksController < ApplicationController
       author_id: params[:bookmark][:author_id],
       story_id: params[:bookmark][:story_id]).destroy
 
-    @story = bookmark.story
-    render "api/stories/show"
+    @author = current_author
+    render "api/authors/show"
   end
 
   private

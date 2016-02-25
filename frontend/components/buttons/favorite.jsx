@@ -1,6 +1,7 @@
 var React = require('react'),
     FontAwesome = require('react-fontawesome'),
     ApiUtil = require('../../util/api_util'),
+    ApiActions = require('../../actions/api_actions'),
     StoryStore = require('../../stores/story_store'),
     CurrentAuthorStore = require('../../stores/current_author_store');
 
@@ -12,10 +13,12 @@ var Favorite = React.createClass({
   getStateFromStore: function () {
     var story = StoryStore.find(this.props.story.id) || this.props.story;
 
-    var authorIds = story.favorites.map(function (fav) {
-      return fav.author_id;
+    var favorites = CurrentAuthorStore.currentAuthor().favorites;
+    var storyIds = favorites.map(function (favorite) {
+      return favorite.story_id;
     });
-    if (authorIds.indexOf(CurrentAuthorStore.currentAuthor().id) !== -1) {
+
+    if (storyIds.indexOf(story.id) !== -1) {
       return { favorited: true };
     }
     return { favorited: false };
@@ -24,7 +27,7 @@ var Favorite = React.createClass({
     return this.getStateFromStore();
   },
   componentDidMount: function () {
-    this.listener = StoryStore.addListener(this._onChange);
+    this.listener = CurrentAuthorStore.addListener(this._onChange);
   },
   componentWillUnmount: function () {
     this.listener.remove();
@@ -34,15 +37,27 @@ var Favorite = React.createClass({
       this.history.pushState(null, 'auth', {});
     }
 
-    var type = this.state.favorited ? "DELETE" : "POST";
+    var story = this.props.story;
+    var type; 
+    if (this.state.favorited) {
+      type = "DELETE";
+      story.favoritesCount -= 1;
+    } else {
+      type = "POST";
+      story.favoritesCount += 1;
+    }
+
 
     ApiUtil.toggleFavorite({
       favorite: {
-        story_id: this.props.story.id,
+        story_id: story.id,
         author_id: CurrentAuthorStore.currentAuthor().id
       },
       type: type
+    }, function () {
+      ApiActions.updateStoryFavorites(story);
     });
+
   },
   render: function () {
     var name = this.state.favorited? "fa fa-heart" : "fa fa-heart-o";

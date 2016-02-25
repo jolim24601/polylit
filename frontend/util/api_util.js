@@ -110,9 +110,9 @@ module.exports = {
       url: "api/favorites",
       data: data,
       dataType: "json",
-      success: function (story) {
-        ApiActions.receiveSingleStory(story);
-        callback && callback(story);
+      success: function (author) {
+        CurrentAuthorActions.receiveCurrentAuthor(author);
+        callback && callback();
       }
     });
   },
@@ -122,9 +122,9 @@ module.exports = {
       url: "api/bookmarks",
       data: data,
       dataType: "json",
-      success: function (story) {
-        ApiActions.receiveSingleStory(story);
-        callback && callback(story);
+      success: function (author) {
+        CurrentAuthorActions.receiveCurrentAuthor(author);
+        callback && callback();
       }
     });
   },

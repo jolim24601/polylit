@@ -1,8 +1,7 @@
 json.extract!       story, :id, :title, :subtitle, :author_id
 json.timeAgo        time_ago_in_words(story.created_at)
 json.published      story.published
-json.favorites      story.favorites
-json.bookmarks      story.bookmarks
+json.favoritesCount story.favorites_count
 json.responses      0
 json.banner         asset_url(story.banner.url)
 json.lastUpdated    story.updated_at.strftime("%m/%d")
