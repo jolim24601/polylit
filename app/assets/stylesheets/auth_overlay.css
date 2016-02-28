@@ -107,11 +107,11 @@ button.modal-close {
 
 .demo-login {
   cursor: pointer;
-  background-color: rgb(176, 45, 41);
+  background-color: rgb(29, 112, 0);
 }
 
 .demo-login:hover {
-  background-color: rgb(122, 23, 6);
+  background-color: rgb(20, 69, 3);
 }
 
 .auth-alts a {

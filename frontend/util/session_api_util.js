@@ -8,6 +8,7 @@ module.exports = {
       url: "api/session",
       dataType: "json",
       success: function (author) {
+        console.log('fetched')
         CurrentAuthorActions.receiveCurrentAuthor(author);
         if (typeof callback === "function") { callback(); }
       }
