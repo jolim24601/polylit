@@ -131,8 +131,8 @@
   }
 }
 
-/*@media (max-width: 262px) {
+@media (max-width: 262px) {
   .navbar {
     position: inherit;
   }
-}*/
+}

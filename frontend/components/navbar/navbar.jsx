@@ -38,10 +38,10 @@ var Navbar = React.createClass({
     // if they scrolled and scrolled out of view of the header
     if (st > this.state.lastScrollTop && st > nbHeight) {
       nb.classList.add('nav-up');
-      sb.classList.add('side-up');
+      if (sb) { sb.classList.add('side-up'); }
     } else if (st + window.innerHeight < document.body.offsetHeight) {
       nb.classList.remove('nav-up');
-      sb.classList.remove('side-up');
+      if (sb) { sb.classList.remove('side-up'); }
     }
 
     this.slideSidebar();
