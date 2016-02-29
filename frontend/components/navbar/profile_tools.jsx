@@ -5,7 +5,7 @@ var React = require('react'),
 var ProfileTools = React.createClass({
   render: function () {
     return (
-      <div className="profile-tools group floatLeft">
+      <div className="profile-tools group float-left">
         <li><ProfileButton /></li>
       </div>
     );

@@ -74,8 +74,8 @@ var Search = React.createClass({
       return SearchResultsStore.authors().map(function (author) {
         return (
           <li key={author.id} className="author-search-card group">
-            <img className="avatar-small floatLeft" src={author.avatar} alt={author.name} />
-            <div className="bio floatLeft">
+            <img className="avatar-small float-left" src={author.avatar} alt={author.name} />
+            <div className="bio float-left">
               <a href={author.url}>{author.name}</a>
               <p>{author.description}</p>
             </div>

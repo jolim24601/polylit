@@ -53,7 +53,7 @@ var HomeTools = React.createClass({
       return (
         <select value={this.state.optionsState}
                 onChange={this.handleChange}
-                className="navbar-dropdown group floatLeft">
+                className="navbar-dropdown group float-left">
 
           <option value="/">HOME</option>
           <option value="/top-stories">TOP STORIES</option>
@@ -63,7 +63,7 @@ var HomeTools = React.createClass({
     }
 
     return (
-      <ul className="navbar-center group floatLeft">
+      <ul className="navbar-center group float-left">
         <li className={this.state.tabActive1}>
           <a href="#">HOME</a>
         </li>

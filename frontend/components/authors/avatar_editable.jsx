@@ -27,7 +27,7 @@ var AvatarEditable = React.createClass({
     }
 
     return (
-      <div className="avatar floatRight">
+      <div className="avatar float-right">
         <img
           className="avatar-large"
           src={imageURL}

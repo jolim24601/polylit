@@ -52,7 +52,7 @@ var StoryView = React.createClass({
     if (CurrentAuthorStore.currentAuthor() && this.state.story &&
         CurrentAuthorStore.currentAuthor().id === this.state.story.author.id) {
       editLink = "#/stories/" + this.state.story.id + "/edit";
-      editButton = <a className="story-edit button floatRight" href={editLink}>Edit</a>;
+      editButton = <a className="story-edit button float-right" href={editLink}>Edit</a>;
     }
 
     if (!this.state.story) {

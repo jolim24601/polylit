@@ -34,7 +34,7 @@ var CustomFeed = React.createClass({
       <ul className="custom story-feed">
         <li className="heading-title">
           Recent stories from authors you follow
-          <button className="close-feed floatRight" onClick={this.closeFeed}>&times;</button>
+          <button className="close-feed float-right" onClick={this.closeFeed}>&times;</button>
         </li>
 
         {followedStories}

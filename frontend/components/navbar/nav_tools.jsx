@@ -29,7 +29,7 @@ var NavTools = React.createClass({
     }
 
     return (
-      <ul className="navbar-tools group floatRight">
+      <ul className="navbar-tools group float-right">
         <li><PredictiveSearch /></li>
         <li>
           <a onClick={this._ensureSignIn}

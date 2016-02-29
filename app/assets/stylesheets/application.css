@@ -23,6 +23,4 @@
  *= require 'publish'
  *= require font-awesome
  *= require 'mobile'
- *= require_self
- *= require_tree
  */

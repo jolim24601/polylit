@@ -11,7 +11,7 @@ var PredictiveSearch = React.createClass({
   getInitialState: function () {
     return { query: '' };
   },
-  componentDidMount: function () {    
+  componentDidMount: function () {
     window.addEventListener('resize', this._onChange, false);
 
     this.listener = SearchResultsStore.addListener(this._onChange);
@@ -50,7 +50,7 @@ var PredictiveSearch = React.createClass({
           onClick={this.handleClick}
           name="fa fa-search" />
         <input
-          className="predictiveSearch"
+          className="predictive-search"
           type="search"
           placeholder="Search Polylit"
           onKeyUp={this.search}

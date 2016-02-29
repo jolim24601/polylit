@@ -75,7 +75,7 @@ var Follow = React.createClass({
       <button
         disabled={this.state.disabled}
         onClick={this.toggleFollow}
-        className={this.state.message + " primary"}
+        className={this.state.message.toLowerCase() + " primary"}
         >
       {this.state.message}
       </button>

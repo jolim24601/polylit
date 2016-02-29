@@ -107,7 +107,7 @@ var AuthorEditable = React.createClass({
     return (
       <div className="profile-banner">
         <div className="inner-profile group">
-          <div className="author-bio floatLeft">
+          <div className="author-bio float-left">
           </div>
           <BioEditable
             changeName={this.changeName}

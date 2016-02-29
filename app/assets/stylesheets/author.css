@@ -111,7 +111,7 @@
   margin-left: 5px;
 }
 
-.author-profile .predictiveSearch {
+.author-profile .predictive-search {
   bottom: 15px;
 }
 
@@ -303,7 +303,7 @@ button:disabled {
   color: black !important;
 }
 
-.Following {
+.following {
   background-color: #00ab6b !important;
   color: #fff;
 }

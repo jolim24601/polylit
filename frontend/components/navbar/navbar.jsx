@@ -1,8 +1,5 @@
 var React = require('react');
 
-var navbarHeight = $('header').outerHeight();
-var delta = 5;
-
 var Navbar = React.createClass({
   getInitialState: function () {
     return ({
@@ -13,7 +10,7 @@ var Navbar = React.createClass({
   componentDidMount: function () {
     this.slideSidebar();
 
-    $(window).scroll(this.scrollHandler);
+    window.addEventListener('scroll', this.scrollHandler);
     this.intervalId = setInterval(function() {
       if (this.state.didScroll) {
         this.hasScrolled();
@@ -25,42 +22,52 @@ var Navbar = React.createClass({
     this.setState({ didScroll: true });
   },
   componentWillUnmount: function () {
-    $(window).off('scroll', this.scrollHandler);
+    window.removeEventListener('scroll', this.scrollHandler);
     clearInterval(this.intervalId);
     this.intervalId = null;
   },
   hasScrolled: function () {
-    var st = $(document).scrollTop();
+    var st = document.body.scrollTop;
     // Make sure they scroll more than delta
-    if (Math.abs(this.state.lastScrollTop - st) <= delta) { return; }
+    if (Math.abs(this.state.lastScrollTop - st) <= 5) { return; }
 
-    if (st > this.state.lastScrollTop && st > navbarHeight) {
-      $('.navbar').addClass('nav-up');
-      $('.sidebar').addClass('side-up');
-    } else if (st + $(window).height() < $(document).height()) {
-      $('.navbar').removeClass('nav-up');
-      $('.sidebar').removeClass('side-up');
+    var sb =  document.querySelector('.sidebar');
+    var nb = document.querySelector('.navbar');
+    var nbHeight = nb.offsetHeight;
+
+    // if they scrolled and scrolled out of view of the header
+    if (st > this.state.lastScrollTop && st > nbHeight) {
+      nb.classList.add('nav-up');
+      sb.classList.add('side-up');
+    } else if (st + window.innerHeight < document.body.offsetHeight) {
+      nb.classList.remove('nav-up');
+      sb.classList.remove('side-up');
     }
 
     this.slideSidebar();
-
     this.setState({ lastScrollTop: st });
   },
   slideSidebar: function () {
-    var st = $(document).scrollTop();
-    var promoHeight =  $('.promotron').outerHeight();
-    if (document.querySelector('.promotron') && (st < promoHeight || promoHeight === 0)) {
-      $('.sidebar').addClass('side-right');
+    var st = document.body.scrollTop;
+    var promo =  document.querySelector('.promotron');
+    var promoHeight = promo.offsetHeight;
+    var sb =  document.querySelector('.sidebar');
+
+    // remove initialized display
+    sb.classList.remove('hide');
+
+    // check if they scrolled past the promo or promo is there but not loaded (i.e. 0 height)
+    if (promo && (st < promoHeight || promoHeight === 0)) {
+      sb.classList.add('side-right');
     } else {
-      $('.sidebar').removeClass('hide');
-      $('.sidebar').removeClass('side-right');
+      sb.classList.remove('side-right');
     }
   },
   render: function () {
     return (
       <header className="navbar">
         <nav className="navbar-nav group">
-          <a href="#" className="navbar-logo floatLeft">
+          <a href="#" className="navbar-logo float-left">
             <img className="logo" alt="site-logo"
               src="https://s3-us-west-2.amazonaws.com/jolim24601/polylit-prod/logo.png" />
           </a>

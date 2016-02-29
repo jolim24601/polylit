@@ -103,8 +103,8 @@ var StoryForm = React.createClass({
     return (
       <div className="main-content">
         <Navbar>
-          <span className="draft-message floatLeft">{this.state.draftState}</span>
-          <div className="floatRight">
+          <span className="draft-message float-left">{this.state.draftState}</span>
+          <div className="float-right">
             <WriteTools>{publishButton}</WriteTools>
             <ProfileTools />
           </div>

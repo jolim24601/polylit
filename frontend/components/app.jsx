@@ -29,7 +29,7 @@ var App = React.createClass({
       errors.push(<li key={message}>{message}</li>);
     });
 
-    if (errors.length > 0) { flashBar = <ul className="errorBar">{errors}</ul>; }
+    if (errors.length > 0) { flashBar = <ul className="error-bar">{errors}</ul>; }
 
     if (!CurrentAuthorStore.currentAuthorFetched()) {
       return (

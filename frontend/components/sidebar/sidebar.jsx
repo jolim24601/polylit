@@ -58,7 +58,7 @@ var Sidebar = React.createClass({
     }
 
     return (
-      <aside className="sidebar">
+      <aside className="sidebar hide">
         <div className="sidebox group">
           <h3 className="sidebar-header">MOST POPULAR TAGS</h3>
           <ul className="top-tags">

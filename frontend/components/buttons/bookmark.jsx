@@ -56,7 +56,7 @@ var Bookmark = React.createClass({
         <FontAwesome
           onClick={this.bookmarkStory}
           name={name}
-          className="bookmark-button floatRight"
+          className="bookmark-button float-right"
           />
       </small>
     );

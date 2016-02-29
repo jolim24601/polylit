@@ -69,7 +69,7 @@ var Favorite = React.createClass({
       <small>
         <FontAwesome
           onClick={this.favoriteStory}
-          className="favorite-button floatLeft"
+          className="favorite-button float-left"
           name={name}
           />
       </small>

@@ -65,7 +65,7 @@ input {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .is-active {
@@ -78,15 +78,15 @@ input {
   clear: both;
 }
 
-.floatRight {
+.float-right {
   float: right;
 }
 
-.floatLeft {
+.float-left {
   float: left;
 }
 
-.errorBar {
+.error-bar {
   position: absolute;
   margin: 0 auto;
   top: 0; left: 0; right: 0;
@@ -94,7 +94,7 @@ input {
   z-index: 1000;
 }
 
-.errorBar > li {
+.error-bar > li {
   background: #cc5454;
   color: #fff;
   padding: 12px 25px;

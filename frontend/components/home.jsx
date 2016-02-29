@@ -28,7 +28,7 @@ var Home = React.createClass({
           </div>
         </div>
       );
-    } 
+    }
 
     return (
       <div id="main-content">
