@@ -32,6 +32,7 @@ var PredictiveSearch = React.createClass({
     this.history.pushState(null, 'search', this.state);
   },
   render: function () {
+    // change to a small icon if there's no space
     if (window.innerWidth <= 912) {
       return (
         <a href="#/search" className="search-link">
