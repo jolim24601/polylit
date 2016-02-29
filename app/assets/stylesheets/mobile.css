@@ -101,6 +101,10 @@
 }
 
 @media (max-width: 484px) {
+  .navbar-nav {
+    height: 120px;
+  }
+
   .navbar-center {
     border: none;
     background: #fff;
@@ -127,8 +131,8 @@
   }
 }
 
-@media (max-width: 262px) {
+/*@media (max-width: 262px) {
   .navbar {
     position: inherit;
   }
-}
+}*/
