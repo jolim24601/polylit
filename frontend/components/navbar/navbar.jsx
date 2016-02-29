@@ -57,7 +57,7 @@ var Navbar = React.createClass({
       sb.classList.add('side-right');
       // remove initialized display
       sb.classList.remove('hide');
-    } else {
+    } else if (sb) {
       sb.classList.remove('side-right');
     }
   },
