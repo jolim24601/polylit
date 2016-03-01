@@ -1,7 +1,9 @@
 var React = require('react'),
     ProfileTools = require('./profile_tools'),
     PredictiveSearch = require('./predictive_search'),
-    CurrentAuthorStore = require('../../stores/current_author_store');
+    CurrentAuthorStore = require('../../stores/current_author_store'),
+    FontAwesome = require('react-fontawesome');
+
 
 var NavTools = React.createClass({
   getStateFromStore: function () {
@@ -12,14 +14,24 @@ var NavTools = React.createClass({
   },
   componentDidMount: function () {
     this.authorListener = CurrentAuthorStore.addListener(this._onChange);
+    window.addEventListener('resize', this._onChange, false);
   },
   componentWillUnmount: function () {
     this.authorListener.remove();
+    window.removeEventListener('resize', this._onChange, false);
   },
   render: function () {
     var buttons;
     if (this.state.authenticated) {
       buttons = <ProfileTools />;
+    } else if (window.innerWidth <= 484) {
+      buttons = (
+        <li>
+          <a href="#/auth">
+            <FontAwesome id="login-icon" name="fa fa-sign-in" />
+          </a>
+        </li>
+      );
     } else {
       buttons = (
         <li id="nav-login" className="button primary">

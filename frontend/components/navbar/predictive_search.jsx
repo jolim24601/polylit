@@ -34,10 +34,12 @@ var PredictiveSearch = React.createClass({
   render: function () {
     // change to a small icon if there's no space
     if (window.innerWidth <= 912) {
+      var zeroMargin = { margin: 0 };
+      
       return (
         <a href="#/search" className="search-link">
           <FontAwesome
-            className="search-icon"
+            style={zeroMargin}
             onClick={this.handleClick}
             name="fa fa-search" />
         </a>

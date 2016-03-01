@@ -3,9 +3,9 @@ var React = require('react'),
     CurrentAuthorStore = require('../../stores/current_author_store'),
     History = require('react-router').History;
 
-var blankState = { 
-  tabActive1: "", 
-  tabActive2: "", 
+var blankState = {
+  tabActive1: "",
+  tabActive2: "",
   tabActive3: ""
 };
 
@@ -26,19 +26,19 @@ var HomeTools = React.createClass({
 
     var newState;
     if (path === '/') {
-      newState = objectAssign({}, blankState, { 
+      newState = objectAssign({}, blankState, {
         tabActive1: "is-active",
-        optionsState: path 
+        optionsState: path
       });
     } else if (path === '/top-stories') {
-      newState = objectAssign({}, blankState, { 
+      newState = objectAssign({}, blankState, {
         tabActive2: "is-active",
-        optionsState: path 
+        optionsState: path
       });
     } else {
       newState = objectAssign({}, blankState, {
         tabActive3: "is-active",
-        optionsState: path 
+        optionsState: path
       });
     }
 
@@ -48,7 +48,7 @@ var HomeTools = React.createClass({
     this.history.pushState(null, e.target.value, {});
   },
   render: function () {
-    if (window.innerWidth <= 484 
+    if (window.innerWidth <= 658 
         || (!CurrentAuthorStore.isLoggedIn() && window.innerWidth <= 643)) {
       return (
         <select value={this.state.optionsState}
@@ -59,7 +59,7 @@ var HomeTools = React.createClass({
           <option value="/top-stories">TOP STORIES</option>
           <option value="/me/bookmarks">BOOKMARKS</option>
         </select>
-      );      
+      );
     }
 
     return (
