@@ -76,8 +76,8 @@ class Api::StoriesController < ApplicationController
   private
 
     def story_params
-      params.require(:story)
+      params
+        .require(:story)
         .permit(:title, :subtitle, :published, :node, :wordcount, :banner)
     end
 end
-
