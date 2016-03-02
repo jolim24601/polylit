@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def create
     begin
-      @author = Author.from_omniauth(request.env['omniauth.auth'])
+      Author.from_omniauth(request.env['omniauth.auth'])
     rescue => e
       # render json: { errors: e.message }, status: 401
       # redirect back to page for now
