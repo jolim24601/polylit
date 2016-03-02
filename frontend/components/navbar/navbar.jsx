@@ -55,11 +55,12 @@ var Navbar = React.createClass({
     // check if they scrolled past the promo or promo is there but not loaded (i.e. 0 height)
     if (promo && (st < promo.offsetHeight || promo.offsetHeight === 0)) {
       sb.classList.add('side-right');
-      // remove initialized display
-      sb.classList.remove('hide');
     } else if (sb) {
       sb.classList.remove('side-right');
     }
+
+    // remove initialized display
+    if (sb) { sb.classList.remove('hide'); }
   },
   render: function () {
     return (
