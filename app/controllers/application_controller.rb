@@ -3,8 +3,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_author
 
   def current_author
-    @current_author ||= Author.includes(:bookmarks, :favorites)
-                              .find_by_session_token(session[:session_token])
+    @current_author ||= Session
+      .find_by_session_token(session[:session_token])
+      .try(:author)
   end
 
   def require_logged_in_author
@@ -13,11 +14,14 @@ class ApplicationController < ActionController::Base
   end
 
   def login_author(author)
-    session[:session_token] = author.reset_session_token!
+    session[:session_token] = author.create_session
   end
 
   def logout_author!
-    current_author.try(:reset_session_token!)
+    Session
+      .find_by_session_token(session[:session_token])
+      .try(:destroy)
+
     session[:sesion_token] = nil
   end
 end

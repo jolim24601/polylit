@@ -12,7 +12,7 @@ class Api::AuthorsController < ApplicationController
   end
 
   def show
-    @author = Author.includes(:favorites, :bookmarks, :follows).find(params[:id])
+    @author = Author.find(params[:id])
   end
 
   def update

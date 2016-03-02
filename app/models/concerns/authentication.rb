@@ -3,15 +3,6 @@ require 'active_support/concern'
 module Authentication
   extend ActiveSupport::Concern
 
-  def generate_unique_token_for_field(field)
-    token = SecureRandom.base64
-    while self.class.exists?(field => token)
-      token = SecureRandom.base64
-    end
-
-    token
-  end
-
   def is_password?(password)
     BCrypt::Password.new(password_digest).is_password?(password)
   end
@@ -21,10 +12,11 @@ module Authentication
     self.password_digest = BCrypt::Password.create(password)
   end
 
-  def reset_session_token!
-    self.session_token = generate_unique_token_for_field(:session_token)
-    save!
-    session_token
+  def create_session
+    session = sessions.new
+    session.generate_unique_secure_token(:session_token)
+    session.save!
+    session.session_token
   end
 
   module ClassMethods
@@ -51,19 +43,15 @@ module Authentication
       author_check = Author.find_by(email: author.email)
       return author_check if author_check
 
-      author.email ||= author.generate_unique_token_for_field(:email)
+      # generate random strings for email and password
+      author.email ||= SecureRandom.base64
+      author.password = SecureRandom.base64
+
       author.pen_name = auth_hash['info']['name']
       author.description = auth_hash['info']['description']
       author.avatar = auth_hash['info']['image']
-      author.password = author.generate_unique_token_for_field(:password_digest)
       author.save!
       author
     end
-  end
-
-  private
-
-  def ensure_session_token
-    self.session_token ||= generate_unique_token_for_field(:session_token)
   end
 end
