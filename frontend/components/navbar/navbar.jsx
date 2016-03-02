@@ -39,7 +39,7 @@ var Navbar = React.createClass({
     if (st > this.state.lastScrollTop && st > nbHeight) {
       nb.classList.add('nav-up');
       if (sb) { sb.classList.add('side-up'); }
-    } else if (st + window.innerHeight < document.body.offsetHeight) {
+    } else {
       nb.classList.remove('nav-up');
       if (sb) { sb.classList.remove('side-up'); }
     }
