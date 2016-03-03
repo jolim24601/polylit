@@ -151,7 +151,7 @@
   height: 42px;
   width: auto;
   margin-top: 8px;
-  background-image: url('/public/logo.png');
+  background-image: url('/logo.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
