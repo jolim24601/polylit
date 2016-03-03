@@ -1,31 +1,29 @@
 class Api::StoriesController < ApplicationController
   def index
-    @stories = Story.page(1)
-                    .per(Story.default_per_page * params[:page].to_i)
-                    .includes(:tags, author: :follows)
+    @stories = Story.includes(:tags, author: :follows)
                     .where(published: true)
                     .order(created_at: :desc)
+                    .limit(25 * params[:page].to_i)
 
   end
 
   def top_stories
-    @stories = Story.page(1)
-                    .per(Story.default_per_page * params[:page].to_i)
-                    .includes(:tags, author: :follows)
-                    .where(published: true)
-                    .order(favorites_count: :desc)
+    # retrieve from redis cache, expires every 6 hours
+    @stories = Story.top_stories(params[:page].to_i)
 
     render :index
   end
+
+
 
   def by_tag
     tag = Tag.find_by(name: params[:name])
 
     @stories = tag.stories
-                  .page(1)
-                  .per(Story.default_per_page * params[:page].to_i)
                   .where(published: true)
                   .order(created_at: :desc)
+                  .limit(25 * params[:page].to_i)
+
 
     render :index
   end

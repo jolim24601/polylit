@@ -1,10 +1,9 @@
 class Api::BookmarksController < ApplicationController
   def index
-    @stories = Story.page(1)
-                    .per(Story.default_per_page * params[:page].to_i)
-                    .joins(bookmarks: :author)
+    @stories = Story.joins(bookmarks: :author)
                     .where("bookmarks.author_id = ?", current_author.id)
                     .order("bookmarks.created_at DESC")
+                    .limit(25 * params[:page].to_i)
 
     render "api/stories/index"
   end

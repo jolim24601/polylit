@@ -67,8 +67,7 @@ var Navbar = React.createClass({
       <header className="navbar">
         <nav className="navbar-nav group">
           <a href="#" className="navbar-logo float-left">
-            <img className="logo" alt="site-logo"
-              src="https://s3-us-west-2.amazonaws.com/jolim24601/polylit-prod/logo.png" />
+            <div className="logo" />
           </a>
 
           {this.props.children}

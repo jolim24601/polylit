@@ -24,5 +24,6 @@ class Author < ActiveRecord::Base
   has_many :following, foreign_key: :follower_id, class_name: "Follow"
 
   has_attached_file :avatar, default_url: 'avatar.png'
+
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 end

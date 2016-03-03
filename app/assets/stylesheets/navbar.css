@@ -141,11 +141,20 @@
   color: #00AB38;
 }
 
+.navbar-logo {
+  margin-left: 8px;
+  height: 100%;
+  width: 67px;
+}
+
 .logo {
   height: 42px;
   width: auto;
   margin-top: 8px;
-  margin-left: 30px;
+  background-image: url('/assets/logo.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .modal-logo {

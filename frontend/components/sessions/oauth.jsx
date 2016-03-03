@@ -32,8 +32,7 @@ var auth = React.createClass({
 
     return (
       <form className="oauth-form modal-form" onSubmit={this.handleSubmit}>
-        <img className="modal-logo logo"
-          src="https://s3-us-west-2.amazonaws.com/jolim24601/polylit-prod/logo.png" alt="site logo"/>
+        <div className="logo" />
 
         <p className="modal-content">Sign In</p>
 

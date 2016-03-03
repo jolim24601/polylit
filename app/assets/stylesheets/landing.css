@@ -1,6 +1,10 @@
 .promotron {
   /*background-color: #020733;*/
   background-color: #FF6CD9;
+  background-image: url('/assets/promotron.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 622px;
 }
 
 .inner-promotron {

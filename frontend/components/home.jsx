@@ -23,8 +23,8 @@ var Home = React.createClass({
                 Polylit is for writers of all stripes to come and engage. There are no strangers here; Only friends you haven’t yet met.
               </p>
             </div>
-            <img className="promotron"
-              src="https://s3-us-west-2.amazonaws.com/jolim24601/polylit-prod/promotron.png" />
+            
+            <div className="promotron" />
           </div>
         </div>
       );

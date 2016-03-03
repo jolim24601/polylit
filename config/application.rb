@@ -22,5 +22,18 @@ module Polylit
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    if ENV["REDISTOGO_URL"]
+      uri = URI.parse(ENV["REDISTOGO_URL"])
+
+      config.cache_store = [
+        :redis_store, {
+          :host => uri.host,
+          :port => uri.port,
+          :password => uri.password,
+          :namespace => "cache"
+        }
+      ]
+    end
   end
 end

@@ -20,8 +20,7 @@ var newAuthor = React.createClass({
   render: function () {
     return (
       <form className="modal-form" onSubmit={this.handleSubmit}>
-      <img className="modal-logo logo"
-          src="https://s3-us-west-2.amazonaws.com/jolim24601/polylit-prod/logo.png" alt="site logo"/>
+        <div className="logo" />
 
         <p className="modal-content">Create an account</p>
 

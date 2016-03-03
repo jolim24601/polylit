@@ -16,8 +16,8 @@ gem 'omniauth-twitter'
 gem 'paperclip'
 gem 'aws-sdk', '~> 1.6'
 gem 'pg_search'
-gem 'kaminari'
 gem 'font-awesome-rails'
+gem 'redis-rails'
 
 group :development, :test do
   gem 'byebug'
