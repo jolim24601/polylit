@@ -3,7 +3,12 @@ json.timeAgo        time_ago_in_words(story.created_at)
 json.published      story.published
 json.favoritesCount story.favorites_count
 json.responses      0
-json.banner         asset_url(story.banner.url)
+
+
+unless story.banner.url.empty?
+  json.banner         "http://res.cloudinary.com/polylit/image/upload/remote_media/#{story.banner.url.gsub!(/.*?(?=stories)/im, "")}"
+end
+
 json.lastUpdated    story.updated_at.strftime("%m/%d")
 
 read_time = (story.wordcount / 200).to_s + ' min read'
