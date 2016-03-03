@@ -6,7 +6,7 @@ json.responses      0
 
 
 unless story.banner.url.empty?
-  json.banner         "http://res.cloudinary.com/polylit/image/upload/remote_media/#{story.banner.url.gsub!(/.*?(?=stories)/im, "")}"
+  json.banner         "http://res.cloudinary.com/polylit/image/upload/w_600/remote_media/#{story.banner.url.gsub!(/.*?(?=stories)/im, "")}"
 end
 
 json.lastUpdated    story.updated_at.strftime("%m/%d")
