@@ -19,10 +19,10 @@ var StoriesIndex = React.createClass({
   },
   getInitialState: function () {
     return objectAssign(
-      this.getStateFromStore(), { 
-        page: 0, 
+      this.getStateFromStore(), {
+        page: 0,
         loading: false,
-        noMoreStories: false 
+        noMoreStories: false
       }
     );
   },
@@ -35,7 +35,7 @@ var StoriesIndex = React.createClass({
   },
   nextPage: function () {
     // Throttle the AJAX call to prevent thrashing the server
-    if ($(window).scrollTop() + $(window).height() === $(document).height()
+    if (document.body.scrollTop + window.innerHeight >= document.body.offsetHeight
         && (Date.now() - this.lastTime) > 2500) {
 
       this.fetchStories();

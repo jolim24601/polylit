@@ -9,7 +9,7 @@ json.follows            author.follows
 if author.avatar.url == 'avatar.png'
   json.avatar asset_url(author.avatar.url)
 else
-  json.avatar "http://res.cloudinary.com/polylit/image/upload/remote_media/#{asset_url(author.avatar.url).gsub!(/.*?(?=authors)/im, "")}"
+  json.avatar "http://res.cloudinary.com/polylit/image/upload/w_100,h_100/remote_media/#{asset_url(author.avatar.url).gsub!(/.*?(?=authors)/im, "")}"
 end
 
 json._type              "Author"
