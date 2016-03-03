@@ -18,6 +18,7 @@ gem 'aws-sdk', '~> 1.6'
 gem 'pg_search'
 gem 'font-awesome-rails'
 gem 'redis-rails'
+gem 'cloudinary'
 
 group :development, :test do
   gem 'byebug'
