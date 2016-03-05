@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303201907) do
+ActiveRecord::Schema.define(version: 20160305035122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 20160303201907) do
     t.string   "banner_content_type"
     t.integer  "banner_file_size"
     t.datetime "banner_updated_at"
-    t.integer  "favorites_count"
+    t.integer  "favorites_count",     default: 0,     null: false
   end
 
   add_index "stories", ["author_id"], name: "index_stories_on_author_id", using: :btree

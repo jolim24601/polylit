@@ -2,8 +2,6 @@ json.extract!       story, :id, :title, :subtitle, :author_id
 json.timeAgo        time_ago_in_words(story.created_at)
 json.published      story.published
 json.favoritesCount story.favorites_count
-json.responses      0
-
 
 unless story.banner.url.empty?
   json.banner         "http://res.cloudinary.com/polylit/image/upload/w_600/remote_media/#{story.banner.url.gsub!(/.*?(?=stories)/im, "")}"
