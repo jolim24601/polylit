@@ -40,6 +40,7 @@ module Authentication
         author.username = author.email[/[^@]+/]
       end
 
+      # return author if the account already exists
       author_check = Author.find_by(email: author.email)
       return author_check if author_check
 
