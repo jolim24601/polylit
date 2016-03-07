@@ -57,11 +57,9 @@
 
 .top-five li:before {
   content: counter(step-counter);
-  background-color: #fff;
   color: black;
   font-size: 15px;
   padding: 8px 15px;
-  border-radius: 100%;
   margin-left: -46px;
   margin-right: 8px;
   border-color: solid .1em rgba(0,0,0,0.05);
