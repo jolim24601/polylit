@@ -133,6 +133,7 @@ var StoryForm = React.createClass({
     }
   },
   componentDidMount: function () {
+    // check if this is a story that is being edited
     if (this.props.params.id) {
       return this.fetchStory();
     }

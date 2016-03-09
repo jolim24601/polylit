@@ -33,7 +33,9 @@ module Authentication
       )
 
       if auth_hash['provider'] == 'twitter'
-        author.email = auth_hash['info']['email']
+        # twitter requires you to have your site whitelisted to access emails
+        # so just put in random filler here
+        author.email = SecureRandom.base64
         author.username = auth_hash['info']['nickname']
       else
         author.email = auth_hash['extra']['raw_info']['email']
@@ -44,8 +46,7 @@ module Authentication
       author_check = Author.find_by(email: author.email)
       return author_check if author_check
 
-      # generate random strings for email and password
-      author.email ||= SecureRandom.base64
+      # generate random strings for email (if none) and password
       author.password = SecureRandom.base64
 
       author.pen_name = auth_hash['info']['name']
