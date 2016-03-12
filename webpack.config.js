@@ -23,11 +23,6 @@ module.exports = {
       {
         test: /\.node$/,
         loader: "node-loader"
-      },
-      {
-        test: /\.js$/,
-        loader: "eslint-loader",
-        exclude: /node_modules/
       }
     ]
   },
