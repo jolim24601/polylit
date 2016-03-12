@@ -1,12 +1,13 @@
-var SearchActions = require('../actions/search_actions');
+var SearchActions = require('../actions/search_actions'),
+    reqwest = require('reqwest');
 
 module.exports = {
-  search: function (query, type, page) {
-    $.ajax({
-      type: "GET",
+  search: function (query, type) {
+    reqwest({
+      method: "GET",
       url: "/api/search",
-      dataType: "json",
-      data: { query: query, page: page, type: type },
+      type: "json",
+      data: { query: query, type: type },
       success: function (data) {
         SearchActions.receiveResults(data);
       }

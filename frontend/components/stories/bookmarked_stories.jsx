@@ -14,13 +14,7 @@ var BookmarksIndex = React.createClass({
   mixins: [History],
 
   getInitialState: function () {
-    return { stories: [], page: 1 };
-  },
-  nextPage: function () {
-    var nextPage = this.state.page + 1;
-    var data = { page: nextPage };
-    this.setState({ page: nextPage });
-    this.fetchBookmarkedStories(data);
+    return { stories: [] };
   },
   componentDidMount: function () {
     if (!CurrentAuthorStore.isLoggedIn()) {
@@ -28,8 +22,8 @@ var BookmarksIndex = React.createClass({
     }
 
     var self = this;
-    var data = { page: 1 };
-    ApiUtil.fetchBookmarkedStories(data, function (stories) {
+
+    ApiUtil.fetchBookmarkedStories(function (stories) {
       self.setState({ stories: stories }, function () {
         self.listener = StoryStore.addListener(this._onChange);
       });
@@ -41,7 +35,6 @@ var BookmarksIndex = React.createClass({
     }.bind(this));
   },
   componentWillUnmount: function () {
-    $(window).off('scroll', this.throttled);
     this.listener.remove();
   },
   render: function () {

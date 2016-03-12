@@ -12,7 +12,7 @@ var Navbar = require('../navbar/navbar'),
 
 var TaggedStoriesIndex = React.createClass({
   getInitialState: function () {
-    return { page: 1, stories: [], tag: null, tagName: this.props.params.name };
+    return { stories: [], tag: null, tagName: this.props.params.name };
   },
   fetchTagDetails: function (tagName) {
     TagApiUtil.fetchTagDetails(tagName, function (tag) {
@@ -20,8 +20,8 @@ var TaggedStoriesIndex = React.createClass({
     }.bind(this));
   },
   componentWillReceiveProps: function (newProps) {
-    var data = { page: 1, tagName: newProps.params.name };
-    this.setState({ page: 1, tagName: newProps.params.name });
+    var data = { tagName: newProps.params.name };
+    this.setState({ tagName: newProps.params.name });
 
     ApiUtil.fetchStoriesByTagName(data, function (stories) {
       this.setState({ stories: stories });
@@ -29,19 +29,8 @@ var TaggedStoriesIndex = React.createClass({
 
     this.fetchTagDetails(newProps.params.name);
   },
-  nextPage: function () {
-    if ($(window).scrollTop() + $(window).height() === $(document).height()) {
-      var nextPage = this.state.page + 1;
-      this.setState({ page: nextPage });
-
-      ApiUtil.fetchStoriesByTagName({
-        tagName: this.props.params.name,
-        page: nextPage
-      });
-    }
-  },
   componentDidMount: function () {
-    var data = { page: 1, tagName: this.props.params.name };
+    var data = { tagName: this.props.params.name };
     ApiUtil.fetchStoriesByTagName(data, function (stories) {
       this.storyListener = StoryStore.addListener(this._onChange);
       this.setState({ stories: stories });

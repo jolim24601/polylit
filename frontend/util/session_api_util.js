@@ -1,12 +1,13 @@
 var CurrentAuthorActions = require('../actions/current_author_actions'),
-    FlashActions = require('../actions/flash_actions');
+    FlashActions = require('../actions/flash_actions'),
+    reqwest = require('reqwest');
 
 module.exports = {
   fetchCurrentAuthor: function (callback) {
-    $.ajax({
-      type: "GET",
+    reqwest({
+      method: "GET",
       url: "api/session",
-      dataType: "json",
+      type: "json",
       success: function (author) {
         CurrentAuthorActions.receiveCurrentAuthor(author);
         if (typeof callback === "function") { callback(); }
@@ -14,10 +15,13 @@ module.exports = {
     });
   },
   loginAuthor: function (credentials, callback) {
-    $.ajax({
-      type: "POST",
+    reqwest({
+      method: "POST",
       url: "api/session",
-      dataType: "json",
+      type: "json",
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
       data: { author: credentials },
       success: function (author) {
         CurrentAuthorActions.receiveCurrentAuthor(author);
@@ -29,9 +33,12 @@ module.exports = {
     });
   },
   logoutAuthor: function (callback) {
-    $.ajax({
-      type: "DELETE",
+    reqwest({
+      method: "DELETE",
       url: "api/session",
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
       success: function () {
         callback && callback();
       }

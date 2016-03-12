@@ -1,12 +1,16 @@
-var TagActions = require('../actions/tag_actions');
+var TagActions = require('../actions/tag_actions'),
+    reqwest = require('reqwest');
 
 module.exports = {
   createTags: function (data, callback) {
-    $.ajax({
-      type: "POST",
+    reqwest({
+      method: "POST",
       url: "api/tags",
       data: data,
-      dataType: "json",
+      type: "json",
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
       success: function (tags) {
         TagActions.receiveTags(tags);
         callback && callback();
@@ -14,32 +18,38 @@ module.exports = {
     });
   },
   destroyTagging: function (data, callback) {
-    $.ajax({
-      type: "DELETE",
+    reqwest({
+      method: "DELETE",
       url: "api/taggings",
       data: data,
-      dataType: "json",
+      type: "json",
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
       success: function (taggable) {
         callback && callback(taggable);
       }
     });
   },
   createTagging: function (data, callback) {
-    $.ajax({
-      type: "POST",
+    reqwest({
+      method: "POST",
       url: "api/taggings",
       data: data,
-      dataType: "json",
+      type: "json",
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
       success: function (taggable) {
         callback && callback(taggable);
       }
     });
   },
   fetchTopTags: function (callback) {
-    $.ajax({
-      type: "GET",
+    reqwest({
+      method: "GET",
       url: "api/tags/top-tags",
-      dataType: "json",
+      type: "json",
       success: function (tags) {
         TagActions.receiveTopTags(tags);
         callback && callback();
@@ -47,10 +57,10 @@ module.exports = {
     });
   },
   fetchTagDetails: function (data, callback) {
-    $.ajax({
-      type: "GET",
+    reqwest({
+      method: "GET",
       url: "api/tags/" + data,
-      dataType: "json",
+      type: "json",
       success: function (tag) {
         TagActions.receiveTag(tag);
         callback && callback(tag);

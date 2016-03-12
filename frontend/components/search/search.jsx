@@ -8,7 +8,7 @@ var Navbar = require('../navbar/navbar'),
 
 var Search = React.createClass({
   getInitialState: function () {
-    return { query: '', page: 1, type: "Story" };
+    return { query: '', type: "Story" };
   },
   componentDidMount: function () {
     this.listener = SearchResultsStore.addListener(this._onChange);
@@ -22,14 +22,7 @@ var Search = React.createClass({
     this.search(newQuery, this.state.type);
   },
   search: function (newQuery, newType) {
-    SearchApiUtil.search(newQuery, newType, this.state.page);
-  },
-  nextPage: function () {
-    if ($(window).scrollTop() + $(window).height() === $(document).height()) {
-      var nextPage = this.state.page + 1;
-      this.setState({ page: nextPage });
-      SearchApiUtil.search(this.state.query, this.state.type, nextPage);
-    }
+    SearchApiUtil.search(newQuery, newType);
   },
   render: function () {
     var results = this.findByType();

@@ -11,6 +11,7 @@ var PublishButton = React.createClass({
   },
   componentDidMount: function () {
     this.listener = StoryStore.addListener(this._onChange);
+    document.addEventListener('click', this.toggleView);
   },
   componentWillUnmount: function () {
     this.listener.remove();
@@ -26,9 +27,10 @@ var PublishButton = React.createClass({
     });
   },
   toggleView: function (e) {
-    if ($(e.target).parents('#pub-parent').length > 0) {
-      return;
-    }
+    var isClickInside = document.getElementById('pub-parent')
+                                .contains(e.target);
+
+    if (isClickInside) { return; }
 
     this.setState({ menuActive: !this.state.menuActive });
   },
@@ -96,7 +98,8 @@ var PublishButton = React.createClass({
               onChange={this.handleChange}
               onKeyDown={this.handleSubmit}
               placeholder="Add a tag..."
-              value={this.state.value} />
+              value={this.state.value}
+              />
             <div className={this.state.helperActive}>You can only add up to 3 tags</div>
           </div>
 

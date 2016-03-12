@@ -2,12 +2,14 @@ var ApiActions = require('../actions/api_actions'),
     TagActions = require('../actions/tag_actions'),
     FlashActions = require('../actions/flash_actions'),
     AuthorActions = require('../actions/author_actions'),
-    CurrentAuthorActions = require('../actions/current_author_actions');
+    CurrentAuthorActions = require('../actions/current_author_actions'),
+    reqwest = require('reqwest');
+
 
 module.exports = {
   fetchTopStories: function (data, callback) {
-    $.get({
-      type: "GET",
+    reqwest({
+      method: "GET",
       url: "api/stories/top-stories",
       data: data,
       success: function (stories) {
@@ -18,8 +20,8 @@ module.exports = {
     });
   },
   fetchStories: function (data, callback) {
-    $.get({
-      type: "GET",
+    reqwest({
+      method: "GET",
       url: "api/stories",
       data: data,
       success: function (stories) {
@@ -30,8 +32,8 @@ module.exports = {
     });
   },
   fetchStoriesByTagName: function (data, callback) {
-    $.ajax({
-      type: "GET",
+    reqwest({
+      method: "GET",
       url: "api/stories/tag/" + data.tagName,
       data: data,
       success: function (stories) {
@@ -41,11 +43,10 @@ module.exports = {
       }
     });
   },
-  fetchBookmarkedStories: function (data, callback) {
-    $.ajax({
-      type: "GET",
+  fetchBookmarkedStories: function (callback) {
+    reqwest({
+      method: "GET",
       url: "api/bookmarks",
-      data: data,
       success: function (stories) {
         ApiActions.receiveBookmarkedStories(stories);
         AuthorActions.receiveAuthorsFromStories(stories);
@@ -54,8 +55,8 @@ module.exports = {
     });
   },
   fetchFollowedAuthorStories: function (callback) {
-    $.ajax({
-      type: "GET",
+    reqwest({
+      method: "GET",
       url: "api/stories/followed-stories",
       success: function (stories) {
         ApiActions.receiveFollowedStories(stories);
@@ -71,11 +72,14 @@ module.exports = {
       url = "api/stories";
     }
 
-    $.ajax({
-      type: data.verb,
+    reqwest({
+      method: data.verb,
       url: url,
-      dataType: "json",
+      type: "json",
       data: { story: data.story },
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
       success: function (story) {
         ApiActions.receiveSingleStory(story);
         callback && callback(story);
@@ -86,8 +90,8 @@ module.exports = {
     });
   },
   destroyStory: function (data, callback) {
-    $.ajax({
-      type: "DELETE",
+    reqwest({
+      method: "DELETE",
       url: "api/stories/" + data.id,
       success: function (story) {
         callback && callback(story);
@@ -95,8 +99,8 @@ module.exports = {
     });
   },
   fetchStory: function (id, callback) {
-    $.ajax({
-      type: "GET",
+    reqwest({
+      method: "GET",
       url: "api/stories/" + id,
       success: function (story) {
         ApiActions.receiveSingleStory(story);
@@ -105,11 +109,14 @@ module.exports = {
     });
   },
   toggleFavorite: function (data, callback) {
-    $.ajax({
-      type: data.type,
+    reqwest({
+      method: data.type,
       url: "api/favorites",
       data: data,
-      dataType: "json",
+      type: "json",
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
       success: function (author) {
         CurrentAuthorActions.receiveCurrentAuthor(author);
         callback && callback();
@@ -117,11 +124,14 @@ module.exports = {
     });
   },
   toggleBookmark: function (data, callback) {
-    $.ajax({
-      type: data.type,
+    reqwest({
+      method: data.type,
       url: "api/bookmarks",
       data: data,
-      dataType: "json",
+      type: "json",
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
       success: function (author) {
         CurrentAuthorActions.receiveCurrentAuthor(author);
         callback && callback();
@@ -129,8 +139,8 @@ module.exports = {
     });
   },
   fetchAuthor: function (id, callback) {
-    $.ajax({
-      type: "GET",
+    reqwest({
+      method: "GET",
       url: "api/authors/" + id,
       success: function (author) {
         AuthorActions.receiveAuthor(author);
@@ -139,12 +149,13 @@ module.exports = {
     });
   },
   editAuthor: function (id, formData, callback) {
-    $.ajax({
-      type: "PATCH",
+    reqwest({
+      method: "PATCH",
       url: "api/authors/" + id,
-      dataType: "json",
-      processData: false,
-      contentType: false,
+      type: "json",
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
       data: formData,
       success: function (author) {
         CurrentAuthorActions.receiveCurrentAuthor(author);
@@ -157,11 +168,14 @@ module.exports = {
     });
   },
   createAuthor: function (data, callback) {
-    $.ajax({
-      type: "POST",
+    reqwest({
+      method: "POST",
       url: "api/authors",
-      dataType: "json",
+      type: "json",
       data: { author: data },
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
       success: function (author) {
         AuthorActions.receiveAuthor(author);
         CurrentAuthorActions.receiveCurrentAuthor(author);
@@ -173,7 +187,7 @@ module.exports = {
     });
   },
   destroyAuthor: function (data, callback) {
-    $.ajax({
+    reqwest({
       type: "DELETE",
       url: "api/authors/" + data,
       success: function () {

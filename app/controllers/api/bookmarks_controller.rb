@@ -3,7 +3,6 @@ class Api::BookmarksController < ApplicationController
     @stories = Story.joins(bookmarks: :author)
                     .where("bookmarks.author_id = ?", current_author.id)
                     .order("bookmarks.created_at DESC")
-                    .limit(25 * params[:page].to_i)
 
     render "api/stories/index"
   end
@@ -18,7 +17,8 @@ class Api::BookmarksController < ApplicationController
   def destroy
     bookmark = Bookmark.find_by(
       author_id: params[:bookmark][:author_id],
-      story_id: params[:bookmark][:story_id]).destroy
+      story_id: params[:bookmark][:story_id]
+    ).destroy
 
     @author = current_author
     render "api/authors/show"

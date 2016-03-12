@@ -22,8 +22,6 @@ class Api::StoriesController < ApplicationController
     @stories = tag.stories
                   .where(published: true)
                   .order(created_at: :desc)
-                  .limit(25 * params[:page].to_i)
-
 
     render :index
   end
