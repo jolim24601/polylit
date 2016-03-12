@@ -22,18 +22,18 @@
     "url": "https://github.com/jolim24601/polylit/issues"
   },
   "devDependencies": {
-    "babel-core": "^6.4.5",
     "babel-eslint": "^5.0.0-beta6",
-    "babel-loader": "^6.2.1",
-    "babel-preset-react": "^6.3.13",
     "eslint": "^1.10.3",
     "eslint-config-airbnb-es5": "^1.0.8",
     "eslint-loader": "^1.2.0",
-    "eslint-plugin-react": "^3.15.0",
-    "flux": "^2.1.1"
+    "eslint-plugin-react": "^3.15.0"
   },
   "dependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-react": "^6.3.13",
     "embedly": "^1.0.4",
+    "flux": "^2.1.1",
     "history": "1.13.x",
     "keymirror": "^0.1.1",
     "nprogress": "^0.2.0",
@@ -43,7 +43,6 @@
     "react-addons-linked-state-mixin": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-fontawesome": "^0.3.3",
-    "react-infinite-scroll": "^0.1.5",
     "react-router": "1.0.2",
     "reqwest": "^2.0.5",
     "webpack": "^1.12.12"
