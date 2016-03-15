@@ -9,7 +9,7 @@ class Api::StoriesController < ApplicationController
 
   def top_stories
     # retrieve from redis cache, expires every 6 hours
-    @stories = Story.top_stories(params[:page].to_i)
+    @stories = Story.top_stories.first(25 * params[:page].to_i)
 
     render :index
   end

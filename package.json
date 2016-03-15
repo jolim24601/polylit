@@ -44,7 +44,6 @@
     "react-dom": "^0.14.6",
     "react-fontawesome": "^0.3.3",
     "react-router": "1.0.2",
-    "reqwest": "^2.0.5",
     "webpack": "^1.12.12"
   },
   "engines": {

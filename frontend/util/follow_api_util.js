@@ -1,18 +1,10 @@
-var request = require('reqwest');
+var qwest = require('qwest');
 
 module.exports = {
   toggleFollow: function (data, callback) {
-    request({
-      method: data.type,
-      url: "api/follows",
-      data: data,
-      type: "json",
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-      },
-      success: function (follow) {
-        callback && callback(follow);
-      }
-    });
+    qwest.map(data.verb, "api/follows", data)
+         .then(function (xhr, response) {
+           callback && callback(response);
+         });
   }
 };

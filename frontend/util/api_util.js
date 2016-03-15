@@ -3,67 +3,56 @@ var ApiActions = require('../actions/api_actions'),
     FlashActions = require('../actions/flash_actions'),
     AuthorActions = require('../actions/author_actions'),
     CurrentAuthorActions = require('../actions/current_author_actions'),
-    request = require('reqwest'),
     qwest = require('qwest');
 
+qwest.setDefaultOptions({
+    dataType: 'post',
+    responseType: 'json',
+    headers: {
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')
+                              .content
+    }
+});
 
 module.exports = {
   fetchTopStories: function (data, callback) {
-    request({
-      method: "GET",
-      url: "api/stories/top-stories",
-      data: data,
-      success: function (stories) {
-        ApiActions.receiveTopStories(stories);
-        AuthorActions.receiveAuthorsFromStories(stories);
-        callback && callback();
-      }
-    });
+    qwest.get("api/stories/top-stories", data)
+         .then(function (xhr, response) {
+           ApiActions.receiveTopStories(response);
+           AuthorActions.receiveAuthorsFromStories(response);
+           callback && callback();
+         });
   },
   fetchStories: function (data, callback) {
-    request({
-      method: "GET",
-      url: "api/stories",
-      data: data,
-      success: function (stories) {
-        ApiActions.receiveLatestStories(stories);
-        AuthorActions.receiveAuthorsFromStories(stories);
-        callback && callback();
-      }
-    });
+    qwest.get("api/stories", data)
+         .then(function (xhr, response) {
+           ApiActions.receiveLatestStories(response);
+           AuthorActions.receiveAuthorsFromStories(response);
+           callback && callback();
+         });
   },
   fetchStoriesByTagName: function (data, callback) {
-    request({
-      method: "GET",
-      url: "api/stories/tag/" + data.tagName,
-      data: data,
-      success: function (stories) {
-        ApiActions.receiveStoriesByTag(stories);
-        AuthorActions.receiveAuthorsFromStories(stories);
-        callback && callback(stories);
-      }
-    });
+    qwest.get("api/stories/tag/" + data.tagName, data)
+         .then(function (xhr, response) {
+           ApiActions.receiveStoriesByTag(response);
+           AuthorActions.receiveAuthorsFromStories(response);
+           callback && callback(response);
+         });
   },
   fetchBookmarkedStories: function (callback) {
-    request({
-      method: "GET",
-      url: "api/bookmarks",
-      success: function (stories) {
-        ApiActions.receiveBookmarkedStories(stories);
-        AuthorActions.receiveAuthorsFromStories(stories);
-        callback && callback(stories);
-      }
-    });
+    qwest.get("api/bookmarks")
+         .then(function (xhr, response) {
+           ApiActions.receiveBookmarkedStories(response);
+           AuthorActions.receiveAuthorsFromStories(response);
+           callback && callback(response);
+         });
   },
   fetchFollowedAuthorStories: function (callback) {
-    request({
-      method: "GET",
-      url: "api/stories/followed-stories",
-      success: function (stories) {
-        ApiActions.receiveFollowedStories(stories);
-        callback && callback(stories);
-      }
-    });
+    qwest.get("api/stories/followed-stories")
+         .then(function (xhr, response) {
+           ApiActions.receiveFollowedStories(response);
+           callback && callback(response);
+         });
   },
   saveStory: function (data, callback) {
     var url;
@@ -73,129 +62,77 @@ module.exports = {
       url = "api/stories";
     }
 
-    request({
-      method: data.verb,
-      url: url,
-      type: "json",
-      data: { story: data.story },
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-      },
-      success: function (story) {
-        ApiActions.receiveSingleStory(story);
-        callback && callback(story);
-      },
-      error: function (flash) {
-        FlashActions.updateFlash(flash);
-      }
-    });
+    qwest.map(data.verb, url, { story: data.story })
+         .then(function (xhr, response) {
+           ApiActions.receiveSingleStory(response);
+           callback && callback(response);
+         })
+         .catch(function(e, xhr, response) {
+           FlashActions.updateFlash(e);
+         });
   },
   destroyStory: function (data, callback) {
-    request({
-      method: "DELETE",
-      url: "api/stories/" + data.id,
-      success: function (story) {
-        callback && callback(story);
-      }
-    });
+    qwest.map("DELETE", "api/stories" + data.id)
+         .then(function (xhr, response) {
+           callback && callback(response);
+
+         });
   },
   fetchStory: function (id, callback) {
-    request({
-      method: "GET",
-      url: "api/stories/" + id,
-      success: function (story) {
-        ApiActions.receiveSingleStory(story);
-        callback && callback(story);
-      }
-    });
+    qwest.get("api/stories/" + id)
+         .then(function (xhr, response) {
+           ApiActions.receiveSingleStory(response);
+           callback && callback(response);
+         });
   },
   toggleFavorite: function (data, callback) {
-    request({
-      method: data.type,
-      url: "api/favorites",
-      data: data,
-      type: "json",
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-      },
-      success: function (author) {
-        CurrentAuthorActions.receiveCurrentAuthor(author);
-        callback && callback();
-      }
-    });
+    qwest.map(data.type, "api/favorites", data)
+         .then(function (xhr, response) {
+           CurrentAuthorActions.receiveCurrentAuthor(response);
+           callback && callback();
+         });
   },
   toggleBookmark: function (data, callback) {
-    request({
-      method: data.type,
-      url: "api/bookmarks",
-      data: data,
-      type: "json",
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-      },
-      success: function (author) {
-        CurrentAuthorActions.receiveCurrentAuthor(author);
-        callback && callback();
-      }
-    });
+    qwest.map(data.type, "api/bookmarks", data)
+         .then(function (xhr, response) {
+           CurrentAuthorActions.receiveCurrentAuthor(response);
+           callback && callback();
+         });
   },
   fetchAuthor: function (id, callback) {
-    request({
-      method: "GET",
-      url: "api/authors/" + id,
-      success: function (author) {
-        AuthorActions.receiveAuthor(author);
-        callback && callback(author);
-      }
-    });
+    qwest.get("api/authors/" + id)
+         .then(function (xhr, response) {
+           AuthorActions.receiveAuthor(response);
+           callback && callback(response);
+         });
   },
   editAuthor: function (id, formData, callback) {
-    // reqwest does not handle xhr2 types, will have to migrate to qwest
-    qwest
-      .map("PATCH", "api/authors/" + id, formData,
-      {
-        dataType: 'formdata',
-        headers: {
-          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-        }
-      })
-     .then(function(xhr, response) {
-       var author = response;
-       CurrentAuthorActions.receiveCurrentAuthor(author);
-       AuthorActions.receiveAuthor(author);
-       callback && callback();
-      })
-      .catch(function(e, xhr, response) {
-        FlashActions.updateFlash(e);
-      });
+    qwest.map("PATCH", "api/authors/" + id, formData, { dataType: 'formdata' })
+         .then(function (xhr, response) {
+           CurrentAuthorActions.receiveCurrentAuthor(response);
+           AuthorActions.receiveAuthor(response);
+           callback && callback();
+         })
+         .catch(function(e, xhr, response) {
+           FlashActions.updateFlash(e);
+         });
   },
   createAuthor: function (data, callback) {
-    request({
-      method: "POST",
-      url: "api/authors",
-      type: "json",
-      data: { author: data },
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-      },
-      success: function (author) {
-        AuthorActions.receiveAuthor(author);
-        CurrentAuthorActions.receiveCurrentAuthor(author);
-        callback && callback();
-      },
-      error: function (flash) {
-        FlashActions.updateFlash(flash);
-      }
-    });
+    qwest.post("api/authors", { author: data })
+         .then(function (xhr, response) {
+           AuthorActions.receiveAuthor(response);
+           CurrentAuthorActions.receiveCurrentAuthor(response);
+           callback && callback();
+         })
+         .catch(function (e, xhr, response) {
+           FlashActions.updateFlash(e);
+         });
   },
   destroyAuthor: function (data, callback) {
-    request({
-      type: "DELETE",
-      url: "api/authors/" + data,
-      success: function () {
-        CurrentAuthorActions.destroyCurrentAuthor();
-        callback && callback();
-      }
-    });
+    qwest.map("DELETE", "api/authors/" + data)
+         .then(function (xhr, response) {
+           CurrentAuthorActions.destroyCurrentAuthor();
+           callback && callback();
+         });
   }
 };

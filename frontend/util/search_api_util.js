@@ -1,16 +1,11 @@
 var SearchActions = require('../actions/search_actions'),
-    request = require('reqwest');
+    qwest = require('qwest');
 
 module.exports = {
   search: function (query, type) {
-    request({
-      method: "GET",
-      url: "/api/search",
-      type: "json",
-      data: { query: query, type: type },
-      success: function (data) {
-        SearchActions.receiveResults(data);
-      }
-    });
+    qwest.get("/api/search", { query: query, type: type })
+         .then(function (xhr, response) {
+           SearchActions.receiveResults(response);
+         });
   }
 };

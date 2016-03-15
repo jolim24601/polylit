@@ -1,47 +1,29 @@
 var CurrentAuthorActions = require('../actions/current_author_actions'),
     FlashActions = require('../actions/flash_actions'),
-    request = require('reqwest');
+    qwest = require('qwest');
 
 module.exports = {
   fetchCurrentAuthor: function (callback) {
-    request({
-      method: "GET",
-      url: "api/session",
-      type: "json",
-      success: function (author) {
-        CurrentAuthorActions.receiveCurrentAuthor(author);
-        if (typeof callback === "function") { callback(); }
-      }
-    });
+    qwest.get("api/session")
+         .then(function (xhr, response) {
+           CurrentAuthorActions.receiveCurrentAuthor(response);
+           if (typeof callback === "function") { callback(); }
+         });
   },
   loginAuthor: function (credentials, callback) {
-    request({
-      method: "POST",
-      url: "api/session",
-      type: "json",
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-      },
-      data: { author: credentials },
-      success: function (author) {
-        CurrentAuthorActions.receiveCurrentAuthor(author);
-        callback && callback();
-      },
-      error: function (flash) {
-        FlashActions.updateFlash(flash);
-      }
-    });
+    qwest.post("api/session", { author: credentials })
+         .then(function (xhr, response) {
+           CurrentAuthorActions.receiveCurrentAuthor(response);
+           callback && callback();
+         })
+         .catch(function (e, xhr, response) {
+           FlashActions.updateFlash(e);
+         });
   },
   logoutAuthor: function (callback) {
-    request({
-      method: "DELETE",
-      url: "api/session",
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-      },
-      success: function () {
-        callback && callback();
-      }
-    });
+    qwest.map("DELETE", "api/session")
+         .then(function (xhr, response) {
+           callback && callback();
+         });
   }
 };

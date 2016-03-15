@@ -45,12 +45,13 @@ var Follow = React.createClass({
       followable_type: this.props.followable._type,
       followable_id: this.props.followable.id,
       follower_id: CurrentAuthorStore.currentAuthor().id,
-      type: ""
+      verb: ""
     };
+
     if (this.state.message === "Following") {
-      data.type = "DELETE";
+      data.verb = "DELETE";
     } else {
-      data.type = "POST";
+      data.verb = "POST";
     }
 
     FollowApiUtil.toggleFollow(data, function(follow) {

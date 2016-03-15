@@ -21,16 +21,16 @@ class Story < ActiveRecord::Base
   has_attached_file :banner, default_url: ""
   validates_attachment_content_type :banner, content_type: /\Aimage\/.*\Z/
 
-  def self.top_stories(page)
-    Rails.cache.fetch("top-stories", :expires_in => 6.hours) do
-      force_top_stories(page)
+  def self.top_stories
+    Rails.cache.fetch("top-stories", :expires_in => 3.hours) do
+      force_top_stories
     end
   end
 
-  def self.force_top_stories(page)
+  def self.force_top_stories
     Story.includes(:tags, author: :follows)
          .where(published: true)
          .order(favorites_count: :desc)
-         .limit(25 * page)
+
   end
 end

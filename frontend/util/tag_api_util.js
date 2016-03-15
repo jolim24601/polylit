@@ -1,70 +1,38 @@
 var TagActions = require('../actions/tag_actions'),
-    request = require('reqwest');
+    qwest = require('qwest');
 
 module.exports = {
   createTags: function (data, callback) {
-    request({
-      method: "POST",
-      url: "api/tags",
-      data: data,
-      type: "json",
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-      },
-      success: function (tags) {
-        TagActions.receiveTags(tags);
-        callback && callback();
-      }
-    });
+    qwest.post("api/tags", data)
+         .then(function (xhr, response) {
+           TagActions.receiveTags(response);
+           callback && callback();
+         });
   },
   destroyTagging: function (data, callback) {
-    request({
-      method: "DELETE",
-      url: "api/taggings",
-      data: data,
-      type: "json",
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-      },
-      success: function (taggable) {
-        callback && callback(taggable);
-      }
-    });
+    qwest.map("DELETE", "api/taggings", data)
+         .then(function (xhr, response) {
+           callback && callback(response);
+         });
   },
   createTagging: function (data, callback) {
-    request({
-      method: "POST",
-      url: "api/taggings",
-      data: data,
-      type: "json",
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-      },
-      success: function (taggable) {
-        callback && callback(taggable);
-      }
-    });
+    qwest.post("api/taggings", data)
+         .then(function (xhr, response) {
+           callback && callback(response);
+         });
   },
   fetchTopTags: function (callback) {
-    request({
-      method: "GET",
-      url: "api/tags/top-tags",
-      type: "json",
-      success: function (tags) {
-        TagActions.receiveTopTags(tags);
-        callback && callback();
-      }
-    });
+    qwest.get("api/tags/top-tags")
+         .then(function (xhr, response) {
+           TagActions.receiveTopTags(response);
+           callback && callback();
+         });
   },
   fetchTagDetails: function (data, callback) {
-    request({
-      method: "GET",
-      url: "api/tags/" + data,
-      type: "json",
-      success: function (tag) {
-        TagActions.receiveTag(tag);
-        callback && callback(tag);
-      }
-    });
+    qwest.get("api/tags/" + data)
+         .then(function (xhr, response) {
+           TagActions.receiveTag(response);
+           callback && callback(response);
+         });
   }
 };
