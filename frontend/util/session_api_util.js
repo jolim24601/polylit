@@ -17,7 +17,7 @@ module.exports = {
            callback && callback();
          })
          .catch(function (e, xhr, response) {
-           FlashActions.updateFlash(e);
+           FlashActions.updateFlash(response);
          });
   },
   logoutAuthor: function (callback) {

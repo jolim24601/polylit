@@ -68,7 +68,7 @@ module.exports = {
            callback && callback(response);
          })
          .catch(function(e, xhr, response) {
-           FlashActions.updateFlash(e);
+           FlashActions.updateFlash(response);
          });
   },
   destroyStory: function (data, callback) {
@@ -114,7 +114,7 @@ module.exports = {
            callback && callback();
          })
          .catch(function(e, xhr, response) {
-           FlashActions.updateFlash(e);
+           FlashActions.updateFlash(response);
          });
   },
   createAuthor: function (data, callback) {
@@ -125,7 +125,7 @@ module.exports = {
            callback && callback();
          })
          .catch(function (e, xhr, response) {
-           FlashActions.updateFlash(e);
+           FlashActions.updateFlash(response);
          });
   },
   destroyAuthor: function (data, callback) {

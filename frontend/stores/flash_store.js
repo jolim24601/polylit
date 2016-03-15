@@ -11,8 +11,9 @@ FlashStore.all = function () {
 
 function resetFlash(flash) {
   _errors = [];
-  if (flash.status) {
-    _errors = flash.responseJSON.errors.map(function (err) { return err; });
+  
+  if (flash.errors) {
+    _errors = flash.errors.map(function (err) { return err; });
   }
 }
 
