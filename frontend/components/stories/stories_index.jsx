@@ -13,12 +13,18 @@ var Navbar = require('../navbar/navbar'),
 var StoriesIndex = React.createClass({
   getStateFromStore: function () {
     if (this.props.location.pathname === '/') {
-      return ({ stories: StoryStore.all() });
+      return ({
+        stories: StoryStore.all(),
+        storiesTab: 'Latest'
+      });
     }
-    return ({ stories: StoryStore.topStories() });
+    return ({
+      stories: StoryStore.topStories(),
+      storiesTab: 'Top'
+    });
   },
   getInitialState: function () {
-    return objectAssign(
+    return objectAssign({},
       this.getStateFromStore(), {
         page: 0,
         loading: false,
@@ -48,6 +54,12 @@ var StoriesIndex = React.createClass({
     var pageParams = { page: this.state.page + 1 };
     this.setState(objectAssign({}, pageParams, { loading: true }));
     ApiUtil.fetchStories(pageParams, this.stopLoading);
+
+    // no need to fetch more top stories, only need top 10 for sidebar
+    if (pageParams.page > 1 && this.state.storiesTab === 'Latest') {
+      return;
+    }
+
     ApiUtil.fetchTopStories(pageParams, this.stopLoading);
   },
   stopLoading: function () {
