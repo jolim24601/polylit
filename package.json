@@ -21,8 +21,7 @@
   "bugs": {
     "url": "https://github.com/jolim24601/polylit/issues"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "babel-core": "^6.4.5",
     "babel-eslint": "^5.0.0-beta6",
@@ -39,6 +38,7 @@
     "nprogress": "^0.2.0",
     "object-assign": "^4.0.1",
     "prosemirror": "^0.1.1",
+    "qwest": "^4.2.1",
     "react": "^0.14.6",
     "react-addons-linked-state-mixin": "^0.14.6",
     "react-dom": "^0.14.6",

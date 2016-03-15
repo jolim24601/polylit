@@ -1,10 +1,10 @@
 var CurrentAuthorActions = require('../actions/current_author_actions'),
     FlashActions = require('../actions/flash_actions'),
-    reqwest = require('reqwest');
+    request = require('reqwest');
 
 module.exports = {
   fetchCurrentAuthor: function (callback) {
-    reqwest({
+    request({
       method: "GET",
       url: "api/session",
       type: "json",
@@ -15,7 +15,7 @@ module.exports = {
     });
   },
   loginAuthor: function (credentials, callback) {
-    reqwest({
+    request({
       method: "POST",
       url: "api/session",
       type: "json",
@@ -33,7 +33,7 @@ module.exports = {
     });
   },
   logoutAuthor: function (callback) {
-    reqwest({
+    request({
       method: "DELETE",
       url: "api/session",
       headers: {

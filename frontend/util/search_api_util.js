@@ -1,9 +1,9 @@
 var SearchActions = require('../actions/search_actions'),
-    reqwest = require('reqwest');
+    request = require('reqwest');
 
 module.exports = {
   search: function (query, type) {
-    reqwest({
+    request({
       method: "GET",
       url: "/api/search",
       type: "json",

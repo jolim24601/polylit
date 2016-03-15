@@ -1,8 +1,8 @@
-var reqwest = require('reqwest');
+var request = require('reqwest');
 
 module.exports = {
   toggleFollow: function (data, callback) {
-    reqwest({
+    request({
       method: data.type,
       url: "api/follows",
       data: data,

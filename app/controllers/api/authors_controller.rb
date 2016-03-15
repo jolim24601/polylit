@@ -17,6 +17,7 @@ class Api::AuthorsController < ApplicationController
 
   def update
     @author = Author.find(params[:id])
+
     if @author.update(author_params)
       render :show
     else

@@ -3,12 +3,13 @@ var ApiActions = require('../actions/api_actions'),
     FlashActions = require('../actions/flash_actions'),
     AuthorActions = require('../actions/author_actions'),
     CurrentAuthorActions = require('../actions/current_author_actions'),
-    reqwest = require('reqwest');
+    request = require('reqwest'),
+    qwest = require('qwest');
 
 
 module.exports = {
   fetchTopStories: function (data, callback) {
-    reqwest({
+    request({
       method: "GET",
       url: "api/stories/top-stories",
       data: data,
@@ -20,7 +21,7 @@ module.exports = {
     });
   },
   fetchStories: function (data, callback) {
-    reqwest({
+    request({
       method: "GET",
       url: "api/stories",
       data: data,
@@ -32,7 +33,7 @@ module.exports = {
     });
   },
   fetchStoriesByTagName: function (data, callback) {
-    reqwest({
+    request({
       method: "GET",
       url: "api/stories/tag/" + data.tagName,
       data: data,
@@ -44,7 +45,7 @@ module.exports = {
     });
   },
   fetchBookmarkedStories: function (callback) {
-    reqwest({
+    request({
       method: "GET",
       url: "api/bookmarks",
       success: function (stories) {
@@ -55,7 +56,7 @@ module.exports = {
     });
   },
   fetchFollowedAuthorStories: function (callback) {
-    reqwest({
+    request({
       method: "GET",
       url: "api/stories/followed-stories",
       success: function (stories) {
@@ -72,7 +73,7 @@ module.exports = {
       url = "api/stories";
     }
 
-    reqwest({
+    request({
       method: data.verb,
       url: url,
       type: "json",
@@ -90,7 +91,7 @@ module.exports = {
     });
   },
   destroyStory: function (data, callback) {
-    reqwest({
+    request({
       method: "DELETE",
       url: "api/stories/" + data.id,
       success: function (story) {
@@ -99,7 +100,7 @@ module.exports = {
     });
   },
   fetchStory: function (id, callback) {
-    reqwest({
+    request({
       method: "GET",
       url: "api/stories/" + id,
       success: function (story) {
@@ -109,7 +110,7 @@ module.exports = {
     });
   },
   toggleFavorite: function (data, callback) {
-    reqwest({
+    request({
       method: data.type,
       url: "api/favorites",
       data: data,
@@ -124,7 +125,7 @@ module.exports = {
     });
   },
   toggleBookmark: function (data, callback) {
-    reqwest({
+    request({
       method: data.type,
       url: "api/bookmarks",
       data: data,
@@ -139,7 +140,7 @@ module.exports = {
     });
   },
   fetchAuthor: function (id, callback) {
-    reqwest({
+    request({
       method: "GET",
       url: "api/authors/" + id,
       success: function (author) {
@@ -149,26 +150,27 @@ module.exports = {
     });
   },
   editAuthor: function (id, formData, callback) {
-    reqwest({
-      method: "PATCH",
-      url: "api/authors/" + id,
-      type: "json",
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-      },
-      data: formData,
-      success: function (author) {
-        CurrentAuthorActions.receiveCurrentAuthor(author);
-        AuthorActions.receiveAuthor(author);
-        callback && callback();
-      },
-      error: function (flash) {
-        FlashActions.updateFlash(flash);
-      }
-    });
+    // reqwest does not handle xhr2 types, will have to migrate to qwest
+    qwest
+      .map("PATCH", "api/authors/" + id, formData,
+      {
+        dataType: 'formdata',
+        headers: {
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        }
+      })
+     .then(function(xhr, response) {
+       var author = response;
+       CurrentAuthorActions.receiveCurrentAuthor(author);
+       AuthorActions.receiveAuthor(author);
+       callback && callback();
+      })
+      .catch(function(e, xhr, response) {
+        FlashActions.updateFlash(e);
+      });
   },
   createAuthor: function (data, callback) {
-    reqwest({
+    request({
       method: "POST",
       url: "api/authors",
       type: "json",
@@ -187,7 +189,7 @@ module.exports = {
     });
   },
   destroyAuthor: function (data, callback) {
-    reqwest({
+    request({
       type: "DELETE",
       url: "api/authors/" + data,
       success: function () {

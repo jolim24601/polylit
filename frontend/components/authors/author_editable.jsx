@@ -53,10 +53,12 @@ var AuthorEditable = React.createClass({
   handleClick: function (e) {
     e.preventDefault();
     this.setState({ disabled: true });
+
     var formData = new FormData();
     if (this.state.imageFile) { formData.append('author[avatar]', this.state.imageFile); }
     if (this.state.name) { formData.append('author[pen_name]', this.state.name); }
     if (this.state.description) { formData.append('author[description]', this.state.description); }
+
     ApiUtil.editAuthor(this.props.authorId, formData, this.refresh);
   },
   handleUpload: function (e) {
@@ -107,8 +109,6 @@ var AuthorEditable = React.createClass({
     return (
       <div className="profile-banner">
         <div className="inner-profile group">
-          <div className="author-bio float-left">
-          </div>
           <BioEditable
             changeName={this.changeName}
             changeDescription={this.changeDescription}

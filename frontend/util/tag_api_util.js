@@ -1,9 +1,9 @@
 var TagActions = require('../actions/tag_actions'),
-    reqwest = require('reqwest');
+    request = require('reqwest');
 
 module.exports = {
   createTags: function (data, callback) {
-    reqwest({
+    request({
       method: "POST",
       url: "api/tags",
       data: data,
@@ -18,7 +18,7 @@ module.exports = {
     });
   },
   destroyTagging: function (data, callback) {
-    reqwest({
+    request({
       method: "DELETE",
       url: "api/taggings",
       data: data,
@@ -32,7 +32,7 @@ module.exports = {
     });
   },
   createTagging: function (data, callback) {
-    reqwest({
+    request({
       method: "POST",
       url: "api/taggings",
       data: data,
@@ -46,7 +46,7 @@ module.exports = {
     });
   },
   fetchTopTags: function (callback) {
-    reqwest({
+    request({
       method: "GET",
       url: "api/tags/top-tags",
       type: "json",
@@ -57,7 +57,7 @@ module.exports = {
     });
   },
   fetchTagDetails: function (data, callback) {
-    reqwest({
+    request({
       method: "GET",
       url: "api/tags/" + data,
       type: "json",
