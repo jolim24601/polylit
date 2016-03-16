@@ -2,6 +2,7 @@ var React = require('react'),
     Tag = require('../tags/tag'),
     TagApiUtil = require('../../util/tag_api_util'),
     TagStore = require('../../stores/tag_store'),
+    ApiUtil = require('../../util/api_util'),
     StoryStore = require('../../stores/story_store'),
     CurrentAuthorStore = require('../../stores/current_author_store'),
     FontAwesome = require('react-fontawesome');
@@ -12,15 +13,22 @@ var Sidebar = React.createClass({
   },
   componentDidMount: function () {
     this.tagListener = TagStore.addListener(this.handleTags);
-    this.storyListener = StoryStore.addListener(this.handleStories);
     this.currentAuthorListener = CurrentAuthorStore.addListener(this._onChange);
 
+    this.fetchTopStories();
     TagApiUtil.fetchTopTags();
   },
   componentWillUnmount: function () {
     this.tagListener.remove();
-    this.storyListener.remove();
     this.currentAuthorListener.remove();
+  },
+  fetchTopStories: function () {
+    if (!StoryStore.topStories()[0]) {
+      var pageParams = { page: 1 };
+      ApiUtil.fetchTopStories(pageParams, this.handleStories);
+    } else {
+      this.handleStories();
+    }
   },
   handleTags: function () {
     this.setState({ topTags: TagStore.topTags() });

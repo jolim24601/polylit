@@ -20,7 +20,7 @@ module.exports = {
          .then(function (xhr, response) {
            ApiActions.receiveTopStories(response);
            AuthorActions.receiveAuthorsFromStories(response);
-           callback && callback();
+           callback && callback(response);
          });
   },
   fetchStories: function (data, callback) {
